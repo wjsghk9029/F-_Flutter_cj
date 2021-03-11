@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/rootpage.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
       home: Scaffold(
-        body: Text('오브테이블'),
+        body: RootPage(),
       ),
     );
   }
