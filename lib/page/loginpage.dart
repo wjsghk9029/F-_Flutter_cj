@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:oftable_flutter/page/start_oftable/page/start_oftable_page.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
@@ -13,15 +14,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+
   bool keyboardOpen = false;
   @override
   void initState() {
-    super.initState();
     KeyboardVisibilityNotification().addNewListener(
       onChange: (bool visible) {
         setState(() => keyboardOpen = visible);
       },
     );
+    super.initState();
   }
 
   @override
@@ -62,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         keyboardOpen ?
-            SizedBox()
+            Container()
             : _onNotKeyBoardOpen(),
       ],
     );
@@ -74,7 +76,9 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Padding(padding: EdgeInsets.only(top: 100)),
             MaterialButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
+              },
               child: Text('오떼 시작하기', style: TextStyle(fontSize: 20),),
               color: Colors.white54,
             ),
@@ -111,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-
     );
   }
 
