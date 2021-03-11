@@ -32,8 +32,13 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: _buildBody(),
+      ),
     );
   }
 
@@ -58,32 +63,36 @@ class _LoginPageState extends State<LoginPage> {
         ),
         keyboardOpen ?
             SizedBox()
-            : Container(
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.only(top: 100)),
-              MaterialButton(
-                onPressed: (){},
-                child: Text('오떼 시작하기', style: TextStyle(fontSize: 20),),
-                color: Colors.white54,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CupertinoButton(child: Text('아이디 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
-                  CupertinoButton(child: Text('비밀번호 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
-                ],
-              ),
-              SignInButton(
-                  buttonType: ButtonType.google,
-                  onPressed: () {
-                    print('click');
-                  }),
-            ],
-          ),
-        ),
+            : _onNotKeyBoardOpen(),
       ],
     );
+  }
+
+  Container _onNotKeyBoardOpen() {
+    return Container(
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 100)),
+            MaterialButton(
+              onPressed: (){},
+              child: Text('오떼 시작하기', style: TextStyle(fontSize: 20),),
+              color: Colors.white54,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoButton(child: Text('아이디 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
+                CupertinoButton(child: Text('비밀번호 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
+              ],
+            ),
+            SignInButton(
+                buttonType: ButtonType.google,
+                onPressed: () {
+                  print('click');
+                }),
+          ],
+        ),
+      );
   }
 
   _buildLoginTextField() {
