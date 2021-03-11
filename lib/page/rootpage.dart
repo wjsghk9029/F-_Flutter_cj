@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable.dart';
+import 'package:oftable_flutter/page/loginpage.dart';
 
 class RootPage extends StatelessWidget {
   final Stream<int> _timeStreamImprove =
@@ -35,7 +35,7 @@ class RootPage extends StatelessWidget {
 
   _delay(BuildContext context) async {
     await Future<void>.delayed(Duration(seconds: 2));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>StartOfTable()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
   }
 
 
