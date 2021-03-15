@@ -12,8 +12,12 @@ class SingletonRegister {
  //~ 싱글톤
 
   Queue<FoodTable> selectedTable = new Queue();
-
   List<InterestedTable> tableList = [];
+  List<EatingMember> memberList = [];
+  List<Spicy> spicyList = [];
+  int eatingMember = 0;
+  Spicy spicyStage;
+
 
   Future<void> tableEnque (InterestedTable table) async {
     selectedTable.add(table.foodTable);
@@ -37,7 +41,10 @@ class SingletonRegister {
     return null;
   }
 
-  void test() {
+  void test() async{
+    if(tableList.length > 0){
+      return;
+    }
     for(int i = 0; i < 9; i++){
       tableList.add(
         InterestedTable(
@@ -51,6 +58,52 @@ class SingletonRegister {
     }
   }
 
+  void page2Test() async{
+    memberTest();
+    spicyListTest();
+  }
+
+  void memberTest() async{
+    if(memberList.length > 0){
+      return;
+    }
+    for(int i = 0; i < 5; i++){
+      memberList.add(
+          EatingMember(
+            memberCount: i,
+            imgURL: '',
+          )
+      );
+    }
+  }
+
+  void spicyListTest() async{
+    if(spicyList.length > 0){
+      return;
+    }
+    for(int i = 0; i < 4; i++){
+      spicyList.add(
+          Spicy(
+            spicyStage: i,
+            checkBoxString: '$i',
+            imgURL: '',
+          )
+      );
+    }
+  }
+
+
+  void resetMemberCheckBox() async{
+    for(int i = 0; i < memberList.length; i++){
+      memberList[i].isChecked = false;
+    }
+  }
+
+  void resetSpicyCheckBox() async{
+    for(int i = 0; i < spicyList.length; i++){
+      spicyList[i].isChecked = false;
+    }
+  }
 }
 
 class FoodTable {
@@ -64,4 +117,19 @@ class InterestedTable {
   final FoodTable foodTable;
   bool isChecked = false;
   InterestedTable({this.foodTable});
+}
+
+class EatingMember {
+  final String imgURL;
+  final int memberCount;
+  bool isChecked = false;
+  EatingMember({this.imgURL, this.memberCount});
+}
+
+class Spicy {
+  final String imgURL;
+  final int spicyStage;
+  final String checkBoxString;
+  bool isChecked = false;
+  Spicy({this.imgURL, this.spicyStage, this.checkBoxString});
 }

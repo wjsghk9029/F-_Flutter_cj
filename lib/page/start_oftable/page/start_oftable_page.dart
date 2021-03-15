@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/start_oftable/page/registerpage1.dart';
+import 'package:oftable_flutter/page/start_oftable/page/registerpage2.dart';
+import 'package:oftable_flutter/page/start_oftable/page/registerpage3.dart';
+import 'package:oftable_flutter/page/start_oftable/page/registerpage4.dart';
 
 class StartOfTablePage extends StatefulWidget {
   @override
@@ -15,7 +18,14 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
         title: Text('logo'),
       ),
 
-      body: RegisterPage1(),
+      body: PageView(
+          children: [
+            RegisterPage1(),
+            RegisterPage2(),
+            RegisterPage3(),
+            RegisterPage4(),
+          ],
+      ),
     );
   }
 

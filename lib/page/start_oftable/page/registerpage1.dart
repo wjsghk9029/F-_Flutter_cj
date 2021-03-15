@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/Widget/interested_table_checkbox.dart';
+import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 
@@ -14,6 +14,11 @@ class _RegisterPage1State extends State<RegisterPage1> {
   void initState() {
     SingletonRegister().test();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -45,10 +50,11 @@ class _RegisterPage1State extends State<RegisterPage1> {
   }
 
   _buildListItem(BuildContext context, int index) {
-    return InterestedCheckBox(
+    return IconCheckBox(
       size: 40,
       iconSize: 30,
       isChecked: SingletonRegister().tableList[index].isChecked,
+      iconAppear: true,
       onPressed: (){
         setState(() {
           if(SingletonRegister().tableList[index].isChecked) {
