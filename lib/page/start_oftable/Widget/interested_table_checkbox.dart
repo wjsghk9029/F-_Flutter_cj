@@ -4,7 +4,7 @@ class InterestedCheckBox extends StatefulWidget {
   final double size;
   final double iconSize;
   final bool isChecked;
-  void Function() onPressed;
+  final void Function() onPressed;
 
   InterestedCheckBox({this.size, this.iconSize, this.isChecked, this.onPressed});
 

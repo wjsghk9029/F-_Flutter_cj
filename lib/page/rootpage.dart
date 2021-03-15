@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/loginpage.dart';
 
 class RootPage extends StatelessWidget {
-  final Stream<int> _timeStreamImprove =
-  Stream.periodic(Duration(seconds: 2), (var i) {
-    int temp = 1;
-    return temp;
-  });
 
   @override
   Widget build(BuildContext context) {
