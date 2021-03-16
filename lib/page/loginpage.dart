@@ -2,7 +2,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:oftable_flutter/page/start_oftable/page/start_oftable_page.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/start_oftable/start_oftable_page.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 

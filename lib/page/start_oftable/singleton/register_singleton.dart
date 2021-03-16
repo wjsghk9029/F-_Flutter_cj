@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_class.dart';
 
 class Register {
- //싱글톤
+ //#region 싱글톤
   Register._privateConstructor();
 
   static final Register _instance = Register._privateConstructor();
@@ -11,8 +11,9 @@ class Register {
   factory Register() {
       return _instance;
   }
- //~ 싱글톤
+ //#endregion
 
+  final List<bool> allergyCheckBox = [false, false];
   Queue<FoodTable> selectedTable = new Queue();
   List<InterestedTable> tableList = [];
   List<Allergy> selectedAllergyList = [];
@@ -22,7 +23,7 @@ class Register {
   List<Spicy> spicyList = [];
   List<Taste> tasteList = [];
   int eatingMember = 0;
-  Spicy spicyStage = Spicy(checkBoxString: '        ');
+  Spicy spicyStage = Spicy(spicyName: '        ');
   Taste tasteStage = Taste(tasteName: '         ');
 
 
@@ -110,7 +111,7 @@ class Register {
       spicyList.add(
           Spicy(
             spicyStage: i,
-            checkBoxString: '$i',
+            spicyName: '$i',
             imgURL: '',
           )
       );

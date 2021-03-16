@@ -11,7 +11,6 @@ class RegisterPage2 extends StatefulWidget {
 }
 
 class _RegisterPage2State extends State<RegisterPage2> {
-  final List<bool> _allergyCheckBox = [false, false];
   @override
   void initState() {
     Register().page2Test();
@@ -106,7 +105,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: Register().spicyList.length,
-                  childAspectRatio: 2.0,
+                  childAspectRatio: 2,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
                 ),
@@ -126,7 +125,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: Register().spicyList[index].isChecked,
-      text: Text(Register().spicyList[index].checkBoxString, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      text: Text(Register().spicyList[index].spicyName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
           Register().resetSpicyCheckBox();
@@ -140,7 +139,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildSpicyText() {
-    var str = Register().spicyStage.checkBoxString;
+    var str = Register().spicyStage.spicyName;
     return Text('$str', style: TextStyle(fontSize: 20),);
   }
 
@@ -240,13 +239,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
   _buildAllergy(BuildContext context, int index) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: _allergyCheckBox[index],
+      isChecked: Register().allergyCheckBox[index],
       text: Text(index == 0 ? '알러지 있음' : '알러지 없음' , style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          _allergyCheckBox[0] = false;
-          _allergyCheckBox[1] = false;
-          _allergyCheckBox[index] = true;
+          Register().allergyCheckBox[0] = false;
+          Register().allergyCheckBox[1] = false;
+          Register().allergyCheckBox[index] = true;
           if(index == 0){
             Navigator.push(context, CupertinoPageRoute(builder: (context)=>AllergyPage()));
           }else {

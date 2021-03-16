@@ -58,9 +58,9 @@ class _AllergyPageState extends State<AllergyPage> {
       onPressed: (){
         setState(() {
           if(Register().allergyList[index].isChecked) {
-            Register().selectedAllergyList.add(Register().allergyList[index].allergy);
-          } else {
             Register().selectedAllergyList.remove(Register().allergyList[index].allergy);
+          } else {
+            Register().selectedAllergyList.add(Register().allergyList[index].allergy);
           }
           Register().allergyList[index].isChecked = !Register().allergyList[index].isChecked;
         });

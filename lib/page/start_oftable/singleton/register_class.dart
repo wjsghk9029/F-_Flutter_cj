@@ -34,9 +34,9 @@ class EatingMember {
 class Spicy {
   final String imgURL;
   final int spicyStage;
-  final String checkBoxString;
+  final String spicyName;
   bool isChecked = false;
-  Spicy({this.imgURL, this.spicyStage, this.checkBoxString});
+  Spicy({this.imgURL, this.spicyStage, this.spicyName});
 }
 
 class Taste {
