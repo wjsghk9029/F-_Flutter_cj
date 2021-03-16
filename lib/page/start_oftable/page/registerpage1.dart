@@ -19,7 +19,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
+      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [

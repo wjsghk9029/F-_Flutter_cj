@@ -21,12 +21,6 @@ class IconCheckBox extends StatefulWidget {
 class _IconCheckBoxState extends State<IconCheckBox> {
 
   @override
-  void dispose() {
-    SingletonRegister().outputAllergyList = SingletonRegister().selectedAllergyList;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onPressed,

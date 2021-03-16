@@ -10,6 +10,12 @@ class AllergyPage extends StatefulWidget {
 class _AllergyPageState extends State<AllergyPage> {
 
   @override
+  void dispose() {
+    SingletonRegister().outputAllergyList = SingletonRegister().selectedAllergyList;
+    super.dispose();
+  }
+
+  @override
   void initState() {
     SingletonRegister().allergyTest();
     super.initState();
@@ -19,7 +25,7 @@ class _AllergyPageState extends State<AllergyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.all(20),
+        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [

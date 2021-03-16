@@ -4,16 +4,14 @@ class StringCheckBox extends StatefulWidget {
   final double width;
   final double height;
   final bool isChecked;
-  final String text;
-  final Color textColor;
-  final double textSize;
+  final Text text;
   @required
   final bool iconAppear;
   final void Function() onPressed;
   final BorderRadiusGeometry borderRadius;
 
   StringCheckBox({this.width, this.height, this.isChecked, this.onPressed, this.text, this.iconAppear,
-    this.borderRadius, this.textColor, this.textSize});
+    this.borderRadius});
 
   @override
   _StringCheckBoxState createState() => _StringCheckBoxState();
@@ -43,25 +41,13 @@ class _StringCheckBoxState extends State<StringCheckBox> {
     if(widget.iconAppear){
       return Container(
         alignment: Alignment.center,
-        child: Text(
-            widget.text ?? '',
-          style: TextStyle(
-              color: widget.textColor ?? Colors.white,
-            fontSize: widget.textSize ?? 20,
-          ),
-        ),
+        child: widget.text,
       );
     }
     return widget.isChecked ?
     Container(
       alignment: Alignment.center,
-      child: Text(
-          widget.text ?? '',
-        style: TextStyle(
-            color: widget.textColor ?? Colors.white,
-          fontSize: widget.textSize ?? 20,
-        ),
-      ),
+      child: widget.text,
     ) :  null;
   }
 

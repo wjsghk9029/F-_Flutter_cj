@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     widget.idTextFieldController.dispose();
+    widget.pwTextFieldController.dispose();
     super.dispose();
   }
 

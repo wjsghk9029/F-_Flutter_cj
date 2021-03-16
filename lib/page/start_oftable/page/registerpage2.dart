@@ -20,7 +20,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
       child: ListView(
         children: [
           _countEatingMember(),
@@ -126,7 +126,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: SingletonRegister().spicyList[index].isChecked,
-      text: SingletonRegister().spicyList[index].checkBoxString,
+      text: Text(SingletonRegister().spicyList[index].checkBoxString, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
           SingletonRegister().resetSpicyCheckBox();
@@ -191,7 +191,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: SingletonRegister().tasteList[index].isChecked,
-      text: SingletonRegister().tasteList[index].tasteName,
+      text: Text(SingletonRegister().tasteList[index].tasteName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
           SingletonRegister().resetTasteCheckBox();
@@ -241,7 +241,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: _allergyCheckBox[index],
-      text: index == 0 ? '알러지 있음' : '알러지 없음' ,
+      text: Text(index == 0 ? '알러지 있음' : '알러지 없음' , style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
           _allergyCheckBox[0] = false;
