@@ -12,7 +12,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   void initState() {
-    SingletonRegister().test();
+    Register().test();
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                 mainAxisSpacing: 30,
                 crossAxisSpacing: 30,
               ),
-              itemCount: SingletonRegister().tableList.length,
+              itemCount: Register().tableList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
                 return _buildListItem(context, index);
@@ -46,17 +46,17 @@ class _RegisterPage1State extends State<RegisterPage1> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: SingletonRegister().tableList[index].isChecked,
+      isChecked: Register().tableList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(SingletonRegister().tableList[index].isChecked) {
-            SingletonRegister().tableDeque(SingletonRegister().tableList[index]);
+          if(Register().tableList[index].isChecked) {
+            Register().tableDeque(Register().tableList[index]);
           } else {
-            SingletonRegister().tableEnque(
-                SingletonRegister().tableList[index]);
+            Register().tableEnque(
+                Register().tableList[index]);
           }
-          SingletonRegister().tableList[index].isChecked = !SingletonRegister().tableList[index].isChecked;
+          Register().tableList[index].isChecked = !Register().tableList[index].isChecked;
         });
       },
     );

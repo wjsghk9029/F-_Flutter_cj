@@ -9,7 +9,22 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("register 3"),
+      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      child: ListView(
+        children: [
+          _countTableQ(),
+          Padding(padding: EdgeInsets.all(20)),
+          // _selectfood(),
+          // Padding(padding: EdgeInsets.all(20)),
+          // _id(),
+          // Padding(padding: EdgeInsets.all(20)),
+          // _pw()
+        ],
+      ),
     );
+  }
+
+  _countTableQ() {
+
   }
 }

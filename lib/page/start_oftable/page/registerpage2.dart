@@ -14,7 +14,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   final List<bool> _allergyCheckBox = [false, false];
   @override
   void initState() {
-    SingletonRegister().page2Test();
+    Register().page2Test();
     super.initState();
   }
   @override
@@ -46,12 +46,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: SingletonRegister().memberList.length,
+                crossAxisCount: Register().memberList.length,
                 childAspectRatio: 1.0,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
-              itemCount: SingletonRegister().memberList.length,
+              itemCount: Register().memberList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
                 return _buildMemberListItem(context, index);
@@ -66,13 +66,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: SingletonRegister().memberList[index].isChecked,
+      isChecked: Register().memberList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          SingletonRegister().resetMemberCheckBox();
-          SingletonRegister().memberList[index].isChecked = !SingletonRegister().memberList[index].isChecked;
-          SingletonRegister().eatingMember = SingletonRegister().memberList[index].memberCount;
+          Register().resetMemberCheckBox();
+          Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
+          Register().eatingMember = Register().memberList[index].memberCount;
         });
       },
     );
@@ -105,12 +105,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
             Padding(padding: EdgeInsets.only(bottom: 5)),
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: SingletonRegister().spicyList.length,
+                  crossAxisCount: Register().spicyList.length,
                   childAspectRatio: 2.0,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
                 ),
-                itemCount: SingletonRegister().spicyList.length,
+                itemCount: Register().spicyList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildSpicyListItem(context, index);
@@ -125,13 +125,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
   _buildSpicyListItem(BuildContext context, int index) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: SingletonRegister().spicyList[index].isChecked,
-      text: Text(SingletonRegister().spicyList[index].checkBoxString, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: Register().spicyList[index].isChecked,
+      text: Text(Register().spicyList[index].checkBoxString, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          SingletonRegister().resetSpicyCheckBox();
-          SingletonRegister().spicyList[index].isChecked = !SingletonRegister().spicyList[index].isChecked;
-          SingletonRegister().spicyStage = SingletonRegister().spicyList[index];
+          Register().resetSpicyCheckBox();
+          Register().spicyList[index].isChecked = !Register().spicyList[index].isChecked;
+          Register().spicyStage = Register().spicyList[index];
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -140,7 +140,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildSpicyText() {
-    var str = SingletonRegister().spicyStage.checkBoxString;
+    var str = Register().spicyStage.checkBoxString;
     return Text('$str', style: TextStyle(fontSize: 20),);
   }
 
@@ -170,12 +170,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
             ),
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: SingletonRegister().tasteList.length,
+                  crossAxisCount: Register().tasteList.length,
                   childAspectRatio: 2.0,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
                 ),
-                itemCount: SingletonRegister().tasteList.length,
+                itemCount: Register().tasteList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildTasteListItem(context, index);
@@ -190,13 +190,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
   _buildTasteListItem(BuildContext context, int index) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: SingletonRegister().tasteList[index].isChecked,
-      text: Text(SingletonRegister().tasteList[index].tasteName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: Register().tasteList[index].isChecked,
+      text: Text(Register().tasteList[index].tasteName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          SingletonRegister().resetTasteCheckBox();
-          SingletonRegister().tasteList[index].isChecked = !SingletonRegister().tasteList[index].isChecked;
-          SingletonRegister().tasteStage = SingletonRegister().tasteList[index];
+          Register().resetTasteCheckBox();
+          Register().tasteList[index].isChecked = !Register().tasteList[index].isChecked;
+          Register().tasteStage = Register().tasteList[index];
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -205,7 +205,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildTasteText() {
-    var str = SingletonRegister().tasteStage.tasteName;
+    var str = Register().tasteStage.tasteName;
     return Text('$str', style: TextStyle(fontSize: 20),);
   }
 
@@ -250,7 +250,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
           if(index == 0){
             Navigator.push(context, CupertinoPageRoute(builder: (context)=>AllergyPage()));
           }else {
-            SingletonRegister().outputAllergyList = [];
+            Register().outputAllergyList = [];
           }
         });
       },

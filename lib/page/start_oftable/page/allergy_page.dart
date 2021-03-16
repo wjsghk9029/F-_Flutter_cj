@@ -11,13 +11,13 @@ class _AllergyPageState extends State<AllergyPage> {
 
   @override
   void dispose() {
-    SingletonRegister().outputAllergyList = SingletonRegister().selectedAllergyList;
+    Register().outputAllergyList = Register().selectedAllergyList;
     super.dispose();
   }
 
   @override
   void initState() {
-    SingletonRegister().allergyTest();
+    Register().allergyTest();
     super.initState();
   }
 
@@ -38,7 +38,7 @@ class _AllergyPageState extends State<AllergyPage> {
                   mainAxisSpacing: 30,
                   crossAxisSpacing: 30,
                 ),
-                itemCount: SingletonRegister().allergyList.length,
+                itemCount: Register().allergyList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildListItem(context, index);
@@ -53,16 +53,16 @@ class _AllergyPageState extends State<AllergyPage> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: SingletonRegister().allergyList[index].isChecked,
+      isChecked: Register().allergyList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(SingletonRegister().allergyList[index].isChecked) {
-            SingletonRegister().selectedAllergyList.add(SingletonRegister().allergyList[index].allergy);
+          if(Register().allergyList[index].isChecked) {
+            Register().selectedAllergyList.add(Register().allergyList[index].allergy);
           } else {
-            SingletonRegister().selectedAllergyList.remove(SingletonRegister().allergyList[index].allergy);
+            Register().selectedAllergyList.remove(Register().allergyList[index].allergy);
           }
-          SingletonRegister().allergyList[index].isChecked = !SingletonRegister().allergyList[index].isChecked;
+          Register().allergyList[index].isChecked = !Register().allergyList[index].isChecked;
         });
       },
     );

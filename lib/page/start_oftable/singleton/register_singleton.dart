@@ -1,12 +1,12 @@
 import 'dart:collection';
 
-class SingletonRegister {
+class Register {
  //싱글톤
-  SingletonRegister._privateConstructor();
+  Register._privateConstructor();
 
-  static final SingletonRegister _instance = SingletonRegister._privateConstructor();
+  static final Register _instance = Register._privateConstructor();
 
-  factory SingletonRegister() {
+  factory Register() {
       return _instance;
   }
  //~ 싱글톤
