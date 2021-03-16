@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
@@ -39,12 +40,17 @@ class _LoginPageState extends State<LoginPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        body: _buildBody(),
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('나가고 싶다면 한번 더 누르시오'),
+          ),
+            child: _buildBody()
+        ),
       ),
     );
   }
 
-  _buildBody() {
+ Widget _buildBody() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

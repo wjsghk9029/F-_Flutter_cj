@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class IconCheckBox extends StatefulWidget {
   final double size;
@@ -20,11 +21,17 @@ class IconCheckBox extends StatefulWidget {
 class _IconCheckBoxState extends State<IconCheckBox> {
 
   @override
+  void dispose() {
+    SingletonRegister().outputAllergyList = SingletonRegister().selectedAllergyList;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onPressed,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 600),
+        duration: Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
           color: widget.isChecked ? Colors.blueAccent : Colors.grey,

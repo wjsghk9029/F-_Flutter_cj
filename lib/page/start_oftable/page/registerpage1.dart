@@ -17,33 +17,26 @@ class _RegisterPage1State extends State<RegisterPage1> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      margin: EdgeInsets.all(20),
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("당신의 테이블 관심사를 3개 골라주세요", style: TextStyle(fontSize: 20),),
+          Text("당신의 테이블 관심사를 3개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
           Padding(padding: EdgeInsets.only(bottom: 30)),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.0,
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 30,
-                ),
-                itemCount: SingletonRegister().tableList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index){
-                  return _buildListItem(context, index);
-                }),
-          ),
+          GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 30,
+                crossAxisSpacing: 30,
+              ),
+              itemCount: SingletonRegister().tableList.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                return _buildListItem(context, index);
+              }),
         ],
       ),
     );

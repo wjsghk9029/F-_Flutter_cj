@@ -14,9 +14,10 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('logo'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('logo'),
+      //   elevation: 0,
+      // ),
 
       body: PageView(
           children: [

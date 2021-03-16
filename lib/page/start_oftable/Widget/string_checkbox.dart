@@ -26,7 +26,7 @@ class _StringCheckBoxState extends State<StringCheckBox> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 600),
+        duration: Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
           color: widget.isChecked ? Colors.blueAccent : Colors.grey,
