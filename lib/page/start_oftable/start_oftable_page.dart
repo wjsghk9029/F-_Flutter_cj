@@ -11,7 +11,7 @@ class StartOfTablePage extends StatefulWidget {
 
 class _StartOfTablePageState extends State<StartOfTablePage> {
   PageController _pageController;
-  //int _pagenum = 0;
+  int _pagenum = 0;
 
   @override
   void initState() {
@@ -28,11 +28,6 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('$_pagenum'),
-      //   elevation: 0,
-      // ),
-
       body: Container(
         child: Column(
           children: [
@@ -52,6 +47,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
                   ],
               ),
             ),
+            Text('$_pagenum'),
           ],
         ),
       ),

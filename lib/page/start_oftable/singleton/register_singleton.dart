@@ -24,7 +24,7 @@ class Register {
   List<Taste> tasteList = [];
   int eatingMember = 0;
   Spicy spicyStage = Spicy(spicyName: '        ');
-  Taste tasteStage = Taste(tasteName: '         ');
+  Taste tasteStage = Taste(tasteName: '        ');
 
 
   Future<void> tableEnque (InterestedTable table) async {
