@@ -69,9 +69,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
       iconAppear: true,
       onPressed: (){
         setState(() {
-          Register().resetMemberCheckBox();
+          Register().resetCheckBox(Register().memberList);
           Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
-          Register().eatingMember = Register().memberList[index].memberCount;
+          Register().selectedMember = Register().memberList[index].registerCheckBoxData;
         });
       },
     );
@@ -125,12 +125,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: Register().spicyList[index].isChecked,
-      text: Text(Register().spicyList[index].spicyName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      text: Text(Register().spicyList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          Register().resetSpicyCheckBox();
+          Register().resetCheckBox(Register().spicyList);
           Register().spicyList[index].isChecked = !Register().spicyList[index].isChecked;
-          Register().spicyStage = Register().spicyList[index];
+          Register().selectedSpicy = Register().spicyList[index].registerCheckBoxData;
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -139,7 +139,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildSpicyText() {
-    var str = Register().spicyStage.spicyName;
+    var str = Register().selectedSpicy.itemName;
     return Text('$str', style: TextStyle(fontSize: 20),);
   }
 
@@ -190,12 +190,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: Register().tasteList[index].isChecked,
-      text: Text(Register().tasteList[index].tasteName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      text: Text(Register().tasteList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          Register().resetTasteCheckBox();
+          Register().resetCheckBox(Register().tasteList);
           Register().tasteList[index].isChecked = !Register().tasteList[index].isChecked;
-          Register().tasteStage = Register().tasteList[index];
+          Register().selectedTaste = Register().tasteList[index].registerCheckBoxData;
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -204,7 +204,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildTasteText() {
-    var str = Register().tasteStage.tasteName;
+    var str = Register().selectedTaste.itemName;
     return Text('$str', style: TextStyle(fontSize: 20),);
   }
 

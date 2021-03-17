@@ -12,7 +12,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   void initState() {
-    Register().test();
+    Register().test(Register().tableList, 12);
     super.initState();
   }
 
@@ -23,7 +23,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("당신의 테이블 관심사를 3개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+          Text("당신의 푸드 관심사를 2개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
           Padding(padding: EdgeInsets.only(bottom: 30)),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

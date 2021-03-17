@@ -14,142 +14,74 @@ class Register {
  //#endregion
 
   final List<bool> allergyCheckBox = [false, false];
-  Queue<FoodTable> selectedTable = new Queue();
-  List<InterestedTable> tableList = [];
-  List<Allergy> selectedAllergyList = [];
-  List<Allergy> outputAllergyList = [];
-  List<CheckBoxAllergy> allergyList = [];
-  List<EatingMember> memberList = [];
-  List<Spicy> spicyList = [];
-  List<Taste> tasteList = [];
-  int eatingMember = 0;
-  Spicy spicyStage = Spicy(spicyName: '        ');
-  Taste tasteStage = Taste(tasteName: '        ');
+
+  List<RegisterCheckBox> tableList = [];
+  List<RegisterCheckBox> allergyList = [];
+  List<RegisterCheckBox> memberList = [];
+  List<RegisterCheckBox> spicyList = [];
+  List<RegisterCheckBox> tasteList = [];
+
+  Queue<RegisterCheckBoxData> selectedTable = Queue();
+  List<RegisterCheckBoxData> outputAllergyList = [];
+  List<RegisterCheckBoxData> selectedAllergyList = [];
+  RegisterCheckBoxData selectedMember;
+  RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
+  RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
 
 
-  Future<void> tableEnque (InterestedTable table) async {
-    selectedTable.add(table.foodTable);
-    if(selectedTable.length > 3){
+  Future<void> tableEnque (RegisterCheckBox table) async {
+    selectedTable.add(table.registerCheckBoxData);
+    if(selectedTable.length > 2){
       var item = selectedTable.removeFirst();
-      var id = _getByTableId(item);
-      tableList[id].isChecked = false;
+      tableList[_getByTableId(item)].isChecked = false;
     }
   }
 
-  Future<void> tableDeque (InterestedTable table) async {
-    selectedTable.remove(table.foodTable);
+  Future<void> tableDeque (RegisterCheckBox table) async {
+    selectedTable.remove(table.registerCheckBoxData);
   }
 
-  int _getByTableId(FoodTable table){
+  int _getByTableId(RegisterCheckBoxData table){
     for(int i = 0; i < tableList.length; i++){
-      if(tableList[i].foodTable.tableId == table.tableId){
+      if(tableList[i].registerCheckBoxData.itemId == table.itemId){
         return i;
       }
     }
     return null;
   }
 
-  void test() async{
-    if(tableList.length > 0){
-      return;
-    }
-    for(int i = 0; i < 9; i++){
-      tableList.add(
-        InterestedTable(
-          foodTable: FoodTable(
-            imgURL: '',
-            tableId: i,
-            tableName: '$i',
-          )
-        )
-      );
-    }
-  }
-
-  void allergyTest() async{
-    if(allergyList.length > 0){
-      return;
-    }
-    for(int i = 0; i < 16; i++){
-      allergyList.add(
-          CheckBoxAllergy(
-              allergy: Allergy(
-                imgURL: '',
-                allergyId: i,
-                allergyName: '$i',
-              )
-          )
-      );
-    }
-  }
-
+  //#region 테스트
   void page2Test() async{
-    memberTest();
-    spicyListTest();
-    tasteListTest();
+    test(memberList, 5);
+    test(spicyList, 4);
+    test(tasteList, 5);
   }
 
-  void memberTest() async{
-    if(memberList.length > 0){
+  void test(List<RegisterCheckBox> items, int boxCount) async{
+    if(items.length > 0){
       return;
     }
-    for(int i = 0; i < 5; i++){
-      memberList.add(
-          EatingMember(
-            memberCount: i,
-            imgURL: '',
-          )
-      );
-    }
-  }
-
-  void spicyListTest() async{
-    if(spicyList.length > 0){
-      return;
-    }
-    for(int i = 0; i < 4; i++){
-      spicyList.add(
-          Spicy(
-            spicyStage: i,
-            spicyName: '$i',
-            imgURL: '',
-          )
-      );
-    }
-  }
-
-  void tasteListTest() async{
-    if(tasteList.length > 0){
-      return;
-    }
-    for(int i = 0; i < 4; i++){
-      tasteList.add(
-          Taste(
-            tasteId: i,
-            tasteName: '$i',
-            imgURL: '',
+    for(int i = 0; i < boxCount; i++){
+      items.add(
+          RegisterCheckBox(
+            registerCheckBoxData: RegisterCheckBoxData(
+              itemId: i,
+              itemName: '$i',
+            ),
+            itemImgURL: '',
           )
       );
     }
   }
 
 
-  void resetMemberCheckBox() async{
-    for(int i = 0; i < memberList.length; i++){
-      memberList[i].isChecked = false;
+  void resetCheckBox(List<RegisterCheckBox> items) async{
+    for(int i = 0; i < items.length; i++){
+      items[i].isChecked = false;
     }
   }
 
-  void resetSpicyCheckBox() async{
-    for(int i = 0; i < spicyList.length; i++){
-      spicyList[i].isChecked = false;
-    }
-  }
+  //#endregion
 
-  void resetTasteCheckBox() async{
-    for(int i = 0; i < tasteList.length; i++){
-      tasteList[i].isChecked = false;
-    }
-  }
 }
 

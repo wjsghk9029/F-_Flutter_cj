@@ -41,19 +41,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
             _getSelectedAl(),
           ],
         ),
-        // Row(
-        //   children: [
-        //     Text("테이블 관심사 : "),
-        //     _getSelectedTable(),
-        //   ],
-        // ),
-        // Row(
-        //   children: [
-        //     Text("테이블 관심사 : "),
-        //     _getSelectedTable(),
-        //   ],
-        // ),
-
       ],
     );
 
@@ -63,14 +50,14 @@ class _RegisterPage3State extends State<RegisterPage3> {
     var reg = Register().selectedTable.toList();
     String str = '';
     for(int i = 0; i < reg.length; i++){
-      var text = reg[i].tableName;
+      var text = reg[i].itemName;
       str += text + ', ';
     }
     return Text(str);
   }
 
   _getMember() {
-    var text = Register().eatingMember;
+    var text = Register().selectedMember.itemName;
     return Text('$text');
   }
 
@@ -78,7 +65,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
     var reg = Register().outputAllergyList;
     String str = '';
     for(int i = 0; i < reg.length; i++){
-      var text = reg[i].allergyName;
+      var text = reg[i].itemName;
       str += text + ', ';
     }
     return Text(str);
