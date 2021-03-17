@@ -24,7 +24,7 @@ class Register {
   Queue<RegisterCheckBoxData> selectedTable = Queue();
   List<RegisterCheckBoxData> outputAllergyList = [];
   List<RegisterCheckBoxData> selectedAllergyList = [];
-  RegisterCheckBoxData selectedMember;
+  RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
 
@@ -36,11 +36,7 @@ class Register {
       tableList[_getByTableId(item)].isChecked = false;
     }
   }
-
-  Future<void> tableDeque (RegisterCheckBox table) async {
-    selectedTable.remove(table.registerCheckBoxData);
-  }
-
+  
   int _getByTableId(RegisterCheckBoxData table){
     for(int i = 0; i < tableList.length; i++){
       if(tableList[i].registerCheckBoxData.itemId == table.itemId){

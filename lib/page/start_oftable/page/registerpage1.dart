@@ -51,15 +51,13 @@ class _RegisterPage1State extends State<RegisterPage1> {
       onPressed: (){
         setState(() {
           if(Register().tableList[index].isChecked) {
-            Register().tableDeque(Register().tableList[index]);
+            Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData);
           } else {
-            Register().tableEnque(
-                Register().tableList[index]);
+            Register().tableEnque(Register().tableList[index]);
           }
           Register().tableList[index].isChecked = !Register().tableList[index].isChecked;
         });
       },
     );
   }
-
 }
