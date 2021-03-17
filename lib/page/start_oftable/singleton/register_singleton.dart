@@ -50,6 +50,12 @@ class Register {
     return null;
   }
 
+  void resetCheckBox(List<RegisterCheckBox> items) async{
+    for(int i = 0; i < items.length; i++){
+      items[i].isChecked = false;
+    }
+  }
+
   //#region 테스트
   void page2Test() async{
     test(memberList, 5);
@@ -73,14 +79,6 @@ class Register {
       );
     }
   }
-
-
-  void resetCheckBox(List<RegisterCheckBox> items) async{
-    for(int i = 0; i < items.length; i++){
-      items[i].isChecked = false;
-    }
-  }
-
   //#endregion
 
 }
