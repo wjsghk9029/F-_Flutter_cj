@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/Widget/string_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/page/allergy_page.dart';
+import 'package:oftable_flutter/page/start_oftable/singleton/register_class.dart';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class RegisterPage2 extends StatefulWidget {
@@ -13,7 +14,7 @@ class RegisterPage2 extends StatefulWidget {
 class _RegisterPage2State extends State<RegisterPage2> {
   @override
   void initState() {
-    Register().page2Test();
+    Register().page2Test(); //테스트용
     super.initState();
   }
   @override
@@ -34,6 +35,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
     );
   }
 
+  _buildBlankText(RegisterCheckBoxData item) {
+    var str = item.itemName;
+    return Text('$str', style: TextStyle(fontSize: 20),);
+  }
+
+  //#region 식사인원
   _countEatingMember() {
     return Container(
       child: Column(
@@ -77,6 +84,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
     );
   }
 
+  //#endregion
+
+  //#region 매운맛
   _selectSpicy() {
     return Center(
       child: Container(
@@ -90,7 +100,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                     Container(
                       margin: EdgeInsets.only(right: 3, left: 3),
                       padding: EdgeInsets.only(right: 5, left: 5),
-                      child: _buildSpicyText(),
+                      child: _buildBlankText(Register().selectedSpicy),
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(),
@@ -138,10 +148,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
 
   }
 
-  _buildSpicyText() {
-    var str = Register().selectedSpicy.itemName;
-    return Text('$str', style: TextStyle(fontSize: 20),);
-  }
+  //#endregion
+
+  //#region 맛
 
   _selectTaste() {
     return Center(
@@ -156,7 +165,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   Container(
                     margin: EdgeInsets.only(right: 3, left: 3),
                     padding: EdgeInsets.only(right: 5, left: 5),
-                    child: _buildTasteText(),
+                    child: _buildBlankText(Register().selectedTaste),
                     decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(),
@@ -202,11 +211,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
     );
 
   }
+  //#endregion
 
-  _buildTasteText() {
-    var str = Register().selectedTaste.itemName;
-    return Text('$str', style: TextStyle(fontSize: 20),);
-  }
+  //#region 알러지
 
   _selectAllergy() {
     return Column(
@@ -256,5 +263,5 @@ class _RegisterPage2State extends State<RegisterPage2> {
       borderRadius: BorderRadius.circular(10),
     );
   }
-
+//endregion
 }

@@ -12,7 +12,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   void initState() {
-    Register().test(Register().tableList, 12);
+    Register().test(Register().tableList, 12); //테스트용
     super.initState();
   }
 
