@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class RegisterPage3 extends StatefulWidget {
@@ -8,66 +9,65 @@ class RegisterPage3 extends StatefulWidget {
 
 class _RegisterPage3State extends State<RegisterPage3> {
   @override
+  void initState() {
+    Register().test(Register().tableCurationList, 5); //테스트용
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 20, right: 20, left: 20),
       child: ListView(
         children: [
-          _page1Test(),
+          _tableCuration(),
 
         ],
       ),
     );
   }
-
-  _page1Test() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text("테이블 관심사 : "),
-            _getSelectedTable(),
-          ],
-        ),
-        Row(
-          children: [
-            Text("인원 : "),
-            _getMember(),
-          ],
-        ),
-        Row(
-          children: [
-            Text("알러지 : "),
-            _getSelectedAl(),
-          ],
-        ),
-      ],
+//#region 테이블큐레이션
+  _tableCuration() {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: 20),),
+          ),
+          GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: Register().tableCurationList.length,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+              ),
+              itemCount: Register().tableCurationList.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                return _buildTableCuration(context, index);
+              }
+          ),
+        ],
+      ),
     );
-
   }
 
-  _getSelectedTable() {
-    var reg = Register().selectedTable.toList();
-    String str = '';
-    for(int i = 0; i < reg.length; i++){
-      var text = reg[i].itemName;
-      str += text + ', ';
-    }
-    return Text(str);
+  _buildTableCuration(BuildContext context, int index) {
+    return IconCheckBox(
+      size: 40,
+      iconSize: 30,
+      isChecked: Register().tableCurationList[index].isChecked,
+      iconAppear: true,
+      onPressed: (){
+        setState(() {
+          Register().resetCheckBox(Register().tableCurationList);
+          Register().tableCurationList[index].isChecked = !Register().tableCurationList[index].isChecked;
+          Register().selectedTableCuration = Register().tableCurationList[index].registerCheckBoxData;
+        });
+      },
+    );
   }
 
-  _getMember() {
-    var text = Register().selectedMember.itemName;
-    return Text('$text');
-  }
-
-  _getSelectedAl() {
-    var reg = Register().outputAllergyList;
-    String str = '';
-    for(int i = 0; i < reg.length; i++){
-      var text = reg[i].itemName;
-      str += text + ', ';
-    }
-    return Text(str);
-  }
+//#endregion
 }

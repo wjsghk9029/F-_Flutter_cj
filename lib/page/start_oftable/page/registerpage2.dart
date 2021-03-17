@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/Widget/string_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/page/allergy_page.dart';
@@ -14,7 +15,9 @@ class RegisterPage2 extends StatefulWidget {
 class _RegisterPage2State extends State<RegisterPage2> {
   @override
   void initState() {
-    Register().page2Test(); //테스트용
+    Register().test(Register().memberList, 5);
+    Register().test(Register().spicyList, 4);
+    Register().test(Register().tasteList, 5); //테스트용
     super.initState();
   }
   @override

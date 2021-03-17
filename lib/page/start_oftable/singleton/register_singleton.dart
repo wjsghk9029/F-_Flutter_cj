@@ -20,6 +20,7 @@ class Register {
   List<RegisterCheckBox> memberList = [];
   List<RegisterCheckBox> spicyList = [];
   List<RegisterCheckBox> tasteList = [];
+  List<RegisterCheckBox> tableCurationList = [];
 
   Queue<RegisterCheckBoxData> selectedTable = Queue();
   List<RegisterCheckBoxData> outputAllergyList = [];
@@ -27,16 +28,16 @@ class Register {
   RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
+  RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
 
-
-  Future<void> tableEnque (RegisterCheckBox table) async {
+  void tableEnque (RegisterCheckBox table) async {
     selectedTable.add(table.registerCheckBoxData);
     if(selectedTable.length > 2){
       var item = selectedTable.removeFirst();
       tableList[_getByTableId(item)].isChecked = false;
     }
   }
-  
+
   int _getByTableId(RegisterCheckBoxData table){
     for(int i = 0; i < tableList.length; i++){
       if(tableList[i].registerCheckBoxData.itemId == table.itemId){
@@ -53,12 +54,6 @@ class Register {
   }
 
   //#region 테스트
-  void page2Test() async{
-    test(memberList, 5);
-    test(spicyList, 4);
-    test(tasteList, 5);
-  }
-
   void test(List<RegisterCheckBox> items, int boxCount) async{
     if(items.length > 0){
       return;
