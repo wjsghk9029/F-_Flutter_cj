@@ -4,19 +4,21 @@ import 'package:oftable_flutter/page/start_oftable/Widget/string_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class RegisterPage3 extends StatefulWidget {
-  final idTextFieldController = TextEditingController();
-  final pwTextFieldController = TextEditingController();
-  final pwReTextFieldController = TextEditingController();
+
   @override
   _RegisterPage3State createState() => _RegisterPage3State();
 }
 
 class _RegisterPage3State extends State<RegisterPage3> {
+  final idTextFieldController = TextEditingController();
+  final pwTextFieldController = TextEditingController();
+  final pwReTextFieldController = TextEditingController();
+
   @override
   void dispose() {
-    widget.idTextFieldController.dispose();
-    widget.pwTextFieldController.dispose();
-    widget.pwReTextFieldController.dispose();
+    idTextFieldController.dispose();
+    pwTextFieldController.dispose();
+    pwReTextFieldController.dispose();
     super.dispose();
   }
   @override
@@ -228,7 +230,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              controller: widget.idTextFieldController,
+              controller: idTextFieldController,
               decoration: InputDecoration(
                 hintText: '아이디',
                 border: InputBorder.none,
@@ -257,7 +259,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              controller: widget.pwTextFieldController,
+              controller: pwTextFieldController,
               decoration: InputDecoration(
                 hintText: '비밀번호',
                 border: InputBorder.none,
@@ -272,7 +274,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              controller: widget.pwReTextFieldController,
+              controller: pwReTextFieldController,
               decoration: InputDecoration(
                 hintText: '비밀번호 확인',
                 border: InputBorder.none,

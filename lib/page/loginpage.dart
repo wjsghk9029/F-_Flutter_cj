@@ -7,15 +7,14 @@ import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
 class LoginPage extends StatefulWidget {
-  final idTextFieldController = TextEditingController();
-  final pwTextFieldController = TextEditingController();
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-
+  final idTextFieldController = TextEditingController();
+  final pwTextFieldController = TextEditingController();
   bool keyboardOpen = false;
   @override
   void initState() {
@@ -29,8 +28,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    widget.idTextFieldController.dispose();
-    widget.pwTextFieldController.dispose();
+    idTextFieldController.dispose();
+    pwTextFieldController.dispose();
     super.dispose();
   }
 
@@ -116,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              controller: widget.idTextFieldController,
+              controller: idTextFieldController,
               decoration: InputDecoration(
                 hintText: '아이디',
                 border: InputBorder.none,
@@ -131,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              controller: widget.pwTextFieldController,
+              controller: pwTextFieldController,
               decoration: InputDecoration(
                 hintText: '비밀번호',
                 border: InputBorder.none,
