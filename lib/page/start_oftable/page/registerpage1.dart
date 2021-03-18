@@ -18,27 +18,30 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-      child: ListView(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("당신의 푸드 관심사를 2개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-          Padding(padding: EdgeInsets.only(bottom: 30)),
-          GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 30,
-                crossAxisSpacing: 30,
-              ),
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: Register().tableList.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index){
-                return _buildListItem(context, index);
-              }),
-        ],
+    return Center(
+      child: Container(
+        alignment: Alignment.center,
+        width: 1000,
+        padding: EdgeInsets.only(right: 20, left: 20),
+        child: ListView(
+          children: [
+            Text("당신의 푸드 관심사를 2개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+            Padding(padding: EdgeInsets.only(bottom: 15)),
+            GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.0,
+                  mainAxisSpacing: 30,
+                  crossAxisSpacing: 30,
+                ),
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: Register().tableList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index){
+                  return _buildListItem(context, index);
+                }),
+          ],
+        ),
       ),
     );
   }

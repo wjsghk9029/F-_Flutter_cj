@@ -23,7 +23,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      padding: EdgeInsets.only(right: 20, left: 20),
       child: ListView(
         children: [
           _countEatingMember(),
@@ -61,6 +61,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                 crossAxisSpacing: 20,
               ),
               itemCount: Register().memberList.length,
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index){
                 return _buildMemberListItem(context, index);
@@ -123,6 +124,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   crossAxisSpacing: 20,
                 ),
                 itemCount: Register().spicyList.length,
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildSpicyListItem(context, index);
@@ -188,6 +190,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                 ),
                 itemCount: Register().tasteList.length,
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index){
                   return _buildTasteListItem(context, index);
                 }
@@ -237,6 +240,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
               ),
               itemCount: 2,
               shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index){
                 return _buildAllergy(context, index);
               }

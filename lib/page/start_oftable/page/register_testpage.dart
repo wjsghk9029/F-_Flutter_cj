@@ -11,7 +11,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+      padding: EdgeInsets.only(right: 20, left: 20),
       child: ListView(
         children: [
           _page1Test(),

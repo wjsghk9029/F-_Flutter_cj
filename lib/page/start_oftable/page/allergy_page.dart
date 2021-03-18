@@ -24,26 +24,36 @@ class _AllergyPageState extends State<AllergyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-        child: ListView(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("알러지를 선택해 주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-            Padding(padding: EdgeInsets.only(bottom: 30)),
-            GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 1.0,
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 30,
-                ),
-                itemCount: Register().allergyList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index){
-                  return _buildListItem(context, index);
-                }),
-          ],
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          width: 1000,
+          padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("알러지를 선택해 주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+              Padding(padding: EdgeInsets.only(bottom: 30)),
+              Container(
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1.0,
+                      mainAxisSpacing: 30,
+                      crossAxisSpacing: 30,
+                    ),
+                    itemCount: Register().allergyList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index){
+                      return _buildListItem(context, index);
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -58,13 +58,11 @@ class _LoginPageState extends State<LoginPage> {
         Center(
           child: Column(
             children: [
-              Text('로그인'),
               _buildLoginTextField(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CupertinoButton(child: Text('자동로그인'), onPressed: (){}),
-                  CupertinoButton(child: Text('아이디저장'), onPressed: (){}),
                 ]
               ),
             ],
@@ -86,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
               },
-              child: Text('오떼 시작하기', style: TextStyle(fontSize: 20),),
+              child: Text('로그인하기', style: TextStyle(fontSize: 20),),
               color: Colors.white54,
             ),
             Row(
@@ -111,14 +109,34 @@ class _LoginPageState extends State<LoginPage> {
       width: 200,
       child: Column(
         children: [
-          TextField(
-            controller: widget.idTextFieldController,
-            decoration: InputDecoration(hintText: '아이디'),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: widget.idTextFieldController,
+              decoration: InputDecoration(
+                hintText: '아이디',
+                border: InputBorder.none,
+              ),
+            ),
           ),
           Padding(padding: EdgeInsets.all(5)),
-          TextField(
-            controller: widget.pwTextFieldController,
-            decoration: InputDecoration(hintText: '비밀번호'),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: widget.pwTextFieldController,
+              decoration: InputDecoration(
+                hintText: '비밀번호',
+                border: InputBorder.none,
+              ),
+            ),
           ),
         ],
       ),

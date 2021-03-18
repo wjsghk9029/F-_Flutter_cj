@@ -30,6 +30,12 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text('로고'),
+      ),
       body: Container(
         child: Column(
           children: [
