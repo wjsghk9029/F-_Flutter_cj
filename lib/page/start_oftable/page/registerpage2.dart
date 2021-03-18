@@ -27,11 +27,11 @@ class _RegisterPage2State extends State<RegisterPage2> {
       child: ListView(
         children: [
           _countEatingMember(),
-          Padding(padding: EdgeInsets.all(20)),
+          Padding(padding: EdgeInsets.all(10)),
           _selectSpicy(),
-          Padding(padding: EdgeInsets.all(20)),
+          Padding(padding: EdgeInsets.all(10)),
           _selectTaste(),
-          Padding(padding: EdgeInsets.all(20)),
+          Padding(padding: EdgeInsets.all(10)),
           _selectAllergy()
         ],
       ),

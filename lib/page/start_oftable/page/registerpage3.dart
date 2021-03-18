@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
+import 'package:oftable_flutter/page/start_oftable/Widget/string_checkbox.dart';
 import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class RegisterPage3 extends StatefulWidget {
+  final idTextFieldController = TextEditingController();
+  final pwTextFieldController = TextEditingController();
+  final pwReTextFieldController = TextEditingController();
   @override
   _RegisterPage3State createState() => _RegisterPage3State();
 }
 
 class _RegisterPage3State extends State<RegisterPage3> {
   @override
+  void dispose() {
+    widget.idTextFieldController.dispose();
+    widget.pwTextFieldController.dispose();
+    widget.pwReTextFieldController.dispose();
+    super.dispose();
+  }
+  @override
   void initState() {
     Register().test(Register().tableCurationList, 5); //테스트용
+    Register().testMap();
     super.initState();
   }
   @override
@@ -20,7 +32,12 @@ class _RegisterPage3State extends State<RegisterPage3> {
       child: ListView(
         children: [
           _tableCuration(),
-
+          Padding(padding: EdgeInsets.only(top: 10)),
+          _keyword(),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          _registerId(),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          _registerPw(),
         ],
       ),
     );
@@ -69,5 +86,204 @@ class _RegisterPage3State extends State<RegisterPage3> {
     );
   }
 
-//#endregion
+  //#endregion
+
+  //#region 키워드
+  _keyword() {
+    return Container(
+      child: Column(
+        children: [
+          Register().outputTableList.length > 0 ? _keyword1Child() :
+          Padding(padding: EdgeInsets.only(top: 10)),
+          Register().outputTableList.length > 1 ? _keyword2Child() :
+          Padding(padding: EdgeInsets.only(top: 10)),
+
+        ],
+      ),
+    );
+  }
+
+
+  _keyword1Child() {
+    var data = Register().outputTableList[0];
+    var name = data.itemName;
+    var itemId = data.itemId;
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10, top: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('$name의 세부 관심 키워드를 골라주세요', style: TextStyle(fontSize: 20),),
+          ),
+          Container(
+            width: 300,
+            child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                ),
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 8,
+                shrinkWrap: true,
+                itemBuilder: (context, index){
+                  return _buildKeyword(context, index, itemId);
+                }
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildKeyword(BuildContext context, int index, int itemId) {
+    return StringCheckBox(
+      iconAppear: true,
+      isChecked: Register().keywordMap[itemId][index].isChecked,
+      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      onPressed: (){
+        setState(() {
+          if(Register().keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
+          } else {
+            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
+          }
+          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
+        });
+      },
+      borderRadius: BorderRadius.circular(10),
+    );
+  }
+
+  _keyword2Child() {
+    var data = Register().outputTableList[1];
+    var name = data.itemName;
+    var itemId = data.itemId;
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10, top: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('$name의 세부 관심 키워드를 골라주세요', style: TextStyle(fontSize: 20),),
+          ),
+          Container(
+            width: 300,
+            child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                ),
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 8,
+                shrinkWrap: true,
+                itemBuilder: (context, index){
+                  return _buildKeyword2(context, index, itemId);
+                }
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildKeyword2(BuildContext context, int index, int itemId) {
+    return StringCheckBox(
+      iconAppear: true,
+      isChecked: Register().keywordMap[itemId][index].isChecked,
+      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      onPressed: (){
+        setState(() {
+          if(Register().keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword2.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
+          } else {
+            Register().selectedKeyword2.add(Register().keywordMap[itemId][index].registerCheckBoxData);
+          }
+          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
+        });
+      },
+      borderRadius: BorderRadius.circular(10),
+    );
+  }
+  //#endregion
+
+  _registerId() {
+    return Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('아이디', style: TextStyle(fontSize: 20),),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: widget.idTextFieldController,
+              decoration: InputDecoration(
+                hintText: '아이디',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _registerPw() {
+    return Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('비밀번호', style: TextStyle(fontSize: 20),),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: widget.pwTextFieldController,
+              decoration: InputDecoration(
+                hintText: '비밀번호',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+          Padding(padding: EdgeInsets.all(10)),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: widget.pwReTextFieldController,
+              decoration: InputDecoration(
+                hintText: '비밀번호 확인',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
 }

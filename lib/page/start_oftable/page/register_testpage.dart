@@ -27,7 +27,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
         Row(
           children: [
             Text("테이블 관심사 : "),
-            _test(Register().selectedTable.toList()),
+            _test(Register().outputTableList),
           ],
         ),
         Row(
@@ -51,7 +51,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
         Row(
           children: [
             Text("알러지 : "),
-            _test(Register().selectedAllergyList),
+            _test(Register().outputAllergyList),
           ],
         ),
         Row(

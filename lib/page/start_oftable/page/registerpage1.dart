@@ -11,6 +11,12 @@ class RegisterPage1 extends StatefulWidget {
 class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
+  void dispose() {
+    Register().outputTableList = Register().selectedTable.toList();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     Register().test(Register().tableList, 12); //테스트용
     super.initState();

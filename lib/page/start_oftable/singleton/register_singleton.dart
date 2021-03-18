@@ -21,14 +21,19 @@ class Register {
   List<RegisterCheckBox> spicyList = [];
   List<RegisterCheckBox> tasteList = [];
   List<RegisterCheckBox> tableCurationList = [];
+  var keywordMap = <int, List<RegisterCheckBox>>{};
 
   Queue<RegisterCheckBoxData> selectedTable = Queue();
-  List<RegisterCheckBoxData> outputAllergyList = [];
+  List<RegisterCheckBoxData> outputTableList = [];
   List<RegisterCheckBoxData> selectedAllergyList = [];
+  List<RegisterCheckBoxData> outputAllergyList = [];
+  List<RegisterCheckBoxData> selectedKeyword1 = [];
+  List<RegisterCheckBoxData> selectedKeyword2 = [];
   RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
+
 
   void tableEnque (RegisterCheckBox table) async {
     selectedTable.add(table.registerCheckBoxData);
@@ -53,6 +58,11 @@ class Register {
     }
   }
 
+  void keywordMapSetting(RegisterCheckBoxData table){
+    List<RegisterCheckBox> list = [];
+    keywordMap.addAll({table.itemId : list});
+  }
+
   //#region 테스트
   void test(List<RegisterCheckBox> items, int boxCount) async{
     if(items.length > 0){
@@ -68,6 +78,16 @@ class Register {
             itemImgURL: '',
           )
       );
+    }
+  }
+
+  void testMap() {
+    if(keywordMap.length > 0){
+      return;
+    }
+    for(int i = 0; i < tableList.length; i++){
+     keywordMapSetting(tableList[i].registerCheckBoxData);
+     test(keywordMap[i], 8);
     }
   }
   //#endregion
