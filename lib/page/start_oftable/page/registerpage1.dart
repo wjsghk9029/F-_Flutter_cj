@@ -32,6 +32,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                 mainAxisSpacing: 30,
                 crossAxisSpacing: 30,
               ),
+              physics: NeverScrollableScrollPhysics(),
               itemCount: Register().tableList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
