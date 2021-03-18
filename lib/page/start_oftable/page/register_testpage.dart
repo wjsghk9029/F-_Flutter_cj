@@ -15,7 +15,6 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
       child: ListView(
         children: [
           _page1Test(),
-
         ],
       ),
     );
@@ -60,6 +59,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
             _test2(Register().selectedTableCuration),
           ],
         ),
+        Image.network('http://61.81.99.50:8080/image/as.jpg'),
       ],
     );
 
