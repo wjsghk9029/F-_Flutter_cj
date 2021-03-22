@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
+import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/singleton/register_utility.dart';
 
 class AllergyPage extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class AllergyPage extends StatefulWidget {
 }
 
 class _AllergyPageState extends State<AllergyPage> {
+
+  AllergyPageUtility util;
 
   @override
   void dispose() {
@@ -17,7 +20,8 @@ class _AllergyPageState extends State<AllergyPage> {
 
   @override
   void initState() {
-    Register().test(Register().allergyList, 16);
+    util = AllergyPageUtility();
+    util.insertData(util.allergyList, util.allergyListText);
     super.initState();
   }
 
@@ -46,7 +50,7 @@ class _AllergyPageState extends State<AllergyPage> {
                       mainAxisSpacing: 30,
                       crossAxisSpacing: 30,
                     ),
-                    itemCount: Register().allergyList.length,
+                    itemCount: util.allergyList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index){
                       return _buildListItem(context, index);
@@ -63,16 +67,16 @@ class _AllergyPageState extends State<AllergyPage> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: Register().allergyList[index].isChecked,
+      isChecked: util.allergyList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(Register().allergyList[index].isChecked) {
-            Register().selectedAllergyList.remove(Register().allergyList[index].registerCheckBoxData);
+          if(util.allergyList[index].isChecked) {
+            Register().selectedAllergyList.remove(util.allergyList[index].registerCheckBoxData);
           } else {
-            Register().selectedAllergyList.add(Register().allergyList[index].registerCheckBoxData);
+            Register().selectedAllergyList.add(util.allergyList[index].registerCheckBoxData);
           }
-          Register().allergyList[index].isChecked = !Register().allergyList[index].isChecked;
+          util.allergyList[index].isChecked = !util.allergyList[index].isChecked;
         });
       },
     );

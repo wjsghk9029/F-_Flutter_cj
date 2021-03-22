@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/register/page/register_testpage.dart';
+import 'package:oftable_flutter/page/register/page/registerpage1.dart';
+import 'package:oftable_flutter/page/register/page/registerpage2.dart';
+import 'package:oftable_flutter/page/register/page/registerpage3.dart';
+import 'package:oftable_flutter/page/register/page/registerpage4.dart';
 
-import 'package:oftable_flutter/page/start_oftable/page/registerpage1.dart';
-import 'package:oftable_flutter/page/start_oftable/page/registerpage2.dart';
-import 'package:oftable_flutter/page/start_oftable/page/register_testpage.dart';
-import 'package:oftable_flutter/page/start_oftable/page/registerpage3.dart';
-import 'package:oftable_flutter/page/start_oftable/page/registerpage4.dart';
 
 class StartOfTablePage extends StatefulWidget {
   @override

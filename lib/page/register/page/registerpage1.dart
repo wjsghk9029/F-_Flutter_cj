@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
+import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/singleton/register_utility.dart';
 
 
 class RegisterPage1 extends StatefulWidget {
@@ -9,6 +10,7 @@ class RegisterPage1 extends StatefulWidget {
 }
 
 class _RegisterPage1State extends State<RegisterPage1> {
+  RegisterPage1Utility _util;
 
   @override
   void dispose() {
@@ -18,7 +20,8 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   void initState() {
-    Register().test(Register().tableList, 12); //테스트용
+    _util = RegisterPage1Utility();
+    _util.insertData(_util.tableList, _util.tableListText);
     super.initState();
   }
 
@@ -41,7 +44,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                   crossAxisSpacing: 30,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: Register().tableList.length,
+                itemCount: _util.tableList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildListItem(context, index);
@@ -56,16 +59,16 @@ class _RegisterPage1State extends State<RegisterPage1> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: Register().tableList[index].isChecked,
+      isChecked: _util.tableList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(Register().tableList[index].isChecked) {
-            Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData);
+          if(_util.tableList[index].isChecked) {
+            Register().selectedTable.remove(_util.tableList[index].registerCheckBoxData);
           } else {
-            Register().tableEnque(Register().tableList[index]);
+            _util.tableEnque(_util.tableList[index]);
           }
-          Register().tableList[index].isChecked = !Register().tableList[index].isChecked;
+          _util.tableList[index].isChecked = !_util.tableList[index].isChecked;
         });
       },
     );

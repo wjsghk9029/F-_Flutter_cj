@@ -32,12 +32,12 @@ class _StringCheckBoxState extends State<StringCheckBox> {
         ),
         width: widget.width ?? 50,
         height: widget.height ?? 20,
-        child: string_apear(),
+        child: _stringApear(),
       ),
     );
   }
 
-  string_apear() {
+  _stringApear() {
     if(widget.iconAppear){
       return Container(
         alignment: Alignment.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/loginpage.dart';
+
+import 'login/loginpage.dart';
 
 class RootPage extends StatelessWidget {
 
@@ -7,11 +8,16 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     _delay(context);
     return Scaffold(
-      body: _buildBody(context),
+      body: StreamBuilder<Object>(
+        stream: null,
+        builder: (context, snapshot) {
+          return _buildBody(context);
+        }
+      ),
     );
   }
 
-  _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

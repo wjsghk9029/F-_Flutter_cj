@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
 
 class IconCheckBox extends StatefulWidget {
   final double size;
@@ -33,12 +32,12 @@ class _IconCheckBoxState extends State<IconCheckBox> {
         ),
         width: widget.size ?? 50,
         height: widget.size ?? 50,
-        child: icon_apear(),
+        child: _iconApear(),
       ),
     );
   }
 
-  Icon icon_apear() {
+  Icon _iconApear() {
     if(widget.iconAppear){
       return Icon(
         widget.icon ?? Icons.check,

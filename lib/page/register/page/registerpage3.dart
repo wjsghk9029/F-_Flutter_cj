@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/Widget/icon_checkbox.dart';
-import 'package:oftable_flutter/page/start_oftable/Widget/string_checkbox.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
+import 'package:oftable_flutter/page/register/Widget/string_checkbox.dart';
+import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/singleton/register_utility.dart';
+
 
 class RegisterPage3 extends StatefulWidget {
 
@@ -10,6 +12,7 @@ class RegisterPage3 extends StatefulWidget {
 }
 
 class _RegisterPage3State extends State<RegisterPage3> {
+  RegisterPage3Utility _util;
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final pwReTextFieldController = TextEditingController();
@@ -23,8 +26,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
   }
   @override
   void initState() {
-    Register().test(Register().tableCurationList, 5); //테스트용
-    Register().testMap();
+    _util = RegisterPage3Utility();
+    _util.insertData(_util.tableCurationList, _util.tableCurationListText);
+    //Register().testMap();
     super.initState();
   }
   @override
@@ -56,12 +60,12 @@ class _RegisterPage3State extends State<RegisterPage3> {
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Register().tableCurationList.length,
+                crossAxisCount: _util.tableCurationList.length,
                 childAspectRatio: 1.0,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
-              itemCount: Register().tableCurationList.length,
+              itemCount:_util.tableCurationList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
                 return _buildTableCuration(context, index);
@@ -76,13 +80,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: Register().tableCurationList[index].isChecked,
+      isChecked: _util.tableCurationList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          Register().resetCheckBox(Register().tableCurationList);
-          Register().tableCurationList[index].isChecked = !Register().tableCurationList[index].isChecked;
-          Register().selectedTableCuration = Register().tableCurationList[index].registerCheckBoxData;
+          _util.resetCheckBox(_util.tableCurationList);
+          _util.tableCurationList[index].isChecked = !_util.tableCurationList[index].isChecked;
+          Register().selectedTableCuration = _util.tableCurationList[index].registerCheckBoxData;
         });
       },
     );

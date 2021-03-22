@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_class.dart';
-import 'package:oftable_flutter/page/start_oftable/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/singleton/register_class.dart';
+import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
 
 class RegisterTestPage extends StatefulWidget {
   @override
