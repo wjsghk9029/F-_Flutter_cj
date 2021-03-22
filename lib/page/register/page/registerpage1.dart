@@ -21,7 +21,6 @@ class _RegisterPage1State extends State<RegisterPage1> {
   @override
   void initState() {
     _util = RegisterPage1Utility();
-    _util.insertData(_util.tableList, _util.tableListText);
     super.initState();
   }
 
@@ -44,7 +43,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                   crossAxisSpacing: 30,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: _util.tableList.length,
+                itemCount: Register().tableList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildListItem(context, index);
@@ -59,16 +58,16 @@ class _RegisterPage1State extends State<RegisterPage1> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: _util.tableList[index].isChecked,
+      isChecked: Register().tableList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(_util.tableList[index].isChecked) {
-            Register().selectedTable.remove(_util.tableList[index].registerCheckBoxData);
+          if(Register().tableList[index].isChecked) {
+            Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData);
           } else {
-            _util.tableEnque(_util.tableList[index]);
+            _util.tableEnque(Register().tableList[index]);
           }
-          _util.tableList[index].isChecked = !_util.tableList[index].isChecked;
+          Register().tableList[index].isChecked = !Register().tableList[index].isChecked;
         });
       },
     );

@@ -27,8 +27,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   void initState() {
     _util = RegisterPage3Utility();
-    _util.insertData(_util.tableCurationList, _util.tableCurationListText);
-    //Register().testMap();
+   // _util.insertMapText();
     super.initState();
   }
   @override
@@ -60,12 +59,12 @@ class _RegisterPage3State extends State<RegisterPage3> {
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: _util.tableCurationList.length,
+                crossAxisCount: Register().tableCurationList.length,
                 childAspectRatio: 1.0,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
-              itemCount:_util.tableCurationList.length,
+              itemCount:Register().tableCurationList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
                 return _buildTableCuration(context, index);
@@ -80,13 +79,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: _util.tableCurationList[index].isChecked,
+      isChecked: Register().tableCurationList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          _util.resetCheckBox(_util.tableCurationList);
-          _util.tableCurationList[index].isChecked = !_util.tableCurationList[index].isChecked;
-          Register().selectedTableCuration = _util.tableCurationList[index].registerCheckBoxData;
+          _util.resetCheckBox(Register().tableCurationList);
+          Register().tableCurationList[index].isChecked = !Register().tableCurationList[index].isChecked;
+          Register().selectedTableCuration = Register().tableCurationList[index].registerCheckBoxData;
         });
       },
     );
@@ -132,7 +131,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   crossAxisSpacing: 5,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 8,
+                itemCount: _util.keywordMap[itemId].length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildKeyword(context, index, itemId);
@@ -147,16 +146,16 @@ class _RegisterPage3State extends State<RegisterPage3> {
   _buildKeyword(BuildContext context, int index, int itemId) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: Register().keywordMap[itemId][index].isChecked,
-      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: _util.keywordMap[itemId][index].isChecked,
+      text: Text(_util.keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          if(Register().keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
+          if(_util.keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword1.remove(_util.keywordMap[itemId][index].registerCheckBoxData);
           } else {
-            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
+            Register().selectedKeyword1.add(_util.keywordMap[itemId][index].registerCheckBoxData);
           }
-          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
+          _util.keywordMap[itemId][index].isChecked = !_util.keywordMap[itemId][index].isChecked;
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -185,7 +184,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   crossAxisSpacing: 5,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 8,
+                itemCount: _util.keywordMap[itemId].length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildKeyword2(context, index, itemId);
@@ -200,16 +199,16 @@ class _RegisterPage3State extends State<RegisterPage3> {
   _buildKeyword2(BuildContext context, int index, int itemId) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: Register().keywordMap[itemId][index].isChecked,
-      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: _util.keywordMap[itemId][index].isChecked,
+      text: Text(_util.keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          if(Register().keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword2.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
+          if(_util.keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword2.remove(_util.keywordMap[itemId][index].registerCheckBoxData);
           } else {
-            Register().selectedKeyword2.add(Register().keywordMap[itemId][index].registerCheckBoxData);
+            Register().selectedKeyword2.add(_util.keywordMap[itemId][index].registerCheckBoxData);
           }
-          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
+          _util.keywordMap[itemId][index].isChecked = !_util.keywordMap[itemId][index].isChecked;
         });
       },
       borderRadius: BorderRadius.circular(10),

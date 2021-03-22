@@ -21,7 +21,6 @@ class _AllergyPageState extends State<AllergyPage> {
   @override
   void initState() {
     util = AllergyPageUtility();
-    util.insertData(util.allergyList, util.allergyListText);
     super.initState();
   }
 
@@ -50,7 +49,7 @@ class _AllergyPageState extends State<AllergyPage> {
                       mainAxisSpacing: 30,
                       crossAxisSpacing: 30,
                     ),
-                    itemCount: util.allergyList.length,
+                    itemCount: Register().allergyList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index){
                       return _buildListItem(context, index);
@@ -67,16 +66,16 @@ class _AllergyPageState extends State<AllergyPage> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: util.allergyList[index].isChecked,
+      isChecked: Register().allergyList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          if(util.allergyList[index].isChecked) {
-            Register().selectedAllergyList.remove(util.allergyList[index].registerCheckBoxData);
+          if(Register().allergyList[index].isChecked) {
+            Register().selectedAllergyList.remove(Register().allergyList[index].registerCheckBoxData);
           } else {
-            Register().selectedAllergyList.add(util.allergyList[index].registerCheckBoxData);
+            Register().selectedAllergyList.add(Register().allergyList[index].registerCheckBoxData);
           }
-          util.allergyList[index].isChecked = !util.allergyList[index].isChecked;
+          Register().allergyList[index].isChecked = !Register().allergyList[index].isChecked;
         });
       },
     );

@@ -14,7 +14,6 @@ class Register {
  //#endregion
 
   final List<bool> allergyCheckBox = [false, false];
-  var keywordMap = <int, List<RegisterCheckBox>>{};
 
   Queue<RegisterCheckBoxData> selectedTable = Queue();
   List<RegisterCheckBoxData> outputTableList = [];
@@ -26,17 +25,16 @@ class Register {
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
+  List<RegisterCheckBox> tableList = [];
+  List<RegisterCheckBox> allergyList = [];
+  List<RegisterCheckBox> memberList = [];
+  List<RegisterCheckBox> spicyList = [];
+  List<RegisterCheckBox> tasteList = [];
+  List<RegisterCheckBox> tableCurationList = [];
 
 
 
-
-  void keywordMapSetting(RegisterCheckBoxData table){
-    List<RegisterCheckBox> list = [];
-    keywordMap.addAll({table.itemId : list});
-  }
-
-
-  //
+//
   // void testMap() {
   //   if(keywordMap.length > 0){
   //     return;

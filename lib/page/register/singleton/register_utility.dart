@@ -4,6 +4,9 @@ import 'package:oftable_flutter/page/register/singleton/register_singleton.dart'
 class RegisterUtility {
 
   void insertData(List<RegisterCheckBox> items, List<String> texts) async{
+    if(items.length > 0) {
+      return;
+    }
     for(int i = 0; i < texts.length; i++){
       items.add(
           RegisterCheckBox(
@@ -25,9 +28,30 @@ class RegisterUtility {
 
 
 }
+class AllergyPageUtility extends RegisterUtility{
+  List<String> allergyListText = [
+    '달걀',
+    '우유',
+    '밀',
+    '콩',
+    '땅콩',
+    '밤',
+    '생선',
+    '조개',
+    '간장',
+    '바나나',
+    '멜론',
+    '두유',
+    '딸기류',
+    '고추',
+    '오이',
+    '기타',];
 
+  AllergyPageUtility(){
+    insertData(Register().allergyList, allergyListText);
+  }
+}
 class RegisterPage1Utility extends RegisterUtility{
-  List<RegisterCheckBox> tableList = [];
   List<String> tableListText = [
     '식단관리',
     '채식',
@@ -47,44 +71,24 @@ class RegisterPage1Utility extends RegisterUtility{
     Register().selectedTable.add(table.registerCheckBoxData);
     if(Register().selectedTable.length > 2){
       var item = Register().selectedTable.removeFirst();
-      tableList[_getByTableId(item)].isChecked = false;
+      Register().tableList[_getByTableId(item)].isChecked = false;
     }
   }
 
   int _getByTableId(RegisterCheckBoxData table){
-    for(int i = 0; i < tableList.length; i++){
-      if(tableList[i].registerCheckBoxData.itemId == table.itemId){
+    for(int i = 0; i < Register().tableList.length; i++){
+      if(Register().tableList[i].registerCheckBoxData.itemId == table.itemId){
         return i;
       }
     }
     return null;
   }
 
-}
-class AllergyPageUtility extends RegisterUtility{
-  List<RegisterCheckBox> allergyList = [];
-  List<String> allergyListText = [
-    '달걀',
-    '우유',
-    '밀',
-    '콩',
-    '땅콩',
-    '밤',
-    '생선',
-    '조개',
-    '간장',
-    '바나나',
-    '멜론',
-    '두유',
-    '딸기류',
-    '고추',
-    '오이',
-    '기타',];
+  RegisterPage1Utility(){
+    insertData(Register().tableList, tableListText);
+  }
 }
 class RegisterPage2Utility extends RegisterUtility{
-  List<RegisterCheckBox> memberList = [];
-  List<RegisterCheckBox> spicyList = [];
-  List<RegisterCheckBox> tasteList = [];
   List<String> memberListText = [
     '1',
     '2',
@@ -105,9 +109,16 @@ class RegisterPage2Utility extends RegisterUtility{
     '자연의',
     '매운',
   ];
+
+  RegisterPage2Utility(){
+    insertData(Register().spicyList, spicyListText);
+    insertData(Register().memberList, memberListText);
+    insertData(Register().tasteList, tasteListText);
+  }
 }
 class RegisterPage3Utility extends RegisterUtility{
-  List<RegisterCheckBox> tableCurationList = [];
+
+
   List<String> tableCurationListText = [
     '1',
     '2',
@@ -115,6 +126,31 @@ class RegisterPage3Utility extends RegisterUtility{
     '4',
     '5',
   ];
+
+  Map<int,List<RegisterCheckBox>> keywordMap = {};
+  void _insert(){
+    _insertmap(1, 8, 1);
+    _insertmap(2, 6, 9);
+    _insertmap(3, 8, 15);
+    _insertmap(4, 4, 23);
+    _insertmap(5, 3, 27);
+    _insertmap(6, 6, 30);
+    _insertmap(7, 6, 36);
+    _insertmap(8, 5, 42);
+    _insertmap(9, 5, 47);
+    _insertmap(10, 0, 0);
+    _insertmap(11, 5, 52);
+    _insertmap(12, 4, 57);
+  }
+  void _insertmap (int keywordId , int count, int first){
+    var list = <RegisterCheckBox>[];
+    for(int i = first; i < first+count; i++){
+      list.add(keywordList[i-1]);
+    }
+    keywordMap.addAll({keywordId : list});
+  }
+
+  List<RegisterCheckBox> keywordList = [];
   List<String> keywordListText = [
     '체중감량',
     '체중증량',
@@ -124,7 +160,7 @@ class RegisterPage3Utility extends RegisterUtility{
     '보양식',
     '키토제닉',
     '대용식',
-    '플렉시테리언',
+    '플렉시\n테리언',
     '세미',
     '페스코',
     '락토오보',
@@ -132,7 +168,7 @@ class RegisterPage3Utility extends RegisterUtility{
     '비건',
     '수비드',
     '소',
-    '그릴드 바비큐',
+    '그릴드\n바비큐',
     '돼지',
     '닭/오리',
     '양',
@@ -146,7 +182,7 @@ class RegisterPage3Utility extends RegisterUtility{
     '냉동식품',
     '레토르트',
     '일품요리',
-    '국,탕,찌게',
+    '국,탕\n찌게',
     '밑반찬',
     '메인반찬',
     '젓갈류',
@@ -156,7 +192,7 @@ class RegisterPage3Utility extends RegisterUtility{
     '어패류',
     '해조류',
     '연체류',
-    '기타 수산물',
+    '기타\n수산물',
     '양식',
     '일식',
     '중식',
@@ -165,18 +201,24 @@ class RegisterPage3Utility extends RegisterUtility{
     '소주안주',
     '맥주안주',
     '와인안주',
-    '막걸리안주',
+    '막걸리\n안주',
     '마른안주',
-    '초기 이유식',
-    '중기 이유식',
-    '후기 이유식',
-    '유아 반찬',
+    '초기\n이유식',
+    '중기\n이유식',
+    '후기\n이유식',
+    '유아\n반찬',
     '유기농',
     '떡볶이',
     '면류',
     '밥류',
     '튀김류',
   ];
+
+  RegisterPage3Utility(){
+    insertData(Register().tableCurationList, tableCurationListText);
+    insertData(keywordList, keywordListText);
+    _insert();
+  }
 }
 class RegisterPage4Utility extends RegisterUtility{}
 

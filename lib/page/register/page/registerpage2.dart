@@ -18,9 +18,6 @@ class _RegisterPage2State extends State<RegisterPage2> {
   @override
   void initState() {
     _util = RegisterPage2Utility();
-    _util.insertData(_util.spicyList, _util.spicyListText);
-    _util.insertData(_util.memberList, _util.memberListText);
-    _util.insertData(_util.tasteList, _util.tasteListText);
     super.initState();
   }
   @override
@@ -58,12 +55,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: _util.memberList.length,
+                crossAxisCount: Register().memberList.length,
                 childAspectRatio: 1.0,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
-              itemCount: _util.memberList.length,
+              itemCount: Register().memberList.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -79,13 +76,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
     return IconCheckBox(
       size: 40,
       iconSize: 30,
-      isChecked: _util.memberList[index].isChecked,
+      isChecked: Register().memberList[index].isChecked,
       iconAppear: true,
       onPressed: (){
         setState(() {
-          _util.resetCheckBox(_util.memberList);
-          _util.memberList[index].isChecked = !_util.memberList[index].isChecked;
-          Register().selectedMember = _util.memberList[index].registerCheckBoxData;
+          _util.resetCheckBox(Register().memberList);
+          Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
+          Register().selectedMember = Register().memberList[index].registerCheckBoxData;
         });
       },
     );
@@ -121,12 +118,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
             Padding(padding: EdgeInsets.only(bottom: 5)),
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: _util.spicyList.length,
+                  crossAxisCount: Register().spicyList.length,
                   childAspectRatio: 2,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
                 ),
-                itemCount: _util.spicyList.length,
+                itemCount: Register().spicyList.length,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index){
@@ -142,13 +139,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
   _buildSpicyListItem(BuildContext context, int index) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: _util.spicyList[index].isChecked,
-      text: Text(_util.spicyList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: Register().spicyList[index].isChecked,
+      text: Text(Register().spicyList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          _util.resetCheckBox(_util.spicyList);
-          _util.spicyList[index].isChecked = !_util.spicyList[index].isChecked;
-          Register().selectedSpicy = _util.spicyList[index].registerCheckBoxData;
+          _util.resetCheckBox(Register().spicyList);
+          Register().spicyList[index].isChecked = !Register().spicyList[index].isChecked;
+          Register().selectedSpicy = Register().spicyList[index].registerCheckBoxData;
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -187,12 +184,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
             Padding(padding: EdgeInsets.only(bottom: 5)),
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: _util.tasteList.length,
+                  crossAxisCount: Register().tasteList.length,
                   childAspectRatio: 2.0,
                   mainAxisSpacing: 5,
                   crossAxisSpacing: 5,
                 ),
-                itemCount: _util.tasteList.length,
+                itemCount: Register().tasteList.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index){
@@ -208,13 +205,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
   _buildTasteListItem(BuildContext context, int index) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: _util.tasteList[index].isChecked,
-      text: Text(_util.tasteList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
+      isChecked: Register().tasteList[index].isChecked,
+      text: Text(Register().tasteList[index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 20, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          _util.resetCheckBox(_util.tasteList);
-          _util.tasteList[index].isChecked = !_util.tasteList[index].isChecked;
-          Register().selectedTaste = _util.tasteList[index].registerCheckBoxData;
+          _util.resetCheckBox(Register().tasteList);
+          Register().tasteList[index].isChecked = !Register().tasteList[index].isChecked;
+          Register().selectedTaste = Register().tasteList[index].registerCheckBoxData;
         });
       },
       borderRadius: BorderRadius.circular(10),
