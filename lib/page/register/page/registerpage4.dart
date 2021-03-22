@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
 
 class RegisterPage4 extends StatefulWidget {
   @override
@@ -11,6 +12,10 @@ class _RegisterPage4State extends State<RegisterPage4> {
 
   @override
   void dispose() {
+    setState(() {
+      Register().selectedHomeAdress = homeTextFieldController.text;
+      Register().selectedPhone = phoneTextFieldController.text;
+    });
     homeTextFieldController.dispose();
     phoneTextFieldController.dispose();
     super.dispose();

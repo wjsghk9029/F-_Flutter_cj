@@ -127,8 +127,10 @@ class RegisterPage3Utility extends RegisterUtility{
     '5',
   ];
 
-  Map<int,List<RegisterCheckBox>> keywordMap = {};
   void _insert(){
+    if(Register().keywordMap.isNotEmpty){
+      return;
+    }
     _insertmap(1, 8, 1);
     _insertmap(2, 6, 9);
     _insertmap(3, 8, 15);
@@ -147,7 +149,7 @@ class RegisterPage3Utility extends RegisterUtility{
     for(int i = first; i < first+count; i++){
       list.add(keywordList[i-1]);
     }
-    keywordMap.addAll({keywordId : list});
+    Register().keywordMap.addAll({keywordId : list});
   }
 
   List<RegisterCheckBox> keywordList = [];

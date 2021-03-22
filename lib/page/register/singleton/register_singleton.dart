@@ -20,31 +20,23 @@ class Register {
   List<RegisterCheckBoxData> selectedAllergyList = [];
   List<RegisterCheckBoxData> outputAllergyList = [];
   List<RegisterCheckBoxData> selectedKeyword1 = [];
-  List<RegisterCheckBoxData> selectedKeyword2 = [];
+  //List<RegisterCheckBoxData> selectedKeyword2 = [];
   RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
+  String selectedId = '';
+  String selectedPw = '';
+  String selectedName = 'Test';
+  String selectedPhone = '';
+  String selectedHomeAdress = '';
+
   List<RegisterCheckBox> tableList = [];
   List<RegisterCheckBox> allergyList = [];
   List<RegisterCheckBox> memberList = [];
   List<RegisterCheckBox> spicyList = [];
   List<RegisterCheckBox> tasteList = [];
   List<RegisterCheckBox> tableCurationList = [];
-
-
-
-//
-  // void testMap() {
-  //   if(keywordMap.length > 0){
-  //     return;
-  //   }
-  //   for(int i = 0; i < tableList.length; i++){
-  //    keywordMapSetting(tableList[i].registerCheckBoxData);
-  //    InsertData(keywordMap[i], 8);
-  //   }
-  // }
-  //#endregion
-
+  Map<int,List<RegisterCheckBox>> keywordMap = {};
 }
 

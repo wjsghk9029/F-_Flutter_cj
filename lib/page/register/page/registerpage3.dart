@@ -19,6 +19,10 @@ class _RegisterPage3State extends State<RegisterPage3> {
 
   @override
   void dispose() {
+    setState(() {
+      Register().selectedId = idTextFieldController.text;
+      Register().selectedPw = pwTextFieldController.text;
+    });
     idTextFieldController.dispose();
     pwTextFieldController.dispose();
     pwReTextFieldController.dispose();
@@ -131,7 +135,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   crossAxisSpacing: 5,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: _util.keywordMap[itemId].length,
+                itemCount: Register().keywordMap[itemId].length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildKeyword(context, index, itemId);
@@ -146,16 +150,16 @@ class _RegisterPage3State extends State<RegisterPage3> {
   _buildKeyword(BuildContext context, int index, int itemId) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: _util.keywordMap[itemId][index].isChecked,
-      text: Text(_util.keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
+      isChecked: Register().keywordMap[itemId][index].isChecked,
+      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          if(_util.keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword1.remove(_util.keywordMap[itemId][index].registerCheckBoxData);
+          if(Register().keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
           } else {
-            Register().selectedKeyword1.add(_util.keywordMap[itemId][index].registerCheckBoxData);
+            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
           }
-          _util.keywordMap[itemId][index].isChecked = !_util.keywordMap[itemId][index].isChecked;
+          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
         });
       },
       borderRadius: BorderRadius.circular(10),
@@ -184,7 +188,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   crossAxisSpacing: 5,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: _util.keywordMap[itemId].length,
+                itemCount: Register().keywordMap[itemId].length,
                 shrinkWrap: true,
                 itemBuilder: (context, index){
                   return _buildKeyword2(context, index, itemId);
@@ -199,16 +203,16 @@ class _RegisterPage3State extends State<RegisterPage3> {
   _buildKeyword2(BuildContext context, int index, int itemId) {
     return StringCheckBox(
       iconAppear: true,
-      isChecked: _util.keywordMap[itemId][index].isChecked,
-      text: Text(_util.keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
+      isChecked: Register().keywordMap[itemId][index].isChecked,
+      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
       onPressed: (){
         setState(() {
-          if(_util.keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword2.remove(_util.keywordMap[itemId][index].registerCheckBoxData);
+          if(Register().keywordMap[itemId][index].isChecked) {
+            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
           } else {
-            Register().selectedKeyword2.add(_util.keywordMap[itemId][index].registerCheckBoxData);
+            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
           }
-          _util.keywordMap[itemId][index].isChecked = !_util.keywordMap[itemId][index].isChecked;
+          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
         });
       },
       borderRadius: BorderRadius.circular(10),

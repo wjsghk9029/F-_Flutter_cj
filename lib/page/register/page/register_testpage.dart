@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/login/loginclass.dart';
 import 'package:oftable_flutter/page/register/singleton/register_class.dart';
 import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'package:http/http.dart' as http;
+
+import 'Regtest.dart';
 
 class RegisterTestPage extends StatefulWidget {
   @override
@@ -26,7 +32,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
         Row(
           children: [
             Text("테이블 관심사 : "),
-            _test(Register().outputTableList),
+            Text(_test(Register().outputTableList)),
           ],
         ),
         Row(
@@ -50,7 +56,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
         Row(
           children: [
             Text("알러지 : "),
-            _test(Register().outputAllergyList),
+            Text(_test(Register().outputAllergyList)),
           ],
         ),
         Row(
@@ -59,7 +65,41 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
             _test2(Register().selectedTableCuration),
           ],
         ),
-        Image.network('http://61.81.99.50:8080/image/as.jpg'),
+      Row(
+          children: [
+            Text("키워드 : "),
+            Text(_test(Register().selectedKeyword1)),
+          ],
+        ),
+
+        Row(
+          children: [
+            Text("id : "),
+            Text(Register().selectedId),
+          ],
+        ),
+
+        Row(
+          children: [
+            Text("pw : "),
+            Text(Register().selectedPw),
+        ]
+    ),
+
+        Row(
+          children: [
+            Text("home : "),
+            Text(Register().selectedHomeAdress),
+    ],
+        ),
+
+        Row(
+          children: [
+            Text("ph : "),
+            Text(Register().selectedPhone),
+    ],
+        ),
+        MaterialButton(onPressed: testSend, child: Text('보내기'), color: Colors.blueAccent, textColor: Colors.white,),
       ],
     );
 
@@ -68,15 +108,58 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
   _test(List<RegisterCheckBoxData> reg) {
     String str = '';
     for(int i = 0; i < reg.length; i++){
-      var text = reg[i].itemName;
-      str += text + ', ';
+      var text = reg[i].itemId;
+      if(reg.last.itemId == reg[i].itemId){
+        str += '$text';
+        break;
+      }
+      str += '$text' + '#';
     }
-    return Text(str);
+    return str;
   }
 
   _test2(RegisterCheckBoxData reg) {
-    var text = reg.itemName;
+    var text = reg.itemId;
     return Text('$text');
   }
 
+  _test3(RegisterCheckBoxData reg) {
+    var text = reg.itemId;
+    return '$text';
+  }
+
+  Future<Login> doRegisterTest() async {
+      final response = await http.post(
+        Uri.http('172.16.14.251:8080', '/join'),
+        headers: <String, String>{
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: (<String, String>{
+          'id' : Register().selectedId,
+          'pw' : Register().selectedPw,
+          'name' : Register().selectedName,
+          'phone' : Register().selectedPhone,
+          'adress' : Register().selectedHomeAdress,
+          'pop' : _test3(Register().selectedMember),
+          'spicy_degree' : _test3(Register().selectedSpicy),
+          'prefer_flavor' : _test3(Register().selectedTaste),
+          'allergy_list' : _test(Register().outputAllergyList),
+          'taste_list' : _test(Register().selectedKeyword1),
+        }),
+      );
+      if (response.statusCode == 200) {
+        return Login.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to load album');
+      }
+    }
+
+  Future<void> testSend() async {
+    try {
+      var data = await doRegisterTest();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Regtest(data)));
+    }catch(err){
+      print(err);
+    }
+  }
 }
