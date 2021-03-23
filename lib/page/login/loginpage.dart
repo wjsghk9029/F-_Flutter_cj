@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:oftable_flutter/page/home/homepage.dart';
 import 'package:oftable_flutter/page/login/loginclass.dart';
 import 'package:oftable_flutter/page/login/widget/auto_login_checkbox.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
@@ -113,6 +114,16 @@ class _LoginPageState extends State<LoginPage> {
               child: MaterialButton(
                 onPressed: _onpressLoginButton,
                 child: Text('로그인', style: TextStyle(fontSize: 20),),
+                color: Colors.white54,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: MaterialButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                child: Text('홈페이지 테스트', style: TextStyle(fontSize: 20),),
                 color: Colors.white54,
               ),
             ),
