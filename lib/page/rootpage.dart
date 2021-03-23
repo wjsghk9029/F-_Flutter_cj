@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'auto_login_test.dart';
 import 'login/loginpage.dart';
 
-class RootPage extends StatelessWidget {
+class RootPage extends StatefulWidget {
+  @override
+  _RootPageState createState() => _RootPageState();
+}
+
+class _RootPageState extends State<RootPage> {
+  static final tokenStorage = FlutterSecureStorage();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    _delay(context);
     return Scaffold(
       body: StreamBuilder<Object>(
-        stream: null,
-        builder: (context, snapshot) {
-          return _buildBody(context);
-        }
+          stream: null,
+          builder: (context, snapshot) {
+            return _buildBody(context);
+          }
       ),
     );
   }
@@ -34,11 +50,16 @@ class RootPage extends StatelessWidget {
     );
   }
 
-  _delay(BuildContext context) async {
-    await Future<void>.delayed(Duration(seconds: 2));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+  Future<void> _asyncMethod() async {
+    var access_token = await tokenStorage.read(key: "access_token");
+    var refresh_token = await tokenStorage.read(key: "refresh_token");
+    var isAutoLogin = await tokenStorage.read(key: "isAutoLogin");
+    if(access_token != null && refresh_token != null && isAutoLogin != null && isAutoLogin == 'true'){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AutoLoginTest(acT: access_token, rFT: refresh_token,)));
+    }else{
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    }
   }
-
 
 }
 

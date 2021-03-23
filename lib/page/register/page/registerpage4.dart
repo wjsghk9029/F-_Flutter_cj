@@ -21,6 +21,12 @@ class _RegisterPage4State extends State<RegisterPage4> {
     super.dispose();
   }
   @override
+  void initState() {
+    homeTextFieldController.text = Register().selectedHomeAdress;
+    phoneTextFieldController.text = Register().selectedPhone;
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(right: 20, left: 20),

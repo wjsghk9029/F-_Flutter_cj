@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/register/Widget/register_page_router.dart';
 import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
@@ -14,6 +15,14 @@ class StartOfTablePage extends StatefulWidget {
 class _StartOfTablePageState extends State<StartOfTablePage> {
   PageController _pageController;
   int _pagenum = 0;
+
+  List<Widget> Pages = [
+    RegisterPage1(),
+    RegisterPage2(),
+    RegisterPage3(),
+    RegisterPage4(),
+    RegisterTestPage(),
+  ];
 
   @override
   void initState() {
@@ -47,16 +56,19 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
                   });
                 },
                 controller: _pageController,
-                  children: [
-                    RegisterPage1(),
-                    RegisterPage2(),
-                    RegisterPage3(),
-                    RegisterPage4(),
-                    RegisterTestPage(),
-                  ],
+                  children: Pages,
               ),
             ),
-            Text('$_pagenum'),
+            Center(
+            child: Container(
+              padding: EdgeInsets.only(bottom: 10),
+              width: 50,
+              child: RegisterPageRouter(
+                pageIndex: _pagenum,
+                pageViewLength: Pages.length,
+                  ),
+                ),
+            ),
           ],
         ),
       ),

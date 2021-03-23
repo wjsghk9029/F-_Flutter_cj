@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:oftable_flutter/page/login/loginclass.dart';
 import 'package:oftable_flutter/page/login/widget/auto_login_checkbox.dart';
@@ -21,9 +22,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  static final tokenStorage = FlutterSecureStorage();
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
-  bool _test = false;
+  bool _autoLoginCheckbox = false;
   bool keyboardOpen = false;
   @override
   void initState() {
@@ -73,10 +75,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: AutoLoginCheckBox(
                   onPressed: (){
                     setState(() {
-                      _test = !_test;
+                      _autoLoginCheckbox = !_autoLoginCheckbox;
+                      if(_autoLoginCheckbox){
+                        tokenStorage.write(key: 'isAutoLogin', value: 'true');
+                      }else{
+                        tokenStorage.write(key: 'isAutoLogin', value: 'false');
+                      }
                     });
                   },
-                  isChecked: _test,
+                  isChecked: _autoLoginCheckbox,
                 ),
               ),
             ],
@@ -98,14 +105,14 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
               },
-              child: Text('로그인하기', style: TextStyle(fontSize: 20),),
+              child: Text('회원가입', style: TextStyle(fontSize: 20),),
               color: Colors.white54,
             ),
             Container(
               padding: EdgeInsets.only(top: 10),
               child: MaterialButton(
                 onPressed: _onpressLoginButton,
-                child: Text('로그인하기22222222222', style: TextStyle(fontSize: 20),),
+                child: Text('로그인', style: TextStyle(fontSize: 20),),
                 color: Colors.white54,
               ),
             ),
@@ -169,6 +176,10 @@ class _LoginPageState extends State<LoginPage> {
   void _onpressLoginButton() async{
     try {
       var data = await _doLogin();
+      if(_autoLoginCheckbox){
+        await tokenStorage.write(key: 'access_token', value: data.data.access_token);
+        await tokenStorage.write(key: 'refresh_token', value: data.data.refresh_token);
+      }
       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginTest(data)));
     }catch(err){
 

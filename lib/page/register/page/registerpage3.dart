@@ -31,6 +31,8 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   void initState() {
     _util = RegisterPage3Utility();
+    idTextFieldController.text = Register().selectedId;
+    pwTextFieldController.text = Register().selectedPw;
    // _util.insertMapText();
     super.initState();
   }

@@ -38,7 +38,8 @@ dependencies:
   double_back_to_close_app: ^2.0.1
   #http
   http: ^0.13.0
-
+  #자동로그인데이터 저장소 플러그인
+  flutter_secure_storage: ^4.1.0
 
 dev_dependencies:
   flutter_test:
