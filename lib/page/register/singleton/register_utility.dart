@@ -127,7 +127,7 @@ class RegisterPage3Utility extends RegisterUtility{
     '5',
   ];
 
-  void _insert(){
+  void _insert()async{
     if(Register().keywordMap.isNotEmpty){
       return;
     }
@@ -144,7 +144,7 @@ class RegisterPage3Utility extends RegisterUtility{
     _insertmap(11, 5, 52);
     _insertmap(12, 4, 57);
   }
-  void _insertmap (int keywordId , int count, int first){
+  void _insertmap (int keywordId , int count, int first)async{
     var list = <RegisterCheckBox>[];
     for(int i = first; i < first+count; i++){
       list.add(keywordList[i-1]);

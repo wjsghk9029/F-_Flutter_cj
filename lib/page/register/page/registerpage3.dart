@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/register/Widget/string_checkbox.dart';
@@ -34,6 +36,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
     idTextFieldController.text = Register().selectedId;
     pwTextFieldController.text = Register().selectedPw;
    // _util.insertMapText();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
     super.initState();
   }
   @override
@@ -108,7 +113,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
           Padding(padding: EdgeInsets.only(top: 10)),
           Register().outputTableList.length > 1 ? _keyword2Child() :
           Padding(padding: EdgeInsets.only(top: 10)),
-
         ],
       ),
     );
@@ -293,6 +297,12 @@ class _RegisterPage3State extends State<RegisterPage3> {
         ],
       ),
     );
+  }
+
+  void _asyncMethod()async {
+    await sleep(Duration(microseconds: 1));
+    setState(() {
+    });
   }
 
 

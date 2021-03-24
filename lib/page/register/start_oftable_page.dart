@@ -16,7 +16,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   PageController _pageController;
   int _pagenum = 0;
 
-  List<Widget> Pages = [
+  List<Widget> _Pages = [
     RegisterPage1(),
     RegisterPage2(),
     RegisterPage3(),
@@ -49,14 +49,15 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
         child: Column(
           children: [
             Expanded(
-              child: PageView(
+              child: PageView.builder(
                 onPageChanged: (int pageNum){
                   setState(() {
                     _pagenum = pageNum;
                   });
                 },
+                itemBuilder: (ctx, idx){return _Pages[idx];},
+                itemCount: _Pages.length,
                 controller: _pageController,
-                  children: Pages,
               ),
             ),
             Center(
@@ -65,7 +66,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
               width: 50,
               child: RegisterPageRouter(
                 pageIndex: _pagenum,
-                pageViewLength: Pages.length,
+                pageViewLength: _Pages.length,
                   ),
                 ),
             ),
