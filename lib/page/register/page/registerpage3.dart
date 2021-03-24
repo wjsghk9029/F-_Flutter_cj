@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/register/Widget/string_checkbox.dart';
@@ -300,7 +298,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
   }
 
   void _asyncMethod()async {
-    await sleep(Duration(microseconds: 1));
+    await Future.delayed(Duration(microseconds: 1));
     setState(() {
     });
   }

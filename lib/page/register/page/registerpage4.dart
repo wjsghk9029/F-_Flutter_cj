@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kopo/kopo.dart';
 import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
 
 class RegisterPage4 extends StatefulWidget {
@@ -48,7 +50,12 @@ class _RegisterPage4State extends State<RegisterPage4> {
           Container(
             margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Text('배송지', style: TextStyle(fontSize: 20),),
+            child: Row(
+              children: [
+                Text('배송지', style: TextStyle(fontSize: 20),),
+                CupertinoButton(child: Text("배송지 찾기"), onPressed: onAdressPressed)
+              ],
+            ),
           ),
           Container(
             padding: EdgeInsets.only(left: 10),
@@ -96,5 +103,20 @@ class _RegisterPage4State extends State<RegisterPage4> {
         ],
       ),
     );
+  }
+
+  Future<void> onAdressPressed() async {
+    KopoModel model = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => Kopo(),
+      ),
+    );
+    print(model.toJson());
+    setState(() {
+      homeTextFieldController.text =
+      '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
+      Register().selectedHomeAdress = homeTextFieldController.text;
+    });
   }
 }

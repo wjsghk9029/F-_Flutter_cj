@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/login/loginclass.dart';
 import 'package:oftable_flutter/page/register/singleton/register_class.dart';
@@ -14,6 +13,13 @@ class RegisterTestPage extends StatefulWidget {
 }
 
 class _RegisterTestPageState extends State<RegisterTestPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -161,5 +167,11 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
     }catch(err){
       print(err);
     }
+  }
+
+  Future<void> _asyncMethod() async {
+    await Future.delayed(Duration(microseconds: 1));
+    setState(() {
+    });
   }
 }

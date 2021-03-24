@@ -13,12 +13,12 @@ class AutoLoginTest extends StatefulWidget {
 
 class _AutoLoginTestState extends State<AutoLoginTest> {
   static final tokenStorage = FlutterSecureStorage();
-  String _AcT;
-  String _RfT;
+  String _actionToken;
+  String _refreshToken;
   @override
   void initState() {
-    _AcT = widget.acT ?? '없음';
-    _RfT = widget.rFT ?? '없음';
+    _actionToken = widget.acT ?? '없음';
+    _refreshToken = widget.rFT ?? '없음';
     super.initState();
   }
   @override
@@ -27,9 +27,9 @@ class _AutoLoginTestState extends State<AutoLoginTest> {
       body: Column(
         children: [
           Padding(padding: EdgeInsets.all(10)),
-          Text('ACT = $_AcT'),
+          Text('ACT = $_actionToken'),
           Padding(padding: EdgeInsets.all(10)),
-          Text('_RfT = $_RfT'),
+          Text('RfT = $_refreshToken'),
           Padding(padding: EdgeInsets.all(10)),
           MaterialButton(onPressed: logout, child: Text('로그아웃'),)
         ],

@@ -16,7 +16,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   PageController _pageController;
   int _pagenum = 0;
 
-  List<Widget> _Pages = [
+  List<Widget> _pages = [
     RegisterPage1(),
     RegisterPage2(),
     RegisterPage3(),
@@ -55,8 +55,8 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
                     _pagenum = pageNum;
                   });
                 },
-                itemBuilder: (ctx, idx){return _Pages[idx];},
-                itemCount: _Pages.length,
+                itemBuilder: (ctx, idx){return _pages[idx];},
+                itemCount: _pages.length,
                 controller: _pageController,
               ),
             ),
@@ -66,7 +66,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
               width: 50,
               child: RegisterPageRouter(
                 pageIndex: _pagenum,
-                pageViewLength: _Pages.length,
+                pageViewLength: _pages.length,
                   ),
                 ),
             ),

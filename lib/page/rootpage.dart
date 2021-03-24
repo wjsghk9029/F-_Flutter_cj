@@ -51,11 +51,11 @@ class _RootPageState extends State<RootPage> {
   }
 
   Future<void> _asyncMethod() async {
-    var access_token = await tokenStorage.read(key: "access_token");
-    var refresh_token = await tokenStorage.read(key: "refresh_token");
+    var accessToken = await tokenStorage.read(key: "access_token");
+    var refreshToken = await tokenStorage.read(key: "refresh_token");
     var isAutoLogin = await tokenStorage.read(key: "isAutoLogin");
-    if(access_token != null && refresh_token != null && isAutoLogin != null && isAutoLogin == 'true'){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AutoLoginTest(acT: access_token, rFT: refresh_token,)));
+    if(accessToken != null && refreshToken != null && isAutoLogin != null && isAutoLogin == 'true'){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AutoLoginTest(acT: accessToken, rFT: refreshToken,)));
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
     }
