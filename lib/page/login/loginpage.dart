@@ -4,10 +4,11 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:oftable_flutter/page/home/homepage.dart';
 import 'package:oftable_flutter/page/login/loginclass.dart';
 import 'package:oftable_flutter/page/login/widget/auto_login_checkbox.dart';
+import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
@@ -15,6 +16,7 @@ import 'package:sign_button/create_button.dart';
 import 'package:http/http.dart' as http;
 
 import 'logintest.dart';
+import 'logintestgoogle.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -26,6 +28,8 @@ class _LoginPageState extends State<LoginPage> {
   static final tokenStorage = FlutterSecureStorage();
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
+  final googleSignIn = GoogleSignIn(clientId: '582691238041-sqa3ohlnqm6edfroj2dtr98b3ghov0jn.apps.googleusercontent.com',
+  scopes: ['email', 'profile']);
   bool _autoLoginCheckbox = false;
   bool keyboardOpen = false;
   @override
@@ -121,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(top: 10),
               child: MaterialButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                 },
                 child: Text('홈페이지 테스트', style: TextStyle(fontSize: 20),),
                 color: Colors.white54,
@@ -136,9 +140,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SignInButton(
                 buttonType: ButtonType.google,
-                onPressed: () {
-                  print('click');
-                }),
+                onPressed: (){signInWithGoogle().then((value) =>  Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleLoginTest(value))));},
+            ),
           ],
         ),
       );
@@ -193,7 +196,6 @@ class _LoginPageState extends State<LoginPage> {
       }
       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginTest(data)));
     }catch(err){
-
     }
 
   }
@@ -216,4 +218,10 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<GoogleSignInAuthentication> signInWithGoogle() async {
+    final googleUser = await googleSignIn.signIn();
+    print('test');
+    final googleAuth = await googleUser.authentication;
+    return googleAuth;
+  }
 }

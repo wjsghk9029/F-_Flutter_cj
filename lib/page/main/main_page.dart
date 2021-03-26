@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
 
-class HomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   ScrollController _listViewScrollController;
   bool _isVisible = true;
 
@@ -45,10 +46,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(icon: Icon(Icons.notifications), onPressed: (){}),
           IconButton(icon: Icon(Icons.search), onPressed: (){}),
-
         ],
       ),
-      body: _buildBody(),
+      body: OhQuePage( scrollController: _listViewScrollController,),
     );
   }
 
@@ -93,15 +93,5 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
-
-  _buildBody() {
-    return ListView.builder(
-      controller: _listViewScrollController,
-      itemCount: 100,
-      itemBuilder: (ctx, idx){
-        return Text('$idx');
-      },
-    );
-  }
+  } 
 }
