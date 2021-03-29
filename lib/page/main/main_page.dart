@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:oftable_flutter/page/main/page/home_page.dart';
+import 'package:oftable_flutter/page/main/page/megazine_page.dart';
+import 'package:oftable_flutter/page/main/page/my_page.dart';
 import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
+import 'package:oftable_flutter/page/main/page/shop_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -10,6 +14,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   ScrollController _listViewScrollController;
   bool _isVisible = true;
+  int _pageNum = 2;
+  List<Widget> _pages = [];
 
   @override
   void initState() {
@@ -31,7 +37,13 @@ class _MainPageState extends State<MainPage> {
           });
       }
     });
-
+    _pages.addAll([
+    HomePage(),
+    ShopPage(),
+    OhQuePage(scrollController: _listViewScrollController,),
+    MegazinePage(),
+    MyPage(),
+    ]);
   }
 
   @override
@@ -48,7 +60,7 @@ class _MainPageState extends State<MainPage> {
           IconButton(icon: Icon(Icons.search), onPressed: (){}),
         ],
       ),
-      body: OhQuePage( scrollController: _listViewScrollController,),
+      body: _pages[_pageNum],
     );
   }
 
@@ -63,6 +75,12 @@ class _MainPageState extends State<MainPage> {
       child: Wrap(
         children: <Widget>[
           BottomNavigationBar(
+            currentIndex: _pageNum,
+            onTap: (idx){
+              setState(() {
+                _pageNum = idx;
+              });
+            },
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
             unselectedItemColor: Colors.black54,

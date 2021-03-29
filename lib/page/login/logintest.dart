@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'loginclass.dart';
+import 'model/loginclass.dart';
 class LoginTest extends StatefulWidget {
   final Login login;
 
-  LoginTest(this.login);
+  LoginTest({this.login});
 
   @override
   _LoginTestState createState() => _LoginTestState();

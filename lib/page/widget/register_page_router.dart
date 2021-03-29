@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/register/Widget/page_router_circle.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/widget/page_router_circle.dart';
 
-class RegisterPageRouter extends StatefulWidget {
+class PageRouterWithCircle extends StatefulWidget {
   final int pageIndex;
   final int pageViewLength;
 
-  const RegisterPageRouter({Key key, this.pageIndex, this.pageViewLength}) : super(key: key);
+  const PageRouterWithCircle({Key key, this.pageIndex, this.pageViewLength}) : super(key: key);
   @override
-  _RegisterPageRouterState createState() => _RegisterPageRouterState();
+  _PageRouterWithCircleState createState() => _PageRouterWithCircleState();
 }
 
-class _RegisterPageRouterState extends State<RegisterPageRouter> {
+class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
   @override
   Widget build(BuildContext context) {
     return Container(

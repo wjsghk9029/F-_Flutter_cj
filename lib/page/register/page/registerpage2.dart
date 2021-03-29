@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/register/Widget/icon_checkbox.dart';
-import 'package:oftable_flutter/page/register/Widget/string_checkbox.dart';
-import 'package:oftable_flutter/page/register/singleton/register_class.dart';
-import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
-import 'package:oftable_flutter/page/register/singleton/register_utility.dart';
+import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
+import 'package:oftable_flutter/page/register/controller/register_utility.dart';
+import 'package:oftable_flutter/page/widget/string_checkbox.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/widget/icon_checkbox.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/register/model/register_class.dart';
 
 import 'allergy_page.dart';
 

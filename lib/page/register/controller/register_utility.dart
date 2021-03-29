@@ -1,5 +1,5 @@
-import 'package:oftable_flutter/page/register/singleton/register_class.dart';
-import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 
 class RegisterUtility {
 
@@ -45,7 +45,8 @@ class AllergyPageUtility extends RegisterUtility{
     '딸기류',
     '고추',
     '오이',
-    '기타',];
+    '기타',
+  ];
 
   AllergyPageUtility(){
     insertData(Register().allergyList, allergyListText);

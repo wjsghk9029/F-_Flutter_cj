@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'auto_login_test.dart';
-import 'login/loginpage.dart';
+import 'login/page/loginpage.dart';
 
 class RootPage extends StatefulWidget {
   @override

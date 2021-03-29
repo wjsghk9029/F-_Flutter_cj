@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kopo/kopo.dart';
-import 'package:oftable_flutter/page/register/singleton/register_singleton.dart';
+import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 
 class RegisterPage4 extends StatefulWidget {
   @override
@@ -10,6 +10,7 @@ class RegisterPage4 extends StatefulWidget {
 
 class _RegisterPage4State extends State<RegisterPage4> {
   final homeTextFieldController = TextEditingController();
+  final nickNameTextFieldController = TextEditingController();
   final phoneTextFieldController = TextEditingController();
 
   @override
@@ -17,15 +18,18 @@ class _RegisterPage4State extends State<RegisterPage4> {
     setState(() {
       Register().selectedHomeAdress = homeTextFieldController.text;
       Register().selectedPhone = phoneTextFieldController.text;
+      Register().selectedName = nickNameTextFieldController.text;
     });
     homeTextFieldController.dispose();
     phoneTextFieldController.dispose();
+    nickNameTextFieldController.dispose();
     super.dispose();
   }
   @override
   void initState() {
     homeTextFieldController.text = Register().selectedHomeAdress;
     phoneTextFieldController.text = Register().selectedPhone;
+    nickNameTextFieldController.text = Register().selectedName;
     super.initState();
   }
   @override
@@ -34,6 +38,8 @@ class _RegisterPage4State extends State<RegisterPage4> {
       padding: EdgeInsets.only(right: 20, left: 20),
       child: ListView(
         children: [
+          _registerName(),
+          Padding(padding: EdgeInsets.only(top: 10)),
           _registerHome(),
           Padding(padding: EdgeInsets.only(top: 10)),
           _registerPhone(),
@@ -96,6 +102,35 @@ class _RegisterPage4State extends State<RegisterPage4> {
               controller: phoneTextFieldController,
               decoration: InputDecoration(
                 hintText: '연락처',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _registerName() {
+    return Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            alignment: Alignment.centerLeft,
+            child: Text('이름', style: TextStyle(fontSize: 20),),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: nickNameTextFieldController,
+              decoration: InputDecoration(
+                hintText: '이름',
                 border: InputBorder.none,
               ),
             ),

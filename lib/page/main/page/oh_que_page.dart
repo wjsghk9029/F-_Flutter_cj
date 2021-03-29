@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oftable_flutter/page/widget/register_page_router.dart';
 
 class OhQuePage extends StatefulWidget {
   final ScrollController scrollController;
@@ -9,6 +10,8 @@ class OhQuePage extends StatefulWidget {
 }
 
 class _OhQuePageState extends State<OhQuePage> {
+  PageController _bannerController;
+  int _bannerPageNum = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,16 +53,37 @@ class _OhQuePageState extends State<OhQuePage> {
   }
 
   _buildBanner() {
-    return Container(
-      color: Colors.black12,
-      child: LimitedBox(
-        maxHeight: 75,
-        child: PageView.builder(
-          itemCount: 5,
-          itemBuilder: (ctx, idx) => Center(
-            child: Text('$idx'),
-          ),)
-      ),
+    return Stack(
+      children: [
+        Container(
+          height: 75,
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: 40,
+            child: PageRouterWithCircle(
+              pageViewLength: 5,
+              pageIndex: _bannerPageNum,
+            ),
+          ),
+        ),
+        Container(
+          color: Colors.black12,
+          child: LimitedBox(
+            maxHeight: 75,
+            child: PageView.builder(
+              onPageChanged: (idx){
+                setState(() {
+                  _bannerPageNum = idx;
+                });
+              },
+              controller: _bannerController,
+              itemCount: 5,
+              itemBuilder: (ctx, idx) => Center(
+                child: Text('$idx'),
+              ),)
+          ),
+        ),
+      ],
     );
   }
 }

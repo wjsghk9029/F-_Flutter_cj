@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/login/loginclass.dart';
+import 'package:oftable_flutter/page/login/model/loginclass.dart';
 class Regtest extends StatefulWidget {
   final Login login;
 

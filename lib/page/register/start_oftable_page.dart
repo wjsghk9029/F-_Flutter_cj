@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/register/Widget/register_page_router.dart';
 import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
 import 'package:oftable_flutter/page/register/page/registerpage3.dart';
 import 'package:oftable_flutter/page/register/page/registerpage4.dart';
+import 'package:oftable_flutter/page/widget/register_page_router.dart';
 
 
 class StartOfTablePage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
             child: Container(
               padding: EdgeInsets.only(bottom: 10),
               width: 50,
-              child: RegisterPageRouter(
+              child: PageRouterWithCircle(
                 pageIndex: _pagenum,
                 pageViewLength: _pages.length,
                   ),

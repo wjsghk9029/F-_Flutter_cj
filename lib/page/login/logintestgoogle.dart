@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 class GoogleLoginTest extends StatefulWidget {
   final GoogleSignInAuthentication login;
@@ -21,6 +22,7 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: _buildBody(),
 
     );
@@ -39,11 +41,40 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
     return Column(
       children: [
         Text(accessToken),
+        Padding(padding: EdgeInsets.all(10)),
         Text(idToken),
-        Text(serverAuthCode),
+        Padding(padding: EdgeInsets.all(10)),
+        Text(serverAuthCode ?? '없음'),
+        Container(
+          child: MaterialButton(onPressed: _doLogin),
+          color: Colors.yellowAccent,
+          width: 100,
+          height: 100,
+        ),
       ],
     );
   }
 
+
+
+  Future<void> _doLogin() async {
+    final response = await http.post(
+      Uri.http('172.16.35.139:8080', '/google_login'),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      body: (<String, String>{
+        'client_id': widget.login.idToken,
+        'token': widget.login.accessToken,
+      }),
+    );
+    print(response.body);
+    print(response.headers);
+    if (response.statusCode == 200) {
+      return print('성공');
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
 
 }

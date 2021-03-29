@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:oftable_flutter/page/register/singleton/register_class.dart';
+import 'file:///C:/OfTable/oftable_flutter/lib/page/register/model/register_class.dart';
 
 class Register {
  //#region 싱글톤
@@ -27,7 +27,7 @@ class Register {
   RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
   String selectedId = '';
   String selectedPw = '';
-  String selectedName = 'Test';
+  String selectedName = '';
   String selectedPhone = '';
   String selectedHomeAdress = '';
 
