@@ -1,5 +1,3 @@
-
-
 class TagFoodList {
   final String apikey;
   final int error;
@@ -10,10 +8,10 @@ class TagFoodList {
 
   factory TagFoodList.fromJson(Map<String, dynamic> json) {
     return TagFoodList(
-      apikey: json['apikey'],
-      error: json['error'],
-      type: json['type'],
-      data: json['data'].map((data) => TagFoodListData.fromJson(data)).toList(),
+      apikey: json['apikey'] as String,
+      error: json['error'] as int,
+      type: json['type'] as String,
+      data: (json['data'] as List).map((e) => TagFoodListData.fromJson(e)).toList(),
     );
   }
 }
@@ -24,7 +22,7 @@ class TagFoodListData{
  // ignore: non_constant_identifier_names
  final String food_description;
  // ignore: non_constant_identifier_names
- final String food_price;
+ final int food_price;
  // ignore: non_constant_identifier_names
  final String food_name;
  // ignore: non_constant_identifier_names
@@ -35,11 +33,11 @@ class TagFoodListData{
 
  factory TagFoodListData.fromJson(Map<String, dynamic> json) {
    return TagFoodListData(
-     img_src: json['img_src'],
-     food_description: json['food_description'],
-     food_price: json['food_price'],
-     food_name: json['food_name'],
-     food_serial: json['food_serial'],
+     img_src: json['img_src']as String,
+     food_description: json['food_description']as String,
+     food_price: json['food_price']as int,
+     food_name: json['food_name']as String,
+     food_serial: json['food_serial']as int,
    );
  }
 }

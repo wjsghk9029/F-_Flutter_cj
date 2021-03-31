@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'file:///C:/OfTable/oftable_flutter/lib/page/register/model/register_class.dart';
 import 'package:http/http.dart' as http;
 import 'package:oftable_flutter/page/login/model/loginclass.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
+import 'package:oftable_flutter/page/register/model/register_class.dart';
 
 import 'Regtest.dart';
 

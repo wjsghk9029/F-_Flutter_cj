@@ -44,6 +44,8 @@ dependencies:
   kopo: "^0.1.3"
   #구글 소셜로그인
   google_sign_in: ^5.0.1
+  #getX
+  get: ^4.1.1
 
 dev_dependencies:
   flutter_test:

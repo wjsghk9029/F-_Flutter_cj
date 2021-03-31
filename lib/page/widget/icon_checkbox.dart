@@ -27,8 +27,8 @@ class _IconCheckBoxState extends State<IconCheckBox> {
         duration: Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
-          color: widget.isChecked ? Colors.blueAccent : Colors.grey,
           borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
+          color: widget.isChecked ? Colors.blueAccent : Colors.grey,
         ),
         width: widget.size ?? 50,
         height: widget.size ?? 50,

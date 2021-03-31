@@ -1,52 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
+import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'package:oftable_flutter/page/widget/register_page_router.dart';
 
 class OhQuePage extends StatefulWidget {
   final ScrollController scrollController;
-
   const OhQuePage({this.scrollController});
   @override
   _OhQuePageState createState() => _OhQuePageState();
 }
 
 class _OhQuePageState extends State<OhQuePage> {
+  // ignore: non_constant_identifier_names
+  OhQuePageController _pageController;
   PageController _bannerController;
   int _bannerPageNum = 0;
+
+  @override
+  void initState() {
+    _pageController = Get.put(OhQuePageController());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        controller: widget.scrollController,
-        itemCount: 10,
-          itemBuilder: (ctx, idx) => idx == 0 ? _buildBanner() : _buildList()),
-    );
+    return Obx((){
+      var data = _pageController.foodList.value.data;
+      return Container(
+        child: _pageController.isLoading.value ?
+            Center(child: Text('로딩중')) :
+            ListView.separated(
+              separatorBuilder: (ctx, idx) => Divider(),
+                controller: widget.scrollController,
+                itemCount: data.length,
+                itemBuilder: (ctx, idx) => idx == 0 ? _buildBanner() : _buildList(data[idx])),
+      );
+    });
   }
 
-  _buildList() {
+  _buildList(TagFoodListData data) {
     return Container(
       padding: EdgeInsets.only(top: 10),
       alignment: Alignment.center,
       child: Container(
         child: Container(
-          color: Colors.black12,
-          width: 350,
             child: ListTile(
               leading: Container(
-                color: Colors.yellowAccent,
+                color: Colors.transparent,
                 child: ConstrainedBox(
                     constraints: BoxConstraints(
-                    minWidth: 44,
-                    minHeight: 44,
-                    maxWidth: 64,
-                    maxHeight: 64,
+                    minWidth: 100,
+                    minHeight: 100,
+                    maxWidth: 100,
+                    maxHeight: 100,
                     ),
-                    child: Center(child: Text('레시피')),
+                    child: Image.network('http://${data.img_src}', fit: BoxFit.fill,),
                 ),
               ),
               title: Container(
-                  child: Text('타이틀'),
+                  child: Text(data.food_name),
               ),
-              subtitle: Text('서브 설명'),
+              subtitle: Text(data.food_description),
         )),
       ),
     );
