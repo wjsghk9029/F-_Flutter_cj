@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'file:///C:/OfTable/oftable_flutter/lib/page/widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
@@ -54,6 +55,15 @@ class _AllergyPageState extends State<AllergyPage> {
                     itemBuilder: (context, index){
                       return _buildListItem(context, index);
                     }),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                alignment: Alignment.bottomRight,
+                child: MaterialButton(
+                  child: Text('확인', style: TextStyle(color: Colors.white),),
+                  color: Colors.blueAccent,
+                  onPressed: () => Get.back(),
+                ),
               ),
             ],
           ),
