@@ -136,7 +136,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
 
   Future<Login> doRegisterTest() async {
       final response = await http.post(
-        Uri.http('172.16.14.251:8080', '/join'),
+        Uri.http('210.93.86.79:8080', '/join'),
         headers: <String, String>{
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         },

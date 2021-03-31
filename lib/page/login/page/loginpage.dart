@@ -1,21 +1,19 @@
-import 'dart:convert';
-
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:oftable_flutter/page/login/logintest.dart';
+import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/login/logintestgoogle.dart';
-import 'package:oftable_flutter/page/login/model/loginclass.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/auto_login_checkbox.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
-import 'package:http/http.dart' as http;
+
 
 class LoginPage extends StatefulWidget {
 
@@ -24,6 +22,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginPageService _loginPageService = Get.put(LoginPageService());
   static final tokenStorage = FlutterSecureStorage();
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
@@ -184,38 +183,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-  void _onpressLoginButton() async{
-    try {
-      var data = await _doLogin();
-      if(_autoLoginCheckbox){
-        await tokenStorage.write(key: 'access_token', value: data.data.access_token);
-        await tokenStorage.write(key: 'refresh_token', value: data.data.refresh_token);
-      }
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginTest(login: data,)));
-    }catch(err){
-    }
-
-  }
-
-  Future<Login> _doLogin() async {
-    final response = await http.post(
-      Uri.http('61.81.99.55:8080', '/login'),
-      headers: <String, String>{
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      },
-      body: (<String, String>{
-        'id': idTextFieldController.text,
-        'pw': pwTextFieldController.text,
-      }),
-    );
-    if (response.statusCode == 200) {
-      return Login.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
-
   Future<GoogleSignInAuthentication> signInWithGoogle() async {
     final googleUser = await googleSignIn.signIn();
     print('test');
@@ -224,5 +191,15 @@ class _LoginPageState extends State<LoginPage> {
     print(googleAuth.idToken);
     print(googleAuth.accessToken);
     return googleAuth;
+  }
+
+  Future<void> _onpressLoginButton() async {
+    try{
+      await _loginPageService.doLogin(_autoLoginCheckbox, idTextFieldController.text, pwTextFieldController.text);
+      Get.to(MainPage());
+    }
+    catch(ex) {
+      Get.defaultDialog(title: '에러', middleText: ex.toString());
+    }
   }
 }
