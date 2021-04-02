@@ -24,8 +24,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(right: 20, left: 20),
-      child: ListView(
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
           _countEatingMember(),
           Padding(padding: EdgeInsets.all(10)),
           _selectSpicy(),
@@ -33,7 +34,9 @@ class _RegisterPage2State extends State<RegisterPage2> {
           _selectTaste(),
           Padding(padding: EdgeInsets.all(10)),
           _selectAllergy()
-        ],
+          ],
+        ),
+
       ),
     );
   }
@@ -44,7 +47,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   //#region 식사인원
-  _countEatingMember() {
+  Widget _countEatingMember() {
     return Container(
       child: Column(
         children: [
@@ -231,7 +234,6 @@ class _RegisterPage2State extends State<RegisterPage2> {
           child: Text('알러지 정보를 알려주세요', style: TextStyle(fontSize: 20),),
         ),
         Container(
-          //width: 250,
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

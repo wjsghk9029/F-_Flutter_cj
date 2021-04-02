@@ -74,10 +74,11 @@ class _OhQuePageState extends State<OhQuePage> {
   }
 
   _buildBanner() {
+    var _height = Get.height * 0.13;
     return Stack(
       children: [
         Container(
-          height: 75,
+          height: _height,
           alignment: Alignment.bottomCenter,
           child: Container(
             width: 40,
@@ -90,7 +91,7 @@ class _OhQuePageState extends State<OhQuePage> {
         Container(
           color: Colors.black12,
           child: LimitedBox(
-            maxHeight: 75,
+            maxHeight: _height,
             child: PageView.builder(
               onPageChanged: (idx){
                 setState(() {

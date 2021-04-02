@@ -35,7 +35,7 @@ class _AllergyPageState extends State<AllergyPage> {
       body: Center(
         child: Container(
           alignment: Alignment.center,
-          width: 1000,
+          width: 500,
           padding: EdgeInsets.only(top: 20, right: 20, left: 20),
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.center,

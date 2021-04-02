@@ -31,7 +31,7 @@ class _StringCheckBoxState extends State<StringCheckBox> {
           borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
         ),
         width: widget.width ?? 50,
-        height: widget.height ?? 20,
+        height: widget.height ?? 50,
         child: _stringApear(),
       ),
     );
@@ -45,9 +45,11 @@ class _StringCheckBoxState extends State<StringCheckBox> {
       );
     }
     return widget.isChecked ?
-    Container(
-      alignment: Alignment.center,
-      child: widget.text,
+    Center(
+      child: Container(
+        alignment: Alignment.center,
+        child: widget.text,
+      ),
     ) :  null;
   }
 

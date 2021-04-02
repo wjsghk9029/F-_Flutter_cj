@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
@@ -48,6 +49,12 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
       body: Container(
         child: Column(
           children: [
+            Container(
+              color: Colors.grey,
+              height: Get.height * 0.05,
+              child: Center(child: Text('배너', style: TextStyle(color: Colors.white),)),
+            ),
+            Padding(padding: EdgeInsets.all(10)),
             Expanded(
               child: PageView.builder(
                 onPageChanged: (int pageNum){
@@ -55,7 +62,9 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
                     _pagenum = pageNum;
                   });
                 },
-                itemBuilder: (ctx, idx){return _pages[idx];},
+                itemBuilder: (ctx, idx){
+                  return _pages[idx];
+                  },
                 itemCount: _pages.length,
                 controller: _pageController,
               ),

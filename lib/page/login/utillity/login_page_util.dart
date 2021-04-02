@@ -22,5 +22,20 @@ class LoginPageUtil {
     }
   }
 
-
+  static Future<RenewAccessToken> postRenewAccessToken(String refreshToken) async {
+    final response = await http.post(
+      Uri.http('210.93.86.79:8080', '/renew_access_token'),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      body: (<String, String>{
+        'refresh_token': refreshToken,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return RenewAccessToken.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to Post RenewAccessToken');
+    }
+  }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/main/main_page.dart';
 
-import 'auto_login_test.dart';
-import 'login/page/loginpage.dart';
+import 'loginpage.dart';
+
 
 class RootPage extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   static final tokenStorage = FlutterSecureStorage();
+  LoginPageService _loginPageService = Get.put(LoginPageService());
 
   @override
   void initState() {
@@ -53,13 +57,17 @@ class _RootPageState extends State<RootPage> {
   Future<void> _asyncMethod() async {
     var accessToken = await tokenStorage.read(key: "access_token");
     var refreshToken = await tokenStorage.read(key: "refresh_token");
-    var isAutoLogin = await tokenStorage.read(key: "isAutoLogin");
-    if(accessToken != null && refreshToken != null && isAutoLogin != null && isAutoLogin == 'true'){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AutoLoginTest(acT: accessToken, rFT: refreshToken,)));
+    if(accessToken != null && refreshToken != null){
+      try{
+        _loginPageService.doAutoLogin(refreshToken);
+        Get.offAll(MainPage());
+      }catch(ex){
+        print(ex);
+        Get.offAll(LoginPage());
+      }
     }else{
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+      Get.offAll(LoginPage());
     }
   }
-
 }
 

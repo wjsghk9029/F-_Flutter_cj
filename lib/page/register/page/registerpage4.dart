@@ -34,16 +34,20 @@ class _RegisterPage4State extends State<RegisterPage4> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(right: 20, left: 20),
-      child: ListView(
-        children: [
-          _registerName(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          _registerHome(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          _registerPhone(),
-        ],
+    return LimitedBox(
+      maxWidth: 100,
+      child: Container(
+        padding: EdgeInsets.only(right: 20, left: 20),
+        child: ListView(
+          children: [
+            _registerName(),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            _registerHome(),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            _registerPhone(),
+          ],
+          shrinkWrap: true,
+        ),
       ),
     );
   }

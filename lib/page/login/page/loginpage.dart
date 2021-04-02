@@ -1,7 +1,6 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
@@ -9,7 +8,6 @@ import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/login/logintestgoogle.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
-import 'package:oftable_flutter/page/widget/auto_login_checkbox.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
@@ -23,11 +21,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginPageService _loginPageService = Get.put(LoginPageService());
-  static final tokenStorage = FlutterSecureStorage();
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();
-  bool _autoLoginCheckbox = false;
   bool keyboardOpen = false;
   @override
   void initState() {
@@ -68,28 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildLoginTextField(),
-              Padding(padding: EdgeInsets.all(5)),
-              Container(
-                child: AutoLoginCheckBox(
-                  onPressed: (){
-                    setState(() {
-                      _autoLoginCheckbox = !_autoLoginCheckbox;
-                      if(_autoLoginCheckbox){
-                        tokenStorage.write(key: 'isAutoLogin', value: 'true');
-                      }else{
-                        tokenStorage.write(key: 'isAutoLogin', value: 'false');
-                      }
-                    });
-                  },
-                  isChecked: _autoLoginCheckbox,
-                ),
-              ),
-            ],
-          ),
+          child: _buildLoginTextField(),
         ),
         keyboardOpen ?
             Container()
@@ -103,18 +78,21 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             Padding(padding: EdgeInsets.only(top: 100)),
-            MaterialButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
-              },
-              child: Text('회원가입', style: TextStyle(fontSize: 20),),
-              color: Colors.white54,
-            ),
             Container(
               padding: EdgeInsets.only(top: 10),
               child: MaterialButton(
                 onPressed: _onpressLoginButton,
                 child: Text('로그인', style: TextStyle(fontSize: 20),),
+                color: Colors.white54,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: MaterialButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
+                },
+                child: Text('회원가입', style: TextStyle(fontSize: 20),),
                 color: Colors.white54,
               ),
             ),
@@ -195,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _onpressLoginButton() async {
     try{
-      await _loginPageService.doLogin(_autoLoginCheckbox, idTextFieldController.text, pwTextFieldController.text);
+      await _loginPageService.doLogin(idTextFieldController.text, pwTextFieldController.text);
       Get.to(MainPage());
     }
     catch(ex) {

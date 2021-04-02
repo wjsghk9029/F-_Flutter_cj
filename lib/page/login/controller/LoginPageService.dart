@@ -8,13 +8,13 @@ class LoginPageService extends GetxService{
   var accessToken = ''.obs;
   var refreshToken = ''.obs;
 
-  void doLogin(bool isAutoLogin, String id, String pw) async{
+  void doLogin(String id, String pw) async{
     try {
       var data = await LoginPageUtil.postLogin(id, pw);
-      if(isAutoLogin){
-        await tokenStorage.write(key: 'access_token', value: data.data.access_token);
-        await tokenStorage.write(key: 'refresh_token', value: data.data.refresh_token);
-      }
+      await tokenStorage.containsKey(key: 'access_token') ? tokenStorage.delete(key: 'access_token') : null;
+      await tokenStorage.containsKey(key: 'refresh_token') ? tokenStorage.delete(key: 'refresh_token') : null;
+      await tokenStorage.write(key: 'access_token', value: data.data.access_token);
+      await tokenStorage.write(key: 'refresh_token', value: data.data.refresh_token);
       memberName(data.data.member_name);
       accessToken(data.data.access_token);
       refreshToken(data.data.refresh_token);
@@ -23,4 +23,19 @@ class LoginPageService extends GetxService{
     }
   }
 
+  Future<void> doAutoLogin(String _refreshToken) async {
+    try {
+      var data = await LoginPageUtil.postRenewAccessToken(_refreshToken);
+      accessToken(data.data.access_token);
+      refreshToken(_refreshToken);
+    }catch(err){
+      throw(err);
+    }
+  }
+
+  Future<void> doLogout() async {
+    await tokenStorage.delete(key: 'access_token');
+    await tokenStorage.delete(key: 'refresh_token');
+    Get.reset();
+  }
 }

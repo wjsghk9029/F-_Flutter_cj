@@ -29,7 +29,6 @@ class _RegisterPage1State extends State<RegisterPage1> {
     return Center(
       child: Container(
         alignment: Alignment.center,
-        width: 1000,
         padding: EdgeInsets.only(right: 20, left: 20),
         child: ListView(
           children: [

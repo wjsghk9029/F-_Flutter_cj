@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
+import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
@@ -42,6 +43,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 500,
       padding: EdgeInsets.only(right: 20, left: 20),
       child: ListView(
         children: [
@@ -107,9 +109,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
     return Container(
       child: Column(
         children: [
-          Register().outputTableList.length > 0 ? _keyword1Child() :
+          Register().outputTableList.length > 0 ? _keywordChild(Register().outputTableList[0]) :
           Padding(padding: EdgeInsets.only(top: 10)),
-          Register().outputTableList.length > 1 ? _keyword2Child() :
+          Register().outputTableList.length > 1 ? _keywordChild(Register().outputTableList[1]) :
           Padding(padding: EdgeInsets.only(top: 10)),
         ],
       ),
@@ -117,8 +119,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
   }
 
 
-  _keyword1Child() {
-    var data = Register().outputTableList[0];
+  _keywordChild(RegisterCheckBoxData data) {
     var name = data.itemName;
     var itemId = data.itemId;
     return Container(
@@ -130,13 +131,12 @@ class _RegisterPage3State extends State<RegisterPage3> {
             child: Text('$name의 세부 관심 키워드를 골라주세요', style: TextStyle(fontSize: 20),),
           ),
           Container(
-            width: 300,
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: 1,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 20,
                 ),
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: Register().keywordMap[itemId].length,
@@ -169,60 +169,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
       borderRadius: BorderRadius.circular(10),
     );
   }
-
-  _keyword2Child() {
-    var data = Register().outputTableList[1];
-    var name = data.itemName;
-    var itemId = data.itemId;
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10, top: 10),
-            alignment: Alignment.centerLeft,
-            child: Text('$name의 세부 관심 키워드를 골라주세요', style: TextStyle(fontSize: 20),),
-          ),
-          Container(
-            width: 300,
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 1,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 5,
-                ),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: Register().keywordMap[itemId].length,
-                shrinkWrap: true,
-                itemBuilder: (context, index){
-                  return _buildKeyword2(context, index, itemId);
-                }
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildKeyword2(BuildContext context, int index, int itemId) {
-    return StringCheckBox(
-      iconAppear: true,
-      isChecked: Register().keywordMap[itemId][index].isChecked,
-      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
-      onPressed: (){
-        setState(() {
-          if(Register().keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
-          } else {
-            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
-          }
-          Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
-        });
-      },
-      borderRadius: BorderRadius.circular(10),
-    );
-  }
-  //#endregion
 
   _registerId() {
     return Container(
