@@ -10,13 +10,13 @@ class OhQuePageController extends GetxController{
 
   @override
   void onInit() {
-    getTagFoodList(1);
     super.onInit();
   }
 
 
   Future<void> getTagFoodList (int listIdx) async {
     try{
+      isLoading(true);
       var _foodList = await MainPageUtil.getTagFoodList(listIdx);
       foodList(_foodList);
       isLoading(false);

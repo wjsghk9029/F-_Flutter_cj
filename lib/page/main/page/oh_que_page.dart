@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
-import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
-import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
-import 'package:oftable_flutter/page/widget/register_page_router.dart';
+
+import 'oh_que/oh_que_list.dart';
 
 class OhQuePage extends StatefulWidget {
   final ScrollController scrollController;
@@ -13,99 +10,26 @@ class OhQuePage extends StatefulWidget {
 }
 
 class _OhQuePageState extends State<OhQuePage> {
-  // ignore: non_constant_identifier_names
-  OhQuePageController _pageController;
-  PageController _bannerController;
-  int _bannerPageNum = 0;
-
+  List<Widget> _pages = [];
   @override
   void initState() {
-    _pageController = Get.put(OhQuePageController());
     super.initState();
+    _pages.addAll([
+      OhQueList(listIdx: 1, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 2, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 3, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 4, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 5, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 6, scrollController: widget.scrollController,),
+      OhQueList(listIdx: 7, scrollController: widget.scrollController,),
+    ]);
   }
   @override
   Widget build(BuildContext context) {
-    return Obx((){
-      var data = _pageController.foodList.value.data;
-      return Container(
-        child: _pageController.isLoading.value ?
-            Center(child: Text('로딩중')) :
-            ListView.separated(
-              separatorBuilder: (ctx, idx) => Divider(),
-                controller: widget.scrollController,
-                itemCount: data.length,
-                itemBuilder: (ctx, idx) => idx == 0 ? _buildBanner() : _buildList(data[idx])),
-      );
-    });
-  }
-
-  _buildList(TagFoodListData data) {
-    return Container(
-      child: Slidable(
-          actionPane: SlidableDrawerActionPane(),
-          actionExtentRatio: 0.25,
-          actions: [
-            IconSlideAction(
-              caption: '좋아요',
-              color: Colors.blue,
-              icon: Icons.favorite_outlined,
-              onTap: () => Get.snackbar('좋아요', '${data.food_name}이 좋아요!!')
-            ),
-          ],
-          child: ListTile(
-            leading: Container(
-              color: Colors.transparent,
-              child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                  minWidth: 100,
-                  minHeight: 100,
-                  maxWidth: 100,
-                  maxHeight: 100,
-                  ),
-                  child: Image.network('http://${data.img_src}', fit: BoxFit.fill,),
-              ),
-            ),
-            title: Container(
-                child: Text(data.food_name),
-            ),
-            subtitle: Text(data.food_description),
-      )),
-    );
-  }
-
-  _buildBanner() {
-    var _height = Get.height * 0.13;
-    return Stack(
-      children: [
-        Container(
-          height: _height,
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: 40,
-            child: PageRouterWithCircle(
-              pageViewLength: 5,
-              pageIndex: _bannerPageNum,
-            ),
-          ),
-        ),
-        Container(
-          color: Colors.black12,
-          child: LimitedBox(
-            maxHeight: _height,
-            child: PageView.builder(
-              onPageChanged: (idx){
-                setState(() {
-                  _bannerPageNum = idx;
-                });
-              },
-              controller: _bannerController,
-              itemCount: 5,
-              itemBuilder: (ctx, idx) => Center(
-                child: Text('$idx'),
-              ),)
-          ),
-        ),
-      ],
+    return PageView.builder(
+        itemBuilder: (ctx, idx) => _pages[idx],
+      itemCount: _pages.length,
     );
   }
 }
+

@@ -43,18 +43,17 @@ class _RootPageState extends State<RootPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/ic_launcher.png',
+            'assets/logo1.png',
             fit: BoxFit.fill,
-            height:80,
-            width: 80,
+            width: Get.width * 0.7,
           ),
-          Text('title', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
         ],
       ),
     );
   }
 
   Future<void> _asyncMethod() async {
+    await Future.delayed(Duration(seconds: 2));
     var accessToken = await tokenStorage.read(key: "access_token");
     var refreshToken = await tokenStorage.read(key: "refresh_token");
     if(accessToken != null && refreshToken != null){
