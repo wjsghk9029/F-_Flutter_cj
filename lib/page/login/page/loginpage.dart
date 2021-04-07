@@ -221,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _onpressLoginButton() async {
     try{
       await _loginPageService.doLogin(idTextFieldController.text, pwTextFieldController.text);
-      Get.to(MainPage());
+      Get.offAll(MainPage());
     }
     catch(ex) {
       Get.defaultDialog(title: '에러', middleText: ex.toString());

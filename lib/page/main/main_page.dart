@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/page/home_page.dart';
 import 'package:oftable_flutter/page/main/page/megazine_page.dart';
 import 'package:oftable_flutter/page/main/page/my_page.dart';
@@ -51,13 +52,18 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       bottomNavigationBar: _buildBottomNavi(),
       appBar: AppBar(
+        toolbarHeight: Get.height * 0.1,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text('로고'),
+        title: Container(
+          alignment: Alignment.centerLeft,
+          child: Image.asset('assets/logo_white.png',
+            fit: BoxFit.cover,
+            height: Get.height * 0.075,),
+        ),
+        automaticallyImplyLeading: false,
         actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: (){}),
-          IconButton(icon: Icon(Icons.search), onPressed: (){}),
+
         ],
       ),
       body: _pages[_pageNum],

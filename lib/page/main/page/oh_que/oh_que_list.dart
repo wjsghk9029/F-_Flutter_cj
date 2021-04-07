@@ -26,14 +26,15 @@ class _OhQueListState extends State<OhQueList> {
     return Obx(() =>
     _pageController.isLoading.value ?
     Center(child: Text('로딩중')) :
-    buildListView(_pageController.foodList.value.data)
+    Container(
+      padding: EdgeInsets.only(left: Get.width * 0.05, right: Get.width * 0.05),
+        child: buildListView(_pageController.foodList.value.data))
     );
   }
 
 
 Widget buildListView(List<TagFoodListData> data) {
-  return ListView.separated(
-      separatorBuilder: (ctx, idx) => Divider(),
+  return ListView.builder(
       controller: widget.scrollController,
       itemCount: data.length,
       itemBuilder:(ctx, idx) => _buildList(data[idx]),
@@ -43,8 +44,25 @@ Widget buildListView(List<TagFoodListData> data) {
 _buildList(TagFoodListData data) {
   return Container(
     child: Container(
-      height: Get.height * 0.1,
-      // child: c
+      child: Card(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Container(
+            color: Colors.transparent,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: Get.height * 0.25,
+                minHeight: Get.height * 0.25,
+                maxWidth: Get.height * 0.25,
+                maxHeight: Get.height * 0.25,
+            ),
+              child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
+           ),
+          ),
+          ],
+        ),
+      )
     ),
   );
 }
