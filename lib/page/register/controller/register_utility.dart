@@ -90,13 +90,6 @@ class RegisterPage1Utility extends RegisterUtility{
   }
 }
 class RegisterPage2Utility extends RegisterUtility{
-  List<String> memberListText = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-  ];
   List<String> spicyListText = [
     '맵생아',
     '맵린이',
@@ -113,12 +106,19 @@ class RegisterPage2Utility extends RegisterUtility{
 
   RegisterPage2Utility(){
     insertData(Register().spicyList, spicyListText);
-    insertData(Register().memberList, memberListText);
     insertData(Register().tasteList, tasteListText);
   }
 }
 class RegisterPage3Utility extends RegisterUtility{
 
+
+  List<String> memberListText = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ];
 
   List<String> tableCurationListText = [
     '1',
@@ -220,6 +220,7 @@ class RegisterPage3Utility extends RegisterUtility{
   RegisterPage3Utility(){
     insertData(Register().tableCurationList, tableCurationListText);
     insertData(keywordList, keywordListText);
+    insertData(Register().memberList, memberListText);
     _insert();
   }
 }

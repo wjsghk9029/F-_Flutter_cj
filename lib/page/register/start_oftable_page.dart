@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/colorsUtil.dart';
 import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
@@ -41,18 +42,23 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: Get.height * 0.1,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text('로고'),
+        title: Container(
+          alignment: Alignment.centerLeft,
+          child: Image.asset('assets/logo_white.png',
+          fit: BoxFit.cover,
+          height: Get.height * 0.075,),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         child: Column(
           children: [
             Container(
-              color: Colors.grey,
-              height: Get.height * 0.05,
-              child: Center(child: Text('배너', style: TextStyle(color: Colors.white),)),
+              color: ColorsUtil.indiaCurryYellow,
+              height: Get.height * 0.035,
             ),
             Padding(padding: EdgeInsets.all(10)),
             Expanded(

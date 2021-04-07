@@ -79,16 +79,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-fonts:
- - family: Supersize_Black
-   fonts:
-     - asset: fonts/Supersize_Black.ttf
- - family: Nanum
-   fonts:
-     - asset: fonts/NanumGothic.ttf
-     - asset: fonts/NanumGothicExtraBold.ttf
- - family: Poppins
-   fonts:
-     - asset: fonts/Poppins-Bold.ttf
+  fonts:
+   - family: Supersize_Black
+     fonts:
+       - asset: fonts/Supersize_Black.ttf
+   - family: NanumGothic
+     fonts:
+       - asset: fonts/NanumFont/NanumGothic.ttf
+       - asset: fonts/NanumFont/NanumGothicExtraBold.ttf
+         weight: 800
+   - family: Poppins
+     fonts:
+       - asset: fonts/Poppins/Poppins-Bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

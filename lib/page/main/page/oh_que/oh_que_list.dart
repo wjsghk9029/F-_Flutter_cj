@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
@@ -43,38 +42,30 @@ Widget buildListView(List<TagFoodListData> data) {
 
 _buildList(TagFoodListData data) {
   return Container(
-    child: Slidable(
-        actionPane: SlidableDrawerActionPane(),
-        actionExtentRatio: 0.25,
-        actions: [
-          IconSlideAction(
-              caption: '좋아요',
-              color: Colors.blue,
-              icon: Icons.favorite_outlined,
-              onTap: () => Get.snackbar('좋아요', '${data.food_name}이 좋아요!!')
-          ),
-        ],
-        child: ListTile(
-          leading: Container(
-            color: Colors.transparent,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: 100,
-                minHeight: 100,
-                maxWidth: 100,
-                maxHeight: 100,
-              ),
-              child: Image.network('http://${data.img_src}', fit: BoxFit.fill,),
-            ),
-          ),
-          title: Container(
-            child: Text(data.food_name),
-          ),
-          subtitle: Text(data.food_description),
-        )),
+    child: Container(
+      height: Get.height * 0.1,
+      // child: c
+    ),
   );
 }
-
+  // ListTile(
+  // leading: Container(
+  // color: Colors.transparent,
+  // child: ConstrainedBox(
+  // constraints: BoxConstraints(
+  // minWidth: Get.width * 0.4,
+  // minHeight: Get.height * 0.6,
+  // maxWidth: Get.width * 0.4,
+  // maxHeight: Get.height * 0.6,
+  // ),
+  // child: Image.network('http://${data.img_src}', fit: BoxFit.fill,),
+  // ),
+  // ),
+  // title: Container(
+  // child: Text(data.food_name),
+  // ),
+  // subtitle: Text(data.food_description),
+  // ),
 
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/colorsUtil.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
@@ -14,27 +16,9 @@ class RegisterPage3 extends StatefulWidget {
 
 class _RegisterPage3State extends State<RegisterPage3> {
   RegisterPage3Utility _util;
-  final idTextFieldController = TextEditingController();
-  final pwTextFieldController = TextEditingController();
-  final pwReTextFieldController = TextEditingController();
-
-  @override
-  void dispose() {
-    setState(() {
-      Register().selectedId = idTextFieldController.text;
-      Register().selectedPw = pwTextFieldController.text;
-    });
-    idTextFieldController.dispose();
-    pwTextFieldController.dispose();
-    pwReTextFieldController.dispose();
-    super.dispose();
-  }
   @override
   void initState() {
     _util = RegisterPage3Utility();
-    idTextFieldController.text = Register().selectedId;
-    pwTextFieldController.text = Register().selectedPw;
-   // _util.insertMapText();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
@@ -43,17 +27,18 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 500,
-      padding: EdgeInsets.only(right: 20, left: 20),
+      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
       child: ListView(
         children: [
+          _keyword(),
+          Register().outputTableList.length == 0 ?
+          Padding(padding: EdgeInsets.zero) :
+          Padding(padding: EdgeInsets.only(top: 50)),
+          Text('선택질문 입니다',
+          style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),),
           _tableCuration(),
           Padding(padding: EdgeInsets.only(top: 10)),
-          _keyword(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          _registerId(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          _registerPw(),
+          _countEatingMember()
         ],
       ),
     );
@@ -64,9 +49,8 @@ class _RegisterPage3State extends State<RegisterPage3> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: 20),),
+            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,6 +59,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
+              physics: NeverScrollableScrollPhysics(),
               itemCount:Register().tableCurationList.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -110,9 +95,10 @@ class _RegisterPage3State extends State<RegisterPage3> {
       child: Column(
         children: [
           Register().outputTableList.length > 0 ? _keywordChild(Register().outputTableList[0]) :
-          Padding(padding: EdgeInsets.only(top: 10)),
+          Padding(padding: EdgeInsets.zero),
+          Padding(padding: EdgeInsets.only(top: 20)),
           Register().outputTableList.length > 1 ? _keywordChild(Register().outputTableList[1]) :
-          Padding(padding: EdgeInsets.only(top: 10)),
+          Padding(padding: EdgeInsets.zero),
         ],
       ),
     );
@@ -126,9 +112,16 @@ class _RegisterPage3State extends State<RegisterPage3> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 10, top: 10),
+            margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Text('$name의 세부 관심 키워드를 골라주세요', style: TextStyle(fontSize: 20),),
+            child: Row(
+              children: [
+                Text('$name',
+                  style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: ColorsUtil.hibiscusPink),),
+                Text('의 세부 관심 키워드를 골라주세요',
+                  style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+              ],
+            ),
           ),
           Container(
             child: GridView.builder(
@@ -169,86 +162,59 @@ class _RegisterPage3State extends State<RegisterPage3> {
       borderRadius: BorderRadius.circular(10),
     );
   }
+ //#endregion
 
-  _registerId() {
+  //#region 식사인원
+  Widget _countEatingMember() {
     return Container(
-      padding: EdgeInsets.only(top: 10),
       child: Column(
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Text('아이디', style: TextStyle(fontSize: 20),),
+            child: Text('함께 식사할 인원은?', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
           ),
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: idTextFieldController,
-              decoration: InputDecoration(
-                hintText: '아이디',
-                border: InputBorder.none,
+          GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: Register().memberList.length,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
               ),
-            ),
+              itemCount: Register().memberList.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                return _buildMemberListItem(context, index);
+              }
           ),
         ],
       ),
     );
   }
 
-  _registerPw() {
-    return Container(
-      padding: EdgeInsets.only(top: 10),
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            alignment: Alignment.centerLeft,
-            child: Text('비밀번호', style: TextStyle(fontSize: 20),),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: pwTextFieldController,
-              decoration: InputDecoration(
-                hintText: '비밀번호',
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(10)),
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: pwReTextFieldController,
-              decoration: InputDecoration(
-                hintText: '비밀번호 확인',
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-        ],
-      ),
+  _buildMemberListItem(BuildContext context, int index) {
+    return IconCheckBox(
+      size: 40,
+      iconSize: 30,
+      isChecked: Register().memberList[index].isChecked,
+      iconAppear: true,
+      onPressed: (){
+        setState(() {
+          _util.resetCheckBox(Register().memberList);
+          Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
+          Register().selectedMember = Register().memberList[index].registerCheckBoxData;
+        });
+      },
     );
   }
+
+//#endregion
 
   void _asyncMethod()async {
     await Future.delayed(Duration(microseconds: 1));
     setState(() {
     });
   }
-
-
 
 }

@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:oftable_flutter/page/login/model/loginclass.dart';
 
 class LoginPageUtil {
-
   static Future<Login> postLogin(String id, String pw) async {
     final response = await http.post(
       Uri.http('210.93.86.79:8080', '/login'),

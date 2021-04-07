@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/colorsUtil.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
@@ -26,29 +28,37 @@ class _RegisterPage1State extends State<RegisterPage1> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(right: 20, left: 20),
-        child: ListView(
-          children: [
-            Text("당신의 푸드 관심사를 2개 골라주세요", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-            Padding(padding: EdgeInsets.only(bottom: 15)),
-            GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.0,
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 30,
-                ),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: Register().tableList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index){
-                  return _buildListItem(context, index);
-                }),
-          ],
-        ),
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
+      child: ListView(
+        children: [
+          Row(
+            children: [
+              Text("나의 푸드 라이프스타일은?",
+                style: TextStyle(fontSize: Get.height * 0.03, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+                textAlign: TextAlign.start,),
+              Padding(padding: EdgeInsets.all(5)),
+              Text("(2개 선택)",
+                style: TextStyle(fontSize: Get.height * 0.022, fontFamily: FontsUtil.nanumGothic),
+                textAlign: TextAlign.start,),
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 15)),
+          GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 30,
+                crossAxisSpacing: 30,
+              ),
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: Register().tableList.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                return _buildListItem(context, index);
+              }),
+        ],
       ),
     );
   }

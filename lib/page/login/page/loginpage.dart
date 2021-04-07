@@ -4,13 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:oftable_flutter/colorsUtil.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
-import 'package:oftable_flutter/page/login/logintestgoogle.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
-import 'package:sign_button/constants.dart';
-import 'package:sign_button/create_button.dart';
-
 
 
 class LoginPage extends StatefulWidget {
@@ -25,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();
   bool keyboardOpen = false;
+
   @override
   void initState() {
     KeyboardVisibilityNotification().addNewListener(
@@ -60,114 +58,163 @@ class _LoginPageState extends State<LoginPage> {
   }
 
  Widget _buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: _buildLoginTextField(),
-        ),
-        keyboardOpen ?
-            Container()
-            : _onNotKeyBoardOpen(),
-      ],
-    );
-  }
-
-  Container _onNotKeyBoardOpen() {
-    return Container(
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.only(left: Get.width * 0.1),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(padding: EdgeInsets.only(top: 100)),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: MaterialButton(
-                onPressed: _onpressLoginButton,
-                child: Text('로그인', style: TextStyle(fontSize: 20),),
-                color: Colors.white54,
+            Padding(padding: EdgeInsets.all(Get.height*0.025),),
+            LimitedBox(
+              maxHeight: Get.height*0.45,
+              child:Container(
+                child: _logoPart(),
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: MaterialButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StartOfTablePage()));
-                },
-                child: Text('회원가입', style: TextStyle(fontSize: 20),),
-                color: Colors.white54,
+            Padding(padding: EdgeInsets.all(Get.height*0.05),),
+            LimitedBox(
+              maxHeight: Get.height*0.35,
+              child:Container(
+                child: _loginPart(),
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: MaterialButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
-                },
-                child: Text('홈페이지 테스트', style: TextStyle(fontSize: 20),),
-                color: Colors.white54,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CupertinoButton(child: Text('아이디 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
-                CupertinoButton(child: Text('비밀번호 찾기', style: TextStyle(fontSize: 13),), onPressed: (){}),
-              ],
-            ),
-            SignInButton(
-                buttonType: ButtonType.google,
-                onPressed: (){signInWithGoogle().then((value) =>  Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleLoginTest(value))));},
-            ),
+            Padding(padding: EdgeInsets.all(Get.height*0.025),),
           ],
         ),
-      );
-  }
-
-  _buildLoginTextField() {
-    return Container(
-      width: 200,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: idTextFieldController,
-              decoration: InputDecoration(
-                hintText: '아이디',
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(5)),
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: pwTextFieldController,
-              decoration: InputDecoration(
-                hintText: '비밀번호',
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
 
-  Future<GoogleSignInAuthentication> signInWithGoogle() async {
-    final googleUser = await googleSignIn.signIn();
-    print('test');
-    final googleAuth = await googleUser.authentication;
+  Widget _logoPart() {
+    return Column(
+      children: [
+        Image.asset('assets/logo_white.png',
+        height: Get.height * 0.3,),
+        Container(
+          padding: EdgeInsets.only(top: Get.height*0.02),
+          child: MaterialButton(
+            onPressed: () => Get.to(StartOfTablePage()),
+            child: Container(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+                child: Text('시작하기',
+                  style: TextStyle(
+                      fontFamily: 'NanumGothic',
+                      fontSize: Get.height*0.08,
+                      color: ColorsUtil.indiaCurryYellow,
+                      fontWeight: FontWeight.w800
+                  ),
+                )
+            ),
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
 
-    print(googleAuth.idToken);
-    print(googleAuth.accessToken);
+  Widget _loginPart(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('LOG IN', style: TextStyle(fontFamily: 'Poppins', fontSize: Get.height * 0.025),),
+        Container(
+          width: Get.width * 0.5,
+          height: Get.height * 0.05,
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                width: 5
+              )
+            ),
+          ),
+          child: TextField(
+            controller: idTextFieldController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                  fontFamily: 'NanumGothic',
+                  color: Colors.grey,
+              ),
+              hintText: '아이디',
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+        Padding(padding: EdgeInsets.all(Get.height * 0.01)),
+        Container(
+          width: Get.width * 0.5,
+          height: Get.height * 0.05,
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 5)),),
+          child: TextField(
+            controller: pwTextFieldController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                fontFamily: 'NanumGothic',
+                color: Colors.grey,
+              ),
+              hintText: '비밀번호',
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(top: Get.height*0.001, bottom: Get.height*0.001),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            child: MaterialButton(
+              minWidth: Get.width* 0.3,
+              height: Get.height * 0.05,
+              onPressed: _onpressLoginButton,
+              child: Container(
+                  child: Text('로그인 하기',
+                    style: TextStyle(
+                        fontFamily: 'NanumGothic',
+                        fontSize: Get.height * 0.025,
+                        color: Colors.white,
+                    ),
+                  )
+              ),
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(bottom: Get.height*0.01),
+          alignment: Alignment.centerLeft,
+          child: _findUser(Get.height * 0.02),
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Row _findUser(double _fontSize) {
+    return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(child: Text('아이디 찾기', style: TextStyle(fontSize: _fontSize), ), onTap: (){}),
+            Container(child: Text(' / ', style: TextStyle(fontSize: _fontSize),)),
+            GestureDetector(child: Text('비밀번호 찾기', style: TextStyle(fontSize: _fontSize),), onTap: (){}),
+          ],
+        );
+  }
+
+  Future<GoogleSignInAuthentication> _signInWithGoogle() async {
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser.authentication;
     return googleAuth;
   }
 
@@ -180,4 +227,6 @@ class _LoginPageState extends State<LoginPage> {
       Get.defaultDialog(title: '에러', middleText: ex.toString());
     }
   }
+
+
 }

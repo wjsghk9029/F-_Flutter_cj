@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/colorsUtil.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
-import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
 import 'allergy_page.dart';
@@ -23,12 +24,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 20, left: 20),
+      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
       child: SingleChildScrollView(
         child: Column(
           children: [
-          _countEatingMember(),
-          Padding(padding: EdgeInsets.all(10)),
           _selectSpicy(),
           Padding(padding: EdgeInsets.all(10)),
           _selectTaste(),
@@ -43,55 +42,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
 
   _buildBlankText(RegisterCheckBoxData item) {
     var str = item.itemName;
-    return Text('$str', style: TextStyle(fontSize: 20),);
+    return Text('$str', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),);
   }
 
-  //#region 식사인원
-  Widget _countEatingMember() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            alignment: Alignment.centerLeft,
-            child: Text('함께 식사할 인원은?', style: TextStyle(fontSize: 20),),
-          ),
-          GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Register().memberList.length,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-              ),
-              itemCount: Register().memberList.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index){
-                return _buildMemberListItem(context, index);
-              }
-          ),
-        ],
-      ),
-    );
-  }
 
-  _buildMemberListItem(BuildContext context, int index) {
-    return IconCheckBox(
-      size: 40,
-      iconSize: 30,
-      isChecked: Register().memberList[index].isChecked,
-      iconAppear: true,
-      onPressed: (){
-        setState(() {
-          _util.resetCheckBox(Register().memberList);
-          Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
-          Register().selectedMember = Register().memberList[index].registerCheckBoxData;
-        });
-      },
-    );
-  }
-
-  //#endregion
 
   //#region 매운맛
   _selectSpicy() {
@@ -103,18 +57,18 @@ class _RegisterPage2State extends State<RegisterPage2> {
               margin: EdgeInsets.only(bottom: 5),
               child: Row(
                 children: [
-                  Text('나는', style: TextStyle(fontSize: 20),),
+                  Text('나는', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
                     Container(
                       margin: EdgeInsets.only(right: 3, left: 3),
-                      padding: EdgeInsets.only(right: 5, left: 5),
+                      padding: EdgeInsets.only(right: Get.width* 0.05, left: Get.width* 0.05),
                       child: _buildBlankText(Register().selectedSpicy),
                       decoration: BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(),
+                          bottom: BorderSide(width: 3),
                         )
                       ),
                   ),
-                  Text('이다', style: TextStyle(fontSize: 20),),
+                  Text('이다', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
                 ],
               ),
             ),
@@ -169,18 +123,18 @@ class _RegisterPage2State extends State<RegisterPage2> {
               margin: EdgeInsets.only(bottom: 5),
               child: Row(
                 children: [
-                  Text('나는', style: TextStyle(fontSize: 20),),
+                  Text('나는', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
                   Container(
                     margin: EdgeInsets.only(right: 3, left: 3),
-                    padding: EdgeInsets.only(right: 5, left: 5),
+                    padding: EdgeInsets.only(right: Get.width* 0.05, left: Get.width* 0.05),
                     child: _buildBlankText(Register().selectedTaste),
                     decoration: BoxDecoration(
                         border: Border(
-                          bottom: BorderSide(),
+                          bottom: BorderSide(width: 3),
                         )
                     ),
                   ),
-                  Text('맛을 좋아한다.', style: TextStyle(fontSize: 20),),
+                  Text('맛을 좋아한다.', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
                 ],
               ),
             ),
@@ -231,7 +185,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
         Container(
           margin: EdgeInsets.only(bottom: 5),
           alignment: Alignment.centerLeft,
-          child: Text('알러지 정보를 알려주세요', style: TextStyle(fontSize: 20),),
+          child: Text('알러지 정보를 알려주세요', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
         ),
         Container(
           child: GridView.builder(
