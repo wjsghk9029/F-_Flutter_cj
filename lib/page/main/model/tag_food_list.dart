@@ -41,17 +41,3 @@ class TagFoodListData{
    );
  }
 }
-
-
-// {
-// "apikey":"3155438468483",
-// "error":0,
-// "type":"json",
-// "data":[
-// {
-// "img_src":"172.16.37.187:8080/images/1_test_1.png",
-// "food_description":"돈까스라는 음식",
-// "food_price":10000,
-// "food_name":"fork",
-// "food_serial":1
-// },

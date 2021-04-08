@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/main/page/home_page.dart';
 import 'package:oftable_flutter/page/main/page/megazine_page.dart';
 import 'package:oftable_flutter/page/main/page/my_page.dart';
 import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
@@ -15,7 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   ScrollController _listViewScrollController;
   bool _isVisible = true;
-  int _pageNum = 2;
+  int _pageNum = 1;
   List<Widget> _pages = [];
 
   @override
@@ -39,7 +38,6 @@ class _MainPageState extends State<MainPage> {
       }
     });
     _pages.addAll([
-    HomePage(),
     ShopPage(),
     OhQuePage(scrollController: _listViewScrollController,),
     MegazinePage(),
@@ -63,7 +61,8 @@ class _MainPageState extends State<MainPage> {
         ),
         automaticallyImplyLeading: false,
         actions: [
-
+          IconButton(icon: Icon(Icons.notifications), onPressed: (){}),
+          IconButton(icon: Icon(Icons.search), onPressed: (){}),
         ],
       ),
       body: _pages[_pageNum],
@@ -92,10 +91,6 @@ class _MainPageState extends State<MainPage> {
             unselectedItemColor: Colors.black54,
             selectedItemColor: Colors.blueAccent,
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: '홈',
-              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.shop),
                 label: '숍',

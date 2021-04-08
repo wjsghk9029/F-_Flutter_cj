@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:oftable_flutter/colorsUtil.dart';
+import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
@@ -132,6 +132,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           child: TextField(
+            style: TextStyle(
+              fontFamily: 'NanumGothic',
+              fontSize: Get.height * 0.02,
+            ),
             controller: idTextFieldController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -150,6 +154,10 @@ class _LoginPageState extends State<LoginPage> {
           decoration: BoxDecoration(
             border: Border(bottom: BorderSide(width: 5)),),
           child: TextField(
+            style: TextStyle(
+              fontFamily: 'NanumGothic',
+              fontSize: Get.height * 0.02,
+            ),
             controller: pwTextFieldController,
             decoration: InputDecoration(
               hintStyle: TextStyle(

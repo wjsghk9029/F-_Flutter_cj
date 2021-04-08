@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 
+import '../../../../Util.dart';
+
 class OhQueList extends StatefulWidget {
   final ScrollController scrollController;
   final int listIdx;
@@ -43,47 +45,42 @@ Widget buildListView(List<TagFoodListData> data) {
 
 _buildList(TagFoodListData data) {
   return Container(
-    child: Container(
-      child: Card(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Container(
-            color: Colors.transparent,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: Get.height * 0.25,
-                minHeight: Get.height * 0.25,
-                maxWidth: Get.height * 0.25,
-                maxHeight: Get.height * 0.25,
-            ),
-              child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
-           ),
+    height: Get.height * 0.25,
+    child: Card(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Container(
+          alignment: Alignment.center,
+          color: Colors.transparent,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: Get.height * 0.25,
+              minHeight: Get.height * 0.25,
+              maxWidth: Get.height * 0.25,
+              maxHeight: Get.height * 0.25,
           ),
-          ],
+            child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
+         ),
         ),
-      )
-    ),
+          Container(
+            margin: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+            child: Flex(
+              direction: Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic)),
+                Padding(padding: EdgeInsets.all(Get.height * 0.01)),
+                Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800,)),
+              ],
+            ),
+          )
+        ],
+      ),
+    )
   );
 }
-  // ListTile(
-  // leading: Container(
-  // color: Colors.transparent,
-  // child: ConstrainedBox(
-  // constraints: BoxConstraints(
-  // minWidth: Get.width * 0.4,
-  // minHeight: Get.height * 0.6,
-  // maxWidth: Get.width * 0.4,
-  // maxHeight: Get.height * 0.6,
-  // ),
-  // child: Image.network('http://${data.img_src}', fit: BoxFit.fill,),
-  // ),
-  // ),
-  // title: Container(
-  // child: Text(data.food_name),
-  // ),
-  // subtitle: Text(data.food_description),
-  // ),
-
 }
 

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
-import 'package:oftable_flutter/colorsUtil.dart';
+import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 
 class RegisterPage4 extends StatefulWidget {
@@ -89,7 +89,15 @@ class _RegisterPage4State extends State<RegisterPage4> {
             ),
             _buildTextField(
               label: '비밀번호',
-              labelChild: Icon(Icons.info_outline),
+              labelChild: GestureDetector(
+                child: Icon(Icons.info_outline),
+                onTap: ()=>Get.defaultDialog(
+                  title: '비밀번호 규칙',
+                  titleStyle: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+                  middleText: '대충 비밀번호 규칙 내용',
+                  middleTextStyle: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),
+                ),
+              ),
               controller: pwTextFieldController,
             ),
             _buildTextField(
@@ -105,7 +113,7 @@ class _RegisterPage4State extends State<RegisterPage4> {
               children: [
                 _buildTextField(
                   label: '연락처',
-                  controller: idTextFieldController,
+                  controller: phoneTextFieldController,
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -188,6 +196,10 @@ class _RegisterPage4State extends State<RegisterPage4> {
               ),
             ),
             child: TextField(
+              style: TextStyle(
+                fontFamily: 'NanumGothic',
+                fontSize: Get.height * 0.02,
+              ),
               decoration: InputDecoration(
                 border: InputBorder.none
               ),

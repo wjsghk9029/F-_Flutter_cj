@@ -25,5 +25,4 @@ class OhQuePageController extends GetxController{
       print(ex);
     }
   }
-
 }

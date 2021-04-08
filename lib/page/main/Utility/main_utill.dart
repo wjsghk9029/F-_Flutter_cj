@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 class MainPageUtil {
 
   static Future<TagFoodList> getTagFoodList(int listIdx) async {
-    print('getTagFoodList');
     final response = await http.get(
       Uri.http('210.93.86.79:8080', '/tag_food_list', {'select_food_tag' : '$listIdx'}),
       headers: <String, String>{
