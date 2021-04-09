@@ -19,7 +19,9 @@ class _TabButtonState extends State<TabButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onPressed,
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.fastLinearToSlowEaseIn,
         height: widget.height ?? null,
         width: widget.width ?? null,
         color: widget.isChecked ?

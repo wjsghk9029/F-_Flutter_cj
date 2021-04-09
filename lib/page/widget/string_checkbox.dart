@@ -52,9 +52,4 @@ class _StringCheckBoxState extends State<StringCheckBox> {
       ),
     ) :  null;
   }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 }

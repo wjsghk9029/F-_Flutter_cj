@@ -4,6 +4,7 @@ import 'oh_que/oh_que_list.dart';
 
 class OhQuePage extends StatefulWidget {
   final ScrollController scrollController;
+  static final PageController pageController = PageController();
   const OhQuePage({this.scrollController});
   @override
   _OhQuePageState createState() => _OhQuePageState();
@@ -27,8 +28,10 @@ class _OhQuePageState extends State<OhQuePage> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
+      controller: OhQuePage.pageController,
         itemBuilder: (ctx, idx) => _pages[idx],
       itemCount: _pages.length,
+      physics: NeverScrollableScrollPhysics(),
     );
   }
 }

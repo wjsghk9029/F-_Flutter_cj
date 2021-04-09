@@ -17,5 +17,18 @@ class MainPageUtil {
       throw Exception('${response.request.url} ${response.body} = Failed to Get TagFoodList');
     }
   }
-
+  static Future<bool> postFoodLike(String authorization) async {
+    final response = await http.post(
+      Uri.http('210.93.86.79:8080', '/food_like'),
+      headers: <String, String>{
+        'Authorization' : authorization,
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },);
+    if (response.statusCode == 200) {
+      print(response.body);
+      return true;
+    }else {
+      throw Exception('${response.request.url} ${response.body} = Failed to postFoodLike');
+    }
+  }
 }
