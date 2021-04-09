@@ -28,6 +28,8 @@ class LoginPageService extends GetxService{
       var data = await LoginPageUtil.postRenewAccessToken(_refreshToken);
       accessToken(data.data.access_token);
       refreshToken(_refreshToken);
+      print('at = $accessToken');
+      print('rt = $refreshToken');
     }catch(err){
       throw(err);
     }

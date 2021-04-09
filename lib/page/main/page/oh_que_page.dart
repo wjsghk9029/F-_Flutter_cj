@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 
 import 'oh_que/oh_que_list.dart';
 
@@ -9,8 +11,14 @@ class OhQuePage extends StatefulWidget {
   @override
   _OhQuePageState createState() => _OhQuePageState();
 }
+@override
 
 class _OhQuePageState extends State<OhQuePage> {
+  OhQuePageController _ohQueController =Get.put(OhQuePageController());
+  void dispose() {
+    _ohQueController.isLoading(true);
+    super.dispose();
+  }
   List<Widget> _pages = [];
   @override
   void initState() {

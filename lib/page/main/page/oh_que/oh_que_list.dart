@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
@@ -18,12 +19,7 @@ class OhQueList extends StatefulWidget {
 }
 class _OhQueListState extends State<OhQueList> {
   OhQuePageController _ohQueController =Get.put(OhQuePageController());
-  final PageController pageController = OhQuePage.pageController;
-  @override
-  void dispose() {
-    _ohQueController.isLoading(true);
-    super.dispose();
-  }
+  LoginPageService _loginPageService =Get.put(LoginPageService());
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -71,11 +67,19 @@ _buildList(TagFoodListData data) {
                   maxWidth: Get.height * 0.25,
                   maxHeight: Get.height * 0.25,
               ),
-                child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
+               child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
              ),
             ),
             GestureDetector(
-              onTap: ()=>Get.snackbar('좋아요', data.food_name),
+              onTap: () async {
+                try{
+                  await _ohQueController.postFoodLike(_loginPageService.accessToken.value, data.food_serial) ?
+                  Get.snackbar('좋아요', data.food_name) :
+                  Get.defaultDialog(title: '에러', middleText: 'postFoodLike');
+                }catch(ex){
+                  Get.defaultDialog(title: '에러', middleText: ex.toString());
+                }
+              },
               child: Container(
                 margin: EdgeInsets.all(5),
                 alignment: Alignment.center,
@@ -129,7 +133,7 @@ _buildList(TagFoodListData data) {
     return TabButton(
       notCheckColor: Colors.transparent,
       height: 10,
-      isChecked: pageController.page == idx ?? false,
+      isChecked: OhQuePage.pageController.page == idx ?? false,
       child: Center(
         child: Text(
           '$idx',
@@ -138,7 +142,7 @@ _buildList(TagFoodListData data) {
           ),
         ),
       ),
-      onPressed: () => pageController.jumpToPage(idx),
+      onPressed: () => OhQuePage.pageController.jumpToPage(idx),
     );
   }
 }

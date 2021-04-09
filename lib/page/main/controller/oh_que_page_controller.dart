@@ -15,14 +15,25 @@ class OhQuePageController extends GetxController{
 
 
   Future<void> getTagFoodList (int listIdx) async {
-    try{
+    try {
       isLoading(true);
       var _foodList = await MainPageUtil.getTagFoodList(listIdx);
       foodList(_foodList);
       isLoading(false);
     }
+    catch (ex) {
+      print(ex);
+      throw ex;
+    }
+  }
+
+  Future<bool> postFoodLike (String authorization, int food_sn) async {
+    try{
+      return await MainPageUtil.postFoodLike(authorization, food_sn);
+    }
     catch(ex){
       print(ex);
+      throw ex;
     }
   }
 }
