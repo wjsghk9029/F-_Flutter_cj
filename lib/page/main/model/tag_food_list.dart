@@ -27,9 +27,14 @@ class TagFoodListData{
  final String food_name;
  // ignore: non_constant_identifier_names
  final int food_serial;
+ // ignore: non_constant_identifier_names
+ final int food_level;
+ // ignore: non_constant_identifier_names
+ final int food_time;
+
 
   // ignore: non_constant_identifier_names
-  TagFoodListData({this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
+  TagFoodListData({this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
 
  factory TagFoodListData.fromJson(Map<String, dynamic> json) {
    return TagFoodListData(
@@ -38,6 +43,8 @@ class TagFoodListData{
      food_price: json['food_price']as int,
      food_name: json['food_name']as String,
      food_serial: json['food_serial']as int,
+     food_level: json['food_level']as int,
+     food_time: json['food_time']as int,
    );
  }
 }

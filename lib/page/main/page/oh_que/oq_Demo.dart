@@ -11,6 +11,11 @@ class OqDemo extends StatefulWidget {
 
 class _OqDemoState extends State<OqDemo> {
   @override
+  void initState() {
+    print(widget.listData.img_src);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

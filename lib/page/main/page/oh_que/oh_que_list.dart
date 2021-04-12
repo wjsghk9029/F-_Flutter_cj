@@ -81,7 +81,7 @@ _buildList(TagFoodListData data) {
                   try{
                     await _ohQueController.postFoodLike(_loginPageService.accessToken.value, data.food_serial) ?
                     Get.snackbar('좋아요', data.food_name) :
-                    Get.defaultDialog(title: '에러', middleText: 'postFoodLike');
+                    Get.defaultDialog(title: '실패', middleText: '실패');
                   }catch(ex){
                     Get.defaultDialog(title: '에러', middleText: ex.toString());
                   }
@@ -104,7 +104,8 @@ _buildList(TagFoodListData data) {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic)),
+                  Text('${data.food_time}min / level ${data.food_level}', style: TextStyle(fontSize: Get.height * 0.023, fontFamily: FontsUtil.poppins, color: ColorsUtil.indiaCurryYellow)),
+                  Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.015, fontFamily: FontsUtil.nanumGothic)),
                   Padding(padding: EdgeInsets.all(Get.height * 0.01)),
                   Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800,)),
                 ],
