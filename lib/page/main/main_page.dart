@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,12 @@ class _MainPageState extends State<MainPage> {
           IconButton(icon: Icon(Icons.search), onPressed: (){}),
         ],
       ),
-      body: _pages[_pageNum],
+      body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('나가고 싶다면 한번 더 누르시오'),
+          ),
+          child: _pages[_pageNum]
+      ),
     );
   }
 
