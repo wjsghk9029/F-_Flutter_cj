@@ -17,7 +17,7 @@ class LoginPageUtil {
     if (response.statusCode == 200) {
       return Login.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to Post Login');
+      throw Exception('${response.body}Failed to Post Login');
     }
   }
 

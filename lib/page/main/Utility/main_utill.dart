@@ -31,7 +31,6 @@ class MainPageUtil {
       }
     );
     if (response.statusCode == 200 && jsonDecode(response.body)['error'] == 0) {
-      print(response.body);
       return true;
     }else {
       throw Exception('${response.request.url} ${response.body} $authorization = Failed to postFoodLike');

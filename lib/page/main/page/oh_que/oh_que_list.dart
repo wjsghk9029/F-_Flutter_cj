@@ -4,6 +4,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
+import 'package:oftable_flutter/page/main/page/oh_que/oq_Demo.dart';
 import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
 import 'package:oftable_flutter/page/widget/tab_button.dart';
 
@@ -51,60 +52,66 @@ Widget buildListView(List<TagFoodListData> data) {
 
 _buildList(TagFoodListData data) {
   return Container(
-    height: Get.height * 0.25,
-    child: Card(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        Stack(
-          alignment: Alignment.topRight,
+    height: Get.width * 0.4,
+    child: GestureDetector(
+      onTap: ()=>Get.to(OqDemo(listData: data,)),
+      child: Card(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Hero(
+                tag: 'DemoTag${data.food_serial}',
+                child: Container(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: Get.width * 0.4,
+                      minHeight: Get.width * 0.4,
+                      maxWidth: Get.width * 0.4,
+                      maxHeight: Get.width * 0.4,
+                  ),
+                   child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
+                 ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  try{
+                    await _ohQueController.postFoodLike(_loginPageService.accessToken.value, data.food_serial) ?
+                    Get.snackbar('좋아요', data.food_name) :
+                    Get.defaultDialog(title: '에러', middleText: 'postFoodLike');
+                  }catch(ex){
+                    Get.defaultDialog(title: '에러', middleText: ex.toString());
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  alignment: Alignment.center,
+                  color: Colors.black,
+                  width: Get.height * 0.05,
+                  height: Get.height * 0.05,
+                  child: Icon(Icons.favorite, color: ColorsUtil.hibiscusPink,),
+                ),
+              ),
+            ],
+          ),
             Container(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: Get.height * 0.25,
-                  minHeight: Get.height * 0.25,
-                  maxWidth: Get.height * 0.25,
-                  maxHeight: Get.height * 0.25,
+              margin: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic)),
+                  Padding(padding: EdgeInsets.all(Get.height * 0.01)),
+                  Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800,)),
+                ],
               ),
-               child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
-             ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                try{
-                  await _ohQueController.postFoodLike(_loginPageService.accessToken.value, data.food_serial) ?
-                  Get.snackbar('좋아요', data.food_name) :
-                  Get.defaultDialog(title: '에러', middleText: 'postFoodLike');
-                }catch(ex){
-                  Get.defaultDialog(title: '에러', middleText: ex.toString());
-                }
-              },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                alignment: Alignment.center,
-                color: Colors.black,
-                width: Get.height * 0.05,
-                height: Get.height * 0.05,
-                child: Icon(Icons.favorite, color: ColorsUtil.hibiscusPink,),
-              ),
-            ),
+            )
           ],
         ),
-          Container(
-            margin: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic)),
-                Padding(padding: EdgeInsets.all(Get.height * 0.01)),
-                Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800,)),
-              ],
-            ),
-          )
-        ],
       ),
     )
   );

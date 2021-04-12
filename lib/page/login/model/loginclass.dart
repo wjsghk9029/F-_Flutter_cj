@@ -31,7 +31,6 @@ class LoginData {
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
     return LoginData(
-      member_name: json['member_name']as String,
       access_token: json['access_token']as String,
       refresh_token: json['refresh_token']as String,
     );

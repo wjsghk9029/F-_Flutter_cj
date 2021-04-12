@@ -18,6 +18,8 @@ class LoginPageService extends GetxService{
       memberName(data.data.member_name);
       accessToken(data.data.access_token);
       refreshToken(data.data.refresh_token);
+      print(accessToken);
+      print(refreshToken);
     }catch(err){
       throw(err);
     }
