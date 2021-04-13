@@ -86,6 +86,8 @@ class _MainPageState extends State<MainPage> {
       child: Wrap(
         children: <Widget>[
           BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             currentIndex: _pageNum,
             onTap: (idx){
               setState(() {
@@ -93,24 +95,22 @@ class _MainPageState extends State<MainPage> {
               });
             },
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            unselectedItemColor: Colors.black54,
-            selectedItemColor: Colors.blueAccent,
+            backgroundColor: Colors.black,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.shop),
+                icon: _pageNum == 0 ? Image.asset('assets/F#_shop_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F#_shop.png', fit: BoxFit.cover, height: Get.height * 0.045,),
                 label: '숍',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.check),
+                icon: _pageNum == 1 ? Image.asset('assets/F#_curation_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# curation.png', fit: BoxFit.cover, height: Get.height * 0.045,),
                 label: '오큐',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.library_add),
+                icon: _pageNum == 2 ? Image.asset('assets/F# magazine HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# magazine.png', fit: BoxFit.cover, height: Get.height * 0.045,),
                 label: '매거진',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_box),
+                icon: _pageNum == 3 ? Image.asset('assets/F# my page HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# my page.png', fit: BoxFit.cover, height: Get.height * 0.045,),
                 label: '마이페이지',
               ),
             ],
