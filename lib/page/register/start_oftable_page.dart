@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
@@ -44,7 +43,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
       appBar: AppBar(
         toolbarHeight: Get.height * 0.1,
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         title: Container(
           alignment: Alignment.centerLeft,
           child: Image.asset('assets/logo_white.png',
@@ -56,10 +55,6 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
       body: Container(
         child: Column(
           children: [
-            Container(
-              color: ColorsUtil.indiaCurryYellow,
-              height: Get.height * 0.035,
-            ),
             Padding(padding: EdgeInsets.all(10)),
             Expanded(
               child: PageView.builder(

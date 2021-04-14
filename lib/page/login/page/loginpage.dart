@@ -9,6 +9,8 @@ import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 
+import '../logintestgoogle.dart';
+
 
 class LoginPage extends StatefulWidget {
 
@@ -199,7 +201,10 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: () async {
+              var data = await _signInWithGoogle();
+              Get.to(GoogleLoginTest(data));
+            }, color: Colors.white, icon: Icon(Icons.add))),
             Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
             Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
             Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),

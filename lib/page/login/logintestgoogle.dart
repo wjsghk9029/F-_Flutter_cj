@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,8 +59,9 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
 
 
   Future<void> _doLogin() async {
+    print(widget.login.idToken);
     final response = await http.post(
-      Uri.http('172.16.35.139:8080', '/google_login'),
+      Uri.http('172.16.36.142:8080', '/google_login'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
@@ -71,9 +73,9 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
     print(response.body);
     print(response.headers);
     if (response.statusCode == 200) {
-      return print('성공');
+      return Get.defaultDialog(title: '성공', middleText: response.body);
     } else {
-      throw Exception('Failed to load album');
+      Get.defaultDialog(title: '실패', middleText: response.body);
     }
   }
 

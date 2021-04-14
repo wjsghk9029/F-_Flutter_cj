@@ -51,19 +51,19 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       bottomNavigationBar: _buildBottomNavi(),
       appBar: AppBar(
-        toolbarHeight: Get.height * 0.1,
+        toolbarHeight: Get.height * 0.075,
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         title: Container(
           alignment: Alignment.centerLeft,
           child: Image.asset('assets/logo_white.png',
             fit: BoxFit.cover,
-            height: Get.height * 0.075,),
+            height: Get.height * 0.045,),
         ),
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: (){}),
-          IconButton(icon: Icon(Icons.search), onPressed: (){}),
+          IconButton(icon: Icon(Icons.notifications, color: Colors.white,), iconSize: Get.height * 0.035, onPressed: (){}),
+          IconButton(icon: Icon(Icons.search, color: Colors.white), iconSize: Get.height * 0.035, onPressed: (){}),
         ],
       ),
       body: DoubleBackToCloseApp(
