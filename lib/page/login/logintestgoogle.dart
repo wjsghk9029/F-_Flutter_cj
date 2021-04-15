@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:oftable_flutter/page/login/page/loginpage.dart';
 
 class GoogleLoginTest extends StatefulWidget {
   final GoogleSignInAuthentication login;
@@ -35,24 +36,42 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
     );
   }
 
-  Column _test() {
+  Widget _test() {
     var accessToken = _login.accessToken;
     var idToken = _login.idToken;
     var serverAuthCode = _login.serverAuthCode;
-    return Column(
-      children: [
-        Text(accessToken),
-        Padding(padding: EdgeInsets.all(10)),
-        Text(idToken),
-        Padding(padding: EdgeInsets.all(10)),
-        Text(serverAuthCode ?? '없음'),
-        Container(
-          child: MaterialButton(onPressed: _doLogin),
-          color: Colors.yellowAccent,
-          width: 100,
-          height: 100,
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Text('accessToken'),
+          Text(accessToken),
+          Padding(padding: EdgeInsets.all(10)),
+          Text('idToken'),
+          Text(idToken),
+          Padding(padding: EdgeInsets.all(10)),
+          Text(serverAuthCode ?? 'serverAuthCode : 없음'),
+          Container(
+            child: MaterialButton(
+                onPressed: _doLogin,
+              child: Text('토큰보내기'),
+            ),
+            color: Colors.yellowAccent,
+            width: 100,
+            height: 100,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: MaterialButton(onPressed: () async {
+              await GoogleSignIn().signOut();
+              Get.offAll(LoginPage());
+            },
+            child: Text('로그아웃'),),
+            color: Colors.yellowAccent,
+            width: 100,
+            height: 100,
+          ),
+        ],
+      ),
     );
   }
 
@@ -61,7 +80,7 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
   Future<void> _doLogin() async {
     print(widget.login.idToken);
     final response = await http.post(
-      Uri.http('172.16.36.142:8080', '/google_login'),
+      Uri.http('172.16.35.78:8080', '/google_login'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },

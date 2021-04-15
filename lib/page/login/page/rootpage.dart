@@ -28,12 +28,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<Object>(
-          stream: null,
-          builder: (context, snapshot) {
-            return _buildBody(context);
-          }
-      ),
+      body: _buildBody(context),
     );
   }
 
@@ -53,7 +48,6 @@ class _RootPageState extends State<RootPage> {
   }
 
   Future<void> _asyncMethod() async {
-    await Future.delayed(Duration(seconds: 2));
     var accessToken = await tokenStorage.read(key: "access_token");
     var refreshToken = await tokenStorage.read(key: "refresh_token");
     if(accessToken != null && refreshToken != null){

@@ -41,14 +41,14 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: Get.height * 0.1,
+        toolbarHeight: Get.height * 0.075,
         elevation: 0,
         backgroundColor: Colors.black,
         title: Container(
           alignment: Alignment.centerLeft,
           child: Image.asset('assets/logo_white.png',
           fit: BoxFit.cover,
-          height: Get.height * 0.075,),
+          height: Get.height * 0.045,),
         ),
         automaticallyImplyLeading: false,
       ),
