@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
@@ -23,17 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();
-  bool keyboardOpen = false;
-
-  @override
-  void initState() {
-    KeyboardVisibilityNotification().addNewListener(
-      onChange: (bool visible) {
-        setState(() => keyboardOpen = visible);
-      },
-    );
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -60,171 +48,171 @@ class _LoginPageState extends State<LoginPage> {
   }
 
  Widget _buildBody() {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.only(left: Get.width * 0.1),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(padding: EdgeInsets.all(Get.height*0.025),),
-            LimitedBox(
-              maxHeight: Get.height*0.45,
-              child:Container(
-                child: _logoPart(),
-              ),
-            ),
-            Padding(padding: EdgeInsets.all(Get.height*0.05),),
-            LimitedBox(
-              maxHeight: Get.height*0.35,
-              child:Container(
-                child: _loginPart(),
-              ),
-            ),
-            Padding(padding: EdgeInsets.all(Get.height*0.025),),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _logoPart() {
-    return Column(
+    return Stack(
       children: [
-        Image.asset('assets/logo_white.png',
-        height: Get.height * 0.3,),
         Container(
-          padding: EdgeInsets.only(top: Get.height*0.02),
-          child: MaterialButton(
-            onPressed: () => Get.to(StartOfTablePage()),
-            child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
-                child: Text('시작하기',
-                  style: TextStyle(
-                      fontFamily: 'NanumGothic',
-                      fontSize: Get.height*0.08,
-                      color: ColorsUtil.indiaCurryYellow,
-                      fontWeight: FontWeight.w800
-                  ),
-                )
-            ),
-            color: Colors.black,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage('assets/Login_background.jpg'), fit: BoxFit.cover),
           ),
         ),
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.all(Get.height * 0.2)),
+              Container(
+                alignment: Alignment.center,
+                  child: Image.asset('assets/logowithtext.png', height: Get.width * 0.2,)
+              ),
+              Padding(padding: EdgeInsets.all(Get.height * 0.02)),
+              Container(
+                margin: EdgeInsets.only(left: Get.width * 0.125, right: Get.width * 0.125),
+                  child: _loginPart()
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
 
   Widget _loginPart(){
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
-        Text('LOG IN', style: TextStyle(fontFamily: 'Poppins', fontSize: Get.height * 0.025),),
         Container(
-          width: Get.width * 0.5,
-          height: Get.height * 0.05,
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            child: Text('아이디 / 비밀번호 찾기', style: TextStyle(color: Colors.white, fontSize: Get.height * 0.02),),
+            onPressed: (){},
+          ),
+        ),
+        loginInput(controller: idTextFieldController, hintText: '아이디'),
+        Padding(padding: EdgeInsets.all(Get.height * 0.005)),
+        loginInput(controller: pwTextFieldController, hintText: '비밀번호'),
+        Padding(padding: EdgeInsets.all(Get.height * 0.01)),
+        Container(
+          height: Get.height * 0.07,
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                width: 5
+                width: 0.25,
+                color: Colors.white
               )
-            ),
+            )
           ),
-          child: TextField(
-            style: TextStyle(
-              fontFamily: 'NanumGothic',
-              fontSize: Get.height * 0.02,
-            ),
-            controller: idTextFieldController,
-            decoration: InputDecoration(
-              hintStyle: TextStyle(
-                  fontFamily: 'NanumGothic',
-                  color: Colors.grey,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                child: TextButton(
+                    onPressed: _onpressLoginButton,
+                    child: Text(
+                      '로그인',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Get.height * 0.025),
+                    ),
+                ),
+                width: Get.width * 0.35,
+                height: Get.height *0.06,
               ),
-              hintText: '아이디',
-              border: InputBorder.none,
-            ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(
+                      width: 0.25,
+                      color: Colors.white,
+                    )
+                  )
+                ),
+                child: SizedBox(
+                  child: TextButton(
+                    onPressed: ()=>Get.to(StartOfTablePage(), transition: Transition.rightToLeftWithFade),
+                    child: Text(
+                      '시작하기',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Get.height * 0.025),
+                    ),
+                  ),
+                  width: Get.width * 0.35,
+                  height: Get.height *0.06,
+                ),
+              ),
+            ],
           ),
         ),
         Padding(padding: EdgeInsets.all(Get.height * 0.01)),
-        Container(
-          width: Get.width * 0.5,
-          height: Get.height * 0.05,
-          decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 5)),),
-          child: TextField(
-            style: TextStyle(
-              fontFamily: 'NanumGothic',
-              fontSize: Get.height * 0.02,
-            ),
-            controller: pwTextFieldController,
-            decoration: InputDecoration(
-              hintStyle: TextStyle(
-                fontFamily: 'NanumGothic',
-                color: Colors.grey,
-              ),
-              hintText: '비밀번호',
-              border: InputBorder.none,
-            ),
+        Text(
+          'SNS계정으로 로그인하기',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: Get.height * 0.018
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(top: Get.height*0.001, bottom: Get.height*0.001),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            child: MaterialButton(
-              minWidth: Get.width* 0.3,
-              height: Get.height * 0.05,
-              onPressed: _onpressLoginButton,
-              child: Container(
-                  child: Text('로그인 하기',
-                    style: TextStyle(
-                        fontFamily: 'NanumGothic',
-                        fontSize: Get.height * 0.025,
-                        color: Colors.white,
-                    ),
-                  )
-              ),
-              color: Colors.black,
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(bottom: Get.height*0.01),
-          alignment: Alignment.centerLeft,
-          child: _findUser(Get.height * 0.02),
-        ),
+        Padding(padding: EdgeInsets.all(Get.height * 0.005)),
         Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: () async {
-              var data = await _signInWithGoogle();
-              Get.to(GoogleLoginTest(data));
-            }, color: Colors.white, icon: Icon(Icons.add))),
-            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
-            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
-            Container(margin: EdgeInsets.only(right: 10),color: Colors.blueAccent,child: IconButton(onPressed: (){}, color: Colors.white, icon: Icon(Icons.add))),
+            IconButton(
+                iconSize: Get.height * 0.05,
+                onPressed: (){},
+                icon: CircleAvatar(
+                  backgroundImage: AssetImage('assets/kakao.png'),
+                )
+            ),
+            IconButton(
+                iconSize: Get.height * 0.05,
+                onPressed: (){},
+                icon: CircleAvatar(
+                  backgroundImage: AssetImage('assets/naver.png'),
+                )
+            ),
+            IconButton(
+              iconSize: Get.height * 0.05,
+                onPressed: (){},
+                icon: CircleAvatar(
+                  backgroundImage: AssetImage('assets/google.png'),
+                )
+            ),
           ],
-        ),
+        )
       ],
     );
   }
 
-  Row _findUser(double _fontSize) {
-    return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(child: Text('아이디 찾기', style: TextStyle(fontSize: _fontSize), ), onTap: (){}),
-            Container(child: Text(' / ', style: TextStyle(fontSize: _fontSize),)),
-            GestureDetector(child: Text('비밀번호 찾기', style: TextStyle(fontSize: _fontSize),), onTap: (){}),
-          ],
-        );
+  Container loginInput({@required TextEditingController controller, String hintText}) {
+    return Container(
+        height: Get.height * 0.055,
+        child: TextField(
+          style: TextStyle(
+            fontFamily: 'NanumGothic',
+            fontSize: Get.height * 0.02,
+          ),
+          controller: controller,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none),
+              gapPadding: 0,
+              borderRadius: BorderRadius.all(Radius.circular(100))
+            ),
+            filled: true,
+            fillColor: Color.fromARGB(75, 255, 255, 255),
+            hintStyle: TextStyle(
+              fontFamily: 'NanumGothic',
+              color: Colors.white,
+            ),
+            hintText: hintText?? '힌트 텍스트',
+            border: OutlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none),
+              gapPadding: 0,
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+            ),
+          ),
+        ),
+      );
   }
-
   Future<GoogleSignInAuthentication> _signInWithGoogle() async {
     final googleUser = await googleSignIn.signIn();
     final googleAuth = await googleUser.authentication;

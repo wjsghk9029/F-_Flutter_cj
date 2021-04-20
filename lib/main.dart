@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays ([SystemUiOverlay.bottom]); //위에 스텟바 숨기기
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); // 세로로만 UI 표시 설정
     return GetMaterialApp(
       title: 'Flutter Demo',

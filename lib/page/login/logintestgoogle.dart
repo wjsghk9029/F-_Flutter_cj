@@ -15,6 +15,7 @@ class GoogleLoginTest extends StatefulWidget {
 
 class _GoogleLoginTestState extends State<GoogleLoginTest> {
   GoogleSignInAuthentication _login;
+  final ipTextFieldController = TextEditingController();
 
   @override
   void initState() {
@@ -51,6 +52,27 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
           Padding(padding: EdgeInsets.all(10)),
           Text(serverAuthCode ?? 'serverAuthCode : 없음'),
           Container(
+            width: Get.width,
+            height: Get.height * 0.1,
+            decoration: BoxDecoration(
+                border: Border.all(width: 5)),
+            child: TextField(
+              style: TextStyle(
+                fontFamily: 'NanumGothic',
+                fontSize: Get.height * 0.05,
+              ),
+              controller: ipTextFieldController,
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  fontFamily: 'NanumGothic',
+                  color: Colors.grey,
+                ),
+                hintText: 'ip번호',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+          Container(
             child: MaterialButton(
                 onPressed: _doLogin,
               child: Text('토큰보내기'),
@@ -79,8 +101,8 @@ class _GoogleLoginTestState extends State<GoogleLoginTest> {
 
   Future<void> _doLogin() async {
     print(widget.login.idToken);
-    final response = await http.post(
-      Uri.http('172.16.35.78:8080', '/google_login'),
+    var response = await http.post(
+      Uri.http('${ipTextFieldController.text}:8080', '/google_login'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
