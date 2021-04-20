@@ -31,14 +31,25 @@ class _RegisterPage3State extends State<RegisterPage3> {
       child: ListView(
         children: [
           _keyword(),
-          Register().outputTableList.length == 0 ?
-          Padding(padding: EdgeInsets.zero) :
-          Padding(padding: EdgeInsets.only(top: 50)),
-          Text('선택질문 입니다',
-          style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),),
-          _tableCuration(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          _countEatingMember()
+          Container(
+            padding: EdgeInsets.only(top: Get.height * 0.15),
+            child: MaterialButton(
+              minWidth: double.infinity,
+              focusElevation: 0,
+              hoverElevation: 0,
+              highlightElevation: 0,
+              elevation: 0,
+              child: Text('관심사 설정 저장', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05),),
+              color: Color.fromARGB(100, 255, 255, 255),
+              onPressed: () {},
+            ),
+          ),
+
+          // Text('선택질문 입니다',
+          // style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),),
+          // _tableCuration(),
+          // Padding(padding: EdgeInsets.only(top: 10)),
+          // _countEatingMember()
         ],
       ),
     );
@@ -72,11 +83,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
   }
 
   _buildTableCuration(BuildContext context, int index) {
-    return IconCheckBox(
+    return ImageCheckBox(
       size: 40,
-      iconSize: 30,
       isChecked: Register().tableCurationList[index].isChecked,
-      iconAppear: true,
       onPressed: (){
         setState(() {
           _util.resetCheckBox(Register().tableCurationList);
@@ -94,11 +103,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
     return Container(
       child: Column(
         children: [
-          Register().outputTableList.length > 0 ? _keywordChild(Register().outputTableList[0]) :
-          Padding(padding: EdgeInsets.zero),
-          Padding(padding: EdgeInsets.only(top: 20)),
-          Register().outputTableList.length > 1 ? _keywordChild(Register().outputTableList[1]) :
-          Padding(padding: EdgeInsets.zero),
+          Register().outputTableList.length > 0
+              ? _keywordChild(Register().outputTableList[0])
+              : Padding(padding: EdgeInsets.zero),
+          Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
+          Register().outputTableList.length > 1
+              ? _keywordChild(Register().outputTableList[1])
+              : Padding(padding: EdgeInsets.zero),
         ],
       ),
     );
@@ -114,12 +125,24 @@ class _RegisterPage3State extends State<RegisterPage3> {
           Container(
             margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('$name',
-                  style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: ColorsUtil.hibiscusPink),),
-                Text('의 세부 관심 키워드를 골라주세요',
-                  style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+                Row(
+                  children: [
+                    Container(
+                      child: Text('$name',
+                        style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(width: 1.5, color: Colors.white))
+                      ),
+                    ),
+                    Text('에 대한',
+                      style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
+                  ],
+                ),
+                Text('세부 관심 키워드를 골라주세요',
+                  style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
               ],
             ),
           ),
@@ -127,8 +150,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 1,
+                  childAspectRatio: 1.5,
                   mainAxisSpacing: 10,
+
                   crossAxisSpacing: 20,
                 ),
                 physics: NeverScrollableScrollPhysics(),
@@ -148,14 +172,18 @@ class _RegisterPage3State extends State<RegisterPage3> {
     return StringCheckBox(
       iconAppear: true,
       isChecked: Register().keywordMap[itemId][index].isChecked,
-      text: Text(Register().keywordMap[itemId][index].registerCheckBoxData.itemName, style: TextStyle(fontSize: 15, color: Colors.white), ),
+      text: Text(
+        Register().keywordMap[itemId][index].registerCheckBoxData.itemName,
+        style: TextStyle(
+            fontSize: 15,
+            color: Register().keywordMap[itemId][index].isChecked ? Colors.black : Colors.white,
+        ),
+      ),
       onPressed: (){
         setState(() {
-          if(Register().keywordMap[itemId][index].isChecked) {
-            Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData);
-          } else {
-            Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
-          }
+          Register().keywordMap[itemId][index].isChecked
+              ? Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData)
+              : Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
           Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
         });
       },
@@ -194,11 +222,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
   }
 
   _buildMemberListItem(BuildContext context, int index) {
-    return IconCheckBox(
+    return ImageCheckBox(
       size: 40,
-      iconSize: 30,
       isChecked: Register().memberList[index].isChecked,
-      iconAppear: true,
       onPressed: (){
         setState(() {
           _util.resetCheckBox(Register().memberList);

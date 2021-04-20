@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/logintestgoogle.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
-
-import '../logintestgoogle.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -81,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          child: TextButton(
+          child: CupertinoButton(
             child: Text('아이디 / 비밀번호 찾기', style: TextStyle(color: Colors.white, fontSize: Get.height * 0.02),),
             onPressed: (){},
           ),
@@ -148,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
           'SNS계정으로 로그인하기',
           style: TextStyle(
             color: Colors.white,
-            fontSize: Get.height * 0.018
+            fontSize: Get.width * 0.04
           ),
         ),
         Padding(padding: EdgeInsets.all(Get.height * 0.005)),
@@ -171,7 +169,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
             IconButton(
               iconSize: Get.height * 0.05,
-                onPressed: (){},
+                onPressed: () async {
+                  var data = await _signInWithGoogle();
+                  Get.to(GoogleLoginTest(data));
+                },
                 icon: CircleAvatar(
                   backgroundImage: AssetImage('assets/google.png'),
                 )
@@ -213,6 +214,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
   }
+  
   Future<GoogleSignInAuthentication> _signInWithGoogle() async {
     final googleUser = await googleSignIn.signIn();
     final googleAuth = await googleUser.authentication;

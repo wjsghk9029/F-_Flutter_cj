@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
+
 class RegisterCheckBox {
   final RegisterCheckBoxData registerCheckBoxData;
-  final String itemImgURL;
+  final Image itemBeforeImg;
+  final Image itemAfterImg;
   bool isChecked = false;
-  RegisterCheckBox({this.itemImgURL, this.registerCheckBoxData});
+  RegisterCheckBox({this.itemBeforeImg, this.itemAfterImg, this.registerCheckBoxData});
 }
 
 class RegisterCheckBoxData {

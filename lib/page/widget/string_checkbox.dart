@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class StringCheckBox extends StatefulWidget {
-  final double width;
-  final double height;
   final bool isChecked;
   final Text text;
   @required
@@ -10,7 +8,7 @@ class StringCheckBox extends StatefulWidget {
   final void Function() onPressed;
   final BorderRadiusGeometry borderRadius;
 
-  StringCheckBox({this.width, this.height, this.isChecked, this.onPressed, this.text, this.iconAppear,
+  StringCheckBox({this.isChecked, this.onPressed, this.text, this.iconAppear,
     this.borderRadius});
 
   @override
@@ -27,11 +25,10 @@ class _StringCheckBoxState extends State<StringCheckBox> {
         duration: Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
-          color: widget.isChecked ? Colors.blueAccent : Colors.grey,
+          color: widget.isChecked ? Colors.white : Colors.transparent,
           borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
+          border: Border.all(color: Colors.white,),
         ),
-        width: widget.width ?? 50,
-        height: widget.height ?? 50,
         child: _stringApear(),
       ),
     );

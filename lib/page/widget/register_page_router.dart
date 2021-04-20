@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/OfTable/oftable_flutter/lib/page/widget/page_router_circle.dart';
+import 'package:oftable_flutter/page/widget/page_router_circle.dart';
 
 class PageRouterWithCircle extends StatefulWidget {
   final int pageIndex;
@@ -17,9 +17,8 @@ class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: widget.pageViewLength,
-            mainAxisSpacing: 0,
-            crossAxisSpacing: 2,
-            childAspectRatio: 1,
+            crossAxisSpacing: 10,
+            childAspectRatio: 5,
           ),
           shrinkWrap: true,
           itemCount: widget.pageViewLength,

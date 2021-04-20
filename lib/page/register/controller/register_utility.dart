@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 
 class RegisterUtility {
 
-  void insertData(List<RegisterCheckBox> items, List<String> texts) async{
+  void insertData(List<RegisterCheckBox> items, List<String> texts, String assetFolderName, bool needImg) async{
     if(items.length > 0) {
       return;
     }
@@ -14,7 +15,9 @@ class RegisterUtility {
               itemId: i+1,
               itemName: texts[i],
             ),
-            itemImgURL: '',
+              //assets/lifestyle/식단관리1.png
+            itemBeforeImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}1.png', fit: BoxFit.fill,) : null,
+            itemAfterImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}2.png', fit: BoxFit.fill,) : null,
           )
       );
     }
@@ -49,7 +52,7 @@ class AllergyPageUtility extends RegisterUtility{
   ];
 
   AllergyPageUtility(){
-    insertData(Register().allergyList, allergyListText);
+    insertData(Register().allergyList, allergyListText, 'alergy', true);
   }
 }
 class RegisterPage1Utility extends RegisterUtility{
@@ -86,27 +89,27 @@ class RegisterPage1Utility extends RegisterUtility{
   }
 
   RegisterPage1Utility(){
-    insertData(Register().tableList, tableListText);
+    insertData(Register().tableList, tableListText, 'lifestyle', true);
   }
 }
 class RegisterPage2Utility extends RegisterUtility{
   List<String> spicyListText = [
     '맵생아',
     '맵린이',
-    '맵으론',
+    '맵어른',
     '맵신',
   ];
   List<String> tasteListText = [
     '단',
     '자극적',
     '건강한',
-    '자연의',
-    '매운',
+    '신선한',
+    '칼칼한',
   ];
 
   RegisterPage2Utility(){
-    insertData(Register().spicyList, spicyListText);
-    insertData(Register().tasteList, tasteListText);
+    insertData(Register().spicyList, spicyListText, 'favor', true);
+    insertData(Register().tasteList, tasteListText, 'favor', true);
   }
 }
 class RegisterPage3Utility extends RegisterUtility{
@@ -218,9 +221,9 @@ class RegisterPage3Utility extends RegisterUtility{
   ];
 
   RegisterPage3Utility(){
-    insertData(Register().tableCurationList, tableCurationListText);
-    insertData(keywordList, keywordListText);
-    insertData(Register().memberList, memberListText);
+    insertData(Register().tableCurationList, tableCurationListText, '', false);
+    insertData(keywordList, keywordListText, 'keyword', true);
+    insertData(Register().memberList, memberListText, '', false);
     _insert();
   }
 }

@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 
-class IconCheckBox extends StatefulWidget {
+class ImageCheckBox extends StatefulWidget {
+  final Image beforeImage;
+  final Image afterImage;
   final double size;
-  final double iconSize;
   final bool isChecked;
-  final Color iconColor;
-  final Icon icon;
   @required
-  final bool iconAppear;
   final void Function() onPressed;
   final BorderRadiusGeometry borderRadius;
 
-  IconCheckBox({this.size, this.iconSize, this.isChecked, this.onPressed, this.iconColor, this.icon, this.iconAppear, this.borderRadius});
+  ImageCheckBox({this.size, this.isChecked, this.onPressed,this.borderRadius, this.beforeImage, this.afterImage});
+  //ImageCheckBox({this.size, this.isChecked, this.onPressed,this.borderRadius, this.beforeImage, this.AfterImage});
 
   @override
-  _IconCheckBoxState createState() => _IconCheckBoxState();
+  _ImageCheckBoxState createState() => _ImageCheckBoxState();
 }
 
-class _IconCheckBoxState extends State<IconCheckBox> {
+class _ImageCheckBoxState extends State<ImageCheckBox> {
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +27,12 @@ class _IconCheckBoxState extends State<IconCheckBox> {
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
           borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
-          color: widget.isChecked ? Colors.blueAccent : Colors.grey,
         ),
         width: widget.size ?? 50,
         height: widget.size ?? 50,
-        child: _iconApear(),
+        child: widget.isChecked ? widget.afterImage : widget.beforeImage,
       ),
     );
-  }
-
-  Icon _iconApear() {
-    if(widget.iconAppear){
-      return Icon(
-        widget.icon ?? Icons.check,
-        color: widget.iconColor ?? Colors.white,
-        size: widget.iconSize ?? 25,
-      );
-    }
-    return widget.isChecked ? Icon(
-        widget.icon ?? Icons.check,
-        color: widget.iconColor ?? Colors.white,
-        size: widget.iconSize ?? 25,
-      ) :  null;
   }
 
   @override

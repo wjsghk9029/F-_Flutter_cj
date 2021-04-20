@@ -36,11 +36,11 @@ class _RegisterPage1State extends State<RegisterPage1> {
           Row(
             children: [
               Text("나의 푸드 라이프스타일은?",
-                style: TextStyle(fontSize: Get.height * 0.03, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),
                 textAlign: TextAlign.start,),
               Padding(padding: EdgeInsets.all(5)),
               Text("(2개 선택)",
-                style: TextStyle(fontSize: Get.height * 0.022, fontFamily: FontsUtil.nanumGothic),
+                style: TextStyle(fontSize: Get.width * 0.025, fontFamily: FontsUtil.nanumGothic, color: Colors.white),
                 textAlign: TextAlign.start,),
             ],
           ),
@@ -49,8 +49,8 @@ class _RegisterPage1State extends State<RegisterPage1> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 1.0,
-                mainAxisSpacing: 30,
-                crossAxisSpacing: 30,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15,
               ),
               physics: NeverScrollableScrollPhysics(),
               itemCount: Register().tableList.length,
@@ -64,11 +64,11 @@ class _RegisterPage1State extends State<RegisterPage1> {
   }
 
   _buildListItem(BuildContext context, int index) {
-    return IconCheckBox(
+    return ImageCheckBox(
+      afterImage: Register().tableList[index].itemAfterImg,
+      beforeImage: Register().tableList[index].itemBeforeImg,
       size: 40,
-      iconSize: 30,
       isChecked: Register().tableList[index].isChecked,
-      iconAppear: true,
       onPressed: (){
         if(Register().keywordMap.isNotEmpty){
           Register().keywordMap.clear();

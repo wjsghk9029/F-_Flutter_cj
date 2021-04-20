@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
+import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 
 class AllergyPage extends StatefulWidget {
@@ -24,34 +25,18 @@ class _AllergyPageState extends State<AllergyPage> {
   void initState() {
     util = AllergyPageUtility();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if(Register().allergyCheckBox[1] || !Register().allergyCheckBox[0]){
+        StartOfTablePage.beforePageNum == 1
+          ? StartOfTablePage.pageController.animateToPage(3, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn)
+          : StartOfTablePage.pageController.animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: Get.height * 0.1,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Container(
-          alignment: Alignment.centerLeft,
-          child: Image.asset('assets/logo_white.png',
-            fit: BoxFit.cover,
-            height: Get.height * 0.075,),
-        ),
-        automaticallyImplyLeading: false,
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: ColorsUtil.indiaCurryYellow,
-            height: Get.height * 0.035,
-          ),
-          Padding(padding: EdgeInsets.all(10)),
-          Expanded(child: buildBody()),
-        ],
-      ),
-    );
+    return Expanded(child: buildBody());
   }
 
   Container buildBody() {
@@ -60,17 +45,17 @@ class _AllergyPageState extends State<AllergyPage> {
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("알러지정보를 알려주세요",
-            style: TextStyle(fontSize: Get.height * 0.03, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+          Text("알러지 정보를 알려주세요.",
+            style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
             textAlign: TextAlign.start,),
           Padding(padding: EdgeInsets.only(bottom: 30)),
           Container(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 1.0,
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 20,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 15,
                 ),
                 itemCount: Register().allergyList.length,
                 shrinkWrap: true,
@@ -79,12 +64,16 @@ class _AllergyPageState extends State<AllergyPage> {
                 }),
           ),
           Container(
-            padding: EdgeInsets.only(top: 20),
-            alignment: Alignment.bottomRight,
+            padding: EdgeInsets.only(top: Get.height * 0.1),
             child: MaterialButton(
-              child: Text('확인', style: TextStyle(color: Colors.white),),
-              color: Colors.blueAccent,
-              onPressed: () => Get.back(),
+              minWidth: double.infinity,
+              focusElevation: 0,
+              hoverElevation: 0,
+              highlightElevation: 0,
+              elevation: 0,
+              child: Text('선택 완료', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05),),
+              color: Color.fromARGB(100, 255, 255, 255),
+              onPressed: () => StartOfTablePage.pageController.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn),
             ),
           ),
         ],
@@ -93,18 +82,16 @@ class _AllergyPageState extends State<AllergyPage> {
   }
 
   _buildListItem(BuildContext context, int index) {
-    return IconCheckBox(
+    return ImageCheckBox(
+      afterImage: Register().allergyList[index].itemAfterImg,
+      beforeImage: Register().allergyList[index].itemBeforeImg,
       size: 40,
-      iconSize: 30,
       isChecked: Register().allergyList[index].isChecked,
-      iconAppear: true,
       onPressed: (){
         setState(() {
-          if(Register().allergyList[index].isChecked) {
-            Register().selectedAllergyList.remove(Register().allergyList[index].registerCheckBoxData);
-          } else {
-            Register().selectedAllergyList.add(Register().allergyList[index].registerCheckBoxData);
-          }
+          Register().allergyList[index].isChecked
+            ? Register().selectedAllergyList.remove(Register().allergyList[index].registerCheckBoxData)
+            : Register().selectedAllergyList.add(Register().allergyList[index].registerCheckBoxData);
           Register().allergyList[index].isChecked = !Register().allergyList[index].isChecked;
         });
       },
