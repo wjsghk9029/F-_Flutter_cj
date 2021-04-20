@@ -44,12 +44,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
               onPressed: () {},
             ),
           ),
-
-          // Text('선택질문 입니다',
-          // style: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),),
-          // _tableCuration(),
-          // Padding(padding: EdgeInsets.only(top: 10)),
-          // _countEatingMember()
         ],
       ),
     );
@@ -95,7 +89,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
       },
     );
   }
-
   //#endregion
 
   //#region 키워드
@@ -106,7 +99,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
           Register().outputTableList.length > 0
               ? _keywordChild(Register().outputTableList[0])
               : Padding(padding: EdgeInsets.zero),
-          Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
+          Padding(padding: EdgeInsets.only(top: Get.height * 0.1)),
           Register().outputTableList.length > 1
               ? _keywordChild(Register().outputTableList[1])
               : Padding(padding: EdgeInsets.zero),
@@ -114,7 +107,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
       ),
     );
   }
-
 
   _keywordChild(RegisterCheckBoxData data) {
     var name = data.itemName;
@@ -234,7 +226,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
       },
     );
   }
-
 //#endregion
 
   void _asyncMethod()async {

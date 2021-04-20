@@ -31,6 +31,7 @@ class Register {
   String selectedPhone = '';
   String selectedHomeAdress = '';
   String selectedHomeAdress2 = '';
+  String outputHomeAdress = '';
 
   List<RegisterCheckBox> tableList = [];
   List<RegisterCheckBox> allergyList = [];

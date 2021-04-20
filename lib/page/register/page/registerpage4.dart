@@ -24,6 +24,7 @@ class _RegisterPage4State extends State<RegisterPage4> {
     setState(() {
       Register().selectedHomeAdress = homeTextFieldController.text;
       Register().selectedHomeAdress2 = home2TextFieldController.text;
+      Register().outputHomeAdress = homeTextFieldController.text + ' ' + home2TextFieldController.text;
       Register().selectedPhone = phoneTextFieldController.text;
       Register().selectedName = emailTextFieldController.text;
       Register().selectedId = idTextFieldController.text;

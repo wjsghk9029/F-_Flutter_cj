@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
+import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 
 
@@ -70,18 +71,16 @@ class _RegisterPage1State extends State<RegisterPage1> {
       size: 40,
       isChecked: Register().tableList[index].isChecked,
       onPressed: (){
-        if(Register().keywordMap.isNotEmpty){
-          Register().keywordMap.clear();
-        }
+        if(Register().keywordMap.isNotEmpty) Register().keywordMap.clear();
         Register().selectedKeyword1 = [];
         setState(() {
-          if(Register().tableList[index].isChecked) {
-            Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData);
-          } else {
-            _util.tableEnque(Register().tableList[index]);
-          }
+          Register().tableList[index].isChecked
+              ? Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData)
+              : _util.tableEnque(Register().tableList[index]);
           Register().tableList[index].isChecked = !Register().tableList[index].isChecked;
         });
+        if(Register().selectedTable.length > 1)
+          StartOfTablePage.pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
     );
   }
