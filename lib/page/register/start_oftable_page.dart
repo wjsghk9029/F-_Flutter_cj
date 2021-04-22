@@ -20,6 +20,7 @@ class StartOfTablePage extends StatefulWidget {
 class _StartOfTablePageState extends State<StartOfTablePage> {
   PageController _pageController;
   int _pagenum = 0;
+  AssetImage backgroundImage;
 
   List<Widget> _pages = [
     RegisterPage1(),
@@ -31,7 +32,13 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   void initState() {
+    backgroundImage = AssetImage('assets/register_background.jpg');
     _pageController = StartOfTablePage.pageController;
     super.initState();
   }
@@ -50,7 +57,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
           children: [
             Container(
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/register_background.jpg'), fit: BoxFit.cover),
+                image: DecorationImage(image: backgroundImage , fit: BoxFit.cover),
               ),
             ),
             Column(

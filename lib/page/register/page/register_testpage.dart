@@ -74,7 +74,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
       Row(
           children: [
             Text("키워드 : "),
-            Text(_test(Register().selectedKeyword1)),
+            Text(_test(Register().selectedKeyword)),
           ],
         ),
 
@@ -150,7 +150,7 @@ class _RegisterTestPageState extends State<RegisterTestPage> {
           'spicy_degree' : _test3(Register().selectedSpicy),
           'prefer_flavor' : _test3(Register().selectedTaste),
           'allergy_list' : _test(Register().outputAllergyList),
-          'taste_list' : _test(Register().selectedKeyword1),
+          'taste_list' : _test(Register().selectedKeyword),
         }),
       );
       if (response.statusCode == 200) {

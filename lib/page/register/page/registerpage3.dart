@@ -4,6 +4,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
@@ -41,7 +42,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
               elevation: 0,
               child: Text('관심사 설정 저장', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05),),
               color: Color.fromARGB(100, 255, 255, 255),
-              onPressed: () {},
+              onPressed: () => StartOfTablePage.pageController.animateToPage(4, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn),
             ),
           ),
         ],
@@ -174,8 +175,8 @@ class _RegisterPage3State extends State<RegisterPage3> {
       onPressed: (){
         setState(() {
           Register().keywordMap[itemId][index].isChecked
-              ? Register().selectedKeyword1.remove(Register().keywordMap[itemId][index].registerCheckBoxData)
-              : Register().selectedKeyword1.add(Register().keywordMap[itemId][index].registerCheckBoxData);
+              ? Register().selectedKeyword.remove(Register().keywordMap[itemId][index].registerCheckBoxData)
+              : Register().selectedKeyword.add(Register().keywordMap[itemId][index].registerCheckBoxData);
           Register().keywordMap[itemId][index].isChecked = !Register().keywordMap[itemId][index].isChecked;
         });
       },

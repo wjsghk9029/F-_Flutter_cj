@@ -72,7 +72,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
       isChecked: Register().tableList[index].isChecked,
       onPressed: (){
         if(Register().keywordMap.isNotEmpty) Register().keywordMap.clear();
-        Register().selectedKeyword1 = [];
+        Register().selectedKeyword = [];
         setState(() {
           Register().tableList[index].isChecked
               ? Register().selectedTable.remove(Register().tableList[index].registerCheckBoxData)

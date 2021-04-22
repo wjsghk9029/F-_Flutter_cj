@@ -5,6 +5,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 
 
@@ -89,12 +90,14 @@ class _RegisterPage2State extends State<RegisterPage2> {
       beforeImage: Register().spicyList[index].itemBeforeImg,
       afterImage: Register().spicyList[index].itemAfterImg,
       isChecked: Register().spicyList[index].isChecked,
-      onPressed: (){
+      onPressed: () async {
         setState(() {
           _util.resetCheckBox(Register().spicyList);
           Register().spicyList[index].isChecked = !Register().spicyList[index].isChecked;
           Register().selectedSpicy = Register().spicyList[index].registerCheckBoxData;
         });
+        if(await Register().checkRegisterPage2())
+          StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
       borderRadius: BorderRadius.circular(10),
     );
@@ -147,12 +150,14 @@ class _RegisterPage2State extends State<RegisterPage2> {
       beforeImage: Register().tasteList[index].itemBeforeImg,
       afterImage: Register().tasteList[index].itemAfterImg,
       isChecked: Register().tasteList[index].isChecked,
-      onPressed: (){
+      onPressed: () async {
         setState(() {
           _util.resetCheckBox(Register().tasteList);
           Register().tasteList[index].isChecked = !Register().tasteList[index].isChecked;
           Register().selectedTaste = Register().tasteList[index].registerCheckBoxData;
         });
+        if(await Register().checkRegisterPage2())
+          StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
       borderRadius: BorderRadius.circular(10),
     );
@@ -195,7 +200,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
       afterImage: index == 0 ? Image.asset('assets/favor/알레르기주의2.png') : Image.asset('assets/favor/없음2.png'),
       beforeImage: index == 0 ? Image.asset('assets/favor/알레르기주의1.png') : Image.asset('assets/favor/없음1.png'),
       isChecked: Register().allergyCheckBox[index],
-      onPressed: (){
+      onPressed: () async {
         setState(() {
           Register().allergyCheckBox[0] = false;
           Register().allergyCheckBox[1] = false;
@@ -204,6 +209,8 @@ class _RegisterPage2State extends State<RegisterPage2> {
             Register().outputAllergyList = [];
           }
         });
+        if(await Register().checkRegisterPage2())
+          StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
       borderRadius: BorderRadius.circular(10),
     );

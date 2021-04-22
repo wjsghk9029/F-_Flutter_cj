@@ -19,8 +19,7 @@ class Register {
   List<RegisterCheckBoxData> outputTableList = [];
   List<RegisterCheckBoxData> selectedAllergyList = [];
   List<RegisterCheckBoxData> outputAllergyList = [];
-  List<RegisterCheckBoxData> selectedKeyword1 = [];
-  //List<RegisterCheckBoxData> selectedKeyword2 = [];
+  List<RegisterCheckBoxData> selectedKeyword = [];
   RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
@@ -40,5 +39,9 @@ class Register {
   List<RegisterCheckBox> tasteList = [];
   List<RegisterCheckBox> tableCurationList = [];
   Map<int,List<RegisterCheckBox>> keywordMap = {};
+
+  bool checkRegisterPage2() {
+    return (allergyCheckBox[0] != allergyCheckBox[1]) && selectedSpicy.itemId != 0 && selectedTaste.itemId != 0;
+  }
 }
 

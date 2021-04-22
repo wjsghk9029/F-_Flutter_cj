@@ -17,12 +17,17 @@ class _RootPageState extends State<RootPage> {
   LoginPageService _loginPageService = Get.put(LoginPageService());
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(AssetImage('assets/Login_background.jpg'), context);
+  }
+
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
-
   }
 
   @override
@@ -33,16 +38,9 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/logo1.png',
-            fit: BoxFit.fill,
-            width: Get.width * 0.7,
-          ),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage('assets/splash_demo.gif'), fit: BoxFit.cover),
       ),
     );
   }
@@ -50,6 +48,7 @@ class _RootPageState extends State<RootPage> {
   Future<void> _asyncMethod() async {
     var accessToken = await tokenStorage.read(key: "access_token");
     var refreshToken = await tokenStorage.read(key: "refresh_token");
+    await Future.delayed(Duration(seconds: 2, milliseconds: 200));
     if(accessToken != null && refreshToken != null){
       try{
         _loginPageService.doAutoLogin(refreshToken);

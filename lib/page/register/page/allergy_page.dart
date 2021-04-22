@@ -36,10 +36,12 @@ class _AllergyPageState extends State<AllergyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: buildBody());
+    return Register().allergyCheckBox[1] || !Register().allergyCheckBox[0]
+        ? Container()
+        : buildBody();
   }
 
-  Container buildBody() {
+  Widget buildBody() {
     return Container(
       padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
       child: ListView(

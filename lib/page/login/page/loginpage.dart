@@ -20,6 +20,18 @@ class _LoginPageState extends State<LoginPage> {
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();
+  AssetImage backgroundImage;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage( AssetImage('assets/register_background.jpg'), context);
+  }
+  @override
+  void initState() {
+    super.initState();
+    backgroundImage = AssetImage('assets/Login_background.jpg');
+  }
 
   @override
   void dispose() {
@@ -50,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/Login_background.jpg'), fit: BoxFit.cover),
+            image: DecorationImage(image: backgroundImage, fit: BoxFit.cover),
           ),
         ),
         SingleChildScrollView(
