@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/login/logintestgoogle.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
@@ -69,12 +70,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(padding: EdgeInsets.all(Get.height * 0.2)),
+              Padding(padding: EdgeInsets.all(Get.height * 0.23)),
               Container(
                 alignment: Alignment.center,
-                  child: Image.asset('assets/logowithtext.png', height: Get.width * 0.2,)
+                  child: Image.asset('assets/logowithtext.png', height: Get.width * 0.15,)
               ),
-              Padding(padding: EdgeInsets.all(Get.height * 0.02)),
+              Padding(padding: EdgeInsets.all(Get.height * 0.003)),
               Container(
                 margin: EdgeInsets.only(left: Get.width * 0.125, right: Get.width * 0.125),
                   child: _loginPart()
@@ -169,6 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                 iconSize: Get.height * 0.05,
                 onPressed: (){},
                 icon: CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('assets/kakao.png'),
                 )
             ),
@@ -176,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                 iconSize: Get.height * 0.05,
                 onPressed: (){},
                 icon: CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('assets/naver.png'),
                 )
             ),
@@ -186,6 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   Get.to(GoogleLoginTest(data));
                 },
                 icon: CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('assets/google.png'),
                 )
             ),
@@ -197,11 +201,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Container loginInput({@required TextEditingController controller, String hintText}) {
     return Container(
-        height: Get.height * 0.055,
+        height: Get.height * 0.05,
         child: TextField(
+          textAlignVertical: TextAlignVertical.bottom,
           style: TextStyle(
-            fontFamily: 'NanumGothic',
-            fontSize: Get.height * 0.02,
+            fontFamily: FontsUtil.korean,
+            color: Colors.white,
+            fontSize: Get.width* 0.04,
           ),
           controller: controller,
           decoration: InputDecoration(
@@ -213,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
             filled: true,
             fillColor: Color.fromARGB(75, 255, 255, 255),
             hintStyle: TextStyle(
-              fontFamily: 'NanumGothic',
+              fontFamily: FontsUtil.korean,
               color: Colors.white,
             ),
             hintText: hintText?? '힌트 텍스트',

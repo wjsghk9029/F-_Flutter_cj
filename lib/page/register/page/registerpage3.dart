@@ -28,13 +28,17 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
       child: ListView(
+        physics: ClampingScrollPhysics(),
         children: [
           _keyword(),
           Container(
-            padding: EdgeInsets.only(top: Get.height * 0.15),
+            padding: EdgeInsets.only(top: Get.height * 0.07),
             child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7.5),
+              ),
               minWidth: double.infinity,
               focusElevation: 0,
               hoverElevation: 0,
@@ -56,7 +60,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,7 +104,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
           Register().outputTableList.length > 0
               ? _keywordChild(Register().outputTableList[0])
               : Padding(padding: EdgeInsets.zero),
-          Padding(padding: EdgeInsets.only(top: Get.height * 0.1)),
+          Padding(padding: EdgeInsets.only(top: Get.height * 0.07)),
           Register().outputTableList.length > 1
               ? _keywordChild(Register().outputTableList[1])
               : Padding(padding: EdgeInsets.zero),
@@ -114,9 +118,9 @@ class _RegisterPage3State extends State<RegisterPage3> {
     var itemId = data.itemId;
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,28 +129,31 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   children: [
                     Container(
                       child: Text('$name',
-                        style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
+                        style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
                       decoration: BoxDecoration(
                         border: Border(bottom: BorderSide(width: 1.5, color: Colors.white))
                       ),
                     ),
                     Text('에 대한',
-                      style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
+                      style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
                   ],
                 ),
                 Text('세부 관심 키워드를 골라주세요',
-                  style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),),
+                  style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
               ],
             ),
           ),
+          Text("SELECT A KEYWORD",
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+            textAlign: TextAlign.start,),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           Container(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: 1.5,
                   mainAxisSpacing: 10,
-
-                  crossAxisSpacing: 20,
+                  crossAxisSpacing: 10,
                 ),
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: Register().keywordMap[itemId].length,
@@ -193,7 +200,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
           Container(
             margin: EdgeInsets.only(bottom: 10),
             alignment: Alignment.centerLeft,
-            child: Text('함께 식사할 인원은?', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+            child: Text('함께 식사할 인원은?', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
           ),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

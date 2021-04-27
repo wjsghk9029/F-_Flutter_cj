@@ -43,8 +43,7 @@ class _AutoLoginCheckBoxState extends State<AutoLoginCheckBox> {
               ),
             ) :  Padding(padding: EdgeInsets.zero,),
             Container(
-              child: widget.text ?? Text(
-                '자동로그인',
+              child: widget.text ?? Text('자동로그인',
                 style: TextStyle(
                   color: widget.isChecked ? Colors.white : Colors.lightBlue,
                   fontSize: 20,

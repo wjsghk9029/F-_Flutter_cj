@@ -31,27 +31,31 @@ class _RegisterPage1State extends State<RegisterPage1> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
       child: ListView(
+        physics: ClampingScrollPhysics(),
         children: [
           Row(
             children: [
               Text("나의 푸드 라이프스타일은?",
-                style: TextStyle(fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800, color: Colors.white),
+                style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean,  color: Colors.white, fontWeight: FontWeight.w800),
                 textAlign: TextAlign.start,),
-              Padding(padding: EdgeInsets.all(5)),
+              Padding(padding: EdgeInsets.all(2)),
               Text("(2개 선택)",
-                style: TextStyle(fontSize: Get.width * 0.025, fontFamily: FontsUtil.nanumGothic, color: Colors.white),
+                style: TextStyle(fontSize: Get.width * 0.035, fontFamily: FontsUtil.korean, color: Colors.white),
                 textAlign: TextAlign.start,),
             ],
           ),
-          Padding(padding: EdgeInsets.only(bottom: 15)),
+          Text("MY FOOD LIFE STYLE",
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white,),
+            textAlign: TextAlign.start,),
+          Padding(padding: EdgeInsets.only(bottom: 20)),
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
+                childAspectRatio: 456.0 / 455.0,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
               ),
               physics: NeverScrollableScrollPhysics(),
               itemCount: Register().tableList.length,

@@ -26,8 +26,7 @@ class _StringCheckBoxState extends State<StringCheckBox> {
         curve: Curves.fastLinearToSlowEaseIn,
         decoration: BoxDecoration(
           color: widget.isChecked ? Colors.white : Colors.transparent,
-          borderRadius: widget.borderRadius ?? BorderRadius.circular(5),
-          border: Border.all(color: Colors.white,),
+          border: Border.all(color: Colors.white, width: 0.5),
         ),
         child: _stringApear(),
       ),

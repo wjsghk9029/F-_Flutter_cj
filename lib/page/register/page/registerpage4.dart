@@ -55,7 +55,7 @@ class _RegisterPage4State extends State<RegisterPage4> {
   Widget build(BuildContext context) {
     return LimitedBox(
       child: Container(
-        padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
+        padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05, top: Get.height * 0.05),
         child: ListView(
           children: [
             Row(
@@ -94,9 +94,9 @@ class _RegisterPage4State extends State<RegisterPage4> {
                 child: Icon(Icons.info_outline),
                 onTap: ()=>Get.defaultDialog(
                   title: '비밀번호 규칙',
-                  titleStyle: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+                  titleStyle: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),
                   middleText: '대충 비밀번호 규칙 내용',
-                  middleTextStyle: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.nanumGothic),
+                  middleTextStyle: TextStyle(fontSize: Get.height * 0.02, fontFamily: FontsUtil.korean),
                 ),
               ),
               controller: pwTextFieldController,
@@ -142,7 +142,7 @@ class _RegisterPage4State extends State<RegisterPage4> {
             ),
             _buildTextField(
               label: '배송지',
-              labelChild: CupertinoButton(child: Text('배송지 찾기', style: TextStyle(fontFamily: FontsUtil.nanumGothic),), onPressed: () => _findAdress()),
+              labelChild: CupertinoButton(child: Text('배송지 찾기', style: TextStyle(fontFamily: FontsUtil.korean),), onPressed: () => _findAdress()),
               controller: homeTextFieldController,
               width: Get.width,
             ),
@@ -177,7 +177,7 @@ class _RegisterPage4State extends State<RegisterPage4> {
             child: Row(
               children: [
                 Container(
-                  child: Text(label, style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+                  child: Text(label, style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 3),

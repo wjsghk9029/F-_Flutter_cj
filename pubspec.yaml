@@ -48,6 +48,8 @@ dependencies:
   get: ^4.1.1
   #리스트타일 슬라이드
   flutter_slidable: ^0.5.7
+  #비디오플레이어
+  video_player: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +89,9 @@ flutter:
    - family: Supersize_Black
      fonts:
        - asset: fonts/Supersize_Black.ttf
+   - family: national_park_outline
+     fonts:
+       - asset: fonts/national_park_outline.otf
    - family: NanumGothic
      fonts:
        - asset: fonts/NanumFont/NanumGothic.ttf
@@ -95,5 +100,10 @@ flutter:
    - family: Poppins
      fonts:
        - asset: fonts/Poppins/Poppins-Bold.ttf
+   - family: Campton
+     fonts:
+       - asset: fonts/Campton/Campton-Bold.ttf
+       - asset: fonts/Campton/Campton-Light.otf
+         weight: 100
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

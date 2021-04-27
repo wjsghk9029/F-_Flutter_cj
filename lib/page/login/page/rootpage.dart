@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/controller/RootPageController.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
+import 'package:video_player/video_player.dart';
 
 import 'loginpage.dart';
 
@@ -15,11 +17,13 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   static final tokenStorage = FlutterSecureStorage();
   LoginPageService _loginPageService = Get.put(LoginPageService());
+  RootPageController _rootPageController = Get.put(RootPageController());
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     precacheImage(AssetImage('assets/Login_background.jpg'), context);
+    precacheImage(AssetImage('assets/logowithtext.png'), context);
   }
 
   @override
@@ -38,10 +42,17 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/splash_demo.gif'), fit: BoxFit.cover),
+    var _controller = _rootPageController.videoController.value;
+    return Obx(()=>SizedBox.expand(
+      child: FittedBox(
+        fit: BoxFit.cover,
+        child: SizedBox(
+          width: _controller.value.size?.width ?? Get.width,
+          height: _controller.value.size?.height ?? Get.height,
+          child: _rootPageController.videoInitializeDone.value ? VideoPlayer(_controller) : Image.asset('assets/splash_demo.jpg'),
+        ),
       ),
+    )
     );
   }
 

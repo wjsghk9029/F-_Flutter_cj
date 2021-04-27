@@ -28,8 +28,8 @@ class _AllergyPageState extends State<AllergyPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if(Register().allergyCheckBox[1] || !Register().allergyCheckBox[0]){
         StartOfTablePage.beforePageNum == 1
-          ? StartOfTablePage.pageController.animateToPage(3, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn)
-          : StartOfTablePage.pageController.animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
+          ? StartOfTablePage.pageController.animateToPage(3, duration: Duration(milliseconds: 150), curve: Curves.fastOutSlowIn)
+          : StartOfTablePage.pageController.animateToPage(1, duration: Duration(milliseconds: 150), curve: Curves.fastOutSlowIn);
       }
     });
   }
@@ -43,14 +43,17 @@ class _AllergyPageState extends State<AllergyPage> {
 
   Widget buildBody() {
     return Container(
-      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("알러지 정보를 알려주세요.",
-            style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),
+          Text("알레르기 정보를 알려주세요.",
+            style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),
             textAlign: TextAlign.start,),
-          Padding(padding: EdgeInsets.only(bottom: 30)),
+          Text("WHAT ALLERGIES DO YOU HAVE?",
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.start,),
+          Padding(padding: EdgeInsets.only(bottom: 20)),
           Container(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,8 +69,11 @@ class _AllergyPageState extends State<AllergyPage> {
                 }),
           ),
           Container(
-            padding: EdgeInsets.only(top: Get.height * 0.1),
+            padding: EdgeInsets.only(top: Get.height * 0.075),
             child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7.5),
+              ),
               minWidth: double.infinity,
               focusElevation: 0,
               hoverElevation: 0,

@@ -1,11 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/register/page/allergy_page.dart';
-import 'package:oftable_flutter/page/register/page/register_testpage.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
 import 'package:oftable_flutter/page/register/page/registerpage3.dart';
-import 'package:oftable_flutter/page/register/page/registerpage4.dart';
 import 'package:oftable_flutter/page/widget/register_page_router.dart';
 
 
@@ -27,8 +26,8 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
     RegisterPage2(),
     AllergyPage(),
     RegisterPage3(),
-    RegisterPage4(),
-    RegisterTestPage(),
+    // RegisterPage4(),
+    // RegisterTestPage(),
   ];
 
   @override
@@ -57,34 +56,31 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
           children: [
             Container(
               decoration: BoxDecoration(
-                image: DecorationImage(image: backgroundImage , fit: BoxFit.cover),
+                image: DecorationImage(image: backgroundImage , fit: BoxFit.fill),
               ),
             ),
             Column(
               children: [
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.075)),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: Get.height * 0.075),
-                    child: PageView.builder(
-                      onPageChanged: (int pageNum){
-                        setState(() {
-                          _pagenum = pageNum;
-                          StartOfTablePage.beforePageNum = _pagenum;
-                        });
+                  child: PageView.builder(
+                    onPageChanged: (int pageNum){
+                      setState(() {
+                        _pagenum = pageNum;
+                        StartOfTablePage.beforePageNum = _pagenum;
+                      });
+                    },
+                    itemBuilder: (ctx, idx){
+                      return _pages[idx];
                       },
-                      itemBuilder: (ctx, idx){
-                        return _pages[idx];
-                        },
-                      itemCount: _pages.length,
-                      controller: _pageController,
-                    ),
+                    itemCount: _pages.length,
+                    controller: _pageController,
                   ),
                 ),
                 Center(
                 child: Container(
-                  padding: EdgeInsets.only(bottom: Get.height * 0.05),
-                  width: 200,
+                  padding: EdgeInsets.only(bottom: Get.height * 0.04),
+                  width: 125,
                   child: PageRouterWithCircle(
                     pageIndex: _pagenum,
                     pageViewLength: _pages.length,
@@ -94,29 +90,20 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
               ],
             ),
             Positioned(
-              height: Get.height * 0.075,
               width: Get.width,
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            width: 0.75,
-                            color: Colors.white
-                        )
-                    )
+              child: AppBar(
+                shape: Border(bottom: BorderSide(color: Colors.white, width: 0.75)),
+                toolbarHeight: Get.height * 0.075,
+                elevation: 0,
+                shadowColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset('assets/상단로고.png',
+                    fit: BoxFit.cover,
+                    height: Get.height * 0.05,),
                 ),
-                child: AppBar(
-                  toolbarHeight: Get.height * 0.075,
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  title: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset('assets/logo_white.png',
-                      fit: BoxFit.cover,
-                      height: Get.height * 0.045,),
-                  ),
-                  automaticallyImplyLeading: false,
-                ),
+                automaticallyImplyLeading: false,
               ),
             ),
           ],

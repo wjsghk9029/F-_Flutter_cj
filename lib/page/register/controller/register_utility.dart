@@ -16,8 +16,8 @@ class RegisterUtility {
               itemName: texts[i],
             ),
               //assets/lifestyle/식단관리1.png
-            itemBeforeImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}1.png', fit: BoxFit.fill,) : null,
-            itemAfterImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}2.png', fit: BoxFit.fill,) : null,
+            itemBeforeImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}1.png', fit: BoxFit.cover) : null,
+            itemAfterImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}2.png', fit: BoxFit.cover) : null,
           )
       );
     }

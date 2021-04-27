@@ -19,30 +19,40 @@ class _RegisterPage2State extends State<RegisterPage2> {
   @override
   void initState() {
     _util = RegisterPage2Utility();
+
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (Register().selectedTable.length < 2) {
+        StartOfTablePage.pageController.jumpToPage(0);
+        // StartOfTablePage.pageController.animateToPage(
+        //     0, duration: Duration(milliseconds: 150),
+        //     curve: Curves.fastOutSlowIn);
+        Get.rawSnackbar(
+          messageText: Text('푸드 라이프스타일을 2개 선택해주세요', style: TextStyle(color: Colors.white),),
+          duration: Duration(seconds: 2),
+        );
+      }
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: Get.width * 0.05, left: Get.width * 0.05),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-          _selectSpicy(),
-          Padding(padding: EdgeInsets.all(Get.height * 0.05)),
-          _selectTaste(),
-          Padding(padding: EdgeInsets.all(Get.height * 0.05)),
-          _selectAllergy()
-          ],
-        ),
-
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
+      child: ListView(
+        children: [
+        _selectSpicy(),
+        Padding(padding: EdgeInsets.all(Get.height * 0.04)),
+        _selectTaste(),
+        Padding(padding: EdgeInsets.all(Get.height * 0.04)),
+        _selectAllergy()
+        ],
       ),
     );
   }
 
   _buildBlankText(RegisterCheckBoxData item) {
-    var str = item.itemName;
-    return Text('$str', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),);
+    return Text('${item.itemName}', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),);
   }
 
 
@@ -50,36 +60,46 @@ class _RegisterPage2State extends State<RegisterPage2> {
   //#region 매운맛
   _selectSpicy() {
     return Column(
+      crossAxisAlignment : CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: 5),
           child: Row(
             children: [
-              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
                 Container(
-                  color: Color.fromARGB(150, 255, 255, 255),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(150, 255, 255, 255),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   margin: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                   padding: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                   child: _buildBlankText(Register().selectedSpicy),
               ),
-              Text('이다', style: TextStyle(color: Colors.white, fontSize: Get.height * 0.025, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+              Text('이다', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
             ],
           ),
         ),
-        Padding(padding: EdgeInsets.only(bottom: 5)),
-        GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 1.5,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 15,
-            ),
-            itemCount: Register().spicyList.length,
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index){
-              return _buildSpicyListItem(context, index);
-            }
+        Text("WHO AM I?",
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          textAlign: TextAlign.start,),
+        Padding(padding: EdgeInsets.only(bottom: 10)),
+        Container(
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 326.0/209.0,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: Register().spicyList.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                return _buildSpicyListItem(context, index);
+              }
+          ),
         ),
       ],
     );
@@ -99,7 +119,6 @@ class _RegisterPage2State extends State<RegisterPage2> {
         if(await Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
-      borderRadius: BorderRadius.circular(10),
     );
 
   }
@@ -110,29 +129,36 @@ class _RegisterPage2State extends State<RegisterPage2> {
 
   _selectTaste() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           margin: EdgeInsets.only(bottom: 5),
           child: Row(
             children: [
-              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
               Container(
                 margin: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                 padding: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                 child: _buildBlankText(Register().selectedTaste),
-                color: Color.fromARGB(150, 255, 255, 255),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(150, 255, 255, 255),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
               ),
-              Text('맛을 좋아한다.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+              Text('맛을 좋아한다.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
             ],
           ),
         ),
-        Padding(padding: EdgeInsets.only(bottom: 5)),
+        Text("WHAT IS YOUR FAVORITE FLAVOR?",
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          textAlign: TextAlign.start,),
+        Padding(padding: EdgeInsets.only(bottom: 10)),
         GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
-              childAspectRatio: 1.5,
+              childAspectRatio: 326.0/209.0,
               mainAxisSpacing: 10,
-              crossAxisSpacing: 15,
+              crossAxisSpacing: 10,
             ),
             itemCount: Register().tasteList.length,
             shrinkWrap: true,
@@ -159,7 +185,6 @@ class _RegisterPage2State extends State<RegisterPage2> {
         if(await Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
-      borderRadius: BorderRadius.circular(10),
     );
 
   }
@@ -169,19 +194,23 @@ class _RegisterPage2State extends State<RegisterPage2> {
 
   _selectAllergy() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: 5),
           alignment: Alignment.centerLeft,
-          child: Text('알러지 정보를 알려주세요.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800),),
+          child: Text('알러지 정보를 알려주세요.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
         ),
+        Text("DO YOU HAVE ANY ALLEREGIES?",
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          textAlign: TextAlign.start,),
+        Padding(padding: EdgeInsets.only(bottom: 10)),
         Container(
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                childAspectRatio: 1.5,
+                childAspectRatio: 326.0/209.0,
                 mainAxisSpacing: 10,
-                crossAxisSpacing: 15,
+                crossAxisSpacing: 10,
               ),
               itemCount: 2,
               shrinkWrap: true,
@@ -212,7 +241,6 @@ class _RegisterPage2State extends State<RegisterPage2> {
         if(await Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
-      borderRadius: BorderRadius.circular(10),
     );
   }
 //endregion

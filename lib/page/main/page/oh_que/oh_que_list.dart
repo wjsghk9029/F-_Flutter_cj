@@ -105,9 +105,9 @@ _buildList(TagFoodListData data) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text('${data.food_time}min / level ${data.food_level}', style: TextStyle(fontSize: Get.height * 0.023, fontFamily: FontsUtil.poppins, color: ColorsUtil.indiaCurryYellow)),
-                  Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.015, fontFamily: FontsUtil.nanumGothic)),
+                  Text(data.food_description, style: TextStyle(fontSize: Get.height * 0.015, fontFamily: FontsUtil.korean)),
                   Padding(padding: EdgeInsets.all(Get.height * 0.01)),
-                  Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.nanumGothic, fontWeight: FontWeight.w800,)),
+                  Text(data.food_name, style: TextStyle(fontSize: Get.height * 0.04, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800,)),
                 ],
               ),
             )
@@ -146,7 +146,7 @@ _buildList(TagFoodListData data) {
         child: Text(
           '$idx',
           style: TextStyle(
-            fontFamily: FontsUtil.nanumGothic,
+            fontFamily: FontsUtil.korean,
           ),
         ),
       ),
