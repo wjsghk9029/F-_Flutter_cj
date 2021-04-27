@@ -5,7 +5,6 @@ import 'package:oftable_flutter/page/register/controller/register_singleton.dart
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
-import 'package:oftable_flutter/page/widget/icon_checkbox.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
 
@@ -16,10 +15,9 @@ class RegisterPage3 extends StatefulWidget {
 }
 
 class _RegisterPage3State extends State<RegisterPage3> {
-  RegisterPage3Utility _util;
   @override
   void initState() {
-    _util = RegisterPage3Utility();
+    RegisterPage3Utility _util = RegisterPage3Utility();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
@@ -53,49 +51,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
       ),
     );
   }
-//#region 테이블큐레이션
-  _tableCuration() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text('주 몇번의 테이블 큐레이션이 필요하세요', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
-          ),
-          GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Register().tableCurationList.length,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-              ),
-              physics: NeverScrollableScrollPhysics(),
-              itemCount:Register().tableCurationList.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index){
-                return _buildTableCuration(context, index);
-              }
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildTableCuration(BuildContext context, int index) {
-    return ImageCheckBox(
-      size: 40,
-      isChecked: Register().tableCurationList[index].isChecked,
-      onPressed: (){
-        setState(() {
-          _util.resetCheckBox(Register().tableCurationList);
-          Register().tableCurationList[index].isChecked = !Register().tableCurationList[index].isChecked;
-          Register().selectedTableCuration = Register().tableCurationList[index].registerCheckBoxData;
-        });
-      },
-    );
-  }
-  //#endregion
-
   //#region 키워드
   _keyword() {
     return Container(
@@ -191,50 +146,6 @@ class _RegisterPage3State extends State<RegisterPage3> {
     );
   }
  //#endregion
-
-  //#region 식사인원
-  Widget _countEatingMember() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            alignment: Alignment.centerLeft,
-            child: Text('함께 식사할 인원은?', style: TextStyle(fontSize: Get.height * 0.025, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
-          ),
-          GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Register().memberList.length,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-              ),
-              itemCount: Register().memberList.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index){
-                return _buildMemberListItem(context, index);
-              }
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildMemberListItem(BuildContext context, int index) {
-    return ImageCheckBox(
-      size: 40,
-      isChecked: Register().memberList[index].isChecked,
-      onPressed: (){
-        setState(() {
-          _util.resetCheckBox(Register().memberList);
-          Register().memberList[index].isChecked = !Register().memberList[index].isChecked;
-          Register().selectedMember = Register().memberList[index].registerCheckBoxData;
-        });
-      },
-    );
-  }
-//#endregion
 
   void _asyncMethod()async {
     await Future.delayed(Duration(microseconds: 1));
