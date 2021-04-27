@@ -4,6 +4,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/page/MemberInfo.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
@@ -42,11 +43,10 @@ class _RegisterPage3State extends State<RegisterPage3> {
               hoverElevation: 0,
               highlightElevation: 0,
               elevation: 0,
-              child: Text('관심사 설정 저장', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.05),),
+              child: Text('관심사 설정 저장', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),),
               color: Color.fromARGB(100, 255, 255, 255),
-              onPressed: () => StartOfTablePage.pageController.animateToPage(4, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn),
+              onPressed: () => Get.to(MemberInfo(), transition: Transition.cupertino)),
             ),
-          ),
         ],
       ),
     );
