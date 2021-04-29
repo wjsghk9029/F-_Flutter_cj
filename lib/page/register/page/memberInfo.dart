@@ -48,25 +48,29 @@ class _MemberInfoState extends State<MemberInfo> {
       margin: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075),
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: ListView(
-          children: [
-            _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            _inputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: pwReTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwReText),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            _inputTextField(label: '이름', hintText: '이름 입력', controller: nameTextFieldController, controllerText: _memberInfoController.nameText),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            _inputTextField(label: '생년월일', hintText: '8자리 입력', controller: birthDayTextFieldController, controllerText: _memberInfoController.birthDayText),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            _inputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            phoneTextField(),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            addressTextField(),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-          ],
+        child: SingleChildScrollView(
+          child:
+            Column(
+              children: [
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: pwReTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwReText),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '이름', hintText: '이름 입력', controller: nameTextFieldController, controllerText: _memberInfoController.nameText),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '생년월일', hintText: '8자리 입력', controller: birthDayTextFieldController, controllerText: _memberInfoController.birthDayText),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _inputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                phoneTextField(),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                addressTextField(),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+              ],
+            ),
         ),
       ),
     );
@@ -115,7 +119,7 @@ class _MemberInfoState extends State<MemberInfo> {
         Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
         Container(
           child: _phoneInput(
-              controller: phoneTextFieldController,
+              controller: phoneAuthTextFieldController,
               hintText: '인증번호 입력',
               buttonChild: Text(
                   '인증번호 확인',
@@ -137,6 +141,7 @@ class _MemberInfoState extends State<MemberInfo> {
 
   Widget _phoneInput({TextEditingController controller, String hintText, bool isPassWord, void Function() buttonOnPressed, Widget buttonChild, ButtonStyle buttonStyle, Rx<MemInfoText> controllerText}){
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(flex: 5,child: _textInputwithIcon(controller, hintText, isPassWord, controllerText)),
         Flexible(flex: 2,child: TextButton(onPressed: buttonOnPressed, child: buttonChild, style: buttonStyle,)),

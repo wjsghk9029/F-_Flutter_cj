@@ -23,6 +23,12 @@ class MemberInfoController extends GetxController{
     if(text == pwText) return _onDebouncePw();
     if(text == pwReText) return _onDebouncePwRe();
     if(text == nameText) return _onDebounceName();
+    if(text == birthDayText) return _onDebounceBirthDay();
+    if(text == emailText) return _onDebounceEmail();
+    if(text == phoneText) return _onDebouncePhone();
+    if(text == phoneAuthText) return _onDebouncePhoneAuth();
+    if(text == homeNameText) return _onDebounceHomeName();
+    if(text == homePhoneText) return _onDebounceHomePhone();
   }
 
   void onChange(String inputText, Rx<MemInfoText> text){
@@ -45,6 +51,12 @@ class MemberInfoController extends GetxController{
     _debounce(pwText);
     _debounce(pwReText);
     _debounce(nameText);
+    _debounce(birthDayText);
+    _debounce(emailText);
+    _debounce(phoneText);
+    _debounce(phoneAuthText);
+    _debounce(homeNameText);
+    _debounce(homePhoneText);
     super.onInit();
   }
 
@@ -78,5 +90,37 @@ class MemberInfoController extends GetxController{
     var regExp = RegExp(r'^[가-힣]{2,4}$');
     if(_regMatch(nameText, regExp))
       return _textError(nameText, '올바른 한글이름의 형식이 아닙니다.');
+  }
+
+  void _onDebounceBirthDay() {
+    var regExp = RegExp(r'^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$');
+    if(_regMatch(birthDayText, regExp))
+      return _textError(birthDayText, '올바른 생년월일의 형식이 아닙니다.');
+  }
+
+  void _onDebounceEmail() {
+    var regExp = RegExp(r'^[0-9a-z]+$');
+    if(_regMatch(emailText, regExp))
+      return _textError(emailText, '올바른 이메일 아이디의 형식이 아닙니다.');
+  }
+
+  void _onDebouncePhone() {
+    var regExp = RegExp(r'^\d{3}-\d{3,4}-\d{4}$');
+    if(_regMatch(phoneText, regExp))
+      return _textError(phoneText, '올바른 전화번호의 형식이 아닙니다.');
+  }
+
+  void _onDebouncePhoneAuth() {}
+
+  void _onDebounceHomeName() {
+    var regExp = RegExp(r'^[가-힣]{2,4}$');
+    if(_regMatch(homeNameText, regExp))
+      return _textError(homeNameText, '올바른 한글이름의 형식이 아닙니다.');
+  }
+
+  void _onDebounceHomePhone() {
+    var regExp = RegExp(r'^\d{3}-\d{3,4}-\d{4}$');
+    if(_regMatch(homePhoneText, regExp))
+      return _textError(homePhoneText, '올바른 전화번호의 형식이 아닙니다.');
   }
 }
