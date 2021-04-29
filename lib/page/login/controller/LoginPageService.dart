@@ -8,10 +8,12 @@ class LoginPageService extends GetxService{
   var accessToken = ''.obs;
   var refreshToken = ''.obs;
 
-  void doLogin(String id, String pw) async{
+  Future<void> doLogin(String id, String pw) async{
     try {
       var data = await LoginPageUtil.postLogin(id, pw);
+      // ignore: unnecessary_statements
       await tokenStorage.containsKey(key: 'access_token') ? tokenStorage.delete(key: 'access_token') : null;
+      // ignore: unnecessary_statements
       await tokenStorage.containsKey(key: 'refresh_token') ? tokenStorage.delete(key: 'refresh_token') : null;
       await tokenStorage.write(key: 'access_token', value: data.data.access_token);
       await tokenStorage.write(key: 'refresh_token', value: data.data.refresh_token);

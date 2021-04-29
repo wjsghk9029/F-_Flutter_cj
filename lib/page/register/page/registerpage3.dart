@@ -26,13 +26,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.07),
       child: ListView(
         physics: ClampingScrollPhysics(),
         children: [
           _keyword(),
           Container(
-            padding: EdgeInsets.only(top: Get.height * 0.07),
+            padding: EdgeInsets.only(top: Get.height * 0.05),
             child: MaterialButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7.5),

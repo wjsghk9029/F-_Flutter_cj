@@ -44,13 +44,12 @@ class _MemberInfoState extends State<MemberInfo> {
   }
 
   Widget _buildBody(){
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Container(
-        margin: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.07),
+    return Container(
+      margin: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
         child: ListView(
           children: [
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
             _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
             _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
@@ -63,9 +62,9 @@ class _MemberInfoState extends State<MemberInfo> {
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
             _inputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            PhoneTextField(),
+            phoneTextField(),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            AdressTextField(),
+            addressTextField(),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
           ],
         ),
@@ -73,7 +72,7 @@ class _MemberInfoState extends State<MemberInfo> {
     );
   }
 
-  Widget AdressTextField() {
+  Widget addressTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,7 +88,7 @@ class _MemberInfoState extends State<MemberInfo> {
   }
 
 
-  Widget PhoneTextField() {
+  Widget phoneTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -109,7 +108,8 @@ class _MemberInfoState extends State<MemberInfo> {
             isPassWord: false,
             buttonStyle: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
-            )
+            ),
+            controllerText: _memberInfoController.phoneText,
           ),
         ),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
@@ -127,7 +127,8 @@ class _MemberInfoState extends State<MemberInfo> {
               isPassWord: false,
               buttonStyle: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
-              )
+              ),
+            controllerText: _memberInfoController.phoneAuthText,
           ),
         )
       ],
@@ -144,8 +145,6 @@ class _MemberInfoState extends State<MemberInfo> {
   }
 
   Widget _inputTextField({String label, String hintText, @required TextEditingController controller, bool isPassWord, bool isEmail, Rx<MemInfoText> controllerText}) {
-    bool _isPassWord = isPassWord ?? false;
-    bool _isEmail = isEmail ?? false;
     return Container(
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,9 +152,9 @@ class _MemberInfoState extends State<MemberInfo> {
               Text(label ?? '라벨', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
               Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
               Container(
-                child: _isEmail
-                        ? _emailTextInput(controller, hintText, _isPassWord)
-                        : _textInputwithIcon(controller, hintText, _isPassWord, controllerText),
+                child: isEmail ?? false
+                        ? _emailTextInput(controller, hintText, isPassWord ?? false)
+                        : _textInputwithIcon(controller, hintText, isPassWord ?? false, controllerText),
               ),
             ],
           ),
@@ -181,72 +180,78 @@ class _MemberInfoState extends State<MemberInfo> {
       body: Stack(
         children: [
           backGroundImage(),
-          _buildBody(),
-          _AppBar(),
+          Column(
+            children: [
+              _appBar(),
+              Expanded(child: _buildBody()),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Container _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText}) {
-    return Container(
-      child: TextField(
-        onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
-        onEditingComplete: ()=> FocusScope.of(context).unfocus(),
-        obscureText: isPassWord,
-        textAlignVertical: TextAlignVertical.bottom,
-        style: TextStyle(
-          fontFamily: FontsUtil.korean,
-          color: Colors.white,
-          fontSize: Get.width* 0.04,
+  Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText}) {
+    return Obx(()=>
+        TextField(
+      onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
+      onEditingComplete: ()=> FocusScope.of(context).unfocus(),
+      obscureText: isPassWord,
+      textAlignVertical: TextAlignVertical.bottom,
+      style: TextStyle(
+        fontFamily: FontsUtil.korean,
+        color: Colors.white,
+        fontSize: Get.width* 0.04,
+      ),
+      controller: controller,
+      decoration: InputDecoration(
+        errorText: controllerText.value.isError.value ? controllerText.value.error.value : null,
+        suffixIconConstraints: BoxConstraints(
+          maxHeight: Get.width * 0.06,
+          maxWidth: Get.width * 0.06,
         ),
-        controller: controller,
-        decoration: InputDecoration(
-          suffixIconConstraints: BoxConstraints(
-            maxHeight: Get.width * 0.06,
-            maxWidth: Get.width * 0.06,
-          ),
-          suffixIcon: GestureDetector(
-            onTap: ()=>_memberInfoController.onClear(controller, controllerText),
-            child: Container(
-              margin: EdgeInsets.only(right: 5),
-              child: CircleAvatar(
-                backgroundColor: Color.fromARGB(100, 255, 255, 255),
-                child: Icon(Icons.clear, size: Get.width * 0.04, color: Colors.white,),
-              ),
+        suffixIcon: GestureDetector(
+          onTap: ()=>_memberInfoController.onClear(controller, controllerText),
+          child: Container(
+            margin: EdgeInsets.only(right: 5),
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(100, 255, 255, 255),
+              child: Icon(Icons.clear, size: Get.width * 0.04, color: Colors.white,),
             ),
           ),
-          contentPadding: EdgeInsets.only(bottom: 10, top: 5),
-          hintStyle: TextStyle(
-            fontSize: Get.width* 0.04,
-            fontFamily: FontsUtil.korean,
-            color: Colors.white60,
-            fontWeight: FontWeight.w100,
-          ),
-          hintText: hintText?? '힌트 텍스트',
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 1.2)),
         ),
+        contentPadding: EdgeInsets.only(bottom: 10, top: 5),
+        hintStyle: TextStyle(
+          fontSize: Get.width* 0.04,
+          fontFamily: FontsUtil.korean,
+          color: Colors.white60,
+          fontWeight: FontWeight.w100,
+        ),
+        hintText: hintText?? '힌트 텍스트',
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.2)),
       ),
-    );
+    ));
   }
 
-  Positioned _AppBar() {
+  Positioned _appBar() {
     return Positioned(
           width: Get.width,
-          child: AppBar(
-            shape: Border(bottom: BorderSide(color: Colors.white, width: 0.75)),
-            toolbarHeight: Get.height * 0.075,
-            elevation: 0,
-            shadowColor: Colors.white,
-            backgroundColor: Colors.transparent,
-            title: Container(
-              alignment: Alignment.centerLeft,
-              child: Image.asset('assets/상단로고.png',
-                fit: BoxFit.cover,
-                height: Get.height * 0.05,),
+          child: Container(
+            child: AppBar(
+              shape: Border(bottom: BorderSide(color: Colors.white, width: 0.75)),
+              toolbarHeight: Get.height * 0.075,
+              elevation: 0,
+              shadowColor: Colors.white,
+              backgroundColor: Colors.transparent,
+              title: Container(
+                alignment: Alignment.centerLeft,
+                child: Image.asset('assets/상단로고.png',
+                  fit: BoxFit.cover,
+                  height: Get.height * 0.05,),
+              ),
+              automaticallyImplyLeading: false,
             ),
-            automaticallyImplyLeading: false,
           ),
         );
   }

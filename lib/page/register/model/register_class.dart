@@ -17,6 +17,7 @@ class RegisterCheckBoxData {
 }
 
 class MemInfoText {
-  RxString Text =  ''.obs;
-  RxString Error = null;
+  RxString text =  ''.obs;
+  RxString error = ''.obs;
+  RxBool isError = false.obs;
 }

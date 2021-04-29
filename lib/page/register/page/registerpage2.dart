@@ -116,7 +116,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
           Register().spicyList[index].isChecked = !Register().spicyList[index].isChecked;
           Register().selectedSpicy = Register().spicyList[index].registerCheckBoxData;
         });
-        if(await Register().checkRegisterPage2())
+        if(Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
     );
@@ -182,7 +182,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
           Register().tasteList[index].isChecked = !Register().tasteList[index].isChecked;
           Register().selectedTaste = Register().tasteList[index].registerCheckBoxData;
         });
-        if(await Register().checkRegisterPage2())
+        if(Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
     );
@@ -238,7 +238,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
             Register().outputAllergyList = [];
           }
         });
-        if(await Register().checkRegisterPage2())
+        if(Register().checkRegisterPage2())
           StartOfTablePage.pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
       },
     );

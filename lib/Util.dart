@@ -9,6 +9,7 @@ static final oatmealWhite = Color(0xFFfbf5e7);
 }
 
 class FontsUtil {
+  // ignore: non_constant_identifier_names
   static final national_park_outline = 'national_park_outline';
   static final supersizeBlack = 'Supersize_Black';
   static final korean = 'Campton';

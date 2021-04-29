@@ -27,9 +27,9 @@ class OhQuePageController extends GetxController{
     }
   }
 
-  Future<bool> postFoodLike (String authorization, int food_sn) async {
+  Future<bool> postFoodLike (String authorization, int foodSn) async {
     try{
-      return await MainPageUtil.postFoodLike(authorization, food_sn);
+      return await MainPageUtil.postFoodLike(authorization, foodSn);
     }
     catch(ex){
       print(ex);

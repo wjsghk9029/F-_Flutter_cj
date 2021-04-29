@@ -31,7 +31,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.045),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.075),
       child: ListView(
         physics: ClampingScrollPhysics(),
         children: [
