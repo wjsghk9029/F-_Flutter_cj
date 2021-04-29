@@ -60,9 +60,9 @@ class MemberInfoController extends GetxController{
     super.onInit();
   }
 
-  void _textError(Rx<MemInfoText> text, String ErrorMsg) {
+  void _textError(Rx<MemInfoText> text, String errorMsg) {
     text.value.isError(true);
-    text.value.error(ErrorMsg);
+    text.value.error(errorMsg);
   }
 
   bool _regMatch(Rx<MemInfoText> text, RegExp regExp) {
