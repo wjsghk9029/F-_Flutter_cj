@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/register/controller/member_info_controller.dart';
+import 'package:oftable_flutter/page/register/model/register_class.dart';
 
 class MemberInfo extends StatefulWidget {
   @override
@@ -21,6 +23,8 @@ class _MemberInfoState extends State<MemberInfo> {
   final homeNameTextFieldController = TextEditingController();
   final homePhoneTextFieldController = TextEditingController();
   final homeAdressTextFieldController = TextEditingController();
+
+  MemberInfoController _memberInfoController = Get.put(MemberInfoController());
 
   @override
   void dispose() {
@@ -47,17 +51,21 @@ class _MemberInfoState extends State<MemberInfo> {
         child: ListView(
           children: [
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController),
+            _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true),
+            _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: pwReTextFieldController, isPassWord: true),
+            _inputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: pwReTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwReText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '이름', hintText: '이름 입력', controller: nameTextFieldController),
+            _inputTextField(label: '이름', hintText: '이름 입력', controller: nameTextFieldController, controllerText: _memberInfoController.nameText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '생년월일', hintText: '8자리 입력', controller: birthDayTextFieldController),
+            _inputTextField(label: '생년월일', hintText: '8자리 입력', controller: birthDayTextFieldController, controllerText: _memberInfoController.birthDayText),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-            InputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true,),
+            _inputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true),
+            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+            PhoneTextField(),
+            Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+            AdressTextField(),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
           ],
         ),
@@ -65,50 +73,106 @@ class _MemberInfoState extends State<MemberInfo> {
     );
   }
 
-  Column InputTextField({String label, String hintText, @required TextEditingController controller, bool isPassWord, bool isEmail}) {
+  Widget AdressTextField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('주소(배송지)', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+        Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
+        _textInputwithIcon(homeNameTextFieldController, '받는분 입력', false, _memberInfoController.homeNameText),
+        Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
+        _textInputwithIcon(homePhoneTextFieldController, '전화번호 입력', false, _memberInfoController.homePhoneText),
+        Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
+        _textInputwithIcon(homeAdressTextFieldController, '주소 입력', false, _memberInfoController.homeAddressText),
+    ],
+    );
+  }
+
+
+  Widget PhoneTextField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('휴대전화', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+        Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
+        Container(
+          child: _phoneInput(
+            controller: phoneTextFieldController,
+            hintText: '전화번호 입력',
+            buttonChild: Text(
+              '인증번호 받기',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            buttonOnPressed: (){},
+            isPassWord: false,
+            buttonStyle: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
+            )
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
+        Container(
+          child: _phoneInput(
+              controller: phoneTextFieldController,
+              hintText: '인증번호 입력',
+              buttonChild: Text(
+                  '인증번호 확인',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              buttonOnPressed: (){},
+              isPassWord: false,
+              buttonStyle: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
+              )
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _phoneInput({TextEditingController controller, String hintText, bool isPassWord, void Function() buttonOnPressed, Widget buttonChild, ButtonStyle buttonStyle, Rx<MemInfoText> controllerText}){
+    return Row(
+      children: [
+        Flexible(flex: 5,child: _textInputwithIcon(controller, hintText, isPassWord, controllerText)),
+        Flexible(flex: 2,child: TextButton(onPressed: buttonOnPressed, child: buttonChild, style: buttonStyle,)),
+      ],
+    );
+  }
+
+  Widget _inputTextField({String label, String hintText, @required TextEditingController controller, bool isPassWord, bool isEmail, Rx<MemInfoText> controllerText}) {
     bool _isPassWord = isPassWord ?? false;
     bool _isEmail = isEmail ?? false;
-    return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label ?? '라벨', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
-            Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
-            _isEmail
-            ? _emailTextInput(controller, hintText, _isPassWord)
-            : _textInputwithIcon(controller, hintText, _isPassWord),
-          ],
-        );
-  }
-
-  Row _emailTextInput(TextEditingController controller, String hintText, bool _isPassWord) {
-    return Row(
+    return Container(
+      child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Flexible(flex: 3,child: _textInputwithIcon(controller, hintText, _isPassWord)),
-              Flexible(flex: 2,child: _textInputwithIcon(email2TextFieldController, '   이메일 선택', _isPassWord)),
-            ],
-          );
-  }
-
-  Stack _textInputwithIcon(TextEditingController controller, String hintText, bool _isPassWord) {
-    return Stack(
-            children: [
-              _textInput(controller: controller, hintText: hintText, isPassWord: _isPassWord),
+              Text(label ?? '라벨', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+              Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
               Container(
-                  height: Get.height * 0.05,
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    onTap: ()=>controller.clear(),
-                    child: SizedBox(
-                        width: 20,
-                        child: CircleAvatar(
-                          backgroundColor: Color.fromARGB(75, 255, 255, 255),
-                          child: Icon(Icons.clear, size: 15, color: Colors.white,),
-                        )
-                    ),
-                  )
+                child: _isEmail
+                        ? _emailTextInput(controller, hintText, _isPassWord)
+                        : _textInputwithIcon(controller, hintText, _isPassWord, controllerText),
               ),
             ],
+          ),
+    );
+  }
+
+  Widget _emailTextInput(TextEditingController controller, String hintText, bool _isPassWord) {
+    return Row(
+            children: [
+              Flexible(flex: 3,child: _textInputwithIcon(controller, hintText, _isPassWord, _memberInfoController.emailText)),
+              Flexible(flex: 2,child: _textInputwithIcon(email2TextFieldController, '   이메일 선택', _isPassWord, _memberInfoController.email2Text)),
+            ],
           );
+  }
+
+  Widget _textInputwithIcon(TextEditingController controller, String hintText, bool _isPassWord, Rx<MemInfoText> controllerText) {
+    return _textInput(controller: controller, hintText: hintText, isPassWord: _isPassWord, controllerText: controllerText);
   }
 
   @override
@@ -124,10 +188,11 @@ class _MemberInfoState extends State<MemberInfo> {
     );
   }
 
-  Container _textInput({@required TextEditingController controller, String hintText, bool isPassWord}) {
+  Container _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText}) {
     return Container(
-      height: Get.height * 0.05,
       child: TextField(
+        onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
+        onEditingComplete: ()=> FocusScope.of(context).unfocus(),
         obscureText: isPassWord,
         textAlignVertical: TextAlignVertical.bottom,
         style: TextStyle(
@@ -137,15 +202,28 @@ class _MemberInfoState extends State<MemberInfo> {
         ),
         controller: controller,
         decoration: InputDecoration(
+          suffixIconConstraints: BoxConstraints(
+            maxHeight: Get.width * 0.06,
+            maxWidth: Get.width * 0.06,
+          ),
+          suffixIcon: GestureDetector(
+            onTap: ()=>_memberInfoController.onClear(controller, controllerText),
+            child: Container(
+              margin: EdgeInsets.only(right: 5),
+              child: CircleAvatar(
+                backgroundColor: Color.fromARGB(100, 255, 255, 255),
+                child: Icon(Icons.clear, size: Get.width * 0.04, color: Colors.white,),
+              ),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(bottom: 10, top: 5),
           hintStyle: TextStyle(
-            fontSize: Get.width* 0.038,
+            fontSize: Get.width* 0.04,
             fontFamily: FontsUtil.korean,
             color: Colors.white60,
             fontWeight: FontWeight.w100,
           ),
           hintText: hintText?? '힌트 텍스트',
-          // border: UnderlineInputBorder(
-          //     borderSide: BorderSide(color: Colors.white, width: 1.2)),
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white, width: 1.2)),
         ),

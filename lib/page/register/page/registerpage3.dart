@@ -5,7 +5,6 @@ import 'package:oftable_flutter/page/register/controller/register_singleton.dart
 import 'package:oftable_flutter/page/register/controller/register_utility.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/register/page/MemberInfo.dart';
-import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 import 'package:oftable_flutter/page/widget/string_checkbox.dart';
 
 

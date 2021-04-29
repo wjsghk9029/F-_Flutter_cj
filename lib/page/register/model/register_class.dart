@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 class RegisterCheckBox {
   final RegisterCheckBoxData registerCheckBoxData;
@@ -13,4 +14,9 @@ class RegisterCheckBoxData {
   final String itemName;
 
   RegisterCheckBoxData({this.itemId, this.itemName});
+}
+
+class MemInfoText {
+  RxString Text =  ''.obs;
+  RxString Error = null;
 }

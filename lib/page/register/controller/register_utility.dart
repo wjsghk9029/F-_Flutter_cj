@@ -15,7 +15,6 @@ class RegisterUtility {
               itemId: i+1,
               itemName: texts[i],
             ),
-              //assets/lifestyle/식단관리1.png
             itemBeforeImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}1.png', fit: BoxFit.cover) : null,
             itemAfterImg: needImg ? Image.asset('assets/$assetFolderName/${texts[i].trim()}2.png', fit: BoxFit.cover) : null,
           )
@@ -227,6 +226,5 @@ class RegisterPage3Utility extends RegisterUtility{
     _insert();
   }
 }
-class RegisterPage4Utility extends RegisterUtility{}
 
 
