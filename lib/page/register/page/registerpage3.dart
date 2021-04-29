@@ -26,7 +26,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075, top: Get.height * 0.07),
+      padding: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075),
       child: ListView(
         physics: ClampingScrollPhysics(),
         children: [

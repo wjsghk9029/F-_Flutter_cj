@@ -15,6 +15,7 @@ class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
   Widget build(BuildContext context) {
     return Container(
       child: GridView.builder(
+          padding: EdgeInsets.zero,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: widget.pageViewLength,
             crossAxisSpacing: 10,
@@ -28,8 +29,10 @@ class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
   }
 
   Widget _itemBuilder(BuildContext ctx, int idx) {
-    return PageRouterCircle(
-      isIt: widget.pageIndex == idx,
+    return Container(
+      child: PageRouterCircle(
+        isIt: widget.pageIndex == idx,
+      ),
     );
   }
 }

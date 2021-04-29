@@ -17,7 +17,7 @@ class MemberInfoController extends GetxController{
   Rx<MemInfoText> homeAddressText = MemInfoText().obs;
 
 
-  void onDebounce(Rx<MemInfoText> text){
+  void onDebounce(Rx<MemInfoText> text) async{
     text.value.isError(false);
     if(text == idText) return _onDebounceId();
     if(text == pwText) return _onDebouncePw();
