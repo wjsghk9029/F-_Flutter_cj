@@ -20,9 +20,8 @@ class _MemberInfoState extends State<MemberInfo> {
   final email2TextFieldController = TextEditingController();
   final phoneTextFieldController = TextEditingController();
   final phoneAuthTextFieldController = TextEditingController();
-  final homeNameTextFieldController = TextEditingController();
-  final homePhoneTextFieldController = TextEditingController();
-  final homeAdressTextFieldController = TextEditingController();
+  final homeAddressTextFieldController = TextEditingController();
+  final homeAddress2TextFieldController = TextEditingController();
 
   MemberInfoController _memberInfoController = Get.put(MemberInfoController());
 
@@ -37,9 +36,9 @@ class _MemberInfoState extends State<MemberInfo> {
     email2TextFieldController.dispose();
     phoneTextFieldController.dispose();
     phoneAuthTextFieldController.dispose();
-    homeNameTextFieldController.dispose();
-    homePhoneTextFieldController.dispose();
-    homeAdressTextFieldController.dispose();
+    homeAddressTextFieldController.dispose();
+    homeAddress2TextFieldController.dispose();
+    homeAddressTextFieldController.dispose();
     super.dispose();
   }
 
@@ -69,10 +68,33 @@ class _MemberInfoState extends State<MemberInfo> {
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
                 addressTextField(),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                _buildDoneButton(),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
               ],
             ),
         ),
       ),
+    );
+  }
+
+  Widget _buildDoneButton() {
+    return Obx(() =>
+      MaterialButton(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(7.5),
+          ),
+          minWidth: double.infinity,
+          focusElevation: 0,
+          hoverElevation: 0,
+          highlightElevation: 0,
+          elevation: 0,
+          child: _memberInfoController.isDone.isFalse
+              ? Text('완료', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),)
+              : Text('확인', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),),
+          color: Colors.transparent,
+          onPressed: ()=> _memberInfoController.onClickDoneButton(),
+      )
     );
   }
 
@@ -82,11 +104,29 @@ class _MemberInfoState extends State<MemberInfo> {
       children: [
         Text('주소(배송지)', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
-        _textInputwithIcon(homeNameTextFieldController, '받는분 입력', false, _memberInfoController.homeNameText),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(flex: 5,child: _textInputwithIcon(homeAddressTextFieldController, '주소 입력', false, _memberInfoController.homeAddressText),),
+            Flexible(flex: 2,
+              fit : FlexFit.tight,
+              child: TextButton(
+                onPressed: ()=>_memberInfoController.findAdress(homeAddressTextFieldController),
+                child: Text('주소 찾기', style: TextStyle(color: Colors.white),),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    )
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.3)),
+                ),
+              )
+            ),
+          ],
+        ),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
-        _textInputwithIcon(homePhoneTextFieldController, '전화번호 입력', false, _memberInfoController.homePhoneText),
-        Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
-        _textInputwithIcon(homeAdressTextFieldController, '주소 입력', false, _memberInfoController.homeAddressText),
+        _textInputwithIcon(homeAddress2TextFieldController, '상세주소 입력', false, _memberInfoController.homeAddress2Text)
     ],
     );
   }
@@ -111,7 +151,12 @@ class _MemberInfoState extends State<MemberInfo> {
             buttonOnPressed: (){},
             isPassWord: false,
             buttonStyle: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  )
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.3)),
             ),
             controllerText: _memberInfoController.phoneText,
           ),
@@ -130,7 +175,12 @@ class _MemberInfoState extends State<MemberInfo> {
               buttonOnPressed: (){},
               isPassWord: false,
               buttonStyle: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.4)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    )
+                ),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.3)),
               ),
             controllerText: _memberInfoController.phoneAuthText,
           ),
@@ -168,15 +218,17 @@ class _MemberInfoState extends State<MemberInfo> {
 
   Widget _emailTextInput(TextEditingController controller, String hintText, bool _isPassWord) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(flex: 3,child: _textInputwithIcon(controller, hintText, _isPassWord, _memberInfoController.emailText)),
-              Flexible(flex: 2,child: _textInputwithIcon(email2TextFieldController, '   이메일 선택', _isPassWord, _memberInfoController.email2Text)),
+              Flexible(flex: 2,child: _textInputwithIcon(email2TextFieldController, '   이메일 선택', _isPassWord, _memberInfoController.email2Text,
+              ontap: ()=>_memberInfoController.onClickEmailSelector(email2TextFieldController), readonly: true)),
             ],
           );
   }
 
-  Widget _textInputwithIcon(TextEditingController controller, String hintText, bool _isPassWord, Rx<MemInfoText> controllerText) {
-    return _textInput(controller: controller, hintText: hintText, isPassWord: _isPassWord, controllerText: controllerText);
+  Widget _textInputwithIcon(TextEditingController controller, String hintText, bool _isPassWord, Rx<MemInfoText> controllerText ,{void Function() ontap, bool readonly = false}) {
+    return _textInput(controller: controller, hintText: hintText, isPassWord: _isPassWord, controllerText: controllerText, ontap: ontap, readonly: readonly);
   }
 
   @override
@@ -196,53 +248,60 @@ class _MemberInfoState extends State<MemberInfo> {
     );
   }
 
-  Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText}) {
+  Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText,void Function() ontap, bool readonly = false}) {
     return Obx(()=>
         TextField(
-      onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
-      onEditingComplete: ()=> FocusScope.of(context).unfocus(),
-      obscureText: isPassWord,
-      textAlignVertical: TextAlignVertical.bottom,
-      style: TextStyle(
-        fontFamily: FontsUtil.korean,
-        color: Colors.white,
-        fontSize: Get.width* 0.04,
-      ),
-      controller: controller,
-      decoration: InputDecoration(
-        errorText: controllerText.value.isError.value ? controllerText.value.error.value : null,
-        suffixIconConstraints: BoxConstraints(
-          maxHeight: Get.width * 0.06,
-          maxWidth: Get.width * 0.06,
-        ),
-        suffixIcon: GestureDetector(
-          onTap: ()=>_memberInfoController.onClear(controller, controllerText),
-          child: Container(
-            margin: EdgeInsets.only(right: 5),
-            child: CircleAvatar(
-              backgroundColor: Color.fromARGB(100, 255, 255, 255),
-              child: Icon(Icons.clear, size: Get.width * 0.04, color: Colors.white,),
+          readOnly: readonly,
+          onTap: ontap,
+          onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
+          onEditingComplete: ()=> FocusScope.of(context).unfocus(),
+          obscureText: isPassWord,
+          textAlignVertical: TextAlignVertical.bottom,
+          style: TextStyle(
+            fontFamily: FontsUtil.korean,
+            color: Colors.white,
+            fontSize: Get.width* 0.04,
+          ),
+          controller: controller,
+          decoration: InputDecoration(
+            errorText: controllerText.value.isError.isTrue ? controllerText.value.errorText.value : null,
+            helperText: controllerText.value.isSuccess.isTrue ? controllerText.value.successText.value : null,
+            helperStyle: TextStyle(color: Colors.white),
+            suffixIconConstraints: BoxConstraints(
+              maxHeight: Get.width * 0.06,
+              maxWidth: Get.width * 0.06,
+            ),
+            suffixIcon: GestureDetector(
+              onTap: ()=>_memberInfoController.onClear(controller, controllerText),
+              child: Container(
+                margin: EdgeInsets.only(right: 5),
+                child: CircleAvatar(
+                  backgroundColor: Color.fromARGB(100, 255, 255, 255),
+                  child: Icon(Icons.clear, size: Get.width * 0.04, color: Colors.white,),
+                ),
+              ),
+            ),
+            contentPadding: EdgeInsets.only(bottom: 10, top: 5),
+            hintStyle: TextStyle(
+              fontSize: Get.width* 0.04,
+              fontFamily: FontsUtil.korean,
+              color: Colors.white60,
+              fontWeight: FontWeight.w100,
+            ),
+            hintText: hintText?? '힌트 텍스트',
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white60, width: 1.2)
             ),
           ),
-        ),
-        contentPadding: EdgeInsets.only(bottom: 10, top: 5),
-        hintStyle: TextStyle(
-          fontSize: Get.width* 0.04,
-          fontFamily: FontsUtil.korean,
-          color: Colors.white60,
-          fontWeight: FontWeight.w100,
-        ),
-        hintText: hintText?? '힌트 텍스트',
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.2)),
-      ),
-    ));
+        )
+    );
   }
 
   Positioned _appBar() {
     return Positioned(
           width: Get.width,
           child: Container(
+            color: Colors.transparent,
             child: AppBar(
               shape: Border(bottom: BorderSide(color: Colors.white, width: 0.75)),
               toolbarHeight: Get.height * 0.075,

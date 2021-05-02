@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kopo/kopo.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 
 class MemberInfoController extends GetxController{
   Rx<MemInfoText> idText = MemInfoText().obs;
@@ -12,9 +15,15 @@ class MemberInfoController extends GetxController{
   Rx<MemInfoText> email2Text = MemInfoText().obs;
   Rx<MemInfoText> phoneText = MemInfoText().obs;
   Rx<MemInfoText> phoneAuthText = MemInfoText().obs;
-  Rx<MemInfoText> homeNameText = MemInfoText().obs;
-  Rx<MemInfoText> homePhoneText = MemInfoText().obs;
   Rx<MemInfoText> homeAddressText = MemInfoText().obs;
+  Rx<MemInfoText> homeAddress2Text = MemInfoText().obs;
+  RxBool isDone = false.obs;
+
+  final List<EmailSelectorItem> emailList = [
+    EmailSelectorItem('gmail.com'),
+    EmailSelectorItem('naver.com'),
+    EmailSelectorItem('daum.com'),
+  ];
 
 
   void onDebounce(Rx<MemInfoText> text) async{
@@ -27,8 +36,6 @@ class MemberInfoController extends GetxController{
     if(text == emailText) return _onDebounceEmail();
     if(text == phoneText) return _onDebouncePhone();
     if(text == phoneAuthText) return _onDebouncePhoneAuth();
-    if(text == homeNameText) return _onDebounceHomeName();
-    if(text == homePhoneText) return _onDebounceHomePhone();
   }
 
   void onChange(String inputText, Rx<MemInfoText> text){
@@ -36,10 +43,45 @@ class MemberInfoController extends GetxController{
   }
 
   void onClear(TextEditingController controller, Rx<MemInfoText> text){
-    text.update((val) {val.text = ''.obs; val.error = ''.obs; val.isError = false.obs;});
+    text.update((val) {
+      val.text('');
+      val.isSuccess(false);
+      val.isError(false);
+      val.errorText('');
+      val.successText('');
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) => controller.clear());
     _debounce(text);
   }
+
+  Future<void> onClickEmailSelector(TextEditingController controller) async {
+    String _emailText = await Get.defaultDialog(
+      title: "이메일 선택",
+      content: EmailSelector(emailList),
+    );
+    controller.text = _emailText;
+    email2Text.value.text(_emailText);
+  }
+
+  void onClickDoneButton(){
+    _emptyCheck(idText);
+    _emptyCheck(pwText);
+    _emptyCheck(pwReText);
+    _emptyCheck(nameText);
+    _emptyCheck(birthDayText);
+    _emptyCheck(emailText);
+    _emptyCheck(email2Text);
+    _emptyCheck(phoneText);
+    _emptyCheck(phoneAuthText);
+    _emptyCheck(homeAddressText);
+    _emptyCheck(homeAddress2Text);
+  }
+
+  void _emptyCheck(Rx<MemInfoText> text){
+    if(text.value.text.isEmpty)
+      return _textError(text, '이 항목은 비어있습니다.');
+  }
+
 
   void _debounce(Rx<MemInfoText> text,{Duration duration}){
     debounce(text.value.text, (_)=>onDebounce(text), time: duration ?? Duration(milliseconds: 300));
@@ -55,72 +97,112 @@ class MemberInfoController extends GetxController{
     _debounce(emailText);
     _debounce(phoneText);
     _debounce(phoneAuthText);
-    _debounce(homeNameText);
-    _debounce(homePhoneText);
     super.onInit();
   }
 
+  void _textReset(Rx<MemInfoText> text) {
+    if(text.value.text.isNotEmpty) return;
+    text.update((val) {
+      val.text('');
+      val.isSuccess(false);
+      val.isError(false);
+      val.errorText('');
+      val.successText('');
+    });
+  }
+
   void _textError(Rx<MemInfoText> text, String errorMsg) {
-    text.value.isError(true);
-    text.value.error(errorMsg);
+    text.update((val) {
+      val.isSuccess(false);
+      val.isError(true);
+      val.errorText(errorMsg);
+    });
+  }
+
+  void _textSuccess(Rx<MemInfoText> text, String successMsg) {
+    text.update((val) {
+      val.isError(false);
+      val.isSuccess(true);
+      val.successText(successMsg);
+    });
   }
 
   bool _regMatch(Rx<MemInfoText> text, RegExp regExp) {
     return !regExp.hasMatch(text.value.text.value) && text.value.text.isNotEmpty;
   }
 
+  Future<void> findAdress(TextEditingController controller) async {
+    KopoModel model = await Get.to(Kopo(), transition: Transition.cupertino);
+    var addressJSON =
+        '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode}';
+    controller.text = addressJSON;
+    homeAddressText.value.text(addressJSON);
+  }
+
   void _onDebounceId() {
     var regExp = RegExp(r'^[0-9a-z]+$');
     if(_regMatch(idText, regExp))
       return _textError(idText, '올바른 아이디의 형식이 아닙니다.');
+    if(idText.value.text.value.isNotEmpty)
+      return _textSuccess(idText, '사용가능한 아이디입니다.');
+
+    _textReset(idText); // 빈칸일때
   }
 
   void _onDebouncePw() {
     var regExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$');
     if(_regMatch(pwText, regExp))
       return _textError(pwText, '올바른 비밀번호의 형식이 아닙니다.');
+
+    _textReset(pwText); // 빈칸일때
+
   }
 
   void _onDebouncePwRe() {
     if(pwReText.value.text.value != pwText.value.text.value  && pwReText.value.text.isNotEmpty)
       return _textError(pwReText, '앞서 입력한 비밀번호와 다릅니다.');
+    if(pwReText.value.text.value.isNotEmpty)
+      return _textSuccess(pwReText, '비밀번호가 동일합니다.');
+
+    _textReset(pwReText); // 빈칸일때
+
   }
 
   void _onDebounceName() {
     var regExp = RegExp(r'^[가-힣]{2,4}$');
     if(_regMatch(nameText, regExp))
       return _textError(nameText, '올바른 한글이름의 형식이 아닙니다.');
+
+    _textReset(nameText); // 빈칸일때
+
   }
 
   void _onDebounceBirthDay() {
     var regExp = RegExp(r'^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$');
     if(_regMatch(birthDayText, regExp))
       return _textError(birthDayText, '올바른 생년월일의 형식이 아닙니다.');
+
+    _textReset(birthDayText); // 빈칸일때
+
   }
 
   void _onDebounceEmail() {
     var regExp = RegExp(r'^[0-9a-z]+$');
     if(_regMatch(emailText, regExp))
       return _textError(emailText, '올바른 이메일 아이디의 형식이 아닙니다.');
+
+    _textReset(emailText); // 빈칸일때
+
   }
 
   void _onDebouncePhone() {
-    var regExp = RegExp(r'^\d{3}-\d{3,4}-\d{4}$');
+    var regExp = RegExp(r'^\d{3}\d{3,4}\d{4}$');
     if(_regMatch(phoneText, regExp))
       return _textError(phoneText, '올바른 전화번호의 형식이 아닙니다.');
+
+    _textReset(phoneText); // 빈칸일때
+
   }
 
   void _onDebouncePhoneAuth() {}
-
-  void _onDebounceHomeName() {
-    var regExp = RegExp(r'^[가-힣]{2,4}$');
-    if(_regMatch(homeNameText, regExp))
-      return _textError(homeNameText, '올바른 한글이름의 형식이 아닙니다.');
-  }
-
-  void _onDebounceHomePhone() {
-    var regExp = RegExp(r'^\d{3}-\d{3,4}-\d{4}$');
-    if(_regMatch(homePhoneText, regExp))
-      return _textError(homePhoneText, '올바른 전화번호의 형식이 아닙니다.');
-  }
 }

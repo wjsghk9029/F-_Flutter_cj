@@ -18,6 +18,14 @@ class RegisterCheckBoxData {
 
 class MemInfoText {
   RxString text =  ''.obs;
-  RxString error = ''.obs;
+  RxString errorText = ''.obs;
   RxBool isError = false.obs;
+  RxString successText = ''.obs;
+  RxBool isSuccess = false.obs;
+}
+
+class EmailSelectorItem {
+  bool isChecked = false;
+  final String emailText;
+  EmailSelectorItem(this.emailText);
 }
