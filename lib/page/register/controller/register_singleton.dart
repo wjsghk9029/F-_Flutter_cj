@@ -20,10 +20,10 @@ class Register {
   List<RegisterCheckBoxData> selectedAllergyList = [];
   List<RegisterCheckBoxData> outputAllergyList = [];
   List<RegisterCheckBoxData> selectedKeyword = [];
-  RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 0, itemName: '');
+  RegisterCheckBoxData selectedMember = RegisterCheckBoxData(itemId: 1, itemName: '1');
   RegisterCheckBoxData selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
   RegisterCheckBoxData selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
-  RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 0, itemName: '');
+  RegisterCheckBoxData selectedTableCuration = RegisterCheckBoxData(itemId: 1, itemName: '1');
   String selectedId = '';
   String selectedPw = '';
   String selectedName = '';

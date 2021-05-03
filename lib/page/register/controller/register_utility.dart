@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 
-class RegisterUtility {
+class RegisterData {
 
   void insertData(List<RegisterCheckBox> items, List<String> texts, String assetFolderName, bool needImg) async{
     if(items.length > 0) {
@@ -30,7 +30,7 @@ class RegisterUtility {
 
 
 }
-class AllergyPageUtility extends RegisterUtility{
+class AllergyPageUtility extends RegisterData{
   List<String> allergyListText = [
     '달걀',
     '우유',
@@ -54,7 +54,7 @@ class AllergyPageUtility extends RegisterUtility{
     insertData(Register().allergyList, allergyListText, 'alergy', true);
   }
 }
-class RegisterPage1Utility extends RegisterUtility{
+class RegisterPage1Utility extends RegisterData{
   List<String> tableListText = [
     '식단관리',
     '채식',
@@ -91,7 +91,7 @@ class RegisterPage1Utility extends RegisterUtility{
     insertData(Register().tableList, tableListText, 'lifestyle', true);
   }
 }
-class RegisterPage2Utility extends RegisterUtility{
+class RegisterPage2Utility extends RegisterData{
   List<String> spicyListText = [
     '맵생아',
     '맵린이',
@@ -111,7 +111,7 @@ class RegisterPage2Utility extends RegisterUtility{
     insertData(Register().tasteList, tasteListText, 'favor', true);
   }
 }
-class RegisterPage3Utility extends RegisterUtility{
+class RegisterPage3Utility extends RegisterData{
 
 
   List<String> memberListText = [

@@ -239,16 +239,17 @@ class _MemberInfoState extends State<MemberInfo> {
           backGroundImage(),
           Column(
             children: [
-              _appBar(),
+              Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
               Expanded(child: _buildBody()),
             ],
           ),
+          _appBar(),
         ],
       ),
     );
   }
 
-  Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText,void Function() ontap, bool readonly = false}) {
+  Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText,void Function() ontap, bool readonly}) {
     return Obx(()=>
         TextField(
           readOnly: readonly,

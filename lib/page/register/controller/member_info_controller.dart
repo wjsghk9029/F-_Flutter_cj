@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/utill/register_util.dart';
 import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 
 class MemberInfoController extends GetxController{
@@ -75,6 +76,26 @@ class MemberInfoController extends GetxController{
     _emptyCheck(phoneAuthText);
     _emptyCheck(homeAddressText);
     _emptyCheck(homeAddress2Text);
+    if(_checkError(idText)) return;
+    if(_checkError(pwText)) return;
+    if(_checkError(pwReText)) return;
+    if(_checkError(nameText)) return;
+    if(_checkError(birthDayText)) return;
+    if(_checkError(emailText)) return;
+    if(_checkError(email2Text)) return;
+    if(_checkError(phoneText)) return;
+    if(_checkError(phoneAuthText)) return;
+    if(_checkError(homeAddressText)) return;
+    if(_checkError(homeAddress2Text)) return;
+    isDone(true);
+    RegisterUtil.doRegister(
+      id: idText.value.text.value,
+      pw: pwText.value.text.value,
+      name: nameText.value.text.value,
+      email: emailText.value.text.value + '@' + email2Text.value.text.value,
+      phone: phoneText.value.text.value,
+      address: homeAddressText.value.text.value+ ' '+ homeAddress2Text.value.text.value,
+    );
   }
 
   void _emptyCheck(Rx<MemInfoText> text){
@@ -134,15 +155,21 @@ class MemberInfoController extends GetxController{
   Future<void> findAdress(TextEditingController controller) async {
     KopoModel model = await Get.to(Kopo(), transition: Transition.cupertino);
     var addressJSON =
-        '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode}';
+        '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''}';
     controller.text = addressJSON;
     homeAddressText.value.text(addressJSON);
   }
 
-  void _onDebounceId() {
+  bool _checkError(Rx<MemInfoText> text) {
+    return text.value.isError.isTrue;
+  }
+
+  Future<void> _onDebounceId() async {
     var regExp = RegExp(r'^[0-9a-z]+$');
     if(_regMatch(idText, regExp))
       return _textError(idText, '올바른 아이디의 형식이 아닙니다.');
+    if(!(await RegisterUtil.idDuplicateCheck(idText.value.text.value)) && idText.value.text.value.isNotEmpty)
+      return _textError(idText, '중복되는 아이디 입니다.');
     if(idText.value.text.value.isNotEmpty)
       return _textSuccess(idText, '사용가능한 아이디입니다.');
 

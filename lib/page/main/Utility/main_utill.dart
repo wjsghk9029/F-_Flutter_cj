@@ -17,6 +17,7 @@ class MainPageUtil {
       throw Exception('${response.request.url} ${response.body} = Failed to Get TagFoodList');
     }
   }
+
   static Future<bool> postFoodLike(String authorization, int foodSn) async {
     print('$authorization');
     print('$foodSn');

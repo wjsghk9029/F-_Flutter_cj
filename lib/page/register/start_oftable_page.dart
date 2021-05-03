@@ -53,7 +53,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
           ),
           Column(
             children: [
-              _buildPositioned(),
+              Padding(padding: EdgeInsets.only(top: Get.height * 0.1)),
               Expanded(
                 child: PageView.builder(
                   onPageChanged: (int pageNum){
@@ -76,9 +76,10 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
                   pageIndex: _pagenum,
                   pageViewLength: _pages.length,
                     ),
-                  ),
+              ),
             ],
           ),
+          _buildPositioned(),
         ],
       ),
     );
