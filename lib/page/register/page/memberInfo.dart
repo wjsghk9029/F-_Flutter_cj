@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/register/controller/member_info_controller.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
+import 'package:oftable_flutter/page/register/utill/register_util.dart';
 
 class MemberInfo extends StatefulWidget {
   @override
@@ -70,6 +72,8 @@ class _MemberInfoState extends State<MemberInfo> {
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
                 _buildDoneButton(),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                // MaterialButton(onPressed: ()=>RegisterUtil.testReg(), child: Text('테스트'),),
+                // Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
               ],
             ),
         ),
@@ -79,22 +83,28 @@ class _MemberInfoState extends State<MemberInfo> {
 
   Widget _buildDoneButton() {
     return Obx(() =>
-      MaterialButton(
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(7.5),
-          ),
-          minWidth: double.infinity,
-          focusElevation: 0,
-          hoverElevation: 0,
-          highlightElevation: 0,
-          elevation: 0,
-          child: _memberInfoController.isDone.isFalse
-              ? Text('완료', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),)
-              : Text('확인', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),),
-          color: Colors.transparent,
-          onPressed: ()=> _memberInfoController.onClickDoneButton(),
-      )
+        MaterialButton(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(7.5),
+              ),
+              minWidth: double.infinity,
+              focusElevation: 0,
+              hoverElevation: 0,
+              highlightElevation: 0,
+              elevation: 0,
+              child: _memberInfoController.isDone.isFalse
+                  ? Text('확인', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),)
+                  : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.check_circle_outline, color: Color.fromARGB(255, 148, 159, 177), size: Get.width * 0.05,),
+                          Text(' 가입을 축하 드립니다!', style: TextStyle(fontFamily: FontsUtil.korean, color: Color.fromARGB(255, 148, 159, 177), fontSize: Get.width * 0.04),)
+                        ],
+                      ),
+              color: _memberInfoController.isDone.isFalse ? Colors.transparent : Colors.white,
+              onPressed: ()=> _memberInfoController.onClickDoneButton(),
+          )
     );
   }
 

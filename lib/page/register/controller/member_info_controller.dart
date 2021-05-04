@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
+import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/register/utill/register_util.dart';
 import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 
 class MemberInfoController extends GetxController{
+  LoginPageService _loginPageService = Get.put(LoginPageService());
+
   Rx<MemInfoText> idText = MemInfoText().obs;
   Rx<MemInfoText> pwText = MemInfoText().obs;
   Rx<MemInfoText> pwReText = MemInfoText().obs;
@@ -88,14 +92,22 @@ class MemberInfoController extends GetxController{
     if(_checkError(homeAddressText)) return;
     if(_checkError(homeAddress2Text)) return;
     isDone(true);
-    RegisterUtil.doRegister(
-      id: idText.value.text.value,
-      pw: pwText.value.text.value,
-      name: nameText.value.text.value,
-      email: emailText.value.text.value + '@' + email2Text.value.text.value,
-      phone: phoneText.value.text.value,
-      address: homeAddressText.value.text.value+ ' '+ homeAddress2Text.value.text.value,
-    );
+    try{
+      RegisterUtil.doRegister(
+        id: idText.value.text.value,
+        pw: pwText.value.text.value,
+        name: nameText.value.text.value,
+        email: emailText.value.text.value + '@' + email2Text.value.text.value,
+        phone: phoneText.value.text.value,
+        address: homeAddressText.value.text.value+ ' '+ homeAddress2Text.value.text.value,
+      );
+      _loginPageService.doLogin(idText.value.text.value, pwText.value.text.value);
+    }catch(ex){
+      print(ex);
+      isDone(false);
+      return;
+    }
+    Get.offAll(MainPage(), transition: Transition.downToUp);
   }
 
   void _emptyCheck(Rx<MemInfoText> text){

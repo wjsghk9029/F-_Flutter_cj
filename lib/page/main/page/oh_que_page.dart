@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 
-import 'oh_que/oh_que_list.dart';
+import 'wiget/oh_que_list.dart';
 
 class OhQuePage extends StatefulWidget {
   final ScrollController scrollController;

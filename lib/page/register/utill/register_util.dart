@@ -68,4 +68,34 @@ class RegisterUtil{
     }
   }
 
+  // static Future<Login> testReg() async {
+  //   final response = await http.post(
+  //     Uri.http('210.93.86.79:8080', '/join'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  //     },
+  //     body: (<String, String>{
+  //       'id' : 'test1234',
+  //       'pw' : 'test1234',
+  //       'name' : 'test',
+  //       'phone' : '111-1111-1111',
+  //       'address' : '대전아마도',
+  //       'email' : 'test@test.com',
+  //       'pop' : '1',
+  //       'spicy_degree' : '1',
+  //       'prefer_flavor' : '1',
+  //       'allergy_list' : '1#2#3',
+  //       'taste_list' : '1#2#3',
+  //       'curation' : '1',
+  //     }),
+  //   );
+  //   print(response.headers.toString());
+  //   print(_listToString(Register().outputAllergyList));
+  //   if (response.statusCode == 200) {
+  //     print(response.body);
+  //   } else {
+  //     throw Exception('${response.body} = Failed to post doRegister');
+  //   }
+  // }
+
 }
