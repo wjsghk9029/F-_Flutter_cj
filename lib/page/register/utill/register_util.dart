@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:oftable_flutter/page/login/model/loginclass.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 
@@ -39,7 +38,7 @@ class RegisterUtil{
     return str;
   }
 
-  static Future<Login> doRegister({String id, String pw, String name, String phone, String address, String email}) async {
+  static Future<void> doRegister({String id, String pw, String name, String phone, String address, String email}) async {
     final response = await http.post(
       Uri.http('210.93.86.79:8080', '/join'),
       headers: <String, String>{

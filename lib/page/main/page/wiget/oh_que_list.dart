@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'file:///C:/OfTable/oftable_flutter/lib/page/main/page/wiget/oq_Demo.dart';
@@ -21,7 +20,6 @@ class OhQueList extends StatefulWidget {
 }
 class _OhQueListState extends State<OhQueList> {
   OhQuePageController _ohQueController =Get.put(OhQuePageController());
-  LoginPageService _loginPageService =Get.put(LoginPageService());
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {

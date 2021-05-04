@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/register/controller/member_info_controller.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
-import 'package:oftable_flutter/page/register/utill/register_util.dart';
 
 class MemberInfo extends StatefulWidget {
   @override
