@@ -11,6 +11,7 @@ class OhQuePageController extends GetxController{
 
   @override
   void onInit() {
+    changeListIdx(1);
     super.onInit();
   }
 

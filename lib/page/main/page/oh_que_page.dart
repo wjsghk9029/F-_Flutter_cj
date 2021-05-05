@@ -136,26 +136,31 @@ class OhQuePage extends StatelessWidget {
   }
 
   Widget _buildList() {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-          Text(
-            'SPECIAL RECIPE',
-            style: TextStyle(
-              fontFamily: FontsUtil.poppins,
-              fontSize: Get.height* 0.035,
-              fontWeight: FontWeight.w800,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: Get.height * 0.3,
+      ),
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
+            Text(
+              'SPECIAL RECIPE',
+              style: TextStyle(
+                fontFamily: FontsUtil.poppins,
+                fontSize: Get.height* 0.035,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-          ),
-          Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-          Obx(()=>
-              OhQueList(_ohQueController.listIndex.value,)
-          ),
-        ],
+            Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
+            Obx(()=>
+                OhQueList(_ohQueController.listIndex.value,)
+            ),
+          ],
+        ),
       ),
     );
   }

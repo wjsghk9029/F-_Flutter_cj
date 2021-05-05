@@ -20,13 +20,14 @@ class _TabButtonState extends State<TabButton> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: Duration(seconds: 1),
         curve: Curves.fastLinearToSlowEaseIn,
         height: widget.height ?? null,
         width: widget.width ?? null,
-        color: widget.isChecked ?
-              widget.checkedColor ?? Colors.blueAccent :
-              widget.notCheckColor ?? Colors.grey,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: widget.isChecked? Border(bottom: BorderSide(color: Colors.white, width: 1)) : Border(bottom: BorderSide.none),
+        ),
         child: widget.child,
       ),
     );
