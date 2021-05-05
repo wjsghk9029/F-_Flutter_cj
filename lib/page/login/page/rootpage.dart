@@ -24,6 +24,8 @@ class _RootPageState extends State<RootPage> {
     super.didChangeDependencies();
     precacheImage(AssetImage('assets/Login_background.jpg'), context);
     precacheImage(AssetImage('assets/logowithtext.png'), context);
+    precacheImage(AssetImage('assets/logowithtext.png'), context);
+    precacheImage(AssetImage('assets/background/레시피 하단 배경.jpg'), context);
   }
 
   @override

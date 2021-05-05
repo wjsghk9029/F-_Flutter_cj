@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
@@ -15,7 +16,7 @@ class OhQueList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() =>
     _ohQueController.isLoading.value ?
-    Center(child: Text('로딩중')) :
+    Center(child: SpinKitRing(color: Colors.blue,)) :
     buildListView(_ohQueController.foodList.value.data)
     );
   }

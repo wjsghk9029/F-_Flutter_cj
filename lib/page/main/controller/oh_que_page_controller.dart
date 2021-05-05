@@ -17,7 +17,7 @@ class OhQuePageController extends GetxController{
 
   void changeListIdx(int idx){
     listIndex(idx);
-    _getTagFoodList(listIndex.value);
+   _getTagFoodList(listIndex.value);
   }
 
 
