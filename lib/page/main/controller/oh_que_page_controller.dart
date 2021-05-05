@@ -7,10 +7,15 @@ import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 class OhQuePageController extends GetxController{
   RxBool isLoading = true.obs;
   Rx<TagFoodList> foodList = TagFoodList().obs;
+  RxInt listIndex = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  void changeListIdx(int Idx){
+    listIndex(Idx);
   }
 
 

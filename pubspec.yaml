@@ -105,5 +105,18 @@ flutter:
        - asset: fonts/Campton/Campton-Bold.ttf
        - asset: fonts/Campton/Campton-Light.otf
          weight: 100
+   - family: SourceHanSansKR
+     fonts:
+       - asset: fonts/SourceHanSansKR_Normal.otf
+       - asset: fonts/SourceHanSansKR_Bold.otf
+         weight: 800
+       - asset: fonts/SourceHanSansKR_Heavy.otf
+         weight: 900
+       - asset: fonts/SourceHanSansKR_Light.otf
+         weight: 200
+       - asset: fonts/SourceHanSansKR_ExtraLight.otf
+         weight: 100
+       - asset: fonts/SourceHanSansKR_Medium.otf
+         weight: 600
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

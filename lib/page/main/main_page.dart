@@ -80,9 +80,6 @@ class _MainPageState extends State<MainPage> {
       duration: Duration(seconds: 1),
       curve: Curves.fastLinearToSlowEaseIn,
       height: _isVisible ? 56.0 : 0.0,
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey)),
-      ),
       child: Wrap(
         children: <Widget>[
           BottomNavigationBar(

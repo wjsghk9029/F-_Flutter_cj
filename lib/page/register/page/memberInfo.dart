@@ -42,6 +42,24 @@ class _MemberInfoState extends State<MemberInfo> {
     super.dispose();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          backGroundImage(),
+          Column(
+            children: [
+              Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
+              Expanded(child: _buildBody()),
+            ],
+          ),
+          _appBar(),
+        ],
+      ),
+    );
+  }
+
   Widget _buildBody(){
     return Container(
       margin: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075),
@@ -51,7 +69,7 @@ class _MemberInfoState extends State<MemberInfo> {
           child:
             Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
+                Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
                 _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
                 _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
@@ -239,24 +257,6 @@ class _MemberInfoState extends State<MemberInfo> {
     return _textInput(controller: controller, hintText: hintText, isPassWord: _isPassWord, controllerText: controllerText, ontap: ontap, readonly: readonly);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          backGroundImage(),
-          Column(
-            children: [
-              Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
-              Expanded(child: _buildBody()),
-            ],
-          ),
-          _appBar(),
-        ],
-      ),
-    );
-  }
-
   Widget _textInput({@required TextEditingController controller, String hintText, bool isPassWord, Rx<MemInfoText> controllerText,void Function() ontap, bool readonly}) {
     return Obx(()=>
         TextField(
@@ -295,7 +295,7 @@ class _MemberInfoState extends State<MemberInfo> {
               fontSize: Get.width* 0.04,
               fontFamily: FontsUtil.korean,
               color: Colors.white60,
-              fontWeight: FontWeight.w100,
+              fontWeight: FontWeight.w500,
             ),
             hintText: hintText?? '힌트 텍스트',
             enabledBorder: UnderlineInputBorder(

@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         loginInput(controller: idTextFieldController, hintText: '아이디'),
         Padding(padding: EdgeInsets.all(Get.height * 0.005)),
-        loginInput(controller: pwTextFieldController, hintText: '비밀번호'),
+        loginInput(controller: pwTextFieldController, hintText: '비밀번호', isPassword: true,),
         Padding(padding: EdgeInsets.all(Get.height * 0.01)),
         Container(
           height: Get.height * 0.07,
@@ -197,10 +197,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Container loginInput({@required TextEditingController controller, String hintText}) {
+  Container loginInput({@required TextEditingController controller, String hintText, bool isPassword = false}) {
     return Container(
         height: Get.height * 0.05,
         child: TextField(
+          obscureText: isPassword,
           textAlignVertical: TextAlignVertical.bottom,
           style: TextStyle(
             fontFamily: FontsUtil.korean,
