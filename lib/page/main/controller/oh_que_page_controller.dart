@@ -14,12 +14,13 @@ class OhQuePageController extends GetxController{
     super.onInit();
   }
 
-  void changeListIdx(int Idx){
-    listIndex(Idx);
+  void changeListIdx(int idx){
+    listIndex(idx);
+    _getTagFoodList(listIndex.value);
   }
 
 
-  Future<void> getTagFoodList (int listIdx) async {
+  Future<void> _getTagFoodList (int listIdx) async {
     try {
       isLoading(true);
       var _foodList = await MainPageUtil.getTagFoodList(listIdx);

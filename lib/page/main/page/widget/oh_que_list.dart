@@ -4,35 +4,26 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
-import 'package:oftable_flutter/page/main/page/wiget/oq_Demo.dart';
+import 'package:oftable_flutter/page/main/page/widget/oq_Demo.dart';
 
 
 class OhQueList extends StatelessWidget {
-  final ScrollController scrollController;
   final int listIdx;
-  OhQueList({this.scrollController, this.listIdx});
+  OhQueList(this.listIdx);
   final OhQuePageController _ohQueController =Get.put(OhQuePageController());
   @override
   Widget build(BuildContext context) {
     return Obx(() =>
     _ohQueController.isLoading.value ?
     Center(child: Text('로딩중')) :
-    Container(
-      padding: EdgeInsets.only(left: Get.width * 0.05, right: Get.width * 0.05),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: [
-              Expanded(child: buildListView(_ohQueController.foodList.value.data)),
-            ],
-          ),
-        ))
+    buildListView(_ohQueController.foodList.value.data)
     );
   }
 
 
   Widget buildListView(List<TagFoodListData> data) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
         itemCount: data.length,
@@ -47,6 +38,7 @@ class OhQueList extends StatelessWidget {
       child: GestureDetector(
         onTap: ()=>Get.to(OqDemo(listData: data,)),
         child: Card(
+          margin: EdgeInsets.symmetric(vertical: 5),
           color: Colors.transparent,
           elevation: 0,
           child: Row(
@@ -68,7 +60,7 @@ class OhQueList extends StatelessWidget {
             ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(left: 20),
+                  margin: EdgeInsets.only(left: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -98,7 +90,8 @@ class OhQueList extends StatelessWidget {
                         flex: 3,
                       ),
                       Flexible(
-                          child: Container(
+                        flex: 1,
+                        child: Container(
                             decoration: BoxDecoration(
                               border: Border(top: BorderSide(width: 0.75))
                             ),
@@ -144,7 +137,6 @@ class OhQueList extends StatelessWidget {
                               ],
                             ),
                           ),
-                        flex: 1,
                       ),
                     ],
                   ),

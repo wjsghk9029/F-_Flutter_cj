@@ -50,22 +50,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _buildBottomNavi(),
-      appBar: AppBar(
-        toolbarHeight: Get.height * 0.075,
-        elevation: 0,
-        backgroundColor: Colors.black,
-        title: Container(
-          alignment: Alignment.centerLeft,
-          child: Image.asset('assets/logo_white.png',
-            fit: BoxFit.cover,
-            height: Get.height * 0.045,),
-        ),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(icon: Icon(Icons.notifications, color: Colors.white,), iconSize: Get.height * 0.035, onPressed: (){}),
-          IconButton(icon: Icon(Icons.search, color: Colors.white), iconSize: Get.height * 0.035, onPressed: (){}),
-        ],
-      ),
       body: DoubleBackToCloseApp(
           snackBar: const SnackBar(
             content: Text('나가고 싶다면 한번 더 누르시오'),
@@ -74,6 +58,8 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+
+
 
   _buildBottomNavi() {
     return AnimatedContainer(
