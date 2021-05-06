@@ -100,26 +100,15 @@ class _MemberInfoState extends State<MemberInfo> {
   Widget _buildDoneButton() {
     return Obx(() =>
         MaterialButton(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(7.5),
-              ),
-              minWidth: double.infinity,
-              focusElevation: 0,
-              hoverElevation: 0,
-              highlightElevation: 0,
-              elevation: 0,
-              child: _memberInfoController.isDone.isFalse
-                  ? Text('확인', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),)
-                  : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.check_circle_outline, color: Color.fromARGB(255, 148, 159, 177), size: Get.width * 0.05,),
-                          Text(' 가입을 축하 드립니다!', style: TextStyle(fontFamily: FontsUtil.korean, color: Color.fromARGB(255, 148, 159, 177), fontSize: Get.width * 0.04),)
-                        ],
-                      ),
-              color: _memberInfoController.isDone.isFalse ? Colors.transparent : Colors.white,
-              onPressed: ()=> _memberInfoController.onClickDoneButton(),
+          padding: EdgeInsets.zero,
+          focusElevation: 0,
+          hoverElevation: 0,
+          highlightElevation: 0,
+          elevation: 0,
+          child: _memberInfoController.isDone.isFalse
+              ? Image.asset('assets/확인1.png', fit: BoxFit.cover,)
+              : Image.asset('assets/확인2.png', fit: BoxFit.cover,),
+          onPressed: ()=> _memberInfoController.onClickDoneButton(),
           )
     );
   }
@@ -138,7 +127,7 @@ class _MemberInfoState extends State<MemberInfo> {
               fit : FlexFit.tight,
               child: TextButton(
                 onPressed: ()=>_memberInfoController.findAdress(homeAddressTextFieldController),
-                child: Text('주소 찾기', style: TextStyle(color: Colors.white),),
+                child: Text('주소 찾기', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.0333),),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -172,6 +161,7 @@ class _MemberInfoState extends State<MemberInfo> {
               '인증번호 받기',
               style: TextStyle(
                 color: Colors.white,
+                  fontSize: Get.width * 0.0333
               ),
             ),
             buttonOnPressed: (){},
@@ -196,6 +186,7 @@ class _MemberInfoState extends State<MemberInfo> {
                   '인증번호 확인',
                 style: TextStyle(
                   color: Colors.white,
+                  fontSize: Get.width * 0.0333
                 ),
               ),
               buttonOnPressed: (){},
@@ -219,8 +210,8 @@ class _MemberInfoState extends State<MemberInfo> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Flexible(flex: 5,child: _textInputwithIcon(controller, hintText, isPassWord, controllerText)),
-        Flexible(flex: 2,child: TextButton(onPressed: buttonOnPressed, child: buttonChild, style: buttonStyle,)),
+        Flexible(flex: 5, fit: FlexFit.tight, child: _textInputwithIcon(controller, hintText, isPassWord, controllerText)),
+        Flexible(flex: 2, fit: FlexFit.tight, child: TextButton(onPressed: buttonOnPressed, child: buttonChild, style: buttonStyle,)),
       ],
     );
   }

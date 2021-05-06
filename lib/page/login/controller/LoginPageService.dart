@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/login/page/loginpage.dart';
 import 'package:oftable_flutter/page/login/utillity/login_page_util.dart';
 
 class LoginPageService extends GetxService{
@@ -43,5 +44,6 @@ class LoginPageService extends GetxService{
     await tokenStorage.delete(key: 'access_token');
     await tokenStorage.delete(key: 'refresh_token');
     Get.reset();
+    Get.offAll(LoginPage());
   }
 }

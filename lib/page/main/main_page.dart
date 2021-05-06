@@ -42,7 +42,7 @@ class _MainPageState extends State<MainPage> {
     ShopPage(),
     OhQuePage(scrollController: _listViewScrollController,),
     MegazinePage(),
-    MyPage(),
+    MyPage(scrollController: _listViewScrollController,),
     ]);
   }
 

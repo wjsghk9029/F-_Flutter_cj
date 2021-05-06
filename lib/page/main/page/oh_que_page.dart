@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
+import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/oh_que_list.dart';
+import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 import 'package:oftable_flutter/page/widget/tab_button.dart';
 
 class OhQuePage extends StatelessWidget {
@@ -20,9 +22,8 @@ class OhQuePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _backGroundImage(),
+        PageBackGroundImage(url: 'assets/background/레시피 하단 배경.jpg'),
         _buildBody(),
-        //MainPageAppBar(),
       ],
     );
   }
@@ -38,7 +39,7 @@ class OhQuePage extends StatelessWidget {
           Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
           _buildTabBar(),
           Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-          _buildRecommendedItems(),
+          Obx(() => _buildRecommendedItems(_ohQueController.foodList.value.data)),
           _buildList(),
         ],
       ),
@@ -96,41 +97,117 @@ class OhQuePage extends StatelessWidget {
     );
   }
 
-  Widget _buildRecommendedItems() {
+  Widget _buildRecommendedItems(List<TagFoodListData> dataList) {
     return Container(
       color: Colors.blue,
-      height: Get.height* 0.4,
+      height: Get.height* 0.45,
       child: Column(
         children: [
           Flexible(
-            flex: 3,
+            flex: 5,
             fit: FlexFit.tight,
-            child: Container(
-              color: Colors.green,
-              child: Center(child: Text('1번아이템'),),
-            ),
+            child: _RecommendedItem(dataList[0], titleFontSize: Get.height * 0.045, subTitleNumberFontSize: Get.height * 0.03, subTitleTextFontSize: Get.height * 0.02),
           ),
           Flexible(
-            flex: 2,
-            fit: FlexFit.tight,
+            flex: 4,
+            fit: FlexFit.loose,
             child: Row(
               children: [
                 Flexible(
-                    child: Container(
-                      color: Colors.blue,
-                      child: Center(child: Text('2번아이템'),),
-                    )
+                    child: _RecommendedItem(dataList[1])
                 ),
                 Flexible(
-                    child: Container(
-                      color: Colors.red,
-                      child: Center(child: Text('3번아이템'),),
-                    )
+                    child: _RecommendedItem(dataList[2])
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _RecommendedItem (TagFoodListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage('http://${data.img_src}'),
+        )
+      ),
+      child: Container(
+          color: Colors.black.withOpacity(0.2),
+          child: Container(
+            margin: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  flex: 3,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    child: Text(
+                      '${data.food_name}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: FontsUtil.korean,
+                        fontWeight: FontWeight.w800,
+                        fontSize: titleFontSize ?? Get.height * 0.03,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(top: BorderSide(width: 1, color: Colors.white.withOpacity(0.5)))
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                    Text(
+                    '${data.food_time}',
+                        style: TextStyle(
+                            fontSize: subTitleNumberFontSize ?? Get.height * 0.023,
+                            fontFamily: FontsUtil.poppins,
+                            color: Colors.white)
+                    ),
+                    Text(
+                        ' min',
+                        style: TextStyle(
+                            fontSize: Get.height * 0.015,
+                            fontFamily: FontsUtil.poppins,
+                            color: Colors.white)
+                    ),
+                    Padding(padding: EdgeInsets.only(right: 10)),
+                    Text(
+                        '${data.food_level}',
+                        style: TextStyle(
+                            fontSize: subTitleNumberFontSize ?? Get.height * 0.023,
+                            fontFamily: FontsUtil.poppins,
+                            color: Colors.white)
+                    ),
+                    Text(
+                        ' level',
+                        style: TextStyle(
+                            fontSize: Get.height * 0.015,
+                            fontFamily: FontsUtil.poppins,
+                            color: Colors.white)
+                    ),
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        iconSize: subTitleNumberFontSize ?? Get.height * 0.03,
+                        onPressed: (){},
+                        icon: Icon(Icons.favorite_border, size: subTitleNumberFontSize ?? Get.height * 0.03, color: Colors.white,)
+                    ),
+                  ]),
+                )
+              )
+              ],
+            ),
+          )
       ),
     );
   }
@@ -156,19 +233,9 @@ class OhQuePage extends StatelessWidget {
               ),
             ),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-            Obx(()=>
-                OhQueList(_ohQueController.listIndex.value,)
-            ),
+            OhQueList(_ohQueController.listIndex.value,),
           ],
         ),
-      ),
-    );
-  }
-
-  Container _backGroundImage() {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/background/레시피 하단 배경.jpg'), fit: BoxFit.cover),
       ),
     );
   }
