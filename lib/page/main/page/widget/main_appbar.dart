@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/page/search_page.dart';
 
 class MainPageAppBar extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ Widget buildAppBar() {
     ),
     automaticallyImplyLeading: false,
     actions: [
-      IconButton(icon: Icon(Icons.search, color: Colors.white), iconSize: Get.height * 0.035, onPressed: (){}),
+      IconButton(icon: Icon(Icons.search, color: Colors.white), iconSize: Get.height * 0.035, onPressed: ()=>Get.to(SearchPage())),
       IconButton(icon: Icon(Icons.favorite_border, color: Colors.white,), iconSize: Get.height * 0.035, onPressed: (){}),
     ],
   );

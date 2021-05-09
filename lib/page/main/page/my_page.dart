@@ -2,20 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/main/controller/mypage_controller.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 
 class MyPage extends StatelessWidget {
   final ScrollController scrollController;
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  final MyPageController _myPageController = Get.put(MyPageController());
 
   MyPage({Key key, this.scrollController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        PageBackGroundImage(url: 'assets/register_background.jpg'),
+       PageBackGroundImage(url: 'assets/register_background.jpg'),
         _buildBody(),
       ],
     );
@@ -23,12 +23,16 @@ class MyPage extends StatelessWidget {
 
   _buildBody() {
     return SingleChildScrollView(
+      controller: scrollController,
+      physics: ScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MainPageAppBar(),
           _buildUserInfo(),
-          CupertinoButton(child: Text('로그아웃',style: TextStyle(color: Colors.white),), onPressed: ()=>_loginPageService.doLogout())
+          _buildList('나의 쇼핑', _myPageController.shoppingItems),
+          _buildList('나의 계정설정', _myPageController.accountItems),
+          _buildList('서비스', _myPageController.serviceItems),
         ],
       ),
     );
@@ -140,6 +144,68 @@ class MyPage extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildList(String title, RxList<MyPageListItem> myPageListItems) {
+    return Obx(()=>
+        Container(
+      margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.only(bottom: 5),
+            width: Get.width,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 1,
+                  color: Colors.white,
+                )
+              )
+            ),
+            child: Container(
+              margin: EdgeInsets.only(left: 10),
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: FontsUtil.korean,
+                  fontWeight: FontWeight.w300,
+                  fontSize: Get.height * 0.02,
+                ),
+              ),
+            ),
+          ),
+          ListView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: myPageListItems.length,
+            itemBuilder: (ctx, idx) => _buildListItem(myPageListItems.elementAt(idx)),
+          ),
+        ],
+      ),
+    ));
+  }
+
+  Widget _buildListItem(MyPageListItem myPageListItem) {
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        onTap: myPageListItem.onTap,
+        title: Text(
+          myPageListItem.listText,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: FontsUtil.korean,
+            fontSize: Get.height * 0.025,
+            fontWeight: FontWeight.w800
+          ),
+        ),
+
       ),
     );
   }

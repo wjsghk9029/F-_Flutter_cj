@@ -1,6 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/login/page/loginpage.dart';
 import 'package:oftable_flutter/page/login/utillity/login_page_util.dart';
 
 class LoginPageService extends GetxService{
@@ -21,6 +20,8 @@ class LoginPageService extends GetxService{
       memberName(data.data.member_name);
       accessToken(data.data.access_token);
       refreshToken(data.data.refresh_token);
+      print('id = $id');
+      print('pw = $pw');
       print(accessToken);
       print(refreshToken);
     }catch(err){
@@ -43,7 +44,5 @@ class LoginPageService extends GetxService{
   Future<void> doLogout() async {
     await tokenStorage.delete(key: 'access_token');
     await tokenStorage.delete(key: 'refresh_token');
-    Get.reset();
-    Get.offAll(LoginPage());
   }
 }

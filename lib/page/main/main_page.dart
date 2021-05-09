@@ -18,6 +18,11 @@ class _MainPageState extends State<MainPage> {
   int _pageNum = 1;
   List<Widget> _pages = [];
 
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(AssetImage('assets/register_background.jpg'), context);
+  }
+
   @override
   void initState() {
     super.initState();
