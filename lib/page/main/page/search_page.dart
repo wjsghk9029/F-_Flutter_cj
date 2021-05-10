@@ -13,11 +13,14 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-      body: Stack(
-        children: [
-          PageBackGroundImage(url: 'assets/register_background.jpg',),
-          _buildBody(statusBarHeight),
-        ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Stack(
+          children: [
+            PageBackGroundImage(url: 'assets/register_background.jpg',),
+            _buildBody(statusBarHeight),
+          ],
+        ),
       ),
     );
   }
@@ -72,9 +75,10 @@ class SearchPage extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: FontsUtil.korean,
                           color: Colors.white,
-                          fontSize: Get.width* 0.04,
+                          fontSize: Get.width* 0.03,
                         ),
                         controller: searchInputController,
+                        onSubmitted: (val)=>_searchPageController.updateLocalItems(val),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           prefixIcon: Icon(Icons.search_sharp, color: Colors.white,),
@@ -144,17 +148,39 @@ class SearchPage extends StatelessWidget {
   _localItems() {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            '최근 검색어',
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: FontsUtil.korean,
-                fontWeight: FontWeight.w800,
-                fontSize: Get.height * 0.035
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '최근 검색어',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: FontsUtil.korean,
+                    fontWeight: FontWeight.w800,
+                    fontSize: Get.height * 0.035
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.bottomRight,
+                height: Get.height * 0.05,
+                child: CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  child: Text('모두 지우기',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: FontsUtil.korean,
+                    fontSize: Get.height * 0.017,
+                  ),),
+                  minSize: Get.height * 0.02,
+                  onPressed: ()=>_searchPageController.resetLocalItems(),
+                ),
+              ),
+            ),
+          ],
         ),
         Padding(padding: EdgeInsets.all(5)),
         Obx(()=>

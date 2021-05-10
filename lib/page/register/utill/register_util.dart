@@ -25,15 +25,14 @@ class RegisterUtil{
     }
   }
 
-  static String _listToString(List<RegisterCheckBoxData> reg) {
+  static String listToString(List<RegisterCheckBoxData> reg) {
     String str = '';
     for(int i = 0; i < reg.length; i++){
-      var text = reg[i].itemId;
       if(reg.last.itemId == reg[i].itemId){
-        str += '$text';
+        str += '${reg[i].itemId}';
         break;
       }
-      str += '$text' + '#';
+      str += '${reg[i].itemId}' + '#';
     }
     return str;
   }
@@ -54,47 +53,16 @@ class RegisterUtil{
         'pop' : '${Register().selectedMember.itemId}',
         'spicy_degree' : '${Register().selectedSpicy.itemId}',
         'prefer_flavor' : '${Register().selectedTaste.itemId}',
-        'allergy_list' : _listToString(Register().outputAllergyList),
-        'taste_list' : _listToString(Register().selectedKeyword),
+        'allergy_list' : listToString(Register().outputAllergyList),
+        'taste_list' : listToString(Register().selectedKeyword),
         'curation' : '${Register().selectedTableCuration.itemId}',
       }),
     );
-    print(_listToString(Register().outputAllergyList));
     if (response.statusCode == 200) {
       print(response.body);
     } else {
       throw Exception('${response.body} = Failed to post doRegister');
     }
   }
-
-  // static Future<Login> testReg() async {
-  //   final response = await http.post(
-  //     Uri.http('210.93.86.79:8080', '/join'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  //     },
-  //     body: (<String, String>{
-  //       'id' : 'test1234',
-  //       'pw' : 'test1234',
-  //       'name' : 'test',
-  //       'phone' : '111-1111-1111',
-  //       'address' : '대전아마도',
-  //       'email' : 'test@test.com',
-  //       'pop' : '1',
-  //       'spicy_degree' : '1',
-  //       'prefer_flavor' : '1',
-  //       'allergy_list' : '1#2#3',
-  //       'taste_list' : '1#2#3',
-  //       'curation' : '1',
-  //     }),
-  //   );
-  //   print(response.headers.toString());
-  //   print(_listToString(Register().outputAllergyList));
-  //   if (response.statusCode == 200) {
-  //     print(response.body);
-  //   } else {
-  //     throw Exception('${response.body} = Failed to post doRegister');
-  //   }
-  // }
 
 }
