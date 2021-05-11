@@ -21,17 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();
-  AssetImage backgroundImage;
+  final AssetImage backgroundImage = AssetImage('assets/Login_background.jpg');
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     precacheImage( AssetImage('assets/register_background.jpg'), context);
-  }
-  @override
-  void initState() {
-    super.initState();
-    backgroundImage = AssetImage('assets/Login_background.jpg');
   }
 
   @override

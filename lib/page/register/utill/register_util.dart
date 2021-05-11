@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 
 class RegisterUtil{
 
-  static Future<bool> idDuplicateCheck(String id) async {
-    final response = await http.post(
+  static Future<http.Response> idDuplicateCheck(String id) async {
+    return await http.post(
       Uri.http('210.93.86.79:8080', '/check_id'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -16,13 +14,6 @@ class RegisterUtil{
         'check_id' : id,
       }
     );
-    if (response.statusCode == 200) {
-      var data = false;
-      jsonDecode(response.body)['error'] == 0 ? data = true : data = false;
-      return data;
-    }else {
-      throw Exception('${response.request.url} ${response.body} = Failed to Post idCheck');
-    }
   }
 
   static String listToString(List<RegisterCheckBoxData> reg) {
@@ -37,8 +28,8 @@ class RegisterUtil{
     return str;
   }
 
-  static Future<void> doRegister({String id, String pw, String name, String phone, String address, String email}) async {
-    final response = await http.post(
+  static Future<http.Response> doRegister({String id, String pw, String name, String phone, String address, String email}) async {
+    return http.post(
       Uri.http('210.93.86.79:8080', '/join'),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -58,11 +49,6 @@ class RegisterUtil{
         'curation' : '${Register().selectedTableCuration.itemId}',
       }),
     );
-    if (response.statusCode == 200) {
-      print(response.body);
-    } else {
-      throw Exception('${response.body} = Failed to post doRegister');
-    }
   }
 
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +32,22 @@ class MemberInfoController extends GetxController{
     EmailSelectorItem('daum.com'),
   ];
 
+  void _debounce(Rx<MemInfoText> text,{Duration duration}){
+    debounce(text.value.text, (_)=>onDebounce(text), time: duration ?? Duration(milliseconds: 300));
+  }
+
+  @override
+  void onInit() {
+    _debounce(idText);
+    _debounce(pwText);
+    _debounce(pwReText);
+    _debounce(nameText);
+    _debounce(birthDayText);
+    _debounce(emailText);
+    _debounce(phoneText);
+    _debounce(phoneAuthText);
+    super.onInit();
+  }
 
   void onDebounce(Rx<MemInfoText> text) async{
     text.value.isError(false);
@@ -40,7 +58,7 @@ class MemberInfoController extends GetxController{
     if(text == birthDayText) return _onDebounceBirthDay();
     if(text == emailText) return _onDebounceEmail();
     if(text == phoneText) return _onDebouncePhone();
-    if(text == phoneAuthText) return _onDebouncePhoneAuth();
+    //if(text == phoneAuthText) return _onDebouncePhoneAuth(); //후에 추가
   }
 
   void onChange(String inputText, Rx<MemInfoText> text){
@@ -68,7 +86,43 @@ class MemberInfoController extends GetxController{
     email2Text.value.text(_emailText);
   }
 
-  void onClickDoneButton(){
+  Future<void> onClickDoneButton() async {
+    isDone(false);
+    _emptyCheckAll();
+    if(_checkErrorAll()) return;
+    isDone(true);
+    try{
+      var jsonData = await RegisterUtil.doRegister(
+        id: idText.value.text.value,
+        pw: pwText.value.text.value,
+        name: nameText.value.text.value,
+        email: emailText.value.text.value + '@' + email2Text.value.text.value,
+        phone: phoneText.value.text.value,
+        address: homeAddressText.value.text.value+ ' '+ homeAddress2Text.value.text.value,
+      );
+      if(jsonData.statusCode != 200)
+        throw Exception('${jsonData.statusCode} => Failed to Post join');
+      var data = jsonDecode(jsonData.body);
+      if(data['error'] as int != 0)
+        throw Exception('${data['data']['msg']}');
+      _loginPageService.doLogin(idText.value.text.value, pwText.value.text.value);
+    }catch(ex){
+      Get.defaultDialog(title: '에러', middleText: ex.toString());
+      isDone(false);
+      return;
+    }
+    Get.offAll(MainPage(), transition: Transition.downToUp);
+  }
+
+  Future<void> findAddress(TextEditingController controller) async {
+    KopoModel model = await Get.to(Kopo(), transition: Transition.cupertino);
+    var addressJSON =
+        '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''}';
+    controller.text = addressJSON;
+    homeAddressText.value.text(addressJSON);
+  }
+
+  void _emptyCheckAll() {
     _emptyCheck(idText);
     _emptyCheck(pwText);
     _emptyCheck(pwReText);
@@ -80,61 +134,25 @@ class MemberInfoController extends GetxController{
     _emptyCheck(phoneAuthText);
     _emptyCheck(homeAddressText);
     _emptyCheck(homeAddress2Text);
-    if(_checkError(idText)) return;
-    if(_checkError(pwText)) return;
-    if(_checkError(pwReText)) return;
-    if(_checkError(nameText)) return;
-    if(_checkError(birthDayText)) return;
-    if(_checkError(emailText)) return;
-    if(_checkError(email2Text)) return;
-    if(_checkError(phoneText)) return;
-    if(_checkError(phoneAuthText)) return;
-    if(_checkError(homeAddressText)) return;
-    if(_checkError(homeAddress2Text)) return;
-    isDone(true);
-    try{
-      RegisterUtil.doRegister(
-        id: idText.value.text.value,
-        pw: pwText.value.text.value,
-        name: nameText.value.text.value,
-        email: emailText.value.text.value + '@' + email2Text.value.text.value,
-        phone: phoneText.value.text.value,
-        address: homeAddressText.value.text.value+ ' '+ homeAddress2Text.value.text.value,
-      );
-      _loginPageService.doLogin(idText.value.text.value, pwText.value.text.value);
-    }catch(ex){
-      print(ex);
-      isDone(false);
-      return;
-    }
-    Get.offAll(MainPage(), transition: Transition.downToUp);
   }
 
-  void _emptyCheck(Rx<MemInfoText> text){
-    if(text.value.text.isEmpty)
-      return _textError(text, '이 항목은 비어있습니다.');
-  }
+  bool _checkErrorAll(){
+    if(_errorCheck(idText)) return true;
+    if(_errorCheck(pwText)) return true;
+    if(_errorCheck(pwReText)) return true;
+    if(_errorCheck(nameText)) return true;
+    if(_errorCheck(birthDayText)) return true;
+    if(_errorCheck(emailText)) return true;
+    if(_errorCheck(email2Text)) return true;
+    if(_errorCheck(phoneText)) return true;
+    if(_errorCheck(phoneAuthText)) return true;
+    if(_errorCheck(homeAddressText)) return true;
+    if(_errorCheck(homeAddress2Text)) return true;
 
-
-  void _debounce(Rx<MemInfoText> text,{Duration duration}){
-    debounce(text.value.text, (_)=>onDebounce(text), time: duration ?? Duration(milliseconds: 300));
-  }
-
-  @override
-  void onInit() {
-    _debounce(idText);
-    _debounce(pwText);
-    _debounce(pwReText);
-    _debounce(nameText);
-    _debounce(birthDayText);
-    _debounce(emailText);
-    _debounce(phoneText);
-    _debounce(phoneAuthText);
-    super.onInit();
+    return false;
   }
 
   void _textReset(Rx<MemInfoText> text) {
-    if(text.value.text.isNotEmpty) return;
     text.update((val) {
       val.text('');
       val.isSuccess(false);
@@ -161,87 +179,99 @@ class MemberInfoController extends GetxController{
   }
 
   bool _regMatch(Rx<MemInfoText> text, RegExp regExp) {
-    return !regExp.hasMatch(text.value.text.value) && text.value.text.isNotEmpty;
+    return !regExp.hasMatch(text.value.text.value);
   }
 
-  Future<void> findAdress(TextEditingController controller) async {
-    KopoModel model = await Get.to(Kopo(), transition: Transition.cupertino);
-    var addressJSON =
-        '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''}';
-    controller.text = addressJSON;
-    homeAddressText.value.text(addressJSON);
-  }
-
-  bool _checkError(Rx<MemInfoText> text) {
+  bool _errorCheck(Rx<MemInfoText> text) {
     return text.value.isError.isTrue;
   }
 
-  Future<void> _onDebounceId() async {
-    var regExp = RegExp(r'^[0-9a-z]+$');
-    if(_regMatch(idText, regExp))
-      return _textError(idText, '올바른 아이디의 형식이 아닙니다.');
-    if(!(await RegisterUtil.idDuplicateCheck(idText.value.text.value)) && idText.value.text.value.isNotEmpty)
-      return _textError(idText, '중복되는 아이디 입니다.');
-    if(idText.value.text.value.isNotEmpty)
-      return _textSuccess(idText, '사용가능한 아이디입니다.');
+  void _emptyCheck(Rx<MemInfoText> text){
+    if(text.value.text.isEmpty)
+      return _textError(text, '이 항목은 비어있습니다.');
+  }
 
-    _textReset(idText); // 빈칸일때
+  Future<bool> _idCheck(String id) async {
+    var jsonData = await RegisterUtil.idDuplicateCheck(id);
+    if(jsonData.statusCode != 200)
+      throw Exception('${jsonData.statusCode} => Failed to Post RenewAccessToken');
+    var data = jsonDecode(jsonData.body);
+    if(data['error'] as int != 0)
+      return true;
+
+    return false;
+  }
+
+  Future<void> _onDebounceId() async {
+    try{
+      if(idText.value.text.value.isEmpty)
+        _textReset(idText);
+      var regExp = RegExp(r'^[0-9a-z]+$');
+      if(_regMatch(idText, regExp))
+        return _textError(idText, '올바른 아이디의 형식이 아닙니다.');
+      if(await _idCheck(idText.value.text.value))
+        return _textError(idText, '중복되는 아이디 입니다.');
+      if(idText.value.text.value.isNotEmpty)
+        return _textSuccess(idText, '사용가능한 아이디입니다.');
+    }catch(ex){
+      print(ex);
+    }
   }
 
   void _onDebouncePw() {
+    if(pwText.value.text.value.isEmpty)
+      _textReset(pwText); // 빈칸일때
     var regExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$');
     if(_regMatch(pwText, regExp))
       return _textError(pwText, '올바른 비밀번호의 형식이 아닙니다.');
-
-    _textReset(pwText); // 빈칸일때
-
   }
 
   void _onDebouncePwRe() {
-    if(pwReText.value.text.value != pwText.value.text.value  && pwReText.value.text.isNotEmpty)
+    if(pwReText.value.text.value.isEmpty)
+      _textReset(pwReText);
+    if(pwReText.value.text.value != pwText.value.text.value)
       return _textError(pwReText, '앞서 입력한 비밀번호와 다릅니다.');
     if(pwReText.value.text.value.isNotEmpty)
       return _textSuccess(pwReText, '비밀번호가 동일합니다.');
 
-    _textReset(pwReText); // 빈칸일때
 
   }
 
   void _onDebounceName() {
+    if(nameText.value.text.value.isEmpty)
+      _textReset(nameText);
     var regExp = RegExp(r'^[가-힣]{2,4}$');
     if(_regMatch(nameText, regExp))
       return _textError(nameText, '올바른 한글이름의 형식이 아닙니다.');
-
-    _textReset(nameText); // 빈칸일때
-
   }
 
   void _onDebounceBirthDay() {
+    if(birthDayText.value.text.value.isEmpty)
+      _textReset(birthDayText);
     var regExp = RegExp(r'^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$');
     if(_regMatch(birthDayText, regExp))
       return _textError(birthDayText, '올바른 생년월일의 형식이 아닙니다.');
 
-    _textReset(birthDayText); // 빈칸일때
 
   }
 
   void _onDebounceEmail() {
+    if(emailText.value.text.value.isEmpty)
+      _textReset(emailText);
     var regExp = RegExp(r'^[0-9a-z]+$');
     if(_regMatch(emailText, regExp))
       return _textError(emailText, '올바른 이메일 아이디의 형식이 아닙니다.');
-
-    _textReset(emailText); // 빈칸일때
-
   }
 
   void _onDebouncePhone() {
+    if(phoneText.value.text.value.isEmpty)
+      _textReset(phoneText);
     var regExp = RegExp(r'^\d{3}\d{3,4}\d{4}$');
     if(_regMatch(phoneText, regExp))
       return _textError(phoneText, '올바른 전화번호의 형식이 아닙니다.');
-
-    _textReset(phoneText); // 빈칸일때
-
   }
 
-  void _onDebouncePhoneAuth() {}
+  //후에 추가
+  //void _onDebouncePhoneAuth() {}
+
 }

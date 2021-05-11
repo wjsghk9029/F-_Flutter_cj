@@ -126,7 +126,7 @@ class _MemberInfoState extends State<MemberInfo> {
             Flexible(flex: 2,
               fit : FlexFit.tight,
               child: TextButton(
-                onPressed: ()=>_memberInfoController.findAdress(homeAddressTextFieldController),
+                onPressed: ()=>_memberInfoController.findAddress(homeAddressTextFieldController),
                 child: Text('주소 찾기', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.0333),),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
