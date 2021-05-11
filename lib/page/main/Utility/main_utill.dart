@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class MainPageUtil {
 
-  static Future<TagFoodList> getTagFoodList(int select_food_tag, String authorization, int page) async {
+  static Future<TagFoodList> getTagFoodList(int selectFoodTag, String authorization, int page) async {
     final response = await http.post(
       Uri.http('210.93.86.79:8080', '/recommend_food'),
       headers: <String, String>{
@@ -12,7 +12,7 @@ class MainPageUtil {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
         body: <String, String>{
-          'select_food_tag' : '$select_food_tag',
+          'select_food_tag' : '$selectFoodTag',
           'page' : '$page',
         });
 

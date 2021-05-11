@@ -106,7 +106,7 @@ class OhQuePage extends StatelessWidget {
           Flexible(
             flex: 5,
             fit: FlexFit.tight,
-            child: _RecommendedItem(data.recommend_list[0], titleFontSize: Get.height * 0.045, subTitleNumberFontSize: Get.height * 0.03, subTitleTextFontSize: Get.height * 0.02),
+            child: _recommendedItem(data.recommend_list[0], titleFontSize: Get.height * 0.045, subTitleNumberFontSize: Get.height * 0.03, subTitleTextFontSize: Get.height * 0.02),
           ),
           Flexible(
             flex: 4,
@@ -114,10 +114,10 @@ class OhQuePage extends StatelessWidget {
             child: Row(
               children: [
                 Flexible(
-                    child: _RecommendedItem(data.recommend_list[1])
+                    child: _recommendedItem(data.recommend_list[1])
                 ),
                 Flexible(
-                    child: _RecommendedItem(data.recommend_list[2])
+                    child: _recommendedItem(data.recommend_list[2])
                 ),
               ],
             ),
@@ -127,7 +127,7 @@ class OhQuePage extends StatelessWidget {
     );
   }
 
-  Widget _RecommendedItem (TagFoodRecommendListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
+  Widget _recommendedItem (TagFoodRecommendListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

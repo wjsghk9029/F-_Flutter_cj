@@ -6,7 +6,7 @@ import 'package:oftable_flutter/page/main/controller/search_page_controller.dart
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 
 class SearchPage extends StatelessWidget {
-  TextEditingController searchInputController;
+  final TextEditingController searchInputController = TextEditingController();
   final SearchPageController _searchPageController = Get.put(SearchPageController());
 
   @override

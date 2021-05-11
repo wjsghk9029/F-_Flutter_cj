@@ -34,22 +34,14 @@ class TagFoodData {
 }
 
 class TagFoodRecommendListData{
-  // ignore: non_constant_identifier_names
   final String img_src;
-  // ignore: non_constant_identifier_names
   final String food_description;
-  // ignore: non_constant_identifier_names
   final int food_price;
-  // ignore: non_constant_identifier_names
   final String food_name;
-  // ignore: non_constant_identifier_names
   final int food_serial;
-  // ignore: non_constant_identifier_names
   final int food_level;
-  // ignore: non_constant_identifier_names
   final int food_time;
 
-  // ignore: non_constant_identifier_names
   TagFoodRecommendListData({this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
 
   factory TagFoodRecommendListData.fromJson(Map<String, dynamic> json) {
@@ -66,24 +58,15 @@ class TagFoodRecommendListData{
 }
 
 class TagFoodListData{
- // ignore: non_constant_identifier_names
  final String img_src;
- // ignore: non_constant_identifier_names
  final String food_description;
- // ignore: non_constant_identifier_names
  final int food_price;
- // ignore: non_constant_identifier_names
  final String food_name;
- // ignore: non_constant_identifier_names
  final int food_serial;
- // ignore: non_constant_identifier_names
  final int food_level;
- // ignore: non_constant_identifier_names
  final int food_time;
- // ignore: non_constant_identifier_names
  final int food_like;
 
-  // ignore: non_constant_identifier_names
   TagFoodListData({this.food_like, this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
 
  factory TagFoodListData.fromJson(Map<String, dynamic> json) {
