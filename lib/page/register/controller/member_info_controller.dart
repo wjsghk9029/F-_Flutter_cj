@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/register/utill/register_util.dart';
 import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 
 class MemberInfoController extends GetxController{
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  LoginService _loginPageService = Get.put(LoginService());
 
   Rx<MemInfoText> idText = MemInfoText().obs;
   Rx<MemInfoText> pwText = MemInfoText().obs;

@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
 import 'package:oftable_flutter/page/login/controller/RootPageController.dart';
-import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:video_player/video_player.dart';
-
-import 'loginpage.dart';
-
 
 class RootPage extends StatefulWidget {
   @override

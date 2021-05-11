@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/main/Utility/main_utill.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 
 
 
 class OhQuePageController extends GetxController{
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  LoginService _loginPageService = Get.put(LoginService());
 
   RxBool isLoading = true.obs;
   Rx<TagFoodList> foodList = TagFoodList().obs;

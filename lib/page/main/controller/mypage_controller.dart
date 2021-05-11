@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/login/page/loginpage.dart';
 
 class MyPageListItem{
@@ -9,7 +9,7 @@ class MyPageListItem{
 }
 
 class MyPageController extends GetxController{
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  LoginService _loginPageService = Get.put(LoginService());
 
   RxList<MyPageListItem> shoppingItems = <MyPageListItem>[].obs;
   RxList<MyPageListItem> accountItems = <MyPageListItem>[].obs;

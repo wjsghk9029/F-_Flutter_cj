@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/login/controller/LoginPageService.dart';
+import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/login/logintestgoogle.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  LoginService _loginPageService = Get.put(LoginService());
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final googleSignIn = GoogleSignIn();

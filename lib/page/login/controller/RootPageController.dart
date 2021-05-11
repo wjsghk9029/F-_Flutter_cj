@@ -3,10 +3,10 @@ import 'package:oftable_flutter/page/login/page/loginpage.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:video_player/video_player.dart';
 
-import 'LoginPageService.dart';
+import 'LoginService.dart';
 
 class RootPageController extends GetxController{
-  LoginPageService _loginPageService = Get.put(LoginPageService());
+  LoginService _loginPageService = Get.put(LoginService());
 
   var videoController = VideoPlayerController.asset("assets/rootLoading.mp4").obs;
   var videoInitializeDone = false.obs;
