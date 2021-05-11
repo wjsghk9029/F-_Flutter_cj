@@ -15,8 +15,6 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  static final tokenStorage = FlutterSecureStorage();
-  LoginPageService _loginPageService = Get.put(LoginPageService());
   RootPageController _rootPageController = Get.put(RootPageController());
 
   @override
@@ -26,14 +24,6 @@ class _RootPageState extends State<RootPage> {
     precacheImage(AssetImage('assets/logowithtext.png'), context);
     precacheImage(AssetImage('assets/logowithtext.png'), context);
     precacheImage(AssetImage('assets/background/레시피 하단 배경.jpg'), context);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _asyncMethod();
-    });
   }
 
   @override
@@ -58,21 +48,6 @@ class _RootPageState extends State<RootPage> {
     );
   }
 
-  Future<void> _asyncMethod() async {
-    var accessToken = await tokenStorage.read(key: "access_token");
-    var refreshToken = await tokenStorage.read(key: "refresh_token");
-    await Future.delayed(Duration(seconds: 2, milliseconds: 200));
-    if(accessToken != null && refreshToken != null){
-      try{
-        _loginPageService.doAutoLogin(refreshToken);
-        Get.offAll(MainPage());
-      }catch(ex){
-        print(ex);
-        Get.offAll(LoginPage());
-      }
-    }else{
-      Get.offAll(LoginPage());
-    }
-  }
+
 }
 

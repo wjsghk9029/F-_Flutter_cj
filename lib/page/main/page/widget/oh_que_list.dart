@@ -22,13 +22,13 @@ class OhQueList extends StatelessWidget {
   }
 
 
-  Widget buildListView(List<TagFoodListData> data) {
+  Widget buildListView(TagFoodData data) {
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-        itemCount: data.length,
-        itemBuilder:(ctx, idx) => _buildList(data[idx]),
+        itemCount: data.food_list.length,
+        itemBuilder:(ctx, idx) => _buildList(data.food_list[idx]),
     );
   }
 
@@ -55,7 +55,7 @@ class OhQueList extends StatelessWidget {
                     maxWidth: Get.width * 0.3,
                     maxHeight: Get.width * 0.3,
                 ),
-                 child: Image.network('http://${data.img_src}', fit: BoxFit.cover,),
+                 child: Image.network(data.img_src, fit: BoxFit.cover,),
                ),
               ),
             ),

@@ -97,7 +97,7 @@ class OhQuePage extends StatelessWidget {
     );
   }
 
-  Widget _buildRecommendedItems(List<TagFoodListData> dataList) {
+  Widget _buildRecommendedItems(TagFoodData data) {
     return Container(
       color: Colors.blue,
       height: Get.height* 0.45,
@@ -106,7 +106,7 @@ class OhQuePage extends StatelessWidget {
           Flexible(
             flex: 5,
             fit: FlexFit.tight,
-            child: _RecommendedItem(dataList[0], titleFontSize: Get.height * 0.045, subTitleNumberFontSize: Get.height * 0.03, subTitleTextFontSize: Get.height * 0.02),
+            child: _RecommendedItem(data.recommend_list[0], titleFontSize: Get.height * 0.045, subTitleNumberFontSize: Get.height * 0.03, subTitleTextFontSize: Get.height * 0.02),
           ),
           Flexible(
             flex: 4,
@@ -114,10 +114,10 @@ class OhQuePage extends StatelessWidget {
             child: Row(
               children: [
                 Flexible(
-                    child: _RecommendedItem(dataList[1])
+                    child: _RecommendedItem(data.recommend_list[1])
                 ),
                 Flexible(
-                    child: _RecommendedItem(dataList[2])
+                    child: _RecommendedItem(data.recommend_list[2])
                 ),
               ],
             ),
@@ -127,12 +127,12 @@ class OhQuePage extends StatelessWidget {
     );
   }
 
-  Widget _RecommendedItem (TagFoodListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
+  Widget _RecommendedItem (TagFoodRecommendListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage('http://${data.img_src}'),
+          image: NetworkImage(data.img_src),
         )
       ),
       child: Container(

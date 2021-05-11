@@ -31,8 +31,11 @@ class MyPage extends StatelessWidget {
           MainPageAppBar(),
           _buildUserInfo(),
           _buildList('나의 쇼핑', _myPageController.shoppingItems),
+          Padding(padding: EdgeInsets.all(Get.height * 0.01)),
           _buildList('나의 계정설정', _myPageController.accountItems),
+          Padding(padding: EdgeInsets.all(Get.height * 0.01)),
           _buildList('서비스', _myPageController.serviceItems),
+          Padding(padding: EdgeInsets.all(Get.height * 0.03)),
         ],
       ),
     );

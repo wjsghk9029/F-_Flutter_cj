@@ -60,7 +60,7 @@ class SearchPage extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Image.asset('assets/상단로고.png',
                         fit: BoxFit.fitHeight,
-                        height: Get.height * 0.04,
+                        height: Get.height * 0.045,
                         ),
                     )
                 ),
@@ -69,13 +69,13 @@ class SearchPage extends StatelessWidget {
                     flex: 7,
                     child: Container(
                       margin: EdgeInsets.only(left: 10, right: 5),
-                      height: Get.height * 0.04,
+                      height: Get.height * 0.05,
                       child: TextField(
                         textAlignVertical: TextAlignVertical.center,
                         style: TextStyle(
                           fontFamily: FontsUtil.korean,
                           color: Colors.white,
-                          fontSize: Get.width* 0.03,
+                          fontSize: Get.width* 0.04,
                         ),
                         controller: searchInputController,
                         onSubmitted: (val)=>_searchPageController.updateLocalItems(val),
