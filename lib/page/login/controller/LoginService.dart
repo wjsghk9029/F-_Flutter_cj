@@ -14,18 +14,13 @@ class LoginService extends GetxService{
 
 
   Future<void> doLogin(String id, String pw) async{
-    try {
-      var jsonData = await LoginPageUtil.postLogin(id, pw);
-      if(jsonData.statusCode != 200)
-        throw Exception('${jsonData.statusCode} => Failed to Post Login');
-      var data = Login.fromJson(jsonDecode(jsonData.body));
-      if(data.error != 0)
-        throw Exception('error to Post Login');
-
-      await _saveLoginData(data);
-    }catch(err){
-      throw(err);
-    }
+    var jsonData = await LoginPageUtil.postLogin(id, pw);
+    if(jsonData.statusCode != 200)
+      throw Exception('${jsonData.statusCode} => Failed to Post Login');
+    var data = Login.fromJson(jsonDecode(jsonData.body));
+    if(data.error != 0)
+      throw Exception('${jsonDecode(jsonData.body)['data']['msg']}');
+    await _saveLoginData(data);
   }
 
   Future _saveLoginData(Login data) async {
@@ -41,17 +36,13 @@ class LoginService extends GetxService{
   }
 
   Future<void> renewAccessToken(String _refreshToken)  async {
-    try {
-      var jsonData = await LoginPageUtil.postRenewAccessToken(_refreshToken);
-      if(jsonData.statusCode != 200)
-        throw Exception('${jsonData.statusCode} => Failed to Post RenewAccessToken');
-      var data = RenewAccessToken.fromJson(jsonDecode(jsonData.body));
-      if(data.error != 0)
-        throw Exception('error to renewAccessToken');
-      accessToken(data.data.access_token);
-    }catch(err){
-      throw(err);
-    }
+    var jsonData = await LoginPageUtil.postRenewAccessToken(_refreshToken);
+    if(jsonData.statusCode != 200)
+      throw Exception('${jsonData.statusCode} => Failed to Post RenewAccessToken');
+    var data = RenewAccessToken.fromJson(jsonDecode(jsonData.body));
+    if(data.error != 0)
+      throw Exception('${jsonDecode(jsonData.body)['data']['msg']}');
+    accessToken(data.data.access_token);
   }
 
   Future<void> doLogout() async {
@@ -61,7 +52,7 @@ class LoginService extends GetxService{
 
   Future<void> readTokenFromStorage () async {
     if( !(await tokenStorage.containsKey(key: 'refresh_token')))
-      throw('there is no refresh_token');
+      throw Exception('there is no refresh_token');
     var _refreshToken = await tokenStorage.read(key: "refresh_token");
     refreshToken(_refreshToken);
   }

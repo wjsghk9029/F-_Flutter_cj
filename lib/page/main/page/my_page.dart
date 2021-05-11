@@ -78,7 +78,7 @@ class MyPage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: Get.width * 0.075,
-                          fontFamily: FontsUtil.korean,
+                          fontFamily: FontUtil.korean,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -88,7 +88,7 @@ class MyPage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: Get.width * 0.04,
-                          fontFamily: FontsUtil.korean,
+                          fontFamily: FontUtil.korean,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -110,7 +110,7 @@ class MyPage extends StatelessWidget {
                                 '알림',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: FontsUtil.korean,
+                                fontFamily: FontUtil.korean,
                                 fontWeight: FontWeight.w400,
                                 fontSize: Get.height * 0.0225,
                               ),
@@ -131,7 +131,7 @@ class MyPage extends StatelessWidget {
                               '좋아요0',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: FontsUtil.korean,
+                                fontFamily: FontUtil.korean,
                                 fontWeight: FontWeight.w400,
                                 fontSize: Get.height * 0.0225,
                               ),
@@ -175,7 +175,7 @@ class MyPage extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: FontsUtil.korean,
+                  fontFamily: FontUtil.korean,
                   fontWeight: FontWeight.w300,
                   fontSize: Get.height * 0.02,
                 ),
@@ -203,7 +203,7 @@ class MyPage extends StatelessWidget {
           myPageListItem.listText,
           style: TextStyle(
             color: Colors.white,
-            fontFamily: FontsUtil.korean,
+            fontFamily: FontUtil.korean,
             fontSize: Get.height * 0.025,
             fontWeight: FontWeight.w800
           ),

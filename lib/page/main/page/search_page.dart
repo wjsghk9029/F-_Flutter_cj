@@ -73,7 +73,7 @@ class SearchPage extends StatelessWidget {
                       child: TextField(
                         textAlignVertical: TextAlignVertical.center,
                         style: TextStyle(
-                          fontFamily: FontsUtil.korean,
+                          fontFamily: FontUtil.korean,
                           color: Colors.white,
                           fontSize: Get.width* 0.04,
                         ),
@@ -90,7 +90,7 @@ class SearchPage extends StatelessWidget {
                           filled: true,
                           fillColor: Color.fromARGB(75, 255, 255, 255),
                           hintStyle: TextStyle(
-                            fontFamily: FontsUtil.korean,
+                            fontFamily: FontUtil.korean,
                             color: Colors.white,
                           ),
                           border: OutlineInputBorder(
@@ -157,7 +157,7 @@ class SearchPage extends StatelessWidget {
                 '최근 검색어',
                 style: TextStyle(
                     color: Colors.white,
-                    fontFamily: FontsUtil.korean,
+                    fontFamily: FontUtil.korean,
                     fontWeight: FontWeight.w800,
                     fontSize: Get.height * 0.035
                 ),
@@ -172,7 +172,7 @@ class SearchPage extends StatelessWidget {
                   child: Text('모두 지우기',
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: FontsUtil.korean,
+                    fontFamily: FontUtil.korean,
                     fontSize: Get.height * 0.017,
                   ),),
                   minSize: Get.height * 0.02,
@@ -210,7 +210,7 @@ class SearchPage extends StatelessWidget {
               text,
               style: TextStyle(
                 color: Colors.white,
-                fontFamily: FontsUtil.korean,
+                fontFamily: FontUtil.korean,
                 fontWeight: FontWeight.w500,
                 fontSize: Get.height * 0.022
               ),
@@ -230,7 +230,7 @@ class SearchPage extends StatelessWidget {
             '추천 검색어',
             style: TextStyle(
                 color: Colors.white,
-                fontFamily: FontsUtil.korean,
+                fontFamily: FontUtil.korean,
                 fontWeight: FontWeight.w800,
                 fontSize: Get.height * 0.035
             ),

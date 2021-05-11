@@ -117,7 +117,7 @@ class _MemberInfoState extends State<MemberInfo> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('주소(배송지)', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+        Text('주소(배송지)', style: TextStyle(fontFamily: FontUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +151,7 @@ class _MemberInfoState extends State<MemberInfo> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('휴대전화', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+        Text('휴대전화', style: TextStyle(fontFamily: FontUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
         Container(
           child: _phoneInput(
@@ -221,7 +221,7 @@ class _MemberInfoState extends State<MemberInfo> {
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label ?? '라벨', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
+              Text(label ?? '라벨', style: TextStyle(fontFamily: FontUtil.korean, color: Colors.white, fontSize: Get.width * 0.06, fontWeight: FontWeight.w800),),
               Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
               Container(
                 child: isEmail ?? false
@@ -258,7 +258,7 @@ class _MemberInfoState extends State<MemberInfo> {
           obscureText: isPassWord,
           textAlignVertical: TextAlignVertical.bottom,
           style: TextStyle(
-            fontFamily: FontsUtil.korean,
+            fontFamily: FontUtil.korean,
             color: Colors.white,
             fontSize: Get.width* 0.04,
           ),
@@ -284,7 +284,7 @@ class _MemberInfoState extends State<MemberInfo> {
             contentPadding: EdgeInsets.only(bottom: 10, top: 5),
             hintStyle: TextStyle(
               fontSize: Get.width* 0.04,
-              fontFamily: FontsUtil.korean,
+              fontFamily: FontUtil.korean,
               color: Colors.white60,
               fontWeight: FontWeight.w500,
             ),

@@ -56,7 +56,7 @@ class OhQuePage extends StatelessWidget {
               'CURATION',
             style: TextStyle(
               color: Colors.white,
-              fontFamily: FontsUtil.poppins,
+              fontFamily: FontUtil.poppins,
               fontSize: Get.height* 0.035,
               fontWeight: FontWeight.w800,
             ),
@@ -88,7 +88,7 @@ class OhQuePage extends StatelessWidget {
             child: Text(
               '$idx',
               style: TextStyle(
-                fontFamily: FontsUtil.korean,
+                fontFamily: FontUtil.korean,
                 color: Colors.white
               ),
             ),
@@ -150,7 +150,7 @@ class OhQuePage extends StatelessWidget {
                       '${data.food_name}',
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: FontsUtil.korean,
+                        fontFamily: FontUtil.korean,
                         fontWeight: FontWeight.w800,
                         fontSize: titleFontSize ?? Get.height * 0.03,
                       ),
@@ -171,14 +171,14 @@ class OhQuePage extends StatelessWidget {
                     '${data.food_time}',
                         style: TextStyle(
                             fontSize: subTitleNumberFontSize ?? Get.height * 0.023,
-                            fontFamily: FontsUtil.poppins,
+                            fontFamily: FontUtil.poppins,
                             color: Colors.white)
                     ),
                     Text(
                         ' min',
                         style: TextStyle(
                             fontSize: Get.height * 0.015,
-                            fontFamily: FontsUtil.poppins,
+                            fontFamily: FontUtil.poppins,
                             color: Colors.white)
                     ),
                     Padding(padding: EdgeInsets.only(right: 10)),
@@ -186,14 +186,14 @@ class OhQuePage extends StatelessWidget {
                         '${data.food_level}',
                         style: TextStyle(
                             fontSize: subTitleNumberFontSize ?? Get.height * 0.023,
-                            fontFamily: FontsUtil.poppins,
+                            fontFamily: FontUtil.poppins,
                             color: Colors.white)
                     ),
                     Text(
                         ' level',
                         style: TextStyle(
                             fontSize: Get.height * 0.015,
-                            fontFamily: FontsUtil.poppins,
+                            fontFamily: FontUtil.poppins,
                             color: Colors.white)
                     ),
                     IconButton(
@@ -227,7 +227,7 @@ class OhQuePage extends StatelessWidget {
             Text(
               'SPECIAL RECIPE',
               style: TextStyle(
-                fontFamily: FontsUtil.poppins,
+                fontFamily: FontUtil.poppins,
                 fontSize: Get.height* 0.035,
                 fontWeight: FontWeight.w800,
               ),

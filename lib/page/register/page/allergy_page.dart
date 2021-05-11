@@ -48,10 +48,10 @@ class _AllergyPageState extends State<AllergyPage> {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("알레르기 정보를 알려주세요.",
-            style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),
+            style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),
             textAlign: TextAlign.start,),
           Text("WHAT ALLERGIES DO YOU HAVE?",
-            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w500),
             textAlign: TextAlign.start,),
           Padding(padding: EdgeInsets.only(bottom: 20)),
           Container(

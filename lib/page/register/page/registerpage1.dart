@@ -38,16 +38,16 @@ class _RegisterPage1State extends State<RegisterPage1> {
           Row(
             children: [
               Text("나의 푸드 라이프스타일은?",
-                style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean,  color: Colors.white, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.korean,  color: Colors.white, fontWeight: FontWeight.w800),
                 textAlign: TextAlign.start,),
               Padding(padding: EdgeInsets.all(2)),
               Text("(2개 선택)",
-                style: TextStyle(fontSize: Get.width * 0.035, fontFamily: FontsUtil.korean, color: Colors.white),
+                style: TextStyle(fontSize: Get.width * 0.035, fontFamily: FontUtil.korean, color: Colors.white),
                 textAlign: TextAlign.start,),
             ],
           ),
           Text("MY FOOD LIFE STYLE",
-            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white,),
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white,),
             textAlign: TextAlign.start,),
           Padding(padding: EdgeInsets.only(bottom: 20)),
           GridView.builder(

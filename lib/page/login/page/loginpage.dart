@@ -204,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
           obscureText: isPassword,
           textAlignVertical: TextAlignVertical.bottom,
           style: TextStyle(
-            fontFamily: FontsUtil.korean,
+            fontFamily: FontUtil.korean,
             color: Colors.white,
             fontSize: Get.width* 0.04,
           ),
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
             filled: true,
             fillColor: Color.fromARGB(75, 255, 255, 255),
             hintStyle: TextStyle(
-              fontFamily: FontsUtil.korean,
+              fontFamily: FontUtil.korean,
               color: Colors.white,
             ),
             hintText: hintText?? '힌트 텍스트',

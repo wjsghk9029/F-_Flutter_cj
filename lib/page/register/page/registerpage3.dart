@@ -42,7 +42,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
               hoverElevation: 0,
               highlightElevation: 0,
               elevation: 0,
-              child: Text('관심사 설정 저장', style: TextStyle(fontFamily: FontsUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),),
+              child: Text('관심사 설정 저장', style: TextStyle(fontFamily: FontUtil.korean, color: Colors.white, fontSize: Get.width * 0.05),),
               color: Color.fromARGB(100, 255, 255, 255),
               onPressed: () => Get.to(MemberInfo(), transition: Transition.cupertino)),
             ),
@@ -83,22 +83,22 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   children: [
                     Container(
                       child: Text('$name',
-                        style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
+                        style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
                       decoration: BoxDecoration(
                         border: Border(bottom: BorderSide(width: 1.5, color: Colors.white))
                       ),
                     ),
                     Text('에 대한',
-                      style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
+                      style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
                   ],
                 ),
                 Text('세부 관심 키워드를 골라주세요',
-                  style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
+                  style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800, color: Colors.white),),
               ],
             ),
           ),
           Text("SELECT A KEYWORD",
-            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+            style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
             textAlign: TextAlign.start,),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           Container(

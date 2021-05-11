@@ -52,7 +52,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
   }
 
   _buildBlankText(RegisterCheckBoxData item) {
-    return Text('${item.itemName}', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),);
+    return Text('${item.itemName}', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),);
   }
 
 
@@ -67,7 +67,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
         Container(
           child: Row(
             children: [
-              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
+              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),),
                 Container(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(150, 255, 255, 255),
@@ -77,12 +77,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   padding: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                   child: _buildBlankText(Register().selectedSpicy),
               ),
-              Text('이다', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
+              Text('이다', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),),
             ],
           ),
         ),
         Text("WHO AM I?",
-          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
           textAlign: TextAlign.start,),
         Padding(padding: EdgeInsets.only(bottom: 10)),
         Container(
@@ -135,7 +135,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
           margin: EdgeInsets.only(bottom: 5),
           child: Row(
             children: [
-              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
+              Text('나는', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),),
               Container(
                 margin: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
                 padding: EdgeInsets.only(right: Get.width* 0.025, left: Get.width* 0.025),
@@ -145,12 +145,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                 ),
               ),
-              Text('맛을 좋아한다.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
+              Text('맛을 좋아한다.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),),
             ],
           ),
         ),
         Text("WHAT IS YOUR FAVORITE FLAVOR?",
-          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
           textAlign: TextAlign.start,),
         Padding(padding: EdgeInsets.only(bottom: 10)),
         GridView.builder(
@@ -198,10 +198,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          child: Text('알러지 정보를 알려주세요.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontsUtil.korean, fontWeight: FontWeight.w800),),
+          child: Text('알러지 정보를 알려주세요.', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.055, fontFamily: FontUtil.korean, fontWeight: FontWeight.w800),),
         ),
         Text("DO YOU HAVE ANY ALLEREGIES?",
-          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontsUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
+          style: TextStyle(fontSize: Get.width * 0.055, fontFamily: FontUtil.national_park_outline, color: Colors.white, fontWeight: FontWeight.w100),
           textAlign: TextAlign.start,),
         Padding(padding: EdgeInsets.only(bottom: 10)),
         Container(

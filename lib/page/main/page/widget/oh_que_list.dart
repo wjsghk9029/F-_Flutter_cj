@@ -75,14 +75,14 @@ class OhQueList extends StatelessWidget {
                                 data.food_name,
                                 style: TextStyle(
                                   fontSize: Get.height * 0.025,
-                                  fontFamily: FontsUtil.korean,
+                                  fontFamily: FontUtil.korean,
                                   fontWeight: FontWeight.w800,
                                 )
                             ),
                             Text(data.food_description,
                                 style: TextStyle(
                                     fontSize: Get.height * 0.015,
-                                    fontFamily: FontsUtil.korean,
+                                    fontFamily: FontUtil.korean,
                                     fontWeight: FontWeight.w600,
                                 )
                             ),
@@ -104,14 +104,14 @@ class OhQueList extends StatelessWidget {
                                     '${data.food_time}',
                                     style: TextStyle(
                                         fontSize: Get.height * 0.025,
-                                        fontFamily: FontsUtil.poppins,
+                                        fontFamily: FontUtil.poppins,
                                         color: Colors.black)
                                 ),
                                 Text(
                                     'min',
                                     style: TextStyle(
                                         fontSize: Get.height * 0.015,
-                                        fontFamily: FontsUtil.poppins,
+                                        fontFamily: FontUtil.poppins,
                                         color: Colors.black)
                                 ),
                                 Padding(padding: EdgeInsets.only(right: 10)),
@@ -119,14 +119,14 @@ class OhQueList extends StatelessWidget {
                                     '${data.food_level}',
                                     style: TextStyle(
                                         fontSize: Get.height * 0.025,
-                                        fontFamily: FontsUtil.poppins,
+                                        fontFamily: FontUtil.poppins,
                                         color: Colors.black)
                                 ),
                                 Text(
                                     'level',
                                     style: TextStyle(
                                         fontSize: Get.height * 0.015,
-                                        fontFamily: FontsUtil.poppins,
+                                        fontFamily: FontUtil.poppins,
                                         color: Colors.black)
                                 ),
                                 IconButton(
