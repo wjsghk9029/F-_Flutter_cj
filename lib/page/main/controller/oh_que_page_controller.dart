@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/main/Utility/main_utill.dart';
@@ -20,30 +22,39 @@ class OhQuePageController extends GetxController{
 
   void changeListIdx(int idx){
     listIndex(idx);
-   _getTagFoodList(listIndex.value, 1);
+   _getFoodList(listIndex.value, 1);
   }
 
 
-  Future<void> _getTagFoodList (int listIdx, int page) async {
+  Future<void> _getFoodList (int listIdx, int page) async {
     try {
       isLoading(true);
-      var _foodList = await MainPageUtil.getTagFoodList(listIdx, _loginPageService.accessToken.value, page);
-      foodList(_foodList);
+      var jsonData = await MainPageUtil.getTagFoodList(listIdx, _loginPageService.accessToken.value, page);
+      if(jsonData.statusCode != 200)
+        throw Exception('${jsonData.statusCode} => Failed to Post Login');
+      var data = TagFoodList.fromJson(jsonDecode(jsonData.body));
+      if(data.error != 0)
+        throw Exception('${jsonDecode(jsonData.body)['data']['msg']}');
+      foodList(data);
       isLoading(false);
     }
     catch (ex) {
-      print(ex);
       throw ex;
     }
   }
 
   Future<bool> postFoodLike (String authorization, int foodSn) async {
     try{
-      return await MainPageUtil.postFoodLike(authorization, foodSn);
+      var jsonData = await MainPageUtil.postFoodLike(_loginPageService.accessToken.value, foodSn);
+      if(jsonData.statusCode != 200)
+        throw Exception('${jsonData.statusCode} => Failed to Post Login');
+      var data = jsonDecode(jsonData.body);
+      if(data['error'] as int != 0)
+        throw Exception('${data['data']['msg']}');
+      return true;
     }
     catch(ex){
-      print(ex);
-      throw ex;
+      return false;
     }
   }
 }

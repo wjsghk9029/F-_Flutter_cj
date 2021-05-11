@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'package:http/http.dart' as http;
 
 class MainPageUtil {
 
-  static Future<TagFoodList> getTagFoodList(int selectFoodTag, String authorization, int page) async {
-    final response = await http.post(
+  static Future<http.Response> getTagFoodList(int selectFoodTag, String authorization, int page) async {
+    return http.post(
       Uri.http('210.93.86.79:8080', '/recommend_food'),
       headers: <String, String>{
         'Authorization' : authorization,
@@ -15,18 +13,11 @@ class MainPageUtil {
           'select_food_tag' : '$selectFoodTag',
           'page' : '$page',
         });
-
-    if (response.statusCode == 200 && jsonDecode(response.body)['error'] == 0) {
-      print('${response.body}');
-      return TagFoodList.fromJson(jsonDecode(response.body));
-    }else {
-      throw Exception('${response.request.url} ${response.body} = Failed to Get TagFoodList');
-    }
   }
 
 
-  static Future<bool> postFoodLike(String authorization, int foodSn) async {
-    final response = await http.post(
+  static Future<http.Response> postFoodLike(String authorization, int foodSn) async {
+    return http.post(
       Uri.http('210.93.86.79:8080', '/food_like'),
       headers: <String, String>{
         'Authorization' : authorization,
@@ -36,10 +27,5 @@ class MainPageUtil {
           'food_sn' : '$foodSn',
       }
     );
-    if (response.statusCode == 200 && jsonDecode(response.body)['error'] == 0) {
-      return true;
-    }else {
-      throw Exception('${response.request.url} ${response.body} $authorization = Failed to postFoodLike');
-    }
   }
 }
