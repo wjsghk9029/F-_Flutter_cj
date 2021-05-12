@@ -28,4 +28,10 @@ class MainPageUtil {
       }
     );
   }
+
+  static Future<http.Response> getFoodDtl(int foodSn) async {
+    return http.get(
+        Uri.http('210.93.86.79:8080', '/get_food_dtl', {'food_sn' : '$foodSn'}),
+    );
+  }
 }

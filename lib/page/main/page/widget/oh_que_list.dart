@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
-import 'package:oftable_flutter/page/main/page/widget/oq_Demo.dart';
+import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
+import 'package:oftable_flutter/page/main/page/food_detail_page.dart';
 
 
 class OhQueList extends StatelessWidget {
@@ -37,7 +38,7 @@ class OhQueList extends StatelessWidget {
     return Container(
       height: Get.width * 0.3,
       child: GestureDetector(
-        onTap: ()=>Get.to(OqDemo(listData: data,)),
+        onTap: ()=> Get.to(FoodDetailPage(), binding: FoodDetailBinding(data.food_serial)),
         child: Card(
           margin: EdgeInsets.symmetric(vertical: 5),
           color: Colors.transparent,

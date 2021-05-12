@@ -14,6 +14,10 @@ class LoginService extends GetxService{
 
 
   Future<void> doLogin(String id, String pw) async{
+    if(id.isEmpty)
+      throw Exception('아이디를 입력해주세요');
+    if(pw.isEmpty)
+      throw Exception('비밀번호를 입력해주세요');
     var jsonData = await LoginPageUtil.postLogin(id, pw);
     if(jsonData.statusCode != 200)
       throw Exception('${jsonData.statusCode} => Failed to Post Login');
