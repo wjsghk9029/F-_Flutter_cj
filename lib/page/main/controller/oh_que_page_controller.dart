@@ -11,12 +11,14 @@ class OhQuePageController extends GetxController{
   LoginService _loginPageService = Get.put(LoginService());
 
   RxBool isLoading = true.obs;
+  RxBool isRecommendLoading = true.obs;
   Rx<TagFoodList> foodList = TagFoodList().obs;
   RxInt listIndex = 0.obs;
 
   @override
   void onInit() {
     changeListIdx(1);
+    isRecommendLoading(false);
     super.onInit();
   }
 
