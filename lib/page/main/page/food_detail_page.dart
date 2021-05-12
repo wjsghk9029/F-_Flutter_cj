@@ -443,6 +443,9 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                     Flexible(child: Container(
                       height: Get.height * 0.05,
                       child: MaterialButton(
+                        hoverElevation: 0,
+                        focusElevation: 0,
+                        highlightElevation: 0,
                         padding: EdgeInsets.zero,
                         elevation: 0,
                         color: Colors.black26,
