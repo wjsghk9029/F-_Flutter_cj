@@ -11,12 +11,15 @@ class HomePageController extends GetxController{
   List<HomPageDataVideo> videoData = [];
   List<YoutubePlayerController> videoControllers = [];
   RxBool isLoading = true.obs;
+  RxInt bannerIndex = 0.obs;
 
   @override
   Future<void> onInit() async {
     await _setData();
     super.onInit();
   }
+
+  void bannerIndexChange(int index) => bannerIndex(index);
 
   Future<HomePageData> _getHomepage() async {
     var jsonData = await MainPageUtil.getHomePage();
@@ -40,6 +43,7 @@ class HomePageController extends GetxController{
         YoutubePlayerController value = YoutubePlayerController(
             initialVideoId: data.video_num,
             params: YoutubePlayerParams(
+              autoPlay: false,
               showControls: true,
               showFullscreenButton: true,
             )

@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 
-@Deprecated(
-    '회원가입 페이지에서만 사용됨'
-)
-class RegisterPageRouter extends StatefulWidget {
-  final int pageIndex;
+class CustomPageBar extends StatelessWidget {
+  final int nowIndex;
   final int pageViewLength;
+  final double width;
+  final double height;
 
-  const RegisterPageRouter({Key key, this.pageIndex, this.pageViewLength}) : super(key: key);
-  @override
-  _RegisterPageRouterState createState() => _RegisterPageRouterState();
-}
+  const CustomPageBar({Key key, this.nowIndex, this.pageViewLength, this.width, this.height}) : super(key: key);
 
-class _RegisterPageRouterState extends State<RegisterPageRouter> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width,
       child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.zero,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: widget.pageViewLength,
+            crossAxisCount: pageViewLength,
             crossAxisSpacing: 10,
             childAspectRatio: 5,
           ),
           shrinkWrap: true,
-          itemCount: widget.pageViewLength,
-          itemBuilder: (ctx, idx){return _itemBuilder(ctx, idx);}
+          itemCount: pageViewLength,
+          itemBuilder: (ctx, idx)=>_itemBuilder(ctx, idx),
       ),
     );
   }
 
   Widget _itemBuilder(BuildContext ctx, int idx) {
-    bool isIt = widget.pageIndex == idx;
+    bool isIt = nowIndex == idx;
     return Container(
       color: isIt ? Colors.white : Colors.white60,
     );

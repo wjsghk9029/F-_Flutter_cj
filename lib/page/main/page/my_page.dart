@@ -35,7 +35,7 @@ class MyPage extends StatelessWidget {
           _buildList('나의 계정설정', _myPageController.accountItems),
           Padding(padding: EdgeInsets.all(Get.height * 0.01)),
           _buildList('서비스', _myPageController.serviceItems),
-          Padding(padding: EdgeInsets.all(Get.height * 0.03)),
+          Padding(padding: EdgeInsets.all(Get.height * 0.1)),
         ],
       ),
     );

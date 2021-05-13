@@ -8,6 +8,7 @@ import 'package:oftable_flutter/page/main/model/home_page_model.dart';
 import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
+import 'package:oftable_flutter/page/widget/register_page_router.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'food_detail_page.dart';
@@ -52,6 +53,7 @@ class HomePage extends StatelessWidget {
         _buildBanner(_homePageController.bannerData),
         Padding(padding: EdgeInsets.only(top: 30)),
         _buildProduct(_homePageController.productData),
+        _buildVideo(_homePageController.videoData, _homePageController.videoControllers)
       ],
     );
   }
@@ -61,10 +63,22 @@ class HomePage extends StatelessWidget {
       height: Get.height * 0.25,
       child: Stack(
         children: [
-          PageView.builder(
-            itemCount: bannerData.length,
-            itemBuilder: (ctx, idx)=>_bannerItem(bannerData.elementAt(idx)),
+          Container(
+            child: PageView.builder(
+              onPageChanged: (idx)=> _homePageController.bannerIndexChange(idx),
+              itemCount: bannerData.length,
+              itemBuilder: (ctx, idx)=>_bannerItem(bannerData.elementAt(idx)),
+            ),
           ),
+          Obx(()=> Container(
+            margin: EdgeInsets.only(bottom: 10),
+              alignment: Alignment.bottomCenter,
+              child: CustomPageBar(
+                width: Get.width * 0.6,
+                pageViewLength: bannerData.length,
+                nowIndex: _homePageController.bannerIndex.value,
+              )
+          )),
         ],
       ),
     );
@@ -77,6 +91,22 @@ class HomePage extends StatelessWidget {
           image: NetworkImage(data.img_src),
           fit: BoxFit.fill,
         )
+      ),
+      child: Container(
+        color: Colors.black.withOpacity(0.25),
+        child: Container(
+          alignment: Alignment.bottomLeft,
+          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+          child: Text(
+            data.banner_dtl,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: FontUtil.korean,
+              fontSize: Get.height * 0.04,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -145,6 +175,47 @@ class HomePage extends StatelessWidget {
               ),
             ),
           )
+        ),
+      ),
+    );
+  }
+
+  _buildVideo(List<HomPageDataVideo> videoData, List<YoutubePlayerController> videoControllers) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 20),
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.05,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                alignment: Alignment.centerLeft,
+                image: AssetImage('assets/logo_white.png')
+              )
+            ),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            itemCount: videoControllers.length,
+            itemBuilder:(ctx, idx)=>_videoItem(videoControllers.elementAt(idx)),
+          )
+        ],
+      ),
+    );
+  }
+
+  _videoItem(YoutubePlayerController controller) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: YoutubePlayerControllerProvider( // Provides controller to all the widget below it.
+        controller: controller,
+        child: YoutubePlayerIFrame(
+          aspectRatio: 16 / 9,
         ),
       ),
     );
