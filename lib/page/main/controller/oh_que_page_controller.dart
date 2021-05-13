@@ -11,26 +11,27 @@ class OhQuePageController extends GetxController{
   LoginService _loginPageService = Get.put(LoginService());
 
   RxBool isLoading = true.obs;
-  RxBool isRecommendLoading = true.obs;
+  RxBool isReCommendLoading = true.obs;
   Rx<TagFoodList> foodList = TagFoodList().obs;
   RxInt listIndex = 0.obs;
 
   @override
-  void onInit() {
-    changeListIdx(1);
-    isRecommendLoading(false);
+  Future<void> onInit() async {
+    await changeListIdx(1);
+    isReCommendLoading(false);
     super.onInit();
   }
 
-  void changeListIdx(int idx){
+  Future<void> changeListIdx(int idx) async {
+    isLoading(true);
     listIndex(idx);
-   _getFoodList(listIndex.value, 1);
+    await _getFoodList(listIndex.value, 1);
+    isLoading(false);
   }
 
 
   Future<void> _getFoodList (int listIdx, int page) async {
     try {
-      isLoading(true);
       var jsonData = await MainPageUtil.getTagFoodList(listIdx, _loginPageService.accessToken.value, page);
       if(jsonData.statusCode != 200)
         throw Exception('${jsonData.statusCode} => Failed to Post Login');
@@ -38,7 +39,6 @@ class OhQuePageController extends GetxController{
       if(data.error != 0)
         throw Exception('${jsonDecode(jsonData.body)['data']['msg']}');
       foodList(data);
-      isLoading(false);
     }
     catch (ex) {
       throw ex;

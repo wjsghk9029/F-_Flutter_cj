@@ -105,7 +105,7 @@ class OhQuePage extends StatelessWidget {
         Container(
       color: Colors.white,
       height: Get.height* 0.45,
-      child: _ohQueController.isRecommendLoading.value
+      child: _ohQueController.isReCommendLoading.value
           ? SpinKitRing(color: Colors.blue)
           : _recommendedItemsColumn(data),
     ));
