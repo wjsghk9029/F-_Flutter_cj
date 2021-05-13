@@ -2,6 +2,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/page/home_page.dart';
 import 'package:oftable_flutter/page/main/page/megazine_page.dart';
 import 'package:oftable_flutter/page/main/page/my_page.dart';
 import 'package:oftable_flutter/page/main/page/oh_que_page.dart';
@@ -15,7 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   ScrollController _listViewScrollController;
   bool _isVisible = true;
-  int _pageNum = 1;
+  int _pageNum = 2;
   List<Widget> _pages = [];
 
   void didChangeDependencies() {
@@ -46,6 +47,7 @@ class _MainPageState extends State<MainPage> {
     _pages.addAll([
     ShopPage(),
     OhQuePage(scrollController: _listViewScrollController,),
+    HomePage(),
     MegazinePage(),
     MyPage(scrollController: _listViewScrollController,),
     ]);
@@ -70,7 +72,7 @@ class _MainPageState extends State<MainPage> {
     return AnimatedContainer(
       duration: Duration(seconds: 1),
       curve: Curves.fastLinearToSlowEaseIn,
-      height: _isVisible ? 56.0 : 0.0,
+      height: _isVisible ? Get.height * 0.08 : 0.0,
       child: Wrap(
         children: <Widget>[
           BottomNavigationBar(
@@ -86,19 +88,28 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: Colors.black,
             items: [
               BottomNavigationBarItem(
-                icon: _pageNum == 0 ? Image.asset('assets/F#_shop_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F#_shop.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                icon: Image.asset('assets/F#_shop.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                activeIcon : Image.asset('assets/F#_shop_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,),
                 label: '숍',
               ),
               BottomNavigationBarItem(
-                icon: _pageNum == 1 ? Image.asset('assets/F#_curation_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# curation.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                icon: Image.asset('assets/F# curation.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                activeIcon : Image.asset('assets/F#_curation_HP.png', fit: BoxFit.fill, height: Get.height * 0.045,),
                 label: '오큐',
               ),
               BottomNavigationBarItem(
-                icon: _pageNum == 2 ? Image.asset('assets/F# magazine HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# magazine.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                icon: Icon(Icons.home_outlined, color: Colors.white,),
+                activeIcon: Icon(Icons.home_outlined, color: Colors.red,),
+                label: '홈',
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset('assets/F# magazine.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                activeIcon : Image.asset('assets/F# magazine HP.png', fit: BoxFit.fill, height: Get.height * 0.045,),
                 label: '매거진',
               ),
               BottomNavigationBarItem(
-                icon: _pageNum == 3 ? Image.asset('assets/F# my page HP.png', fit: BoxFit.fill, height: Get.height * 0.045,) :  Image.asset('assets/F# my page.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                icon: Image.asset('assets/F# my page.png', fit: BoxFit.cover, height: Get.height * 0.045,),
+                activeIcon : Image.asset('assets/F# my page HP.png', fit: BoxFit.fill, height: Get.height * 0.045,),
                 label: '마이페이지',
               ),
             ],

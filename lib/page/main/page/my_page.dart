@@ -64,85 +64,83 @@ class MyPage extends StatelessWidget {
           ),
           Flexible(
             fit: FlexFit.tight,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '닉네임',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Get.width * 0.075,
-                          fontFamily: FontUtil.korean,
-                          fontWeight: FontWeight.w800,
-                        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '닉네임',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Get.width * 0.075,
+                        fontFamily: FontUtil.korean,
+                        fontWeight: FontWeight.w800,
                       ),
-                      Padding(padding: EdgeInsets.all(5)),
-                      Text(
-                        '아이디',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Get.width * 0.04,
-                          fontFamily: FontUtil.korean,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Padding(padding: EdgeInsets.all(5)),
+                    Text(
+                      '아이디',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Get.width * 0.04,
+                        fontFamily: FontUtil.korean,
+                        fontWeight: FontWeight.w500,
                       ),
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.all(10)),
-                  Row(
-                    children: [
-                      Flexible(
-                        fit: FlexFit.tight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.info_outline,
-                              size: Get.height * 0.05,
+                    ),
+                  ],
+                ),
+                Padding(padding: EdgeInsets.all(10)),
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.info_outline,
+                            size: Get.height * 0.05,
+                            color: Colors.white,
+                          ),
+                          Text(
+                              '알림',
+                            style: TextStyle(
                               color: Colors.white,
+                              fontFamily: FontUtil.korean,
+                              fontWeight: FontWeight.w400,
+                              fontSize: Get.height * 0.0225,
                             ),
-                            Text(
-                                '알림',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontUtil.korean,
-                                fontWeight: FontWeight.w400,
-                                fontSize: Get.height * 0.0225,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Flexible(
-                        fit: FlexFit.tight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.favorite_outline_sharp,
-                              size: Get.height * 0.05,
+                    ),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.favorite_outline_sharp,
+                            size: Get.height * 0.05,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            '좋아요0',
+                            style: TextStyle(
                               color: Colors.white,
+                              fontFamily: FontUtil.korean,
+                              fontWeight: FontWeight.w400,
+                              fontSize: Get.height * 0.0225,
                             ),
-                            Text(
-                              '좋아요0',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontUtil.korean,
-                                fontWeight: FontWeight.w400,
-                                fontSize: Get.height * 0.0225,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                  ],
+                )
+              ],
             ),
           )
         ],

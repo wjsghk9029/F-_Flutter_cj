@@ -34,4 +34,10 @@ class MainPageUtil {
         Uri.http('210.93.86.79:8080', '/get_food_dtl', {'food_sn' : '$foodSn'}),
     );
   }
+
+  static Future<http.Response> getHomePage() async {
+    return http.get(
+      Uri.http('210.93.86.79:8080', 'homepage'),
+    );
+  }
 }

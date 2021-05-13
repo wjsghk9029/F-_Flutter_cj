@@ -3,34 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/main/controller/food_detail_controller.dart';
+import 'package:oftable_flutter/page/main/controller/food_detail_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/food_detail.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 
-class FoodDetailPage extends GetView<FoodDetailController> {
+class FoodDetailPage extends GetView<FoodDetailPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx( () =>
         controller.isSettingDone.isTrue
-          ? Stack(
-            children: [
-              Container(
-                height: Get.height * 0.55 + MediaQuery.of(context).padding.top,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage('${controller.foodDetailTitle.value.img_src}'),
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center
-                  )
+          ? GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: [
+                Container(
+                  height: Get.height * 0.55 + MediaQuery.of(context).padding.top,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage('${controller.foodDetailTitle.value.img_src}'),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center
+                    )
+                  ),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
                 ),
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ),
-              _buildBody(),
-            ],
+                _buildBody(),
+              ],
+            ),
           )
           : Padding(
           padding: EdgeInsets.only(top: Get.height * 0.1),
@@ -295,7 +298,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                 minWidth: Get.width * 0.4,
                 maxWidth: Get.width * 0.4,
               ),
-              child: Image.network('http://210.93.86.79:8080/images/test_recipe_image.png', fit: BoxFit.fill,),
+              child: Image.network('${item.img_src}', fit: BoxFit.fill,),
             ),
           ),
           Expanded(child: Container(

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/main/controller/food_detail_controller.dart';
+import 'package:oftable_flutter/page/main/controller/food_detail_page_controller.dart';
 
 class FoodDetailBinding implements Bindings{
   final int foodSerialNumber;
@@ -8,6 +8,6 @@ class FoodDetailBinding implements Bindings{
 
   @override
   void dependencies() {
-    Get.put(FoodDetailController(foodSerialNumber));
+    Get.put(FoodDetailPageController(foodSerialNumber));
   }
 }

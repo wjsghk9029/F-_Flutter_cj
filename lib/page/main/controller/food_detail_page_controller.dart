@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/Utility/main_utill.dart';
 import 'package:oftable_flutter/page/main/model/food_detail.dart';
 
-class FoodDetailController extends GetxController{
+class FoodDetailPageController extends GetxController{
   final int foodSerialNumber;
-  FoodDetailController(this.foodSerialNumber);
+  FoodDetailPageController(this.foodSerialNumber);
 
   final TextEditingController tipEditingController = TextEditingController();
 
