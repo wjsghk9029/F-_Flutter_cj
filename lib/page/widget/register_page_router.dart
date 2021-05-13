@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:oftable_flutter/page/widget/page_router_circle.dart';
 
-class PageRouterWithCircle extends StatefulWidget {
+@Deprecated(
+    '회원가입 페이지에서만 사용됨'
+)
+class RegisterPageRouter extends StatefulWidget {
   final int pageIndex;
   final int pageViewLength;
 
-  const PageRouterWithCircle({Key key, this.pageIndex, this.pageViewLength}) : super(key: key);
+  const RegisterPageRouter({Key key, this.pageIndex, this.pageViewLength}) : super(key: key);
   @override
-  _PageRouterWithCircleState createState() => _PageRouterWithCircleState();
+  _RegisterPageRouterState createState() => _RegisterPageRouterState();
 }
 
-class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
+class _RegisterPageRouterState extends State<RegisterPageRouter> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +31,9 @@ class _PageRouterWithCircleState extends State<PageRouterWithCircle> {
   }
 
   Widget _itemBuilder(BuildContext ctx, int idx) {
+    bool isIt = widget.pageIndex == idx;
     return Container(
-      child: PageRouterCircle(
-        isIt: widget.pageIndex == idx,
-      ),
+      color: isIt ? Colors.white : Colors.white60,
     );
   }
 }

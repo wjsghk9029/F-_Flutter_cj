@@ -72,7 +72,7 @@ class _StartOfTablePageState extends State<StartOfTablePage> {
               Container(
                 height: Get.height * 0.03,
                 width: 125,
-                child: PageRouterWithCircle(
+                child: RegisterPageRouter(
                   pageIndex: _pagenum,
                   pageViewLength: _pages.length,
                     ),
