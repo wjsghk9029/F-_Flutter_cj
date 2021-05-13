@@ -1,10 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/home_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/home_page_model.dart';
+import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
+
+import 'food_detail_page.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -44,6 +49,8 @@ class HomePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildBanner(_homePageController.bannerData),
+        Padding(padding: EdgeInsets.only(top: 30)),
+        _buildProduct(_homePageController.productData),
       ],
     );
   }
@@ -69,6 +76,75 @@ class HomePage extends StatelessWidget {
           image: NetworkImage(data.img_src),
           fit: BoxFit.fill,
         )
+      ),
+    );
+  }
+
+  _buildProduct(List<HomPageDataProduct> productData) {
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.5),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            child: Text(
+              'WHAT\'S NEW',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: FontUtil.korean,
+                fontWeight: FontWeight.w900,
+                fontSize: Get.height * 0.03
+              ),
+            ),
+          ),
+          Container(
+            height: Get.height * 0.25,
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: productData.length,
+              itemBuilder:(ctx, idx)=>_productItem(productData.elementAt(idx)),
+            ),
+          ),
+          Padding(padding: EdgeInsets.all(25))
+        ],
+      ),
+    );
+  }
+
+  _productItem(HomPageDataProduct data) {
+    return GestureDetector(
+      onTap: ()=> Get.to(FoodDetailPage(), binding: FoodDetailBinding(data.food_serial)),
+      child: Container(
+        width: Get.width * 0.5,
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(data.img_src),
+            fit: BoxFit.cover
+          )
+        ),
+        child: Container(
+          color: Colors.black.withOpacity(0.3),
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            child: Text(
+                data.food_name,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: FontUtil.korean,
+                fontWeight: FontWeight.w800,
+                fontSize: Get.height*0.025
+              ),
+            ),
+          )
+        ),
       ),
     );
   }
