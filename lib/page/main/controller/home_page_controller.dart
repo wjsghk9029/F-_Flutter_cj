@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/Utility/main_utill.dart';
 import 'package:oftable_flutter/page/main/model/home_page_model.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class HomePageController extends GetxController{
   List<HomPageDataBanner> bannerData = [];
   List<HomPageDataProduct> productData = [];
   List<HomPageDataVideo> videoData = [];
+  List<YoutubePlayerController> videoControllers = [];
   RxBool isLoading = true.obs;
 
   @override
@@ -34,10 +36,19 @@ class HomePageController extends GetxController{
       bannerData = data.banner;
       productData = data.product;
       videoData = data.video;
+      for(var data in videoData){
+        YoutubePlayerController value = YoutubePlayerController(
+            initialVideoId: data.video_num,
+            params: YoutubePlayerParams(
+              showControls: true,
+              showFullscreenButton: true,
+            )
+        );
+        videoControllers.add(value);
+      }
       isLoading(false);
     }catch(ex){
       print(ex);
-      Get.back();
     }
   }
 

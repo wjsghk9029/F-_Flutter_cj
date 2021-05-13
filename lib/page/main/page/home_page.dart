@@ -8,6 +8,7 @@ import 'package:oftable_flutter/page/main/model/home_page_model.dart';
 import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'food_detail_page.dart';
 
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Text(
               'WHAT\'S NEW',
               style: TextStyle(
@@ -111,7 +112,7 @@ class HomePage extends StatelessWidget {
               itemBuilder:(ctx, idx)=>_productItem(productData.elementAt(idx)),
             ),
           ),
-          Padding(padding: EdgeInsets.all(25))
+          Padding(padding: EdgeInsets.all(15))
         ],
       ),
     );
@@ -133,7 +134,7 @@ class HomePage extends StatelessWidget {
           color: Colors.black.withOpacity(0.3),
           child: Container(
             alignment: Alignment.bottomLeft,
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Text(
                 data.food_name,
               style: TextStyle(

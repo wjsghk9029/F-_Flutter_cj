@@ -50,6 +50,7 @@ dependencies:
   video_player: ^2.1.1
   #스피너
   flutter_spinkit: ^5.0.0
+  youtube_player_iframe: ^2.0.0
 
 dev_dependencies:
   flutter_test:
