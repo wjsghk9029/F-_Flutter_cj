@@ -20,8 +20,9 @@ Widget buildAppBar() {
       backgroundColor: Colors.transparent,
       title: IconButton(
         onPressed: ()=>Get.offAll(MainPage()),
-        iconSize: Get.height * 0.045,
+        iconSize: Get.height * 0.06,
         icon: Container(
+          color: Colors.transparent,
           alignment: Alignment.centerLeft,
           child: Image.asset('assets/logo_white.png',
             fit: BoxFit.cover,
