@@ -20,20 +20,20 @@ class TagFoodList {
 }
 
 class TagFoodData {
-  final List<TagFoodRecommendListData> recommend_list;
+  final List<TagFoodRecommendList> recommend_list;
   final List<TagFoodListData> food_list;
 
   TagFoodData({this.recommend_list, this.food_list});
 
   factory TagFoodData.fromJson(Map<String, dynamic> json) {
     return TagFoodData(
-      recommend_list: (json['recommend_list'] as List).map((e) => TagFoodRecommendListData.fromJson(e)).toList(),
+      recommend_list: (json['recommend_list'] as List).map((e) => TagFoodRecommendList.fromJson(e)).toList(),
       food_list: (json['food_list'] as List).map((e) => TagFoodListData.fromJson(e)).toList(),
     );
   }
 }
 
-class TagFoodRecommendListData{
+class TagFoodRecommendList{
   final String img_src;
   final String food_description;
   final int food_price;
@@ -42,10 +42,10 @@ class TagFoodRecommendListData{
   final int food_level;
   final int food_time;
 
-  TagFoodRecommendListData({this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
+  TagFoodRecommendList({this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
 
-  factory TagFoodRecommendListData.fromJson(Map<String, dynamic> json) {
-    return TagFoodRecommendListData(
+  factory TagFoodRecommendList.fromJson(Map<String, dynamic> json) {
+    return TagFoodRecommendList(
       img_src: json['img_src']as String,
       food_description: json['food_description']as String,
       food_price: json['food_price']as int,
@@ -65,7 +65,7 @@ class TagFoodListData{
  final int food_serial;
  final int food_level;
  final int food_time;
- final int food_like;
+ int food_like;
 
   TagFoodListData({this.food_like, this.food_level, this.food_time, this.img_src, this.food_description, this.food_price, this.food_name, this.food_serial});
 

@@ -60,4 +60,5 @@ class LoginService extends GetxService{
     var _refreshToken = await tokenStorage.read(key: "refresh_token");
     refreshToken(_refreshToken);
   }
+
 }

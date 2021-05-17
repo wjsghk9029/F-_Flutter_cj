@@ -45,18 +45,31 @@ class OhQuePageController extends GetxController{
     }
   }
 
-  Future<bool> postFoodLike (String authorization, int foodSn) async {
-    try{
+  Future<bool> _postFoodLike (int foodSn) async {
       var jsonData = await MainPageUtil.postFoodLike(_loginPageService.accessToken.value, foodSn);
       if(jsonData.statusCode != 200)
-        throw Exception('${jsonData.statusCode} => Failed to Post Login');
+        throw Exception('${jsonData.statusCode} => Failed to Post FoodLike');
       var data = jsonDecode(jsonData.body);
       if(data['error'] as int != 0)
         throw Exception('${data['data']['msg']}');
       return true;
-    }
-    catch(ex){
-      return false;
+  }
+
+  TagFoodListData _getFoodDataBySerial (int foodSn)
+    => foodList.value.data.food_list.where((element) => element.food_serial == foodSn).single;
+
+  Future<void> doFoodLike(int foodSerialNumber) async {
+    try{
+      if(!(await _postFoodLike(foodSerialNumber))) return;
+      var data = _getFoodDataBySerial(foodSerialNumber);
+      data.food_like = 1;
+      foodList.update((val) {
+        for(var data in val.data.food_list){
+          if(data.food_serial == foodSerialNumber) data.food_like = 1;
+        }
+      });
+    }catch(ex){
+      print(ex);
     }
   }
 }

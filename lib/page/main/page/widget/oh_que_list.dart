@@ -133,8 +133,11 @@ class OhQueList extends StatelessWidget {
                                 IconButton(
                                     padding: EdgeInsets.zero,
                                     iconSize: Get.height * 0.025,
-                                    onPressed: (){},
-                                    icon: Icon(Icons.favorite_border, size: Get.height * 0.025,)
+                                    onPressed: ()=>_ohQueController.doFoodLike(data.food_serial),
+                                    icon: Icon(
+                                      data.food_like != 0 ? Icons.favorite : Icons.favorite_border,
+                                      size: Get.height * 0.025,
+                                    )
                                 )
                               ],
                             ),

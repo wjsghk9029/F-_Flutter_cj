@@ -47,7 +47,7 @@ class _MainPageState extends State<MainPage> {
     _pages.addAll([
     ShopPage(),
     OhQuePage(scrollController: _listViewScrollController,),
-    HomePage(),
+    HomePage(scrollController: _listViewScrollController,),
     MegazinePage(),
     MyPage(scrollController: _listViewScrollController,),
     ]);

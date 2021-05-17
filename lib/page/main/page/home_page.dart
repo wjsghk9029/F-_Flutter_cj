@@ -14,6 +14,12 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'food_detail_page.dart';
 
 class HomePage extends StatelessWidget {
+  final ScrollController scrollController;
+
+  HomePage({
+    Key key,
+    this.scrollController
+  }) : super(key: key);
 
   final HomePageController _homePageController = Get.put(HomePageController());
 
@@ -29,6 +35,7 @@ class HomePage extends StatelessWidget {
 
   _buildBody() {
     return SingleChildScrollView(
+      controller: scrollController,
       physics: ScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

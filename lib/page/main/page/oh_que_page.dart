@@ -137,7 +137,7 @@ class OhQuePage extends StatelessWidget {
     );
   }
 
-  Widget _recommendedItem (TagFoodRecommendListData data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
+  Widget _recommendedItem (TagFoodRecommendList data, {double titleFontSize, double subTitleNumberFontSize, double subTitleTextFontSize}){
     return GestureDetector(
       onTap: ()=> Get.to(FoodDetailPage(), binding: FoodDetailBinding(data.food_serial)),
       child: Container(
@@ -211,8 +211,12 @@ class OhQuePage extends StatelessWidget {
                       IconButton(
                           padding: EdgeInsets.zero,
                           iconSize: subTitleNumberFontSize ?? Get.height * 0.03,
-                          onPressed: (){},
-                          icon: Icon(Icons.favorite_border, size: subTitleNumberFontSize ?? Get.height * 0.03, color: Colors.white,)
+                          onPressed: ()=>_ohQueController.doFoodLike(data.food_serial),
+                          icon: Icon(
+                            Icons.favorite_border,
+                            size: subTitleNumberFontSize ?? Get.height * 0.03,
+                            color: Colors.white,
+                          )
                       ),
                     ]),
                   )
