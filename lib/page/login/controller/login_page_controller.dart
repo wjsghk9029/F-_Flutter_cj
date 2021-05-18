@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/controller/register_singleton.dart';
 
@@ -22,6 +23,8 @@ class LoginPageController extends GetxController{
     try{
       await _loginService.doLogin(idTextFieldController.text, pwTextFieldController.text);
       Register().reset();
+      precacheImage(AssetImage('assets/background/레시피 하단 배경.jpg'), Get.context);
+      Get.put(BottomNaviService());
       Get.offAll(MainPage());
     }
     catch(ex) {

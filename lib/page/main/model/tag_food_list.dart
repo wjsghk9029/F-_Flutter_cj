@@ -78,7 +78,7 @@ class TagFoodListData{
      food_serial: json['food_serial']as int,
      food_level: json['food_level']as int,
      food_time: json['food_time']as int,
-     food_like: json['food_like']as int,
+     food_like: json['food_like']as int ?? 0,
    );
  }
 }

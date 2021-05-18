@@ -246,7 +246,10 @@ class OhQuePage extends StatelessWidget {
               ),
             ),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-            OhQueList(_ohQueController.listIndex.value,),
+            Obx(() => OhQueList(
+              data: _ohQueController.foodList.value.data,
+              isLoading: _ohQueController.isLoading.value,
+            )),
           ],
         ),
       ),

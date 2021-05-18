@@ -10,16 +10,13 @@ import 'package:oftable_flutter/page/main/page/food_detail_page.dart';
 
 
 class OhQueList extends StatelessWidget {
-  final int listIdx;
-  OhQueList(this.listIdx);
+  final TagFoodData data;
+  final bool isLoading;
   final OhQuePageController _ohQueController =Get.put(OhQuePageController());
+  OhQueList({this.data, this.isLoading});
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>
-    _ohQueController.isLoading.value ?
-    Center(child: SpinKitRing(color: Colors.blue,)) :
-    buildListView(_ohQueController.foodList.value.data)
-    );
+    return isLoading ? Center(child: SpinKitRing(color: Colors.blue,)) : buildListView(data);
   }
 
 
@@ -40,25 +37,23 @@ class OhQueList extends StatelessWidget {
       child: GestureDetector(
         onTap: ()=> Get.to(FoodDetailPage(), binding: FoodDetailBinding(data.food_serial)),
         child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
           margin: EdgeInsets.symmetric(vertical: 5),
-          color: Colors.transparent,
+          color: Colors.white,
           elevation: 0,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            Hero(
-              tag: 'DemoTag${data.food_serial}',
-              child: Container(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: Get.width * 0.3,
-                    minHeight: Get.width * 0.3,
-                    maxWidth: Get.width * 0.3,
-                    maxHeight: Get.width * 0.3,
-                ),
-                 child: Image.network(data.img_src, fit: BoxFit.cover,),
-               ),
+            Container(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: Get.width * 0.3,
+                  minHeight: Get.width * 0.3,
+                  maxWidth: Get.width * 0.3,
+                  maxHeight: Get.width * 0.3,
               ),
+               child: Image.network(data.img_src, fit: BoxFit.cover,),
+             ),
             ),
               Expanded(
                 child: Container(
