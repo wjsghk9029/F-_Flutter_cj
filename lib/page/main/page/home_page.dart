@@ -3,24 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/home_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/home_page_model.dart';
 import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
-import 'package:oftable_flutter/page/widget/register_page_router.dart';
+import 'package:oftable_flutter/page/widget/pagebar.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'food_detail_page.dart';
 
 class HomePage extends StatelessWidget {
-  final ScrollController scrollController;
-
-  HomePage({
-    Key key,
-    this.scrollController
-  }) : super(key: key);
-
+  final BottomNaviService _naviService = Get.find();
   final HomePageController _homePageController = Get.put(HomePageController());
 
   @override
@@ -35,7 +30,7 @@ class HomePage extends StatelessWidget {
 
   _buildBody() {
     return SingleChildScrollView(
-      controller: scrollController,
+      controller: _naviService.scrollController,
       physics: ScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,7 +195,7 @@ class HomePage extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 alignment: Alignment.centerLeft,
-                image: AssetImage('assets/logo_white.png')
+                image: AssetImage('assets/F#TV-29.png')
               )
             ),
           ),

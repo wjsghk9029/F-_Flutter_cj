@@ -13,6 +13,18 @@ import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 class MemberInfoController extends GetxController{
   LoginService _loginPageService = Get.put(LoginService());
 
+  final idTextFieldController = TextEditingController();
+  final pwTextFieldController = TextEditingController();
+  final pwReTextFieldController = TextEditingController();
+  final nameTextFieldController = TextEditingController();
+  final birthDayTextFieldController = TextEditingController();
+  final emailTextFieldController = TextEditingController();
+  final email2TextFieldController = TextEditingController();
+  final phoneTextFieldController = TextEditingController();
+  final phoneAuthTextFieldController = TextEditingController();
+  final homeAddressTextFieldController = TextEditingController();
+  final homeAddress2TextFieldController = TextEditingController();
+
   Rx<MemInfoText> idText = MemInfoText().obs;
   Rx<MemInfoText> pwText = MemInfoText().obs;
   Rx<MemInfoText> pwReText = MemInfoText().obs;
@@ -47,6 +59,23 @@ class MemberInfoController extends GetxController{
     _debounce(phoneText);
     _debounce(phoneAuthText);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    idTextFieldController.dispose();
+    pwTextFieldController.dispose();
+    pwReTextFieldController.dispose();
+    nameTextFieldController.dispose();
+    birthDayTextFieldController.dispose();
+    emailTextFieldController.dispose();
+    email2TextFieldController.dispose();
+    phoneTextFieldController.dispose();
+    phoneAuthTextFieldController.dispose();
+    homeAddressTextFieldController.dispose();
+    homeAddress2TextFieldController.dispose();
+    homeAddressTextFieldController.dispose();
   }
 
   void onDebounce(Rx<MemInfoText> text) async{

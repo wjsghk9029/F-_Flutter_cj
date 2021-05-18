@@ -43,5 +43,31 @@ class Register {
   bool checkRegisterPage2() {
     return (allergyCheckBox[0] != allergyCheckBox[1]) && selectedSpicy.itemId != 0 && selectedTaste.itemId != 0;
   }
+
+  void reset() {
+    selectedTable = Queue();
+    outputTableList = [];
+    selectedAllergyList = [];
+    outputAllergyList = [];
+    selectedKeyword = [];
+    selectedMember = RegisterCheckBoxData(itemId: 1, itemName: '1');
+    selectedTableCuration = RegisterCheckBoxData(itemId: 1, itemName: '1');
+    selectedSpicy = RegisterCheckBoxData(itemId: 0, itemName: '        ');
+    selectedTaste = RegisterCheckBoxData(itemId: 0, itemName: '        ');
+    selectedId = '';
+    selectedPw = '';
+    selectedName = '';
+    selectedPhone = '';
+    selectedHomeAdress = '';
+    selectedHomeAdress2 = '';
+    outputHomeAdress = '';
+    tableList = [];
+    allergyList = [];
+    memberList = [];
+    spicyList = [];
+    tasteList = [];
+    tableCurationList = [];
+    keywordMap = {};
+  }
 }
 

@@ -5,7 +5,7 @@ import 'package:oftable_flutter/page/register/page/allergy_page.dart';
 import 'package:oftable_flutter/page/register/page/registerpage1.dart';
 import 'package:oftable_flutter/page/register/page/registerpage2.dart';
 import 'package:oftable_flutter/page/register/page/registerpage3.dart';
-import 'package:oftable_flutter/page/widget/register_page_router.dart';
+import 'package:oftable_flutter/page/widget/pagebar.dart';
 
 
 class StartOfTablePage extends StatefulWidget {

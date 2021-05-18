@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/mypage_controller.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 
 class MyPage extends StatelessWidget {
-  final ScrollController scrollController;
+  final BottomNaviService _naviService = Get.find();
   final MyPageController _myPageController = Get.put(MyPageController());
 
-  MyPage({Key key, this.scrollController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,7 +23,7 @@ class MyPage extends StatelessWidget {
 
   _buildBody() {
     return SingleChildScrollView(
-      controller: scrollController,
+      controller: _naviService.scrollController,
       physics: ScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

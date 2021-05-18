@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oftable_flutter/page/login/controller/RootPageController.dart';
+import 'package:oftable_flutter/page/login/controller/root_page_controller.dart';
 import 'package:video_player/video_player.dart';
 
-class RootPage extends StatefulWidget {
-  @override
-  _RootPageState createState() => _RootPageState();
-}
-
-class _RootPageState extends State<RootPage> {
-  RootPageController _rootPageController = Get.put(RootPageController());
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(AssetImage('assets/Login_background.jpg'), context);
-    precacheImage(AssetImage('assets/logowithtext.png'), context);
-    precacheImage(AssetImage('assets/logowithtext.png'), context);
-    precacheImage(AssetImage('assets/background/레시피 하단 배경.jpg'), context);
-  }
+class RootPage extends StatelessWidget {
+  final RootPageController _rootPageController = Get.put(RootPageController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +27,5 @@ class _RootPageState extends State<RootPage> {
     )
     );
   }
-
-
 }
 

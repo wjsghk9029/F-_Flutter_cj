@@ -24,7 +24,7 @@ Widget buildAppBar() {
         icon: Container(
           color: Colors.transparent,
           alignment: Alignment.centerLeft,
-          child: Image.asset('assets/logo_white.png',
+          child: Image.asset('assets/상단로고.png',
             fit: BoxFit.cover,
             height: Get.height * 0.045,),
         ),

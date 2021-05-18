@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
 import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
@@ -13,12 +14,7 @@ import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart
 import 'package:oftable_flutter/page/widget/tab_button.dart';
 
 class OhQuePage extends StatelessWidget {
-  final ScrollController scrollController;
-  OhQuePage({
-    Key key,
-    this.scrollController
-  }) : super(key: key);
-
+  final BottomNaviService _naviService = Get.find();
   final OhQuePageController _ohQueController =Get.put(OhQuePageController());
 
   @override
@@ -34,7 +30,7 @@ class OhQuePage extends StatelessWidget {
   Widget _buildBody() {
     return SingleChildScrollView(
       padding: EdgeInsets.zero,
-      controller: scrollController,
+      controller: _naviService.scrollController,
       physics: ScrollPhysics(),
       child: Column(
         children: [

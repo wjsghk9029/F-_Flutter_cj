@@ -4,37 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/login/controller/LoginService.dart';
+import 'package:oftable_flutter/page/login/controller/login_page_controller.dart';
 import 'package:oftable_flutter/page/login/logintestgoogle.dart';
-import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/start_oftable_page.dart';
 
 
-class LoginPage extends StatefulWidget {
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  LoginService _loginPageService = Get.put(LoginService());
-  final idTextFieldController = TextEditingController();
-  final pwTextFieldController = TextEditingController();
+class LoginPage extends StatelessWidget {
+  final LoginPageController _pageController = Get.put(LoginPageController());
   final googleSignIn = GoogleSignIn();
   final AssetImage backgroundImage = AssetImage('assets/Login_background.jpg');
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage( AssetImage('assets/register_background.jpg'), context);
-  }
-
-  @override
-  void dispose() {
-    idTextFieldController.dispose();
-    pwTextFieldController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +68,9 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: (){},
           ),
         ),
-        loginInput(controller: idTextFieldController, hintText: '아이디'),
+        loginInput(controller: _pageController.idTextFieldController, hintText: '아이디'),
         Padding(padding: EdgeInsets.all(Get.height * 0.005)),
-        loginInput(controller: pwTextFieldController, hintText: '비밀번호', isPassword: true,),
+        loginInput(controller: _pageController.pwTextFieldController, hintText: '비밀번호', isPassword: true,),
         Padding(padding: EdgeInsets.all(Get.height * 0.01)),
         Container(
           height: Get.height * 0.07,
@@ -110,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SizedBox(
                 child: TextButton(
-                    onPressed: _onpressLoginButton,
+                    onPressed: _pageController.onPressLoginButton,
                     child: Text(
                       '로그인',
                       style: TextStyle(
@@ -233,15 +211,7 @@ class _LoginPageState extends State<LoginPage> {
     return googleAuth;
   }
 
-  Future<void> _onpressLoginButton() async {
-    try{
-      await _loginPageService.doLogin(idTextFieldController.text, pwTextFieldController.text);
-      Get.offAll(MainPage());
-    }
-    catch(ex) {
-      Get.defaultDialog(title: '에러', middleText: ex.toString());
-    }
-  }
+
 
 
 }

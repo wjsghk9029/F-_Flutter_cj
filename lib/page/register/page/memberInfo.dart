@@ -5,42 +5,9 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/register/controller/member_info_controller.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 
-class MemberInfo extends StatefulWidget {
-  @override
-  _MemberInfoState createState() => _MemberInfoState();
-}
+class MemberInfo extends StatelessWidget {
+  final MemberInfoController _pageController = Get.put(MemberInfoController());
 
-class _MemberInfoState extends State<MemberInfo> {
-  final idTextFieldController = TextEditingController();
-  final pwTextFieldController = TextEditingController();
-  final pwReTextFieldController = TextEditingController();
-  final nameTextFieldController = TextEditingController();
-  final birthDayTextFieldController = TextEditingController();
-  final emailTextFieldController = TextEditingController();
-  final email2TextFieldController = TextEditingController();
-  final phoneTextFieldController = TextEditingController();
-  final phoneAuthTextFieldController = TextEditingController();
-  final homeAddressTextFieldController = TextEditingController();
-  final homeAddress2TextFieldController = TextEditingController();
-
-  MemberInfoController _memberInfoController = Get.put(MemberInfoController());
-
-  @override
-  void dispose() {
-    idTextFieldController.dispose();
-    pwTextFieldController.dispose();
-    pwReTextFieldController.dispose();
-    nameTextFieldController.dispose();
-    birthDayTextFieldController.dispose();
-    emailTextFieldController.dispose();
-    email2TextFieldController.dispose();
-    phoneTextFieldController.dispose();
-    phoneAuthTextFieldController.dispose();
-    homeAddressTextFieldController.dispose();
-    homeAddress2TextFieldController.dispose();
-    homeAddressTextFieldController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +18,7 @@ class _MemberInfoState extends State<MemberInfo> {
           Column(
             children: [
               Padding(padding: EdgeInsets.only(top: Get.height * 0.15)),
-              Expanded(child: _buildBody()),
+              Expanded(child: _buildBody(context)),
             ],
           ),
           _appBar(),
@@ -60,7 +27,7 @@ class _MemberInfoState extends State<MemberInfo> {
     );
   }
 
-  Widget _buildBody(){
+  Widget _buildBody(BuildContext context){
     return Container(
       margin: EdgeInsets.only(right: Get.width * 0.075, left: Get.width * 0.075),
       child: GestureDetector(
@@ -70,17 +37,17 @@ class _MemberInfoState extends State<MemberInfo> {
             Column(
               children: [
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
-                _inputTextField(label: '아이디', hintText: '아이디 입력', controller: idTextFieldController, controllerText: _memberInfoController.idText),
+                _inputTextField(label: '아이디', hintText: '아이디 입력', controller: _pageController.idTextFieldController, controllerText: _pageController.idText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: pwTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwText),
+                _inputTextField(label: '비밀번호', hintText: '비밀번호 입력', controller: _pageController.pwTextFieldController, isPassWord: true, controllerText: _pageController.pwText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                _inputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: pwReTextFieldController, isPassWord: true, controllerText: _memberInfoController.pwReText),
+                _inputTextField(label: '비밀번호 재확인', hintText: '비밀번호 입력', controller: _pageController.pwReTextFieldController, isPassWord: true, controllerText: _pageController.pwReText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                _inputTextField(label: '이름', hintText: '이름 입력', controller: nameTextFieldController, controllerText: _memberInfoController.nameText),
+                _inputTextField(label: '이름', hintText: '이름 입력', controller: _pageController.nameTextFieldController, controllerText: _pageController.nameText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                _inputTextField(label: '생년월일', hintText: '8자리 입력', controller: birthDayTextFieldController, controllerText: _memberInfoController.birthDayText),
+                _inputTextField(label: '생년월일', hintText: '8자리 입력', controller: _pageController.birthDayTextFieldController, controllerText: _pageController.birthDayText),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                _inputTextField(label: '이메일', hintText: '이메일 입력', controller: emailTextFieldController, isEmail: true),
+                _inputTextField(label: '이메일', hintText: '이메일 입력', controller: _pageController.emailTextFieldController, isEmail: true),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
                 phoneTextField(),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
@@ -88,8 +55,6 @@ class _MemberInfoState extends State<MemberInfo> {
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
                 _buildDoneButton(),
                 Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
-                // MaterialButton(onPressed: ()=>RegisterUtil.testReg(), child: Text('테스트'),),
-                // Padding(padding: EdgeInsets.only(top: Get.height * 0.05)),
               ],
             ),
         ),
@@ -105,10 +70,10 @@ class _MemberInfoState extends State<MemberInfo> {
           hoverElevation: 0,
           highlightElevation: 0,
           elevation: 0,
-          child: _memberInfoController.isDone.isFalse
+          child: _pageController.isDone.isFalse
               ? Image.asset('assets/확인1.png', fit: BoxFit.cover,)
               : Image.asset('assets/확인2.png', fit: BoxFit.cover,),
-          onPressed: ()=> _memberInfoController.onClickDoneButton(),
+          onPressed: ()=> _pageController.onClickDoneButton(),
           )
     );
   }
@@ -122,11 +87,11 @@ class _MemberInfoState extends State<MemberInfo> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(flex: 5,child: _textInputwithIcon(homeAddressTextFieldController, '주소 입력', false, _memberInfoController.homeAddressText),),
+            Flexible(flex: 5,child: _textInputwithIcon(_pageController.homeAddressTextFieldController, '주소 입력', false, _pageController.homeAddressText),),
             Flexible(flex: 2,
               fit : FlexFit.tight,
               child: TextButton(
-                onPressed: ()=>_memberInfoController.findAddress(homeAddressTextFieldController),
+                onPressed: ()=>_pageController.findAddress(_pageController.homeAddressTextFieldController),
                 child: Text('주소 찾기', style: TextStyle(color: Colors.white, fontSize: Get.width * 0.0333),),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -141,7 +106,7 @@ class _MemberInfoState extends State<MemberInfo> {
           ],
         ),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
-        _textInputwithIcon(homeAddress2TextFieldController, '상세주소 입력', false, _memberInfoController.homeAddress2Text)
+        _textInputwithIcon(_pageController.homeAddress2TextFieldController, '상세주소 입력', false, _pageController.homeAddress2Text)
     ],
     );
   }
@@ -155,7 +120,7 @@ class _MemberInfoState extends State<MemberInfo> {
         Padding(padding: EdgeInsets.only(top: Get.height * 0.02)),
         Container(
           child: _phoneInput(
-            controller: phoneTextFieldController,
+            controller: _pageController.phoneTextFieldController,
             hintText: '전화번호 입력',
             buttonChild: Text(
               '인증번호 받기',
@@ -174,13 +139,13 @@ class _MemberInfoState extends State<MemberInfo> {
               ),
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.3)),
             ),
-            controllerText: _memberInfoController.phoneText,
+            controllerText: _pageController.phoneText,
           ),
         ),
         Padding(padding: EdgeInsets.only(top: Get.height * 0.015)),
         Container(
           child: _phoneInput(
-              controller: phoneAuthTextFieldController,
+              controller: _pageController.phoneAuthTextFieldController,
               hintText: '인증번호 입력',
               buttonChild: Text(
                   '인증번호 확인',
@@ -199,7 +164,7 @@ class _MemberInfoState extends State<MemberInfo> {
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white.withOpacity(0.3)),
               ),
-            controllerText: _memberInfoController.phoneAuthText,
+            controllerText: _pageController.phoneAuthText,
           ),
         )
       ],
@@ -237,9 +202,9 @@ class _MemberInfoState extends State<MemberInfo> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Flexible(flex: 3,child: _textInputwithIcon(controller, hintText, _isPassWord, _memberInfoController.emailText)),
-              Flexible(flex: 2,child: _textInputwithIcon(email2TextFieldController, '   이메일 선택', _isPassWord, _memberInfoController.email2Text,
-              ontap: ()=>_memberInfoController.onClickEmailSelector(email2TextFieldController), readonly: true)),
+              Flexible(flex: 3,child: _textInputwithIcon(controller, hintText, _isPassWord, _pageController.emailText)),
+              Flexible(flex: 2,child: _textInputwithIcon(_pageController.email2TextFieldController, '   이메일 선택', _isPassWord, _pageController.email2Text,
+              ontap: ()=>_pageController.onClickEmailSelector(_pageController.email2TextFieldController), readonly: true)),
             ],
           );
   }
@@ -253,8 +218,7 @@ class _MemberInfoState extends State<MemberInfo> {
         TextField(
           readOnly: readonly,
           onTap: ontap,
-          onChanged: (text)=>_memberInfoController.onChange(text, controllerText),
-          onEditingComplete: ()=> FocusScope.of(context).unfocus(),
+          onChanged: (text)=>_pageController.onChange(text, controllerText),
           obscureText: isPassWord,
           textAlignVertical: TextAlignVertical.bottom,
           style: TextStyle(
@@ -272,7 +236,7 @@ class _MemberInfoState extends State<MemberInfo> {
               maxWidth: Get.width * 0.06,
             ),
             suffixIcon: GestureDetector(
-              onTap: ()=>_memberInfoController.onClear(controller, controllerText),
+              onTap: ()=>_pageController.onClear(controller, controllerText),
               child: Container(
                 margin: EdgeInsets.only(right: 5),
                 child: CircleAvatar(

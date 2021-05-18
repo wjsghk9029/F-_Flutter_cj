@@ -3,7 +3,6 @@ import 'package:oftable_flutter/page/main/controller/food_detail_page_controller
 
 class FoodDetailBinding implements Bindings{
   final int foodSerialNumber;
-
   FoodDetailBinding(this.foodSerialNumber);
 
   @override
