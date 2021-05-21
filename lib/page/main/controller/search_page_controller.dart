@@ -1,8 +1,10 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/main/page/binding/main_page_bindings.dart';
+import 'package:oftable_flutter/page/main/page/search_result_page.dart';
 
 class SearchPageController extends GetxController{
-  static final secureStorage = FlutterSecureStorage();
+  final secureStorage = FlutterSecureStorage();
   RxList<String> localItems = <String>[].obs;
   RxList<String> recommendItems = <String>[].obs;
 
@@ -39,10 +41,15 @@ class SearchPageController extends GetxController{
     return temp;
   }
 
+  void onSubmit (String item) {
+    if(item.isEmpty) return;
+    updateLocalItems(item);
+    Get.to(SearchResultPage(), binding: SearchResultBinding(item), transition: Transition.cupertino);
+  }
+
   Future<void> updateLocalItems (String item) async {
-    print('업데이트');
-    if(localItems.length > 8)
-      localItems.removeLast();
+    if(localItems.length > 7)
+      localItems.removeAt(0);
     localItems.add(item);
     await secureStorage.delete(key: 'localSearchItem');
     await secureStorage.write(key: 'localSearchItem', value: listToString(localItems));

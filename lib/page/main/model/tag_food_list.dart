@@ -19,6 +19,24 @@ class TagFoodList {
   }
 }
 
+class SearchFoodList {
+  final String apikey;
+  final int error;
+  final String type;
+  final List<TagFoodListData> data;
+
+  SearchFoodList({this.apikey, this.error, this.type, this.data});
+
+  factory SearchFoodList.fromJson(Map<String, dynamic> json) {
+    return SearchFoodList(
+      apikey: json['apikey'] as String,
+      error: json['error'] as int,
+      type: json['type'] as String,
+      data: (json['data'] as List).map((e) => TagFoodListData.fromJson(e)).toList(),
+    );
+  }
+}
+
 class TagFoodData {
   final List<TagFoodRecommendList> recommend_list;
   final List<TagFoodListData> food_list;

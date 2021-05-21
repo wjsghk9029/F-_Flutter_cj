@@ -2,44 +2,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/search_page_controller.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 
 class SearchPage extends StatelessWidget {
+  final BottomNaviService _naviService = Get.find();
   final TextEditingController searchInputController = TextEditingController();
   final SearchPageController _searchPageController = Get.put(SearchPageController());
 
   @override
   Widget build(BuildContext context) {
-    var statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
           children: [
             PageBackGroundImage(url: 'assets/register_background.jpg',),
-            _buildBody(statusBarHeight),
+            _buildBody(),
           ],
         ),
       ),
     );
   }
 
-  SingleChildScrollView _buildBody(double statusBarHeight) {
+  SingleChildScrollView _buildBody() {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildHeader(statusBarHeight),
+          _buildHeader(),
           _buildContent(),
         ],
       ),
     );
   }
 
-  _buildHeader(double statBar) {
+  _buildHeader() {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: statBar)),
+        Padding(padding: EdgeInsets.only(top: Get.context.mediaQueryPadding.top)),
         Container(
           height: Get.height * 0.075,
           decoration: BoxDecoration(
@@ -56,12 +56,15 @@ class SearchPage extends StatelessWidget {
               children: [
                 Flexible(
                     fit: FlexFit.tight,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Image.asset('assets/상단로고.png',
-                        fit: BoxFit.fitHeight,
-                        height: Get.height * 0.045,
-                        ),
+                    child: GestureDetector(
+                      onTap:()=>_naviService.changeIndex(2, true),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Image.asset('assets/상단로고.png',
+                          fit: BoxFit.fitHeight,
+                          height: Get.height * 0.045,
+                          ),
+                      ),
                     )
                 ),
                 Flexible(
@@ -78,7 +81,7 @@ class SearchPage extends StatelessWidget {
                           fontSize: Get.width* 0.04,
                         ),
                         controller: searchInputController,
-                        onSubmitted: (val)=>_searchPageController.updateLocalItems(val),
+                        onSubmitted: (val)=>_searchPageController.onSubmit(val),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           prefixIcon: Icon(Icons.search_sharp, color: Colors.white,),
@@ -198,7 +201,7 @@ class SearchPage extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: (){},
+        onTap: ()=>_searchPageController.onSubmit(text),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.transparent,

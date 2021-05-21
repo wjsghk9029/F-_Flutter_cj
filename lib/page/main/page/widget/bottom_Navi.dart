@@ -20,7 +20,7 @@ class BottomNavigation extends StatelessWidget {
             showSelectedLabels: false,
             showUnselectedLabels: false,
             currentIndex: _service.currentIndex.value,
-            onTap: (idx) => _service.changeIndex(idx),
+            onTap: (idx) => _service.changeIndex(idx, false),
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.black,
             items: [

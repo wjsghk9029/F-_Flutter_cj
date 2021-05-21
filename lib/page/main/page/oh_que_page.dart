@@ -6,7 +6,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
-import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
+import 'package:oftable_flutter/page/main/page/binding/main_page_bindings.dart';
 import 'package:oftable_flutter/page/main/page/food_detail_page.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/oh_que_list.dart';
@@ -247,8 +247,9 @@ class OhQuePage extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(top: Get.height * 0.03)),
             Obx(() => OhQueList(
-              data: _ohQueController.foodList.value.data,
+              data: _ohQueController.foodList.value.data.food_list,
               isLoading: _ohQueController.isLoading.value,
+              onPressFavorite: (foodSn)=> _ohQueController.doFoodLike(foodSn),
             )),
           ],
         ),

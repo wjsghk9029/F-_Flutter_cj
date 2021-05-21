@@ -54,7 +54,7 @@ class FoodDetailPage extends GetView<FoodDetailPageController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MainPageAppBar(),
+            MainPageAppBar(isNotMainPage: true,),
             Padding(padding: EdgeInsets.all(5)),
             _buildTitle(),
             Padding(padding: EdgeInsets.all(Get.height * 0.01)),

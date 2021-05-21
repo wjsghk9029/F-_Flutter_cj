@@ -6,7 +6,7 @@ import 'package:oftable_flutter/Util.dart';
 import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/home_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/home_page_model.dart';
-import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
+import 'package:oftable_flutter/page/main/page/binding/main_page_bindings.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 import 'package:oftable_flutter/page/widget/pagebar.dart';

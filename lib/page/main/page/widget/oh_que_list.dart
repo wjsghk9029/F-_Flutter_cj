@@ -3,35 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/Util.dart';
-import 'package:oftable_flutter/page/main/controller/oh_que_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/tag_food_list.dart';
-import 'package:oftable_flutter/page/main/page/binding/food_detail_binding.dart';
+import 'package:oftable_flutter/page/main/page/binding/main_page_bindings.dart';
 import 'package:oftable_flutter/page/main/page/food_detail_page.dart';
 
 
 class OhQueList extends StatelessWidget {
-  final TagFoodData data;
-  final bool isLoading;
-  final OhQuePageController _ohQueController =Get.put(OhQuePageController());
-  OhQueList({this.data, this.isLoading});
+  @required final List<TagFoodListData> data;
+  @required final bool isLoading;
+  @required final void Function(int foodSn) onPressFavorite;
+  OhQueList({this.data, this.isLoading, this.onPressFavorite});
   @override
   Widget build(BuildContext context) {
     return isLoading ? Center(child: SpinKitRing(color: Colors.blue,)) : buildListView(data);
   }
 
 
-  Widget buildListView(TagFoodData data) {
+  Widget buildListView(List<TagFoodListData> data) {
     return ListView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-        itemCount: data.food_list.length,
-        itemBuilder:(ctx, idx) => _buildList(data.food_list[idx]),
+        itemCount: data.length,
+        itemBuilder:(ctx, idx) => _buildListItem(data[idx]),
     );
   }
 
 
-  _buildList(TagFoodListData data) {
+  _buildListItem(TagFoodListData data) {
     return Container(
       height: Get.width * 0.3,
       child: GestureDetector(
@@ -57,7 +56,7 @@ class OhQueList extends StatelessWidget {
             ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -128,7 +127,7 @@ class OhQueList extends StatelessWidget {
                                 IconButton(
                                     padding: EdgeInsets.zero,
                                     iconSize: Get.height * 0.025,
-                                    onPressed: ()=>_ohQueController.doFoodLike(data.food_serial),
+                                    onPressed: ()=>onPressFavorite(data.food_serial),
                                     icon: Icon(
                                       data.food_like != 0 ? Icons.favorite : Icons.favorite_border,
                                       size: Get.height * 0.025,

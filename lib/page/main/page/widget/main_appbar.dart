@@ -5,6 +5,8 @@ import 'package:oftable_flutter/page/main/page/search_page.dart';
 
 class MainPageAppBar extends StatelessWidget {
   final BottomNaviService _naviService = Get.find();
+  final bool isNotMainPage;
+  MainPageAppBar({this.isNotMainPage = false});
   @override
   Widget build(BuildContext context) {
     return buildAppBar();
@@ -20,7 +22,7 @@ class MainPageAppBar extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: IconButton(
-          onPressed: ()=>_naviService.changeIndex(2),
+          onPressed: ()=>_naviService.changeIndex(2, isNotMainPage),
           iconSize: Get.height * 0.06,
           icon: Container(
             color: Colors.transparent,

@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:oftable_flutter/page/main/page/widget/bottom_Navi.dart';
 
+import '../main_page.dart';
+
 class BottomNaviService extends GetxService{
   RxInt currentIndex = 2.obs;
   RxBool isVisible = true.obs;
@@ -21,5 +23,9 @@ class BottomNaviService extends GetxService{
   }
 
   BottomNavigation getBottomNavi() => BottomNavigation();
-  void changeIndex(int idx)=>currentIndex(idx);
+
+  void changeIndex(int idx, bool isNotMainPage){
+    currentIndex(idx);
+    if(isNotMainPage) Get.offAll(MainPage());
+  }
 }

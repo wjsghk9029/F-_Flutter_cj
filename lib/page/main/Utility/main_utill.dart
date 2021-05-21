@@ -40,4 +40,11 @@ class MainPageUtil {
       Uri.http('210.93.86.79:8080', 'homepage'),
     );
   }
+
+  static Future<http.Response> getSearchHashTag(String tagText) async {
+    return http.get(
+      Uri.http('210.93.86.79:8080', '/search_hash_tag', {'input_tag' : tagText}),
+    );
+  }
+
 }
