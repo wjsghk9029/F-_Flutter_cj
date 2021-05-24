@@ -48,6 +48,7 @@ class SearchPageController extends GetxController{
   }
 
   Future<void> updateLocalItems (String item) async {
+    if(localItems.contains(item)) return;
     if(localItems.length > 7)
       localItems.removeAt(0);
     localItems.add(item);

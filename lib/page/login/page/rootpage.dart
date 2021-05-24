@@ -4,7 +4,7 @@ import 'package:oftable_flutter/page/login/controller/root_page_controller.dart'
 import 'package:video_player/video_player.dart';
 
 class RootPage extends StatelessWidget {
-  final RootPageController _rootPageController = Get.put(RootPageController());
+  final RootPageController _rootPageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

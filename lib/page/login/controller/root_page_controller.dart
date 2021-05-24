@@ -37,6 +37,7 @@ class RootPageController extends GetxController{
 
   @override
   void onReady() {
+    precacheImage(AssetImage('assets/splash_demo.jpg'), Get.context);
     super.onReady();
   }
 

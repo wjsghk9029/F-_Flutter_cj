@@ -7,10 +7,10 @@ import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/controller/home_page_controller.dart';
 import 'package:oftable_flutter/page/main/model/home_page_model.dart';
 import 'package:oftable_flutter/page/main/page/binding/main_page_bindings.dart';
+import 'package:oftable_flutter/page/main/page/home_video_page.dart';
 import 'package:oftable_flutter/page/main/page/widget/main_appbar.dart';
 import 'package:oftable_flutter/page/main/page/widget/page_background_Image.dart';
 import 'package:oftable_flutter/page/widget/pagebar.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'food_detail_page.dart';
 
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
         _buildBanner(_homePageController.bannerData),
         Padding(padding: EdgeInsets.only(top: 30)),
         _buildProduct(_homePageController.productData),
-        _buildVideo(_homePageController.videoData, _homePageController.videoControllers)
+        _buildVideo(_homePageController.videoData)
       ],
     );
   }
@@ -182,7 +182,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _buildVideo(List<HomPageDataVideo> videoData, List<YoutubePlayerController> videoControllers) {
+  _buildVideo(List<HomPageDataVideo> videoData) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
       child: Column(
@@ -203,21 +203,31 @@ class HomePage extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: EdgeInsets.zero,
-            itemCount: videoControllers.length,
-            itemBuilder:(ctx, idx)=>_videoItem(videoControllers.elementAt(idx)),
+            itemCount: videoData.length,
+            itemBuilder:(ctx, idx)=>_videoItem(videoData.elementAt(idx)),
           )
         ],
       ),
     );
   }
 
-  _videoItem(YoutubePlayerController controller) {
+  _videoItem(HomPageDataVideo dataVideo) {
     return Container(
+      height: Get.height * 0.25,
       margin: EdgeInsets.symmetric(vertical: 10),
-      child: YoutubePlayerControllerProvider( // Provides controller to all the widget below it.
-        controller: controller,
-        child: YoutubePlayerIFrame(
-          aspectRatio: 16 / 9,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage('https://img.youtube.com/vi/${dataVideo.video_num}/sddefault.jpg'),
+          fit: BoxFit.cover,
+        )
+      ),
+      child: Center(
+        child: GestureDetector(
+          onTap: ()=>Get.to(HomeVideoPage(), binding: HomePageVideoBinding(dataVideo), transition: Transition.cupertino),
+          child: Container(
+            height: Get.height * 0.075,
+            child: Image.asset('assets/youtubePlayIcon.png', fit: BoxFit.fitHeight,),
+          ),
         ),
       ),
     );

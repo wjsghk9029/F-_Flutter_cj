@@ -150,6 +150,7 @@ class SearchPage extends StatelessWidget {
 
   _localItems() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,6 +227,7 @@ class SearchPage extends StatelessWidget {
 
   _recommendItems() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           alignment: Alignment.centerLeft,
