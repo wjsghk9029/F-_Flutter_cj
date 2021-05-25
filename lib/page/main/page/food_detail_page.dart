@@ -452,7 +452,7 @@ class FoodDetailPage extends GetView<FoodDetailPageController> {
                         padding: EdgeInsets.zero,
                         elevation: 0,
                         color: Colors.black26,
-                        onPressed: (){},
+                        onPressed: ()=>controller.onPressCommentPost(controller.tipEditingController.text),
                         child: Text(
                           '등록',
                           style: TextStyle(

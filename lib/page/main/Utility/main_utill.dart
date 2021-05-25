@@ -47,4 +47,18 @@ class MainPageUtil {
     );
   }
 
+  static Future<http.Response> postAddComment(String authorization, int foodSn, String comment) async {
+    return http.post(
+        Uri.http('210.93.86.79:8080', '/food_like'),
+        headers: <String, String>{
+          'Authorization' : authorization,
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: <String, String>{
+          'food_sn' : '$foodSn',
+          'comment' : comment,
+        }
+    );
+  }
+
 }

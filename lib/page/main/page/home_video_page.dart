@@ -65,12 +65,21 @@ class HomeVideoPage extends GetView<HomeVideoPageController> {
     return Column(
       children: [
         Obx(()=>controller.showPlayer.value
-            ?YoutubePlayerControllerProvider(
-          controller: controller.playerController,
-          child: YoutubePlayerIFrame(
-            aspectRatio: 4 / 3,
-          ),
-        ) : paddingZero),
+            ?Container(
+              color: Colors.black,
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  SpinKitRing(color: Colors.blueAccent),
+                  YoutubePlayerControllerProvider(
+                    controller: controller.playerController,
+                    child: YoutubePlayerIFrame(
+                        aspectRatio: 4 / 3,
+                    ),
+                  ),
+                ],
+              ),
+            ) : paddingZero),
         Padding(padding: EdgeInsets.all(5)),
         Text(
           controller.getVideoDetail(),

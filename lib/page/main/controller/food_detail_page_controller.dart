@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:oftable_flutter/page/login/controller/LoginService.dart';
 import 'package:oftable_flutter/page/main/Utility/main_utill.dart';
 import 'package:oftable_flutter/page/main/model/food_detail.dart';
 
 class FoodDetailPageController extends GetxController{
+  LoginService _loginService = Get.find();
   final int foodSerialNumber;
   FoodDetailPageController(this.foodSerialNumber);
 
@@ -25,8 +27,7 @@ class FoodDetailPageController extends GetxController{
 
   @override
   Future<void> onInit() async {
-    var data = await _getData();
-    _setData(data);
+    _setData(await _getData());
     super.onInit();
   }
 
@@ -47,5 +48,24 @@ class FoodDetailPageController extends GetxController{
     foodDetailRecipe(data.recipe);
     foodDetailComment(data.comment);
     isSettingDone(true);
+  }
+
+  Future<void> addComment(String comment) async {
+    var response = await MainPageUtil.postAddComment(_loginService.accessToken.value, foodSerialNumber, comment);
+    if (response.statusCode != 200)
+      throw Exception('${response.statusCode} => fail to GetFoodDtl');
+    var jsonData = jsonDecode(response.body);
+    if (jsonData['error'] != 0)
+      throw Exception('${jsonData['data']['msg']}');
+    print('${jsonData['data']['msg']}');
+  }
+
+  Future<void> onPressCommentPost(String comment) async {
+    try{
+      await addComment(comment);
+      _setData(await _getData());
+    }catch(ex){
+      print(ex.toString());
+    }
   }
 }
