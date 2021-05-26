@@ -4,7 +4,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class HomeVideoPageController extends GetxController{
   final HomPageDataVideo _dataVideo;
-  YoutubePlayerController playerController = YoutubePlayerController();
+  YoutubePlayerController playerController;
 
   HomeVideoPageController(this._dataVideo);
 
@@ -28,10 +28,8 @@ class HomeVideoPageController extends GetxController{
   }
 
   @override
-  void onClose() {
-    playerController.stop();
-    showPlayer(false);
-    playerController.close();
+  Future<void> onClose() async {
+    await playerController.close();
     super.onClose();
   }
 }

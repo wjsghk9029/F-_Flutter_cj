@@ -71,9 +71,9 @@ class HomeVideoPage extends GetView<HomeVideoPageController> {
                 alignment: AlignmentDirectional.center,
                 children: [
                   SpinKitRing(color: Colors.blueAccent),
-                  YoutubePlayerControllerProvider(
-                    controller: controller.playerController,
+                  Container(
                     child: YoutubePlayerIFrame(
+                      controller: controller.playerController,
                         aspectRatio: 4 / 3,
                     ),
                   ),
