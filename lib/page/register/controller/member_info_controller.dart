@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kopo/kopo.dart';
 import 'package:oftable_flutter/page/login/controller/LoginService.dart';
+import 'package:oftable_flutter/page/main/controller/bottom_navi_service.dart';
 import 'package:oftable_flutter/page/main/main_page.dart';
 import 'package:oftable_flutter/page/register/model/register_class.dart';
 import 'package:oftable_flutter/page/register/utill/register_util.dart';
@@ -12,7 +12,6 @@ import 'package:oftable_flutter/page/register/widget/email_selector.dart';
 
 class MemberInfoController extends GetxController{
   LoginService _loginPageService = Get.put(LoginService());
-
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
   final pwReTextFieldController = TextEditingController();
@@ -59,23 +58,6 @@ class MemberInfoController extends GetxController{
     _debounce(phoneText);
     _debounce(phoneAuthText);
     super.onInit();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    idTextFieldController.dispose();
-    pwTextFieldController.dispose();
-    pwReTextFieldController.dispose();
-    nameTextFieldController.dispose();
-    birthDayTextFieldController.dispose();
-    emailTextFieldController.dispose();
-    email2TextFieldController.dispose();
-    phoneTextFieldController.dispose();
-    phoneAuthTextFieldController.dispose();
-    homeAddressTextFieldController.dispose();
-    homeAddress2TextFieldController.dispose();
-    homeAddressTextFieldController.dispose();
   }
 
   void onDebounce(Rx<MemInfoText> text) async{
@@ -134,13 +116,14 @@ class MemberInfoController extends GetxController{
       var data = jsonDecode(jsonData.body);
       if(data['error'] as int != 0)
         throw Exception('${data['data']['msg']}');
+      Get.lazyPut<BottomNaviService>(()=>BottomNaviService());
       _loginPageService.doLogin(idText.value.text.value, pwText.value.text.value);
+      Get.offAll(MainPage(), transition: Transition.downToUp);
     }catch(ex){
       Get.defaultDialog(title: '에러', middleText: ex.toString());
       isDone(false);
       return;
     }
-    Get.offAll(MainPage(), transition: Transition.downToUp);
   }
 
   Future<void> findAddress(TextEditingController controller) async {
@@ -299,8 +282,5 @@ class MemberInfoController extends GetxController{
     if(_regMatch(phoneText, regExp))
       return _textError(phoneText, '올바른 전화번호의 형식이 아닙니다.');
   }
-
-  //후에 추가
-  //void _onDebouncePhoneAuth() {}
 
 }

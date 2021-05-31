@@ -12,13 +12,6 @@ class LoginPageController extends GetxController{
   final idTextFieldController = TextEditingController();
   final pwTextFieldController = TextEditingController();
 
-  @override
-  void onClose() {
-    super.onClose();
-    idTextFieldController.dispose();
-    pwTextFieldController.dispose();
-  }
-
   Future<void> onPressLoginButton() async {
     try{
       await _loginService.doLogin(idTextFieldController.text, pwTextFieldController.text);

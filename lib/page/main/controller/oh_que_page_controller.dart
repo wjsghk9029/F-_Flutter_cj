@@ -33,6 +33,7 @@ class OhQuePageController extends GetxController{
   Future<void> _getFoodList (int listIdx, int page) async {
     try {
       var jsonData = await MainPageUtil.getTagFoodList(listIdx, _loginPageService.accessToken.value, page);
+      print(jsonDecode(jsonData.body).toString());
       if(jsonData.statusCode != 200)
         throw Exception('${jsonData.statusCode} => Failed to Post Login');
       var data = TagFoodList.fromJson(jsonDecode(jsonData.body));
@@ -41,7 +42,7 @@ class OhQuePageController extends GetxController{
       foodList(data);
     }
     catch (ex) {
-      throw ex;
+      print(ex.toString());
     }
   }
 

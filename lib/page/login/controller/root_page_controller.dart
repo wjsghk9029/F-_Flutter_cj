@@ -9,7 +9,6 @@ import 'LoginService.dart';
 
 class RootPageController extends GetxController{
   LoginService _loginService = Get.put(LoginService());
-
   var videoController = VideoPlayerController.asset("assets/rootLoading.mp4").obs;
   var videoInitializeDone = false.obs;
   var isAutoLogin = false.obs;
