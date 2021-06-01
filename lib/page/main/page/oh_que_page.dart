@@ -249,7 +249,10 @@ class OhQuePage extends StatelessWidget {
             Obx(() => OhQueList(
               data: _ohQueController.foodList.value.data.food_list,
               isLoading: _ohQueController.isLoading.value,
-              onPressFavorite: (foodSn)=> _ohQueController.doFoodLike(foodSn),
+              onPressFavorite: (foodSn, foodLike){
+                if(foodLike == 0) return _ohQueController.doFoodLike(foodSn);
+                return  _ohQueController.doFoodDisLike(foodSn);
+              },
             )),
           ],
         ),

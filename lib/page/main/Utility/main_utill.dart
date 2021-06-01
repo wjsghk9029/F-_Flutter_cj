@@ -29,6 +29,19 @@ class MainPageUtil {
     );
   }
 
+  static Future<http.Response> postFoodDislike(String authorization, int foodSn) async {
+    return http.post(
+        Uri.http('210.93.86.79:8080', '/food_dis'),
+        headers: <String, String>{
+          'Authorization' : authorization,
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: <String, String>{
+          'food_sn' : '$foodSn',
+        }
+    );
+  }
+
   static Future<http.Response> getFoodDtl(int foodSn) async {
     return http.get(
         Uri.http('210.93.86.79:8080', '/get_food_dtl', {'food_sn' : '$foodSn'}),

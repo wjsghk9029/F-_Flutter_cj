@@ -254,7 +254,7 @@ class SearchResultPage extends GetView<SearchResultController> {
       child: Obx(()=> OhQueList(
         data: controller.data.data,
         isLoading: controller.isSettingDone.isFalse,
-        onPressFavorite: (foodSn){},
+        onPressFavorite: (foodSn, foodLike){},
       )
       ),
     );

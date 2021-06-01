@@ -33,7 +33,6 @@ class OhQuePageController extends GetxController{
   Future<void> _getFoodList (int listIdx, int page) async {
     try {
       var jsonData = await MainPageUtil.getTagFoodList(listIdx, _loginPageService.accessToken.value, page);
-      print(jsonDecode(jsonData.body).toString());
       if(jsonData.statusCode != 200)
         throw Exception('${jsonData.statusCode} => Failed to Post Login');
       var data = TagFoodList.fromJson(jsonDecode(jsonData.body));
@@ -56,6 +55,16 @@ class OhQuePageController extends GetxController{
       return true;
   }
 
+  Future<bool> _postFoodDislike (int foodSn) async {
+    var jsonData = await MainPageUtil.postFoodDislike(_loginPageService.accessToken.value, foodSn);
+    if(jsonData.statusCode != 200)
+      throw Exception('${jsonData.statusCode} => Failed to Post FoodDislike');
+    var data = jsonDecode(jsonData.body);
+    if(data['error'] as int != 0)
+      throw Exception('${data['data']['msg']}');
+    return true;
+  }
+
   TagFoodListData _getFoodDataBySerial (int foodSn)
     => foodList.value.data.food_list.where((element) => element.food_serial == foodSn).single;
 
@@ -67,6 +76,21 @@ class OhQuePageController extends GetxController{
       foodList.update((val) {
         for(var data in val.data.food_list){
           if(data.food_serial == foodSerialNumber) data.food_like = 1;
+        }
+      });
+    }catch(ex){
+      print(ex);
+    }
+  }
+
+  Future<void> doFoodDisLike(int foodSerialNumber) async {
+    try{
+      if(!(await _postFoodDislike(foodSerialNumber))) return;
+      var data = _getFoodDataBySerial(foodSerialNumber);
+      data.food_like = 0;
+      foodList.update((val) {
+        for(var data in val.data.food_list){
+          if(data.food_serial == foodSerialNumber) data.food_like = 0;
         }
       });
     }catch(ex){

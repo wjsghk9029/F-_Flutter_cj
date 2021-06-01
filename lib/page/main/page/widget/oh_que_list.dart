@@ -11,7 +11,7 @@ import 'package:oftable_flutter/page/main/page/food_detail_page.dart';
 class OhQueList extends StatelessWidget {
   @required final List<TagFoodListData> data;
   @required final bool isLoading;
-  @required final void Function(int foodSn) onPressFavorite;
+  @required final void Function(int foodSn, int foodlike) onPressFavorite;
   OhQueList({this.data, this.isLoading, this.onPressFavorite});
   @override
   Widget build(BuildContext context) {
@@ -127,7 +127,7 @@ class OhQueList extends StatelessWidget {
                                 IconButton(
                                     padding: EdgeInsets.zero,
                                     iconSize: Get.height * 0.025,
-                                    onPressed: ()=>onPressFavorite(data.food_serial),
+                                    onPressed: ()=>onPressFavorite(data.food_serial, data.food_like),
                                     icon: Icon(
                                       data.food_like != 0 ? Icons.favorite : Icons.favorite_border,
                                       size: Get.height * 0.025,
